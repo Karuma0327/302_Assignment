@@ -17,9 +17,24 @@ A comprehensive language learning app with an intuitive interface, customizable 
 - [👋🏻 Getting Started with Socslingo](#-getting-started-with-socslingo)
 - [📦 Program Installation](#-program-installation)
 - [✨ Feature Overview](#-feature-overview)
+    - [`1` Language and Level Selection](#1-language-and-level-selection)
+    - [`2` Pre-made Flashcard Lists](#2-pre-made-flashcard-lists)
+    - [`3` Online Word Lists](#3-online-word-lists)
+    - [`4` Custom Flashcard Lists](#4-custom-flashcard-lists)
+    - [`5` List View Management](#5-list-view-management)
+    - [`6` Mark as Learned](#6-mark-as-learned)
+    - [`7` Randomised Flashcards](#7-randomised-flashcards)
+    - [`8` Flashcard Flipping](#8-flashcard-flipping)
+    - [`9` Progress Tracking](#9-progress-tracking)
+    - [`10` User Authentication](#10-user-authentication)
+    - [`11` Interactive Quiz Mode](#11-interactive-quiz-mode)
 - [🤝 Contributors](#-contributors)
+- [🛠️ Why We Chose Liberica JDK 21 LTS Over Amazon Corretto](#️-why-we-chose-liberica-jdk-21-lts-over-amazon-corretto)
+    - [Built-in JavaFX Support](#built-in-javafx-support)
+    - [Broad Platform Compatibility](#broad-platform-compatibility)
+    - [Cross-Platform Focus](#cross-platform-focus)
 - [🔗 Links](#-links)
-  - [Credits](#-credits)
+  - [📜 Credits](#-credits)
 
 ####
 
@@ -105,6 +120,18 @@ Ethan Nordstrom
 Celine Gatzias
 
 Tai Tran
+
+## 🛠️ Why We Chose Liberica JDK 21 LTS Over Amazon Corretto
+
+#### Built-in JavaFX Support
+Liberica JDK 21 LTS includes JavaFX, simplifying our setup and ensuring compatibility, whereas Amazon Corretto requires separate management of JavaFX.
+
+#### Broad Platform Compatibility
+Liberica JDK offers extensive support for Windows (X86 64, X86 32, ARM64) and macOS (ARM and X86), ensuring our app runs smoothly across all targeted platforms.
+
+
+#### Cross-Platform Focus
+BellSoft’s commitment to cross-platform development makes Liberica the ideal choice for our non-cloud, multi-platform project.
 
 ## 🔗 Links
 
