@@ -3,63 +3,91 @@ package com.socslingo.controllers;
 import java.io.IOException;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 public class PrimaryController {
+
+    private Stage stage;
+
+    @FXML
+    private Button closeButton;
+
+    @FXML
+    private Button maximizeButton;
+
+    @FXML
+    private Button minimizeButton;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     private ImageView mascotImageView;
 
     @FXML
-    public void initialize() {
-        if (mascotImageView != null) {
-            // Create a PauseTransition to keep the mascot still for a bit
-            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(0.7));
+    private HBox windowControls;
 
-            // Play the pause transition
-            pauseTransition.play();
-        }
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    public void initialize() {
+
+        windowControls.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        windowControls.setOnMouseDragged(event -> {
+            Stage stage = (Stage) windowControls.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+    }
+
+    @FXML
+    private void closeWindow() {
+        Stage stage = (Stage) windowControls.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void maximizeWindow() {
+        Stage stage = (Stage) windowControls.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) windowControls.getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @FXML
     private Button leftSidebarButton;
 
     @FXML
-    private void handleLeftSidebarButtonAction() {
+    void handleLeftSidebarButtonAction() {
         // Add your button action logic here
         System.out.println("Left Sidebar Button Clicked!");
     }
 
     @FXML
-    private Button switchToHomeButton;
+    private Button switchToMainHomeFXMLButton;
 
     @FXML
-    void switchToHomePage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/main.fxml"));
-        HBox root = loader.load();
-        Scene scene = new Scene(root, 1600, 900);
-        
-        // Add the CSS file to the scene's stylesheets
-        String css = getClass().getResource("/com/socslingo/css/main.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        // Get the current stage from the button's scene
-
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
-        fadeOut.setFromValue(0);
-        fadeOut.setToValue(1);
-        Stage stage = (Stage) switchToHomeButton.getScene().getWindow();
-        stage.setScene(scene);
-        fadeOut.play();
+    void switchToMainHomeFXML() throws IOException {
+        switchScene("/com/socslingo/views/mainHome.fxml", "/com/socslingo/css/mainHome.css");
     }
 
     @FXML
@@ -67,19 +95,7 @@ public class PrimaryController {
 
     @FXML
     void switchToInitialFlashcardLandingPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/initialFlashcard.fxml"));
-        HBox root = loader.load();
-        Scene scene = new Scene(root, 1600, 900);
-        // Add the CSS file to the scene's stylesheets
-        String css = getClass().getResource("/com/socslingo/css/flashcard.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        // Get the current stage from the button's scene
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
-        fadeOut.setFromValue(0);
-        fadeOut.setToValue(1);
-        Stage stage = (Stage) switchToInitialFlashcardLandingPageButton.getScene().getWindow();
-        stage.setScene(scene);
-        fadeOut.play();
+        switchScene("/com/socslingo/views/initialFlashcard.fxml", "/com/socslingo/css/createFlashCard.css");
     }
 
     @FXML
@@ -87,100 +103,96 @@ public class PrimaryController {
 
     @FXML
     void switchToCreateFlashCardPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/mainFlashcard.fxml"));
-        HBox root = loader.load();
-        Scene scene = new Scene(root, 1600, 900);
-        // Add the CSS file to the scene's stylesheets
-        String css = getClass().getResource("/com/socslingo/css/flashcard.css").toExternalForm();
+        switchScene("/com/socslingo/views/mainFlashcard.fxml", "/com/socslingo/css/mainFlashcard.css");
+    }
+
+    @FXML
+    private Button switchToCreateFlashcardFXMLButton;
+
+    @FXML
+    void switchToCreateFlashcardFXML() throws IOException {
+        switchScene("/com/socslingo/views/createFlashcard.fxml", "/com/socslingo/css/createFlashcard.css");
+    }
+
+    @FXML
+    private Button switchToMainFlashcardFXMLButton;
+
+    @FXML
+    void switchToMainFlashcardFXML() throws IOException {
+        switchScene("/com/socslingo/views/mainFlashcard.fxml", "/com/socslingo/css/mainFlashcard.css");
+    }
+
+    @FXML
+    private Button switchToLoginFXMLButton;
+
+    @FXML
+    void switchToLoginFXML() throws IOException {
+        switchScene("/com/socslingo/views/login.fxml", "/com/socslingo/css/login.css");
+    }
+
+    @FXML
+    private Button switchToRegistrationPageButton;
+
+    @FXML
+    void switchToRegistrationPage() throws IOException {
+        switchScene("/com/socslingo/views/registration.fxml", "/com/socslingo/css/registration.css");
+    }
+
+    @FXML
+    private Button switchToRegistrationFXMLButton;
+
+    @FXML
+    void switchToRegistrationFXML() throws IOException {
+        switchScene("/com/socslingo/views/registration.fxml", "/com/socslingo/css/registration.css");
+    }
+
+    @FXML
+    private Button switchToViewFlashcardFXMLButton;
+
+    @FXML
+    void switchToViewFlashcardFXML() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/viewFlashcard.fxml"));
+        VBox root = loader.load();
+        Scene scene = new Scene(root, getScreenWidth() * 0.95, getScreenHeight() * 0.95);
+        String css = getClass().getResource("/com/socslingo/css/viewFlashcard.css").toExternalForm();
         scene.getStylesheets().add(css);
-        // Get the current stage from the button's scene
+
+        // Get the controller and set the PrimaryController instance
+        FlashcardController flashcardController = loader.getController();
+        flashcardController.setPrimaryController(this);
+
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
         fadeOut.setFromValue(0);
         fadeOut.setToValue(1);
-        Stage stage = (Stage) switchToCreateFlashCardPageButton.getScene().getWindow();
+        Stage stage = (Stage) switchToViewFlashcardFXMLButton.getScene().getWindow();
         stage.setScene(scene);
         fadeOut.play();
     }
 
-    @FXML
-    private Button switchToCreateFlashcardListPageButton;
-
-    @FXML
-    void switchToCreateFlashcardListPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/createFlashcardList.fxml"));
-        HBox root = loader.load();
-        Scene scene = new Scene(root, 1600, 900);
-        // Add the CSS file to the scene's stylesheets
-        String css = getClass().getResource("/com/socslingo/css/flashcard.css").toExternalForm();
+    private void switchScene(String fxmlPath, String cssPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        VBox root = loader.load();
+        Scene scene = new Scene(root, getScreenWidth() * 0.95, getScreenHeight() * 0.95);
+        String css = getClass().getResource(cssPath).toExternalForm();
         scene.getStylesheets().add(css);
-        // Get the current stage from the button's scene
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
-        fadeOut.setFromValue(0);
-        fadeOut.setToValue(1);
-        Stage stage = (Stage) switchToCreateFlashcardListPageButton.getScene().getWindow();
-        stage.setScene(scene);
-        fadeOut.play();
-    }
 
-    @FXML
-    private Button switchToMainFlashcardPageButton;
-
-    @FXML
-    void switchToMainFlashcardPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/mainFlashcard.fxml"));
-        HBox root = loader.load();
-        Scene scene = new Scene(root, 1600, 900);
-        // Add the CSS file to the scene's stylesheets
-        String css = getClass().getResource("/com/socslingo/css/flashcard.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        // Get the current stage from the button's scene
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
-        fadeOut.setFromValue(0);
-        fadeOut.setToValue(1);
-        Stage stage = (Stage) switchToMainFlashcardPageButton.getScene().getWindow();
-        stage.setScene(scene);
-        fadeOut.play();
-    }
-
-
-
-    @FXML
-    private TextField textField2;
-    @FXML
-    private TextField textField3;
-
-    @FXML
-    private Button saveButton2;
-    @FXML
-    private Button saveButton3;
-
-    @FXML
-    private Button retrieveButton3;
-    @FXML
-    private Button retrieveButton2;
-
-    @FXML
-    private void handleSaveButtonAction() {
-        int userId = 1; // Assuming a fixed user_id for this example
-        String createdDate = "2023-10-01"; // Assuming a fixed created_date for this example
-
-        if (saveButton2.isArmed()) {
-            String value = textField2.getText();
-            Database.insertData(2, userId, value, "Card Back 2", createdDate);
-        } else if (saveButton3.isArmed()) {
-            String value = textField3.getText();
-            Database.insertData(3, userId, value, "Card Back 3", createdDate);
+        Stage stage = (Stage) switchToMainHomeFXMLButton.getScene().getWindow();
+        if (stage != null) {
+            stage.setScene(scene);
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
+            fadeOut.setFromValue(0);
+            fadeOut.setToValue(1);
+            fadeOut.play();
+        } else {
+            System.err.println("Stage is null");
         }
     }
 
-    @FXML
-    private void handleRetrieveButtonAction() {
-        if (retrieveButton2.isArmed()) {
-            Database.retrieveData(2);
-            // Update textField2 with the retrieved data
-        } else if (retrieveButton3.isArmed()) {
-            Database.retrieveData(3);
-            // Update textField3 with the retrieved data
-        }
+    private double getScreenWidth() {
+        return Screen.getPrimary().getBounds().getWidth();
+    }
+
+    private double getScreenHeight() {
+        return Screen.getPrimary().getBounds().getHeight();
     }
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.RegistrationController">
+    <children>
+        <!-- Custom Window Controls -->
+        <HBox fx:id="windowControls" styleClass="window-control-bar" alignment="TOP_RIGHT" spacing="0">
+            <children>
+                <Button text="_" styleClass="window-control-button" onAction="#minimizeWindow"/>
+                <Button text="⬜" styleClass="window-control-button" onAction="#maximizeWindow"/>
+                <Button text="X" styleClass="window-control-exit-button" onAction="#closeWindow"/>
+            </children>
+        </HBox>
+        
+        <!-- Main Content Area -->
+        <HBox VBox.vgrow="ALWAYS">
+            <children>
+                <VBox styleClass="left-sidebar-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
+                    <children>
+                        <ImageView fx:id="mascotImageView" fitWidth="500" preserveRatio="true" styleClass="mascot-image">
+                            <image>
+                                <Image url="@../images/threadjump_grey.gif"/>
+                            </image>
+                        </ImageView>
+                        <Label fx:id="socslingoLogoName" text="socslingo" styleClass="socslingo-logo-name"/>
+                    </children>
+                </VBox>
+                
+                <!-- Second Column -->
+                <VBox styleClass="right-sidebar-column" HBox.hgrow="ALWAYS" alignment="center">
+                    <children>
+                        <HBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets top="25" right="25" bottom="25" left="25"/>
+                            </padding>
+                            <children>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="switchToLoginButton" text="LOGIN" onAction="#switchToLoginFXML" alignment="CENTER" styleClass="login-button"/>
+                            </children>
+                        </HBox>
+                        <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="16" maxWidth="371">
+                            <children>
+                                <Label fx:id="rightSidebarTaskLabel" text="Create your profile" styleClass="create-your-profile-sub-heading-text"/>
+                                <TextField styleClass="registration-text-field" fx:id="usernameField" promptText="Username"/>
+                                <TextField styleClass="registration-text-field" fx:id="emailField" promptText="Email"/>
+                                <PasswordField styleClass="registration-text-field" fx:id="passwordField" promptText="Password"/>
+                                <PasswordField styleClass="registration-text-field" fx:id="confirmPasswordField" promptText="Confirm Password"/>
+                                <Button text="CREATE ACCOUNT" onAction="#handleRegistration" alignment="CENTER" styleClass="create-account-button" graphicTextGap="12"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>
