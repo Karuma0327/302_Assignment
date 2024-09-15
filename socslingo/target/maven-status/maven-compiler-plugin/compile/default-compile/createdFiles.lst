@@ -1,0 +1,12 @@
+com\socslingo\controllers\database\FlashcardDatabaseController.class
+com\socslingo\App.class
+module-info.class
+com\socslingo\models\Flashcard.class
+com\socslingo\controllers\RegistrationController.class
+com\socslingo\controllers\LoginController.class
+com\socslingo\controllers\PrimaryController.class
+com\socslingo\controllers\database\DatabaseController.class
+com\socslingo\controllers\FlashcardController.class
+com\socslingo\controllers\database\UserDatabaseController.class
+com\socslingo\controllers\FlashcardListCell.class
+com\socslingo\models\User.class
