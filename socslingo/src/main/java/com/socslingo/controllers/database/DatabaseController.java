@@ -7,8 +7,40 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+/**
+ * Controller class responsible for managing the creation and setup of the application's database.
+ * <p>
+ * This class handles the initialization of the SQLite database, including the creation of necessary
+ * tables such as user_table, pet_table, flashcards_table, kahoot_game_table, user_created_flashcards_table,
+ * and user_created_kahootgame_table. It also manages scenarios where the database already exists,
+ * allowing users to overwrite it if desired.
+ * </p>
+ * 
+ * @author TEAM-SOCSLINGO 
+ * @version 1.0
+ * @since 2024-09-18
+ */
 public class DatabaseController {
 
+    /**
+     * Default constructor for DatabaseController.
+     */
+    public DatabaseController() {
+        // Default constructor
+    }
+
+
+    /**
+     * Creates the application's SQLite database and its associated tables.
+     * <p>
+     * This method performs the following actions:
+     * <ul>
+     *     <li>Checks if the database directory exists and creates it if necessary.</li>
+     *     <li>Determines if the database file already exists. If it does, prompts the user to overwrite it.</li>
+     *     <li>Establishes a connection to the SQLite database.</li>
+     *     <li>Executes SQL statements to create the required tables if they do not already exist.</li>
+     * </ul>
+     */
     public static void createDatabase() {
         String folderPath = "src/main/database";
         String dbPath = folderPath + "/socslingo_database.db";
@@ -67,6 +99,7 @@ public class DatabaseController {
                 + " front_text text NOT NULL,\n"
                 + " back_text text NOT NULL,\n"
                 + " flashcard_list_id integer,\n" // Optional
+                + " created_date text NOT NULL,\n"
                 + " FOREIGN KEY (user_id) REFERENCES user_table(user_id),\n"
                 + " FOREIGN KEY (flashcard_list_id) REFERENCES flashcard_list_table(flashcard_list_id)\n" // Optional
                 + ");";
@@ -77,14 +110,6 @@ public class DatabaseController {
                 + " kahoot_game_completed integer,\n"
                 + " accuracy_rate real,\n"
                 + " experience_gained integer\n"
-                + ");";
-
-        String user_created_flashcards_table = "CREATE TABLE IF NOT EXISTS user_created_flashcards_table (\n"
-                + " flashcard_id integer PRIMARY KEY AUTOINCREMENT,\n"
-                + " user_id integer,\n"
-                + " front_text text,\n"
-                + " back_text text,\n"
-                + " created_date text\n"
                 + ");";
 
         String user_created_kahoot_game_table = "CREATE TABLE IF NOT EXISTS user_created_kahootgame_table (\n"
@@ -110,7 +135,6 @@ public class DatabaseController {
                 stmt.execute(pet_table);
                 stmt.execute(flashcards_table);
                 stmt.execute(kahoot_game_table);
-                stmt.execute(user_created_flashcards_table);
                 stmt.execute(user_created_kahoot_game_table);
                 System.out.println("Database and tables created successfully.");
             }
@@ -122,6 +146,11 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * The main method to execute the database creation process.
+     * 
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         createDatabase();
     }

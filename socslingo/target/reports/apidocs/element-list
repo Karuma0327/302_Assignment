@@ -1,0 +1,13 @@
+com.socslingo
+com.socslingo.controllers
+com.socslingo.controllers.authentication
+com.socslingo.controllers.common
+com.socslingo.controllers.database
+com.socslingo.controllers.flashcard
+com.socslingo.controllers.home
+com.socslingo.dao
+com.socslingo.helpers
+com.socslingo.managers
+com.socslingo.models
+com.socslingo.services
+com.socslingo.utils

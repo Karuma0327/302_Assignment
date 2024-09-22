@@ -58,7 +58,7 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
 }
@@ -75,7 +75,7 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
 }
@@ -91,7 +91,7 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
 }
@@ -109,7 +109,7 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
 
@@ -165,7 +165,7 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
     
@@ -185,18 +185,35 @@
     -fx-border-width: 2px; /* Top, Right, Bottom, Left */
     -fx-padding: 8px 14px 8px 14px;
     -fx-background-color: #f7f7f7;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-background-radius: 10px; /* Rounded corners */
     -fx-border-radius: 10px; /* Rounded corners */
 } 
+
+
+
+.registration-text-field-password{
+    -fx-pref-width: 347px;
+    -fx-pref-height: 44px;
+    -fx-font-size: 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px; /* Top, Right, Bottom, Left */
+    -fx-padding: 8px 14px 8px 14px;
+    -fx-background-color: #f7f7f7;
+    -fx-font-family: 'Arial';
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-radius: 10px; /* Rounded corners */
+} 
+
 
 .create-your-profile-sub-heading-text{
     -fx-font-size: 24px;
     -fx-text-fill: #3c3c3c;
     -fx-font-weight: bold;
 
-
+    -fx-translate-y: -20px; /* Move the text up by 20 pixels */
 
 }
 
@@ -211,11 +228,21 @@
     -fx-border-radius: 12px; /* Rounded corners */
     -fxd-padding: 0px 5px 0px 5px; /* Top, Right, Bottom, Left */
     -fx-font-size: 15px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
+    -fx-line-spacing: 0.8px;
+    -fx-line-height: 18px;
+    -fx-font-family: 'DINRoundPro';
+    -fx-cursor: hand;
+}
+
+.sign-up-button:pressed {
+    -fx-border-width: 2px 2px 2px 2px; /* Outline width */
+    -fx-translate-y: 2px; /* Move the button downwards */
+}
+
+.sign-up-button:hover{
+    -fx-background-color: #e5e5e5;
+    -fx-border-color: #cecece;
+    -fx-text-fill: #f5d78e;
 }
 .create-account-button {
     -fx-background-color: #f5d78e; 
@@ -223,14 +250,25 @@
     
     -fx-pref-height: 50px;
     -fx-border-color: #f2c868; /* Outline color */
-    -fx-border-width: 0 0 2px 0; /* Outline width */
+    -fx-border-width: 0 0 3px 0; /* Outline width */
     -fx-text-fill: rgb(255, 255, 255);
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 12px; /* Rounded corners */
+    -fx-border-radius: 12px; /* Rounded corners */
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: "DIN Round Pro";
+    -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
+}
+
+.create-account-button:pressed {
+    -fx-border-width: 0; /* Outline width */
+    -fx-translate-y: 3px; /* Move the button downwards */
+}
+.error-message{
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro';
+    -fx-text-fill: rgb(234, 43, 43);
+    -fx-font-weight: bold;
 }

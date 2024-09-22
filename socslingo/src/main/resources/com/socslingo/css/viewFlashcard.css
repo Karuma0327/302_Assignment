@@ -3,34 +3,11 @@
     src: url('DINRoundPro.ttf');
 }
 
+/*
+    #FFD580 BUTTON 1 COLOR
+    #FFC44D BUTTON 1 OUTLINE COLOR
 
-.window-control-button, .window-control-exit-button {
-    -fx-background-color: #ffffff;
-    -fx-pref-height: 35px;  
-    -fx-pref-width: 45px;
-    -fx-min-width: 45px; /* Ensure width remains the same */
-    -fx-max-width: 45px; /* Ensure width remains the same */
-    -fx-min-height: 35px; /* Ensure height remains the same */
-    -fx-max-height: 35px; /* Ensure height remains the same */
-    -fx-background-radius: 0px;
-    -fx-border-width: 0px;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
-
-.window-control-button:hover {
-    -fx-background-color: #efefef;
-}
-
-.window-control-exit-button:hover {
-    -fx-background-color: #cf382f;
-}
-
-.window-control-bar {
-    -fx-background-color: #ffffff;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
+*/
 
 .socslingo-logo-name {
     -fx-font-size: 46px;
@@ -42,7 +19,7 @@
 }
 
 .left-sidebar-button-active{
-    -fx-background-color: #ffd681;
+    -fx-background-color: #FFD580;
     -fx-pref-width: 222px;
     -fx-border-color: #ffc44b;
     -fx-pref-height: 52px;
@@ -50,7 +27,7 @@
     -fx-text-fill: rgb(0, 0, 0);
     -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
     -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-border-radius: 12px; /* Rounded corners */
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
@@ -93,10 +70,10 @@
 }
 
 .left-sidebar-button-selected{
-    -fx-background-color: #f5d78e; 
+    -fx-background-color: #FFD580; 
     -fx-pref-width: 222px;
     -fx-pref-height: 52px;
-    -fx-border-color: #f2c868; /* Outline color */
+    -fx-border-color: #ffcf6c; /* Outline color */
     -fx-border-width: 2; /* Outline width */
     -fx-text-fill: rgb(0, 0, 0);
     -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
@@ -138,7 +115,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.20), 4, 0, 0, 0);
     -fx-background-radius: 10px; /* Rounded corners */
     -fx-border-width: 0;
-    -fx-padding: 200px; /* Top, Right, Bottom, Left */
+    -fx-padding: 50px; /* Top, Right, Bottom, Left */
     -fx-spacing: 50px;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
@@ -198,13 +175,13 @@
 }
 
 .custom-flashcard-list-view {
-    -fx-pref-width: 700px; /* Width of the ListView */
+   -fx-pref-width: 800px;
 }
 
-.front-label {
-    -fx-pref-width: 347px;
-    -fx-pref-height: 44px;
-    -fx-font-size: 20px;
+.flashcard-label{
+    -fx-pref-width: 800px;
+    -fx-pref-height: 500px;
+    -fx-font-size: 32px;
     -fx-border-color: #e5e5e5;
     -fx-border-width: 2px; /* Top, Right, Bottom, Left */
     -fx-padding: 8px 14px 8px 14px;
@@ -213,20 +190,74 @@
     -fx-font-weight: bold;
     -fx-background-radius: 10px; /* Rounded corners */
     -fx-border-radius: 10px; /* Rounded corners */
+    -fx-alignment: center;
+    -fx-text-alignment: center;
     -fx-background-color: #f7f7f7; /* Light grey */
 }
 
-.back-label {
-    -fx-pref-width: 347px;
-    -fx-pref-height: 44px;
-    -fx-font-size: 20px;
-    -fx-border-color: #e5e5e5;
-    -fx-border-width: 2px; /* Top, Right, Bottom, Left */
-    -fx-padding: 8px 14px 8px 14px;
-    -fx-background-color: #f7f7f7;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
+
+.view-flashcards-button{
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 222px;
+    -fx-pref-height: 52px;
+    -fx-border-width: 2; /* Outline width */
+    -fx-text-fill: rgb(0, 0, 0);
     -fx-background-radius: 10px; /* Rounded corners */
     -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-color: #f7f7f7; /* Light grey */
+    -fx-font-size: 17px;
+    -fx-line-spacing: 5%;
+    -fx-line-height: 24px;
+    -fx-font-family: 'DINRoundPro';
+    -fx-font-weight: bold;
+    -fx-line-height: 1.5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.20), 4, 0, 0, 0);
+}
+
+
+.view-flashcards-button:hover{
+    -fx-background-color: #efefef; 
+    -fx-pref-width: 222px;
+    -fx-pref-height: 52px;
+    -fx-border-width: 2; /* Outline width */
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-font-size: 17px;
+    -fx-line-spacing: 5%;
+    -fx-line-height: 24px;
+    -fx-font-family: 'DINRoundPro';
+    -fx-font-weight: bold;
+    -fx-line-height: 1.5;
+}
+
+.generic-button-medium{
+    -fx-background-color: #FFD580; 
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 168px;
+    -fx-pref-height: 48px;
+    -fx-border-color: #F9C969; /* Outline color */
+    -fx-border-width: 0px 0px 2px 0px; /* Outline width */
+    -fx-background-radius: 12px; /* Rounded corners */
+    -fx-border-radius: 12px; /* Rounded corners */
+    -fx-font-size: 15px;
+    -fx-line-spacing: 0.8px;
+    -fx-border-style: solid; 
+    -fx-line-height: 18px;
+    -fx-font-family: 'DINRoundPro';
+    -fx-cursor: hand;
+}
+
+.generic-button-medium:pressed{
+    -fx-border-width: 0px 0px 0px 0px; /* Outline width */
+    -fx-translate-y: 2px; /* Move the button downwards */
+}
+
+.generic-button-medium:hover{
+    -fx-background-color: #ffdb94;
+}
+
+
+
+.flashcard-container{
+
 }

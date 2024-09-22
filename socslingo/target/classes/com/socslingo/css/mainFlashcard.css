@@ -3,34 +3,6 @@
     src: url('DINRoundPro.ttf');
 }
 
-.window-control-button, .window-control-exit-button {
-    -fx-background-color: #ffffff;
-    -fx-pref-height: 35px;  
-    -fx-pref-width: 45px;
-    -fx-min-width: 45px; /* Ensure width remains the same */
-    -fx-max-width: 45px; /* Ensure width remains the same */
-    -fx-min-height: 35px; /* Ensure height remains the same */
-    -fx-max-height: 35px; /* Ensure height remains the same */
-    -fx-background-radius: 0px;
-    -fx-border-width: 0px;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
-
-.window-control-button:hover {
-    -fx-background-color: #efefef;
-}
-
-.window-control-exit-button:hover {
-    -fx-background-color: #cf382f;
-}
-
-.window-control-bar {
-    -fx-background-color: #ffffff;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
-
 .socslingo-logo-name {
     -fx-font-size: 46px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
@@ -147,7 +119,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.20), 4, 0, 0, 0);
     -fx-background-radius: 10px; /* Rounded corners */
     -fx-border-width: 0;
-    -fx-padding: 200px; /* Top, Right, Bottom, Left */
+    -fx-padding: 50px; /* Top, Right, Bottom, Left */
     -fx-spacing: 50px;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
@@ -175,3 +147,25 @@
 
 }
 
+
+
+.generic-button-medium{
+    -fx-background-color: #FFD580; 
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 168px;
+    -fx-pref-height: 48px;
+    -fx-border-color: #FFC44D; /* Outline color */
+    -fx-border-width: 0px 0px 2px 0px; /* Outline width */
+    -fx-background-radius: 12px; /* Rounded corners */
+    -fx-border-radius: 12px; /* Rounded corners */
+    -fx-font-size: 15px;
+    -fx-line-spacing: 0.8px;
+    -fx-line-height: 18px;
+    -fx-font-family: 'DINRoundPro';
+    -fx-cursor: hand;
+}
+
+.generic-button-medium:pressed{
+    -fx-border-width: 0px 0px 0px 0px; /* Outline width */
+    -fx-translate-y: 2px; /* Move the button downwards */
+}
