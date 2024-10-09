@@ -5,8 +5,15 @@
             "type": "java",
             "name": "DatabaseController",
             "request": "launch",
-            "mainClass": "com.socslingo.controllers.database.DatabaseController",
+            "mainClass": "com.socslingo.controllers.DatabaseController",
             "projectName": "socslingo"
+        },
+        {
+            "type": "java",
+            "name": "Launch Java Application",
+            "request": "launch",
+            "mainClass": "com.socslingo.App",
+            "preLaunchTask": "maven clean install"
         },
         {
             "type": "java",
@@ -28,27 +35,6 @@
             "request": "launch",
             "mainClass": "${file}",
             "vmArgs": "--module-path ${env:PATH_TO_FX} --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "Database",
-            "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.controllers.Database",
-            "projectName": "socslingo"
-        },
-        {
-            "type": "java",
-            "name": "DatabaseCreate",
-            "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.DatabaseCreate",
-            "projectName": "socslingo"
-        },
-        {
-            "type": "java",
-            "name": "DatabaseController",
-            "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.controllers.database.DatabaseController",
-            "projectName": "socslingo"
         }
     ]
 }

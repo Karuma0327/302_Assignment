@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<VBox spacing="0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/view_flashcard.css"  fx:controller="com.socslingo.controllers.FlashcardController">
+    <children>
+        <!-- Main Content Area -->
+        <HBox spacing="0" VBox.vgrow="ALWAYS">
+            <children>
+                
+                <VBox fx:id="rightSidebarColumn" styleClass="middle-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
+                    <children>
+                        <Label fx:id="rightSidebarTaskLabel" styleClass=""/>
+                        <VBox fx:id="firstTimeFlashcardPage" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="first-time-flashcard-page">
+                            <children>
+                                <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
+                                    <children>
+                                            <HBox>
+                                                <children>
+                                                    <StackPane fx:id="stackPane" styleClass="flashcard-container">
+                                                        <children>
+                                                            <Label fx:id="frontLabel" styleClass="flashcard-label"/>
+                                                            <Label fx:id="backLabel" styleClass="flashcard-label" visible="false"/>
+                                                        </children>
+                                                    </StackPane>
+                                                </children>
+                                            </HBox>
+                                    </children>
+                                </HBox>
+                                <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10">
+                                    <Button fx:id="previousFlashcardButton" text="BACK" onAction="#handlePreviousFlashcardAction" styleClass="generic-button-medium" />
+                                    <Button text="VIEW FLASHCARDS" onAction="#handleViewFlashcardsAction" styleClass="generic-button-medium" />
+                                    <Button text="NEXT" onAction="#handleNextFlashcardAction" styleClass="generic-button-medium" />
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="50.0" left="60.0" right="60.0" top="30.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>

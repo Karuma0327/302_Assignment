@@ -1,15 +1,22 @@
-@font-face{
-    font-family: 'DINRoundPro';
-    src: url('DINRoundPro.ttf');
+@font-face {
+    font-family: 'DIN Round Pro';
+    src: url('NerkoOne-Regular.ttf'); /* Corrected path */
 }
 
 
+
+.button-save {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+}
 
 .socslingo-logo-name {
     -fx-font-size: 46px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
     -fx-padding: 15px 0px 5px 0px; /* Top, Right, Bottom, Left */
-    -fx-font-family: 'DINRoundPro';
+    -fx-font-family: "DIN Round Pro";
     -fx-font-weight: bold;
     -fx-text-fill: #FFD681;
 }
@@ -26,9 +33,10 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
+    -fx-font-family: "DIN Round Pro";
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
+    -fx-cursor: hand;
 }
 .left-sidebar-button:hover{
     -fx-background-color: #efefef; 
@@ -42,9 +50,10 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
+    -fx-font-family: "DIN Round Pro";
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
+    
 }
 
 .left-sidebar-button-selected{
@@ -60,13 +69,15 @@
     -fx-font-size: 17px;
     -fx-line-spacing: 5%;
     -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
+    -fx-font-family: "DIN Round Pro";
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
-
+-fx-cursor: hand;
 
 }
-
+.based-background{
+    -fx-background-color: #ffffff;
+}
 .left-sidebar-column{
     -fx-border-color: #e5e5e5;
     -fx-border-width: 2;

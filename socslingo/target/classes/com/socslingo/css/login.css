@@ -3,33 +3,7 @@
     src: url('DINRoundPro.ttf');
 }
 
-.window-control-button, .window-control-exit-button {
-    -fx-background-color: #ffffff;
-    -fx-pref-height: 35px;  
-    -fx-pref-width: 45px;
-    -fx-min-width: 45px; /* Ensure width remains the same */
-    -fx-max-width: 45px; /* Ensure width remains the same */
-    -fx-min-height: 35px; /* Ensure height remains the same */
-    -fx-max-height: 35px; /* Ensure height remains the same */
-    -fx-background-radius: 0px;
-    -fx-border-width: 0px;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
 
-.window-control-button:hover {
-    -fx-background-color: #efefef;
-}
-
-.window-control-exit-button:hover {
-    -fx-background-color: #cf382f;
-}
-
-.window-control-bar {
-    -fx-background-color: #ffffff;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
 
 .socslingo-logo-name {
     -fx-font-size: 46px;
@@ -168,7 +142,7 @@
     -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
-    
+    -fx-cursor: hand;
 
 }
 
@@ -260,6 +234,7 @@
     -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
+    -fx-cursor: hand;
 }
 
 .create-account-button:pressed {
