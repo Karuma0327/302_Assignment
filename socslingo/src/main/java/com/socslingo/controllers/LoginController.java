@@ -1,27 +1,20 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.animation.*;
+import javafx.beans.value.*;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.util.Duration;
-import com.socslingo.managers.SceneManager;
+
+import com.socslingo.managers.*;
 import com.socslingo.services.UserService;
 import com.socslingo.models.User;
-import com.socslingo.managers.SessionManager;
 
 public class LoginController {
 
@@ -53,14 +46,13 @@ public class LoginController {
     private ImageView errorIcon;
 
     @FXML
-    private javafx.scene.layout.Pane rootPane; // Assuming rootPane is the root container of your login screen
+    private javafx.scene.layout.Pane rootPane;
 
     private boolean canSwitch = true;
     private final PauseTransition cooldown = new PauseTransition(Duration.seconds(1));
 
     @FXML
     private void initialize() {
-        // Add event handler for Enter key press
         usernameField.setOnKeyPressed(this::handleEnterKeyPress);
         passwordField.setOnKeyPressed(this::handleEnterKeyPress);
         ChangeListener<javafx.scene.Scene> sceneChangeListener = new ChangeListener<javafx.scene.Scene>() {
@@ -88,19 +80,15 @@ public class LoginController {
         User user = userService.validateUser(username, hashedPassword);
         if (user != null) {
             System.out.println("Login successful, User ID: " + user.getId());
-            // Set the current user in the SessionManager
             SessionManager.getInstance().setCurrentUser(user);
-            // Add fade transition
             FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), rootPane);
             fadeTransition.setFromValue(1.0);
             fadeTransition.setToValue(0.0);
             fadeTransition.setOnFinished(event -> {
-                // Use SceneManager to switch to the main scene
                 SceneManager.getInstance().switchScene(
                     "/com/socslingo/views/main.fxml",
                     "/com/socslingo/css/main.css"
                 );
-                // Fade in the new scene
                 FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(1), rootPane);
                 fadeInTransition.setFromValue(0.0);
                 fadeInTransition.setToValue(1.0);
@@ -141,10 +129,10 @@ public class LoginController {
             if (currentScene != null && buttonScene != null && currentScene.getRoot().equals(buttonScene.getRoot())) {
                 if (usernameField.isFocused()) {
                     passwordField.requestFocus();
-                    event.consume(); // Prevent default Tab behavior
+                    event.consume();
                 } else {
                     SceneManager.getInstance().switchToRegistration();
-                    event.consume(); // Prevent default Tab behavior
+                    event.consume();
                     canSwitch = false;
                     cooldown.playFromStart();
                 }

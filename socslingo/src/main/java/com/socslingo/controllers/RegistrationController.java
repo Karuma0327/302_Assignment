@@ -1,33 +1,24 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.regex.Pattern;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
+import javafx.beans.value.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import javafx.animation.PauseTransition;
-import javafx.beans.value.ObservableValue;
-import javafx.beans.value.ChangeListener;
+
 import com.socslingo.managers.SceneManager;
 import com.socslingo.services.UserService;
-
 
 
 public class RegistrationController {
@@ -37,7 +28,7 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    // Flag to prevent multiple registrations during animation
+    @SuppressWarnings("unused")
     private boolean isAnimating = false;
 
     @FXML
@@ -83,20 +74,17 @@ public class RegistrationController {
     @FXML
     private ImageView confirmPasswordErrorIcon;
 
-    private boolean isProcessing = false;
 
     private boolean canSwitch = true;
     private final PauseTransition cooldown = new PauseTransition(Duration.seconds(1));
 
     @FXML
     private void initialize() {
-        // Add event handler for Enter key press
         usernameField.setOnKeyPressed(this::handleEnterKeyPress);
         emailField.setOnKeyPressed(this::handleEnterKeyPress);
         passwordField.setOnKeyPressed(this::handleEnterKeyPress);
         confirmPasswordField.setOnKeyPressed(this::handleEnterKeyPress);
 
-        // Add scene change listeners to handle Tab key press
         ChangeListener<javafx.scene.Scene> sceneChangeListener = new ChangeListener<javafx.scene.Scene>() {
             @Override
             public void changed(ObservableValue<? extends javafx.scene.Scene> observable, javafx.scene.Scene oldScene, javafx.scene.Scene newScene) {
@@ -112,7 +100,6 @@ public class RegistrationController {
 
         cooldown.setOnFinished(event -> canSwitch = true);
 
-        // Bind the visibility and managed properties of the error labels to their text properties
         bindErrorLabel(usernameErrorLabel, usernameErrorIcon);
         bindErrorLabel(emailErrorLabel, emailErrorIcon);
         bindErrorLabel(passwordErrorLabel, passwordErrorIcon);
@@ -137,17 +124,15 @@ public class RegistrationController {
      */
     @FXML
     private void handleRegistration() {
-        String username = usernameField.getText().trim(); // Trim to remove leading/trailing spaces
+        String username = usernameField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // Clear all error messages and remove invalid styles
         clearErrors();
 
         boolean hasError = false;
 
-        // Validate Username
         String usernameValidationResult = validateUsername(username);
         if (!usernameValidationResult.isEmpty()) {
             usernameErrorLabel.setText(usernameValidationResult);
@@ -155,7 +140,6 @@ public class RegistrationController {
             hasError = true;
         }
 
-        // Validate Email
         String emailValidationResult = validateEmail(email);
         if (!emailValidationResult.isEmpty()) {
             emailErrorLabel.setText(emailValidationResult);
@@ -163,7 +147,6 @@ public class RegistrationController {
             hasError = true;
         }
 
-        // Validate Password
         String passwordValidationResult = validatePassword(password);
         if (!passwordValidationResult.isEmpty()) {
             passwordErrorLabel.setText(passwordValidationResult);
@@ -171,7 +154,6 @@ public class RegistrationController {
             hasError = true;
         }
 
-        // Validate Confirm Password
         String confirmPasswordValidationResult = validateConfirmPassword(password, confirmPassword);
         if (!confirmPasswordValidationResult.isEmpty()) {
             confirmPasswordErrorLabel.setText(confirmPasswordValidationResult);
@@ -180,15 +162,13 @@ public class RegistrationController {
         }
 
         if (hasError) {
-            isProcessing = false; // Reset the flag if there's an error
-            return; // Stop registration if there are validation errors
+            return;
         }
 
         String hashedPassword = hashPassword(password);
         boolean isRegistered = userService.registerUser(username, email, hashedPassword);
 
         if (isRegistered) {
-            // Animate the registration button and then switch to login scene
             isAnimating = true;
             animateDotsAndSwitchScene();
         } else {
@@ -228,7 +208,6 @@ public class RegistrationController {
         if (username.toLowerCase().contains("hyper")) {
             return "Username cannot contain 'hyper'.";
         }
-        // Add more username validations here if needed
         return "";
     }
 
@@ -325,24 +304,22 @@ public class RegistrationController {
             Scene currentScene = SceneManager.getInstance().getCurrentScene();
             Scene buttonScene = this.registerButton.getScene();
             
-            // Add null checks to prevent NullPointerException
             if (currentScene != null && buttonScene != null && currentScene.getRoot().equals(buttonScene.getRoot())) {
                 if (usernameField.isFocused()) {
                     passwordField.requestFocus();
-                    event.consume(); // Prevent default Tab behavior
+                    event.consume();
                 } else if (passwordField.isFocused()) {
                     confirmPasswordField.requestFocus();
-                    event.consume(); // Prevent default Tab behavior
+                    event.consume();
                 } else {
                     SceneManager.getInstance().switchToLogin();
-                    event.consume(); // Prevent default Tab behavior
+                    event.consume();
                     canSwitch = false;
                     cooldown.playFromStart();
                 }
             }
         }
     }
-
 
     /**
      * Switches the scene to the login view.
@@ -359,7 +336,6 @@ public class RegistrationController {
      * @return True if valid; otherwise, false.
      */
     private boolean isValidEmail(String email) {
-        // Updated regex to ensure top-level domain is present
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
@@ -370,89 +346,73 @@ public class RegistrationController {
      * The dots' fill colors change sequentially using shades of grey with varying transparency.
      */
     private void animateDotsAndSwitchScene() {
-        // Clear the button's text
         registerButton.setText("");
 
-        // Create three dots with initial subtle grey fill
-        Circle dot1 = new Circle(5, Color.rgb(128, 128, 128, 0.15)); // Light grey, lower opacity
-        Circle dot2 = new Circle(5, Color.rgb(128, 128, 128, 0.15)); // Light grey, lower opacity
-        Circle dot3 = new Circle(5, Color.rgb(128, 128, 128, 0.15)); // Light grey, lower opacity
+        Circle dot1 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
+        Circle dot2 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
+        Circle dot3 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
 
-        // Create an HBox to hold the dots
-        HBox dotsBox = new HBox(5); // spacing = 5
+        HBox dotsBox = new HBox(5);
         dotsBox.setAlignment(Pos.CENTER);
         dotsBox.getChildren().addAll(dot1, dot2, dot3);
 
-        // Set the HBox as the button's graphic
         registerButton.setGraphic(dotsBox);
 
 
-        // Define the shades of grey with subtle transparency
-        Color greyLowOpacity = Color.rgb(128, 128, 128, 0.15);    // Light grey, lower opacity
-        Color greyMediumOpacity = Color.rgb(128, 128, 128, 0.35); // Medium grey, medium opacity
-        Color greyHighOpacity = Color.rgb(128, 128, 128, 0.55);   // Dark grey, higher opacity
+        Color greyLowOpacity = Color.rgb(128, 128, 128, 0.15);
+        Color greyMediumOpacity = Color.rgb(128, 128, 128, 0.35);
+        @SuppressWarnings("unused")
+        Color greyHighOpacity = Color.rgb(128, 128, 128, 0.55);
 
-        // Number of animation cycles
-        int cycleCount = 2; // Increased to repeat the animation 3 times
+        int cycleCount = 2;
 
-        // Duration for each color change
-        Duration durationPerCycle = Duration.seconds(0.6); // Decreased duration per cycle
+        Duration durationPerCycle = Duration.seconds(0.6);
 
-        // Create a Timeline for the animation
         Timeline timeline = new Timeline();
 
         for (int cycle = 0; cycle < cycleCount; cycle++) {
             double timeOffset = cycle * durationPerCycle.toSeconds();
 
-            // Dot 1 changes opacity at timeOffset + 0.1s
             KeyFrame kf1 = new KeyFrame(Duration.seconds(timeOffset + 0.1),
                 new KeyValue(dot1.fillProperty(), greyMediumOpacity));
 
-            // Dot 1 returns to low opacity at timeOffset + 0.3s
             KeyFrame kf1Reset = new KeyFrame(Duration.seconds(timeOffset + 0.3),
                 new KeyValue(dot1.fillProperty(), greyLowOpacity));
 
-            // Dot 2 changes opacity at timeOffset + 0.3s
             KeyFrame kf2 = new KeyFrame(Duration.seconds(timeOffset + 0.3),
                 new KeyValue(dot2.fillProperty(), greyMediumOpacity));
 
-            // Dot 2 returns to low opacity at timeOffset + 0.5s
             KeyFrame kf2Reset = new KeyFrame(Duration.seconds(timeOffset + 0.5),
                 new KeyValue(dot2.fillProperty(), greyLowOpacity));
 
-            // Dot 3 changes opacity at timeOffset + 0.5s
             KeyFrame kf3 = new KeyFrame(Duration.seconds(timeOffset + 0.5),
                 new KeyValue(dot3.fillProperty(), greyMediumOpacity));
 
-            // Dot 3 returns to low opacity at timeOffset + 0.7s
             KeyFrame kf3Reset = new KeyFrame(Duration.seconds(timeOffset + 0.7),
                 new KeyValue(dot3.fillProperty(), greyLowOpacity));
 
-            // Add all KeyFrames to the Timeline
             timeline.getKeyFrames().addAll(kf1, kf1Reset, kf2, kf2Reset, kf3, kf3Reset);
         }
 
-        // After the animation cycles, switch to the login scene and reset fields/button
         timeline.setOnFinished(event -> {
-            // Clear registration fields
             usernameField.clear();
             emailField.clear();
             passwordField.clear();
             confirmPasswordField.clear();
 
-            // Reset the button's text and graphic
             registerButton.setText("CREATE ACCOUNT");
             registerButton.setGraphic(null);
 
-            // Switch to login scene
             SceneManager.getInstance().switchToLogin();
 
-            // Reset the flag
             isAnimating = false;
         });
 
-        // Play the animation
         timeline.play();
     }
 
 }
+
+
+
+

@@ -1,45 +1,31 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.socslingo.managers.*;
 
-import com.socslingo.managers.ControllerManager;
-import com.socslingo.managers.SceneManager;
-import com.socslingo.managers.SessionManager;
-
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.animation.ParallelTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.util.Duration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PrimaryController {
 
-    // Initialize Logger
     private static final Logger logger = LoggerFactory.getLogger(PrimaryController.class);
 
     private static PrimaryController instance;
@@ -53,12 +39,14 @@ public class PrimaryController {
     }
 
     @FXML
-    private BorderPane rootPane; // Reference to the main BorderPane
+    private StackPane stackPane;
+
+    @FXML
+    private BorderPane rootPane;
 
     @FXML
     private VBox contentArea;
 
-    // Sidebar Buttons
     @FXML
     private Button sidebar_switch_to_home_button;
 
@@ -75,7 +63,7 @@ public class PrimaryController {
     private Button switch_to_flashcard_management_button;
 
     @FXML
-    private Button profileButton;
+    private Button switch_to_profile_button;
 
     @FXML
     private Button moreButton;
@@ -89,58 +77,55 @@ public class PrimaryController {
     @FXML
     private VBox leftSidebar;
 
-    // Add these fields
     private VBox rightSidebar;
     private boolean isRightSidebarVisible = true;
 
-
     private boolean isSidebarVisible = true;
     private Map<String, String> buttonToFXMLMap;
-    private List<Button> sidebarButtons; // List to hold all sidebar buttons
+    private List<Button> sidebarButtons;
 
     private ContextMenu sidebarContextMenu;
+
+    @FXML
+    private HBox statusBar;
 
     @FXML
     private void initialize() {
         logger.info("Initializing PrimaryController");
 
         try {
-            // Initialize the button to FXML mapping
             buttonToFXMLMap = new HashMap<>();
             buttonToFXMLMap.put("sidebar_switch_to_home_button", "/com/socslingo/views/home.fxml");
             buttonToFXMLMap.put("sidebar_switch_to_main_flashcard_button", "/com/socslingo/views/main_flashcard.fxml");
             buttonToFXMLMap.put("switch_to_flashcard_creation_button", "/com/socslingo/views/create_flashcard.fxml");
             buttonToFXMLMap.put("switch_to_deck_creation_button", "/com/socslingo/views/deck_creation.fxml");
             buttonToFXMLMap.put("switch_to_deck_management_button", "/com/socslingo/views/deck_management.fxml");
-            buttonToFXMLMap.put("switch_to_flashcard_management_button", "/com/socslingo/views/flashcard_management.fxml");
+            buttonToFXMLMap.put("switch_to_profile_button", "/com/socslingo/views/profile.fxml");
+            buttonToFXMLMap.put("switch_to_flashcard_management_button",
+                    "/com/socslingo/views/flashcard_management.fxml");
             buttonToFXMLMap.put("switchToCreateFlashCardPageButton", "/com/socslingo/views/createFlashcard.fxml");
-            buttonToFXMLMap.put("switchToCreateFlashcardListPageButton", "/com/socslingo/views/createFlashcardList.fxml");
+            buttonToFXMLMap.put("switchToCreateFlashcardListPageButton",
+                    "/com/socslingo/views/createFlashcardList.fxml");
             buttonToFXMLMap.put("switchToMainFlashcardPageButton", "/com/socslingo/views/mainFlashcard.fxml");
             buttonToFXMLMap.put("switchToLoginFXMLButton", "/com/socslingo/views/login.fxml");
             buttonToFXMLMap.put("switchToRegistrationPageButton", "/com/socslingo/views/registration.fxml");
             buttonToFXMLMap.put("switchToRegistrationFXMLButton", "/com/socslingo/views/registration.fxml");
 
-            // Initialize the list of sidebar buttons
             sidebarButtons = Arrays.asList(
-                sidebar_switch_to_home_button,
-                sidebar_switch_to_main_flashcard_button,
-                switch_to_deck_creation_button,
-                switch_to_deck_management_button,
-                switch_to_flashcard_management_button,
-                profileButton,
-                moreButton
-                // Add other sidebar buttons here if any
-            );
+                    sidebar_switch_to_home_button,
+                    sidebar_switch_to_main_flashcard_button,
+                    switch_to_deck_creation_button,
+                    switch_to_deck_management_button,
+                    switch_to_flashcard_management_button,
+                    switch_to_profile_button,
+                    moreButton);
 
-            // Optionally, set the initial active button
             setActiveButton(sidebar_switch_to_home_button);
 
             setupContextMenu();
 
-            // Initially hide the toggle button
             toggleSidebarButton.setVisible(false);
 
-            // Initialize the sidebar context menu
             sidebarContextMenu = new ContextMenu();
             MenuItem hideSidebarItem = new MenuItem("Hide Sidebar");
             hideSidebarItem.setOnAction(e -> handleHideSidebar());
@@ -148,10 +133,46 @@ public class PrimaryController {
 
             loadRightSidebar();
             logger.info("PrimaryController initialized successfully");
+
+            statusBar.prefWidthProperty().bind(stackPane.widthProperty());
+            applyAnimatedGlowEffect();
+
+            // applyLetterSpacingToStyleClass(leftSidebar, "left-sidebar-button", 0.1);
+
         } catch (Exception e) {
             logger.error("Exception during PrimaryController initialization", e);
             showAlert(Alert.AlertType.ERROR, "Failed to initialize the application.");
         }
+    }
+
+    private void applyLetterSpacingToStyleClass(Parent parent, String styleClass, double spacing) {
+        for (Node node : parent.lookupAll("." + styleClass)) {
+            if (node instanceof Label) {
+                Label labelNode = (Label) node;
+                labelNode.setText(applyLetterSpacing(labelNode.getText(), spacing));
+            } else if (node instanceof Button) {
+                Button buttonNode = (Button) node;
+                buttonNode.setText(applyLetterSpacing(buttonNode.getText(), spacing));
+            }
+        }
+    }
+
+    private String applyLetterSpacing(String text, double spacing) {
+        StringBuilder spacedText = new StringBuilder();
+        String smallSpace = "\u200A"; // Hair space character
+        int fullSpaces = (int) spacing;
+        int fractionalSpaces = (int) ((spacing - fullSpaces) * 10);
+
+        for (char c : text.toCharArray()) {
+            spacedText.append(c);
+            for (int i = 0; i < fullSpaces; i++) {
+                spacedText.append(" ");
+            }
+            for (int i = 0; i < fractionalSpaces; i++) {
+                spacedText.append(smallSpace);
+            }
+        }
+        return spacedText.toString();
     }
 
     /**
@@ -162,15 +183,15 @@ public class PrimaryController {
         logger.debug("Setting active button: {}", activeButton != null ? activeButton.getId() : "None");
         for (Button button : sidebarButtons) {
             if (activeButton != null && button.equals(activeButton)) {
-                // Remove other styles and add the active style
-                button.getStyleClass().removeAll("left-sidebar-button", "left-sidebar-button-selected", "left-sidebar-button-active");
+                button.getStyleClass().removeAll("left-sidebar-button", "left-sidebar-button-selected",
+                        "left-sidebar-button-active");
                 if (!button.getStyleClass().contains("left-sidebar-button-active")) {
                     button.getStyleClass().add("left-sidebar-button-active");
                     logger.debug("Button '{}' set to active", button.getId());
                 }
             } else {
-                // Remove active style and ensure the default style is applied
-                boolean wasActive = button.getStyleClass().removeAll("left-sidebar-button-active", "left-sidebar-button-selected");
+                boolean wasActive = button.getStyleClass().removeAll("left-sidebar-button-active",
+                        "left-sidebar-button-selected");
                 if (wasActive) {
                     logger.debug("Button '{}' deactivated", button.getId());
                 }
@@ -192,54 +213,61 @@ public class PrimaryController {
      * @param fxmlPath The path to the FXML file to load.
      * @throws IOException If the FXML file cannot be loaded.
      */
-    public void switchContent(String fxmlPath) throws IOException {
+    public void switchContent(String fxmlPath, Consumer<FXMLLoader> controllerConsumer) throws IOException {
         logger.debug("Switching content to: {}", fxmlPath);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controller factory is set
+        loader.setControllerFactory(ControllerManager.getInstance());
         Node node = loader.load();
 
-        // Clear existing content
+        if (controllerConsumer != null) {
+            controllerConsumer.accept(loader);
+        }
+
         contentArea.getChildren().clear();
         logger.debug("Cleared existing content in contentArea");
 
-        // Add new content
         contentArea.getChildren().add(node);
         logger.debug("Added new content to contentArea");
 
-        // Apply fade-in transition
         FadeTransition fadeIn = new FadeTransition(Duration.millis(500), node);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.play();
         logger.debug("Applied fade-in transition to new content");
 
-        // Manage the right sidebar based on the loaded content
-        if (isHomePage(fxmlPath)) {
+        if (shouldShowRightSidebar(fxmlPath)) {
             loadRightSidebar();
         } else {
             removeRightSidebar();
         }
     }
 
-    private boolean isHomePage(String fxmlPath) {
-        // Adjust the condition based on your actual home page FXML path
-        boolean isHome = fxmlPath.equals("/com/socslingo/views/home.fxml");
-        logger.debug("isHomePage check for '{}': {}", fxmlPath, isHome);
-        return isHome;
+    public void switchContent(String fxmlPath) throws IOException {
+        switchContent(fxmlPath, null);
+    }
+
+    private boolean shouldShowRightSidebar(String fxmlPath) {
+        List<String> fxmlWithSidebar = Arrays.asList(
+                "/com/socslingo/views/home.fxml",
+                "/com/socslingo/views/deck_management.fxml",
+                "/com/socslingo/views/deck_preview.fxml");
+        boolean shouldShow = fxmlWithSidebar.contains(fxmlPath);
+        logger.debug("shouldShowRightSidebar check for '{}': {}", fxmlPath, shouldShow);
+        return shouldShow;
     }
 
     private void loadRightSidebar() throws IOException {
         logger.debug("Loading right sidebar");
         if (rightSidebar == null) {
-            FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("/com/socslingo/views/right_sidebar.fxml"));
-            sidebarLoader.setControllerFactory(ControllerManager.getInstance()); // Ensure controller factory is set
+            FXMLLoader sidebarLoader = new FXMLLoader(
+                    getClass().getResource("/com/socslingo/views/right_sidebar.fxml"));
+            sidebarLoader.setControllerFactory(ControllerManager.getInstance());
             rightSidebar = sidebarLoader.load();
         }
         rootPane.setRight(rightSidebar);
         isRightSidebarVisible = true;
         logger.info("Right sidebar loaded");
     }
-
 
     private void removeRightSidebar() {
         logger.debug("Removing right sidebar");
@@ -248,7 +276,6 @@ public class PrimaryController {
         logger.info("Right sidebar removed");
     }
 
-
     /**
      * Public method to switch to the main application content.
      * This can be called by other controllers like LoginController.
@@ -256,7 +283,7 @@ public class PrimaryController {
     public void switchToMain() {
         logger.info("Switching to main application content");
         try {
-            switchContent("/com/socslingo/views/main.fxml"); // Adjust the path as needed
+            switchContent("/com/socslingo/views/main.fxml");
         } catch (IOException e) {
             logger.error("Failed to switch to main.fxml", e);
             showAlert(Alert.AlertType.ERROR, "Failed to load the main application content.");
@@ -266,22 +293,18 @@ public class PrimaryController {
     @FXML
     private void handleLogout(ActionEvent event) {
         logger.info("Logout initiated");
-        System.out.println("Logging out..."); // Replace with logging
+        System.out.println("Logging out...");
         showAlert(Alert.AlertType.INFORMATION, "Logging out...");
 
-        // Clear user session data
         clearUserSession();
 
-        // Switch to the login scene using SceneManager
         SceneManager.getInstance().switchToLogin();
 
-        // Optionally, hide the context menu if it's still visible
         moreContextMenu.hide();
-        logger.info("Logout successful and switched to login screen");
+        logger.info("Logout successful and switched to login ");
     }
 
     private void clearUserSession() {
-        // Clear the current user in SessionManager
         SessionManager.getInstance().setCurrentUser(null);
         logger.debug("User session cleared");
     }
@@ -291,7 +314,7 @@ public class PrimaryController {
         logger.info("Settings button clicked");
         try {
             switchContent("/com/socslingo/views/settings.fxml");
-            setActiveButton(null); // Optionally reset active button
+            setActiveButton(null);
         } catch (IOException e) {
             logger.error("Failed to load settings.fxml", e);
             showAlert(Alert.AlertType.ERROR, "Failed to load settings.");
@@ -299,15 +322,12 @@ public class PrimaryController {
         moreContextMenu.hide();
     }
 
-    /**
-     * Handles the Help action from the ContextMenu.
-     */
     @FXML
     private void handleHelp(ActionEvent event) {
         logger.info("Help option selected from ContextMenu");
         try {
             switchContent("/com/socslingo/views/help.fxml");
-            setActiveButton(null); // Optionally reset active button
+            setActiveButton(null);
         } catch (IOException e) {
             logger.error("Failed to load help.fxml", e);
             showAlert(Alert.AlertType.ERROR, "Failed to load help.");
@@ -317,26 +337,19 @@ public class PrimaryController {
 
     private void setupContextMenu() {
         logger.debug("Setting up ContextMenu for 'More' button");
-        // Initially hide the ContextMenu
         moreContextMenu.hide();
+        final boolean[] isContextMenuVisible = { false };
 
-        // Flag to track if the ContextMenu is being shown
-        final boolean[] isContextMenuVisible = {false};
-
-        // Show the ContextMenu when hovering over the "More" button
         moreButton.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
             if (!isContextMenuVisible[0]) {
                 logger.debug("Mouse entered 'More' button");
-                // Position the ContextMenu to the right of the moreButton
                 Bounds moreButtonBounds = moreButton.localToScreen(moreButton.getBoundsInLocal());
-                // Position the ContextMenu slightly offset from the button
                 moreContextMenu.show(moreButton, moreButtonBounds.getMaxX() + 10, moreButtonBounds.getMinY());
                 isContextMenuVisible[0] = true;
                 logger.info("'More' ContextMenu displayed");
             }
         });
 
-        // Create a PauseTransition to hide the ContextMenu after a delay
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(event -> {
             moreContextMenu.hide();
@@ -344,19 +357,16 @@ public class PrimaryController {
             logger.debug("'More' ContextMenu hidden after delay");
         });
 
-        // Start the pause when the mouse exits the "More" button
         moreButton.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
             logger.debug("Mouse exited 'More' button");
             pause.playFromStart();
         });
 
-        // If the mouse enters the ContextMenu, stop the pause (keep it open)
         moreContextMenu.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
             logger.debug("Mouse entered ContextMenu");
             pause.stop();
         });
 
-        // If the mouse exits the ContextMenu, start the pause to hide it
         moreContextMenu.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
             logger.debug("Mouse exited ContextMenu");
             pause.playFromStart();
@@ -380,24 +390,19 @@ public class PrimaryController {
     }
 
     public void switchContentNode(Node node) {
-        // Clear existing content
         contentArea.getChildren().clear();
         logger.debug("Cleared existing content in contentArea");
 
-        // Add new content
         contentArea.getChildren().add(node);
         logger.debug("Added new content to contentArea");
 
-        // Apply fade-in transition
         FadeTransition fadeIn = new FadeTransition(Duration.millis(500), node);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.play();
         logger.debug("Applied fade-in transition to new content");
 
-        // Manage the right sidebar based on the loaded content
-        // Adjust this based on your needs
-        removeRightSidebar();
+        manageToggleButtonsVisibility();
     }
 
     @FXML
@@ -428,29 +433,25 @@ public class PrimaryController {
     private void hideSidebar() {
         if (isSidebarVisible) {
             logger.info("Hiding sidebar");
-            // Animate sidebar hiding
             TranslateTransition hideSidebar = new TranslateTransition(Duration.millis(300), leftSidebar);
             hideSidebar.setToX(-leftSidebar.getWidth());
             hideSidebar.setInterpolator(Interpolator.EASE_IN);
             hideSidebar.play();
 
-            // Move the toggleSidebarButton with the sidebar
             TranslateTransition moveButton = new TranslateTransition(Duration.millis(300), toggleSidebarButton);
             moveButton.setToX(0);
             moveButton.setInterpolator(Interpolator.EASE_IN);
             moveButton.play();
 
-            // After animation, adjust visibility
             hideSidebar.setOnFinished(event -> {
                 leftSidebar.setVisible(false);
                 leftSidebar.setManaged(false);
-                leftSidebar.setTranslateX(0); // Reset translateX
+                leftSidebar.setTranslateX(0);
                 logger.debug("Sidebar hidden");
 
-                // Ensure the toggle button is visible and at the correct position
                 toggleSidebarButton.setVisible(true);
                 toggleSidebarButton.setTranslateX(0);
-                toggleSidebarButton.setOpacity(1); // Ensure opacity is reset
+                toggleSidebarButton.setOpacity(1);
                 logger.debug("Toggle button made visible");
             });
 
@@ -461,41 +462,34 @@ public class PrimaryController {
     private void showSidebar() {
         if (!isSidebarVisible) {
             logger.info("Showing sidebar");
-            // Make sidebar visible before animation
             leftSidebar.setVisible(true);
             leftSidebar.setManaged(true);
             leftSidebar.setTranslateX(-leftSidebar.getWidth());
 
-            // Move toggleSidebarButton to the starting position
             toggleSidebarButton.setTranslateX(0);
-            toggleSidebarButton.setOpacity(1); // Ensure it's fully visible
+            toggleSidebarButton.setOpacity(1);
 
-            // Animate sidebar showing
             TranslateTransition showSidebar = new TranslateTransition(Duration.millis(300), leftSidebar);
             showSidebar.setFromX(-leftSidebar.getWidth());
             showSidebar.setToX(0);
             showSidebar.setInterpolator(Interpolator.EASE_OUT);
 
-            // Animate the toggle button moving with the sidebar
             TranslateTransition moveButton = new TranslateTransition(Duration.millis(300), toggleSidebarButton);
             moveButton.setFromX(0);
             moveButton.setToX(leftSidebar.getWidth());
             moveButton.setInterpolator(Interpolator.EASE_OUT);
 
-            // Create a parallel transition to animate both at the same time
             ParallelTransition parallelTransition = new ParallelTransition(showSidebar, moveButton);
             parallelTransition.play();
 
-            // After animation, fade out the toggleSidebarButton
             parallelTransition.setOnFinished(event -> {
-                // Fade out the toggleSidebarButton
                 FadeTransition fadeOut = new FadeTransition(Duration.millis(200), toggleSidebarButton);
                 fadeOut.setFromValue(1.0);
                 fadeOut.setToValue(0.0);
                 fadeOut.setOnFinished(e -> {
                     toggleSidebarButton.setVisible(false);
-                    toggleSidebarButton.setTranslateX(0); // Reset position
-                    toggleSidebarButton.setOpacity(1);     // Reset opacity for next time
+                    toggleSidebarButton.setTranslateX(0);
+                    toggleSidebarButton.setOpacity(1);
                     logger.debug("Toggle button faded out and made invisible");
                 });
                 fadeOut.play();
@@ -510,19 +504,8 @@ public class PrimaryController {
         return switch_to_deck_management_button;
     }
 
-    
     @FXML
     private Button toggleRightSidebarButton;
-    // Method to instantly hide the right sidebar without animation (used during initialization)
-    private void hideRightSidebarInstantly() {
-        if (rightSidebar != null) {
-            rootPane.setRight(null);
-            isRightSidebarVisible = false;
-            toggleRightSidebarButton.setTranslateX(0);
-            toggleRightSidebarButton.setOpacity(1.0);
-            toggleRightSidebarButton.setVisible(true);
-        }
-    }
 
     public void showRightSidebar() {
         if (rightSidebar != null && !isRightSidebarVisible) {
@@ -533,37 +516,30 @@ public class PrimaryController {
                 sidebarWidth = rightSidebar.prefWidth(-1);
             }
 
-            // Ensure the sidebar is added to the rootPane
             rootPane.setRight(rightSidebar);
             rightSidebar.setTranslateX(sidebarWidth);
 
-            // Position the toggleRightSidebarButton to the initial position
             toggleRightSidebarButton.setTranslateX(0);
             toggleRightSidebarButton.setOpacity(1);
             toggleRightSidebarButton.setVisible(true);
 
-            // Create TranslateTransition for the sidebar sliding in
             TranslateTransition showSidebar = new TranslateTransition(Duration.millis(300), rightSidebar);
             showSidebar.setFromX(sidebarWidth);
             showSidebar.setToX(0);
             showSidebar.setInterpolator(Interpolator.EASE_OUT);
 
-            // Create TranslateTransition for the toggle button moving with the sidebar
             TranslateTransition moveButton = new TranslateTransition(Duration.millis(300), toggleRightSidebarButton);
             moveButton.setFromX(0);
             moveButton.setToX(-sidebarWidth);
             moveButton.setInterpolator(Interpolator.EASE_OUT);
 
-            // Combine both transitions into a ParallelTransition
             ParallelTransition parallelTransition = new ParallelTransition(showSidebar, moveButton);
             parallelTransition.play();
 
-            // After the sidebar is shown and the button has moved, fade out the button
             parallelTransition.setOnFinished(event -> {
                 isRightSidebarVisible = true;
                 logger.debug("Right sidebar shown");
 
-                // Fade out the toggleRightSidebarButton
                 FadeTransition fadeOut = new FadeTransition(Duration.millis(200), toggleRightSidebarButton);
                 fadeOut.setFromValue(1.0);
                 fadeOut.setToValue(0.0);
@@ -582,29 +558,24 @@ public class PrimaryController {
                 sidebarWidth = rightSidebar.prefWidth(-1);
             }
 
-            // Create TranslateTransition for the sidebar sliding out
             TranslateTransition hideSidebar = new TranslateTransition(Duration.millis(300), rightSidebar);
             hideSidebar.setFromX(0);
             hideSidebar.setToX(sidebarWidth);
             hideSidebar.setInterpolator(Interpolator.EASE_IN);
 
-            // Create TranslateTransition for the toggle button moving back
             TranslateTransition moveButton = new TranslateTransition(Duration.millis(300), toggleRightSidebarButton);
             moveButton.setFromX(-sidebarWidth);
             moveButton.setToX(0);
             moveButton.setInterpolator(Interpolator.EASE_IN);
 
-            // Combine both transitions into a ParallelTransition
             ParallelTransition parallelTransition = new ParallelTransition(hideSidebar, moveButton);
             parallelTransition.play();
 
-            // After the sidebar is hidden and the button has moved back, fade in the button
             parallelTransition.setOnFinished(event -> {
                 rootPane.setRight(null);
                 isRightSidebarVisible = false;
                 logger.debug("Right sidebar hidden");
 
-                // Fade in the toggleRightSidebarButton
                 FadeTransition fadeIn = new FadeTransition(Duration.millis(200), toggleRightSidebarButton);
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
@@ -624,50 +595,29 @@ public class PrimaryController {
         }
     }
 
-    @FXML
-    private HBox statusBar;
+    private void applyAnimatedGlowEffect() {
+        DropShadow glow = new DropShadow();
+        glow.setColor(Color.web("rgba(0, 0, 255, 0.6)"));
+        glow.setRadius(30);
+        glow.setOffsetX(0);
+        glow.setOffsetY(10);
+        statusBar.setEffect(glow);
 
-    @FXML
-    private Label statusLabel;
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), statusBar);
+        fadeIn.setFromValue(1.0);
+        fadeIn.setToValue(0.8);
+        fadeIn.setInterpolator(Interpolator.EASE_IN);
 
-    // Existing initialize method...
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), statusBar);
+        fadeOut.setFromValue(0.8);
+        fadeOut.setToValue(1.0);
+        fadeOut.setInterpolator(Interpolator.EASE_OUT);
 
-    /**
-     * Sets the status bar to active state with a custom message.
-     * @param message The message to display in the status bar.
-     */
-    private void setStatusBarActive(String message) {
-        // Update the label text
-        Platform.runLater(() -> statusLabel.setText(message));
+        SequentialTransition pulsate = new SequentialTransition(fadeIn, fadeOut);
+        pulsate.setCycleCount(Animation.INDEFINITE);
+        pulsate.play();
 
-        // Change the style to active
-        Platform.runLater(() -> {
-            statusBar.getStyleClass().remove("status-bar");
-            if (!statusBar.getStyleClass().contains("status-bar-active")) {
-                statusBar.getStyleClass().add("status-bar-active");
-            }
-        });
-
-        // Revert back after a delay
-        PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Adjust duration as needed
-        pause.setOnFinished(event -> resetStatusBar());
-        pause.play();
-    }
-
-    /**
-     * Resets the status bar to its default state.
-     */
-    private void resetStatusBar() {
-        // Reset the label text
-        Platform.runLater(() -> statusLabel.setText("Ready"));
-
-        // Reset the style
-        Platform.runLater(() -> {
-            statusBar.getStyleClass().remove("status-bar-active");
-            if (!statusBar.getStyleClass().contains("status-bar")) {
-                statusBar.getStyleClass().add("status-bar");
-            }
-        });
+        logger.info("Animated glow effect applied to status bar");
     }
 
     @FXML
@@ -677,11 +627,20 @@ public class PrimaryController {
         if (fxmlPath != null) {
             logger.info("Button '{}' clicked. Loading FXML: {}", clickedButton.getId(), fxmlPath);
             try {
-                switchContent(fxmlPath);
-                setActiveButton(clickedButton); // Update the active button styling
+                if (fxmlPath.equals("/com/socslingo/views/deck_management.fxml")) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                    loader.setControllerFactory(ControllerManager.getInstance());
+                    Node newContent = loader.load();
 
-                // Change the status bar to orange with a message
-                setStatusBarActive("Loaded " + clickedButton.getText() + " page.");
+                    switchContentNode(newContent);
+                    setActiveButton(clickedButton);
+
+                } else {
+                    switchContent(fxmlPath);
+                    setActiveButton(clickedButton);
+                }
+
+                applyWaveAnimation();
 
             } catch (IOException e) {
                 logger.error("Failed to load FXML: {}", fxmlPath, e);
@@ -691,6 +650,52 @@ public class PrimaryController {
             logger.warn("No FXML mapping found for button ID: {}", clickedButton.getId());
             showAlert(Alert.AlertType.WARNING, "No action defined for this button.");
         }
+    }
+
+    private void manageToggleButtonsVisibility() {
+        if (!isSidebarVisible) {
+            toggleSidebarButton.setVisible(true);
+        } else {
+            toggleSidebarButton.setVisible(false);
+        }
+
+        if (!isRightSidebarVisible) {
+            toggleRightSidebarButton.setVisible(true);
+        } else {
+            toggleRightSidebarButton.setVisible(false);
+        }
+    }
+
+    private final Color lightOrange = Color.rgb(255, 214, 129);
+    private final Color lightBlue = Color.rgb(173, 216, 230);
+
+    private void applyWaveAnimation() {
+        HBox gradientBox = new HBox();
+        gradientBox.setPrefWidth(statusBar.getWidth() * 1.5);
+
+        LinearGradient gradient = new LinearGradient(
+                0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
+                new Stop(0, lightOrange),
+                new Stop(0.5, lightBlue),
+                new Stop(1, lightOrange));
+
+        gradientBox.setBackground(new Background(new BackgroundFill(gradient, CornerRadii.EMPTY, null)));
+
+        statusBar.getChildren().add(gradientBox);
+
+        TranslateTransition bounceTransition = new TranslateTransition(Duration.seconds(2), gradientBox);
+        bounceTransition.setFromX(-gradientBox.getPrefWidth() / 2);
+        bounceTransition.setToX(statusBar.getWidth() / 2);
+        bounceTransition.setAutoReverse(true);
+        bounceTransition.setCycleCount(2);
+
+        TranslateTransition offScreenTransition = new TranslateTransition(Duration.seconds(2), gradientBox);
+        offScreenTransition.setFromX(statusBar.getWidth() / 2);
+        offScreenTransition.setToX(statusBar.getWidth());
+
+        SequentialTransition fullAnimation = new SequentialTransition(bounceTransition, offScreenTransition);
+
+        fullAnimation.play();
     }
 
 }
