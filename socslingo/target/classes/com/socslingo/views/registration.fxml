@@ -13,8 +13,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.authentication.RegistrationController">
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.RegistrationController">
     <children>
         <!-- Main Content Area -->
         <HBox VBox.vgrow="ALWAYS">
@@ -81,7 +82,12 @@
                                     </ImageView>
                                     <Label fx:id="confirmPasswordErrorLabel" text="" styleClass="error-message-label"/>
                                 </HBox>
-                                <Button text="CREATE ACCOUNT" onAction="#handleRegistration" alignment="CENTER" styleClass="create-account-button" graphicTextGap="12"/>
+                                <Button fx:id="registerButton" 
+                                            text="CREATE ACCOUNT" 
+                                            onAction="#handleRegistration" 
+                                            alignment="CENTER" 
+                                            styleClass="create-account-button" 
+                                            graphicTextGap="12"/>
                             </children>
                         </VBox>
                     </children>

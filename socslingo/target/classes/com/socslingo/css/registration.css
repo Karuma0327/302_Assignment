@@ -237,8 +237,13 @@
     -fx-font-family: 'DINRoundPro';
     -fx-font-weight: bold;
     -fx-line-height: 1.5;
+    -fx-cursor: hand;
 }
-
+/* Style for the dots inside the button (ensure they don't inherit unwanted styles) */
+.create-account-button .circle {
+    -fx-stroke: transparent;
+    -fx-fill: transparent; /* Initial fill; updated via controller */
+}
 .create-account-button:pressed {
     -fx-border-width: 0; /* Outline width */
     -fx-translate-y: 3px; /* Move the button downwards */
