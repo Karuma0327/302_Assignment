@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.LoginController">
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.LoginController">
     <children>
         <!-- Main Content Area -->
         <HBox VBox.vgrow="ALWAYS">
@@ -45,7 +45,7 @@
                         <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="10" maxWidth="371">
                             <children>
                                 <Label fx:id="rightSidebarTaskLabel" text="Log in" styleClass="create-your-profile-sub-heading-text"/>
-                                <VBox spacing="20"> <!-- Added VBox with spacing -->
+                                <VBox spacing="20"> 
                                     <children>
                                         <TextField styleClass="registration-text-field" fx:id="usernameField" promptText="Username"/>
                                         <PasswordField styleClass="registration-text-field-password" fx:id="passwordField" promptText="Password"/>

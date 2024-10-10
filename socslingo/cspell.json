@@ -1,0 +1,12 @@
+ {
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [],
+    "ignoreWords": ["-fx-background-color", ],
+    "import": []
+}
+    background-color: rgb(255, 228, 179);
+    background-color: rgb(255, 219, 153);
+    background-color: rgb(255, 205, 112);

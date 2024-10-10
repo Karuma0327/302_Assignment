@@ -1,37 +1,26 @@
 package com.socslingo.controllers;
 
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.transform.Rotate;
-import javafx.util.Duration;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-
 import com.socslingo.dataAccess.DeckDataAccess;
-import com.socslingo.managers.ControllerManager;
-import com.socslingo.managers.DatabaseManager;
-import com.socslingo.models.Deck;
-import com.socslingo.models.Flashcard;
+import com.socslingo.managers.*;
+import com.socslingo.models.*;
+import com.socslingo.services.FlashcardService;
+
+import javafx.animation.*;
+import javafx.collections.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.scene.transform.*;
+import javafx.util.Duration;
+
+import org.slf4j.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-import javafx.stage.Stage;
+import java.util.*;
 
 public class DeckPreviewController implements Initializable {
 
@@ -62,8 +51,11 @@ public class DeckPreviewController implements Initializable {
     private int currentIndex = 0;
 
     private DeckDataAccess deckDataAccess;
+    private FlashcardService flashcardService;
 
     private Deck currentDeck;
+
+    private ObservableList<Flashcard> allUserFlashcards;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,11 +63,23 @@ public class DeckPreviewController implements Initializable {
         try {
             DatabaseManager dbManager = DatabaseManager.getInstance();
             deckDataAccess = new DeckDataAccess(dbManager);
-            logger.info("DeckDataAccess initialized successfully");
+            flashcardService = new FlashcardService(new com.socslingo.dataAccess.FlashcardDataAccess(dbManager));
+            logger.info("DeckDataAccess and FlashcardService initialized successfully");
         } catch (Exception e) {
-            logger.error("Failed to initialize DeckDataAccess", e);
+            logger.error("Failed to initialize services", e);
             showAlert(Alert.AlertType.ERROR, "Failed to initialize application components.");
             return;
+        }
+
+        allUserFlashcards = FXCollections.observableArrayList();
+        try {
+            int userId = getCurrentUserId();
+            List<Flashcard> userFlashcards = flashcardService.getUserFlashcards(userId);
+            allUserFlashcards.setAll(userFlashcards);
+            logger.info("Loaded {} flashcards for userId {}", userFlashcards.size(), userId);
+        } catch (Exception e) {
+            logger.error("Failed to load all user flashcards", e);
+            showAlert(Alert.AlertType.ERROR, "Failed to load user flashcards.");
         }
 
         // Set up double-click on deckNameLabel to enter edit mode
@@ -88,7 +92,6 @@ public class DeckPreviewController implements Initializable {
         // Handle when the TextField loses focus to save the new name
         deckNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                // Focus lost
                 exitEditMode();
             }
         });
@@ -107,7 +110,6 @@ public class DeckPreviewController implements Initializable {
                 newScene.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                     Node target = event.getPickResult().getIntersectedNode();
                     if (deckNameTextField.isVisible()) {
-                        // If the click is outside the TextField and Label, exit edit mode
                         if (!isDescendant(deckNameTextField, target) && target != deckNameLabel) {
                             exitEditMode();
                         }
@@ -115,6 +117,90 @@ public class DeckPreviewController implements Initializable {
                 });
             }
         });
+
+        initializeDragAndDrop();
+    }
+
+    private void initializeDragAndDrop() {
+        flashcardPane.setOnDragOver(event -> {
+            if (event.getGestureSource() != flashcardPane && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
+            event.consume();
+        });
+
+        flashcardPane.setOnDragEntered(event -> {
+            if (event.getGestureSource() != flashcardPane && event.getDragboard().hasString()) {
+                flashcardPane.getStyleClass().add("drag-over");
+            }
+            event.consume();
+        });
+
+        flashcardPane.setOnDragExited(event -> {
+            flashcardPane.getStyleClass().remove("drag-over");
+            event.consume();
+        });
+
+        flashcardPane.setOnDragDropped(event -> {
+            boolean success = false;
+            Dragboard db = event.getDragboard();
+            if (db.hasString()) {
+                try {
+                    int flashcardId = Integer.parseInt(db.getString());
+                    Flashcard flashcard = findFlashcardById(flashcardId);
+                    if (flashcard != null) {
+                        addFlashcardToDeck(flashcard);
+                        success = true;
+                    } else {
+                        logger.error("Flashcard with id {} not found.", flashcardId);
+                        showAlert(Alert.AlertType.ERROR, "Flashcard not found.");
+                    }
+                } catch (NumberFormatException e) {
+                    logger.error("Invalid flashcard ID format: {}", db.getString(), e);
+                    showAlert(Alert.AlertType.ERROR, "Invalid flashcard data.");
+                }
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
+    }
+
+    private Flashcard findFlashcardById(int id) {
+        for (Flashcard fc : allUserFlashcards) {
+            if (fc.getId() == id) {
+                return fc;
+            }
+        }
+        return null;
+    }
+
+    private void addFlashcardToDeck(Flashcard flashcard) {
+        if (isFlashcardInDeck(flashcard.getId())) {
+            showAlert(Alert.AlertType.WARNING, "Flashcard is already in the deck.");
+            return;
+        }
+        try {
+            boolean success = deckDataAccess.addFlashcardToDeck(currentDeck.getDeckId(), flashcard.getId());
+            if (success) {
+                logger.info("FlashcardId: {} added to DeckId: {}", flashcard.getId(), currentDeck.getDeckId());
+                showAlert(Alert.AlertType.INFORMATION, "Flashcard added to deck successfully.");
+                flashcards = deckDataAccess.getFlashcardsInDeck(currentDeck.getDeckId());
+                allUserFlashcards.remove(flashcard);
+                if (!flashcards.isEmpty()) {
+                    currentIndex = 0;
+                    displayFlashcard(flashcards.get(currentIndex));
+                }
+            } else {
+                logger.error("Failed to add FlashcardId: {} to DeckId: {}", flashcard.getId(), currentDeck.getDeckId());
+                showAlert(Alert.AlertType.ERROR, "Failed to add flashcard to deck.");
+            }
+        } catch (Exception e) {
+            logger.error("Exception occurred while adding FlashcardId: {} to DeckId: {}", flashcard.getId(), currentDeck.getDeckId(), e);
+            showAlert(Alert.AlertType.ERROR, "An error occurred while adding the flashcard to the deck.");
+        }
+    }
+    private boolean isFlashcardInDeck(int flashcardId) {
+        return flashcards.stream().anyMatch(fc -> fc.getId() == flashcardId);
     }
 
     /**
@@ -160,7 +246,6 @@ public class DeckPreviewController implements Initializable {
     private void exitEditMode() {
         String newDeckName = deckNameTextField.getText().trim();
         if (!newDeckName.isEmpty() && !newDeckName.equals(currentDeck.getDeckName())) {
-            // Update deck name in the database
             try {
                 boolean success = deckDataAccess.updateDeck(currentDeck.getDeckId(), newDeckName);
                 if (success) {
@@ -264,26 +349,21 @@ public class DeckPreviewController implements Initializable {
     @FXML
     private void handleBackToDeckManagement(ActionEvent event) {
         try {
-            // Load the deck management FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/deck_management.fxml"));
-            loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controller factory is set
+            loader.setControllerFactory(ControllerManager.getInstance());
             Node deckManagementContent = loader.load();
 
-            // Use the PrimaryController to switch content
             PrimaryController primaryController = PrimaryController.getInstance();
             if (primaryController != null) {
                 primaryController.switchContentNode(deckManagementContent);
-                // Optionally, update the active button if needed
                 primaryController.setActiveButton(null);
             } else {
                 logger.error("PrimaryController instance is null.");
-                // Handle the error appropriately
                 showAlert(Alert.AlertType.ERROR, "Failed to switch to Deck Management.");
             }
 
         } catch (IOException e) {
             logger.error("Failed to load deck management view", e);
-            // Handle the error appropriately
             showAlert(Alert.AlertType.ERROR, "Failed to load Deck Management view.");
         }
     }
@@ -317,5 +397,9 @@ public class DeckPreviewController implements Initializable {
             child = child.getParent();
         }
         return false;
+    }
+
+    private int getCurrentUserId() {
+        return SessionManager.getInstance().getCurrentUserId();
     }
 }

@@ -6,7 +6,6 @@ import com.socslingo.models.User;
 public class UserService {
 
     public UserService() {
-        // Initialization code if needed
     }
     private UserDataAccess userDataAccess;
 
@@ -16,7 +15,6 @@ public class UserService {
     }
 
     public boolean registerUser(String username, String email,String hashedPassword) {
-        // Business logic to check if username already exists
         if (userDataAccess.isUsernameTaken(username)) {
             System.out.println("Username already taken");
             return false;

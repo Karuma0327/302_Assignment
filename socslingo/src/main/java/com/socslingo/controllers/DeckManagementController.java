@@ -1,34 +1,22 @@
 package com.socslingo.controllers;
 
 import com.socslingo.dataAccess.DeckDataAccess;
-import com.socslingo.managers.ControllerManager;
-import com.socslingo.managers.DatabaseManager;
-import com.socslingo.managers.SessionManager;
-import com.socslingo.models.Deck;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.socslingo.managers.*;
+import com.socslingo.models.*;
+import com.socslingo.services.DeckService;
+
+import javafx.collections.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.input.*;
 import javafx.scene.Node;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.slf4j.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DeckManagementController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(DeckManagementController.class);
@@ -49,17 +37,15 @@ public class DeckManagementController implements Initializable {
     @FXML
     private Button deleteDeckButton;
 
-    private DeckDataAccess deckDataAccess;
     private ObservableList<Deck> decksObservableList;
     private Map<String, String> buttonToFXMLMap;
 
     @FXML 
     private Button switch_to_deck_flashcard_management_button;
 
-    // Remove MenuItem from here since it's not a Node
-    // @FXML
-    // private MenuItem someMenuItem; // Example, adjust as needed
 
+    private DeckService deckService;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logger.info("Initializing DeckManagementController");
@@ -69,10 +55,10 @@ public class DeckManagementController implements Initializable {
 
         try {
             DatabaseManager dbManager = DatabaseManager.getInstance();
-            deckDataAccess = new DeckDataAccess(dbManager);
-            logger.info("DeckDataAccess initialized successfully");
+            deckService = new DeckService(new DeckDataAccess(dbManager));
+            logger.info("DeckService initialized successfully");
         } catch (Exception e) {
-            logger.error("Failed to initialize DeckDataAccess", e);
+            logger.error("Failed to initialize DeckService", e);
             showAlert(Alert.AlertType.ERROR, "Failed to initialize application components.");
             return;
         }
@@ -83,7 +69,6 @@ public class DeckManagementController implements Initializable {
         decksListView.setCellFactory(param -> new DeckListCell());
         loadUserDecks();
 
-        // Add global click listener to deselect decks when clicking outside the ListView and interactive controls
         addGlobalClickListener();
 
         logger.info("DeckManagementController initialized successfully");
@@ -107,7 +92,7 @@ public class DeckManagementController implements Initializable {
 
                     // Check if the click is inside decksListView
                     boolean isClickInsideListView = isDescendant(decksListView, clickedNode);
-                    
+
                     // Check if the click is on an interactive control (e.g., Button, TextField)
                     boolean isClickOnInteractiveControl = isDescendantOfInteractiveControl(clickedNode);
 
@@ -149,7 +134,7 @@ public class DeckManagementController implements Initializable {
         while (current != null) {
             if (current instanceof Button || current instanceof TextField || current instanceof CheckBox
                 || current instanceof RadioButton || current instanceof ComboBox<?> || current instanceof MenuBar
-                || current instanceof Slider || current instanceof ToggleButton) { // Add more as needed
+                || current instanceof Slider || current instanceof ToggleButton) {
                 return true;
             }
             current = current.getParent();
@@ -177,6 +162,12 @@ public class DeckManagementController implements Initializable {
     @FXML
     private void handleCreateDeck(ActionEvent event) {
         String deckName = "New Deck";
+        if (deckName.isEmpty()) {
+            logger.warn("Deck creation failed: Deck name is empty");
+            showAlert(Alert.AlertType.ERROR, "Deck name cannot be empty.");
+            return;
+        }
+
         int userId = SessionManager.getInstance().getCurrentUserId();
         if (userId == -1) {
             logger.warn("Deck creation failed: No user is currently logged in.");
@@ -184,14 +175,10 @@ public class DeckManagementController implements Initializable {
             return;
         }
 
-        String createdDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        logger.debug("Creating deck for userId: {} at {}", userId, createdDate);
-
         try {
-            int deckId = deckDataAccess.createDeck(userId, deckName, createdDate);
-            if (deckId != -1) {
-                logger.info("Deck '{}' created successfully with ID: {}", deckName, deckId);
-                Deck newDeck = new Deck(deckId, userId, deckName, createdDate);
+            Deck newDeck = deckService.createDeck(userId, deckName);
+            if (newDeck != null) {
+                logger.info("Deck '{}' created successfully with ID: {}", deckName, newDeck.getDeckId());
                 decksObservableList.add(newDeck);
                 decksListView.getSelectionModel().select(newDeck);
                 decksListView.edit(decksObservableList.indexOf(newDeck));
@@ -201,9 +188,10 @@ public class DeckManagementController implements Initializable {
             }
         } catch (Exception e) {
             logger.error("Exception occurred while creating deck '{}'", deckName, e);
-            showAlert(Alert.AlertType.ERROR, "An error occurred while creating the deck.");
+            showAlert(Alert.AlertType.ERROR, e.getMessage());
         }
     }
+
 
     @FXML
     private void handleDeleteDeck(ActionEvent event) {
@@ -224,7 +212,7 @@ public class DeckManagementController implements Initializable {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                boolean success = deckDataAccess.deleteDeck(selectedDeck.getDeckId());
+                boolean success = deckService.deleteDeck(selectedDeck.getDeckId());
 
                 if (success) {
                     logger.info("DeckId: {} deleted successfully.", selectedDeck.getDeckId());
@@ -254,7 +242,7 @@ public class DeckManagementController implements Initializable {
         try {
             String fxmlPath = "/com/socslingo/views/deck_flashcard_management.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controller factory is set
+            loader.setControllerFactory(ControllerManager.getInstance());
             Node newContent = loader.load();
 
             // Get the controller and set the deck
@@ -265,13 +253,13 @@ public class DeckManagementController implements Initializable {
             PrimaryController primaryController = PrimaryController.getInstance();
             if (primaryController != null) {
                 primaryController.switchContentNode(newContent);
+
                 // Optionally, update the active button if needed
                 primaryController.setActiveButton(null);
             } else {
                 logger.error("PrimaryController instance is null.");
                 showAlert(Alert.AlertType.ERROR, "Failed to switch content.");
             }
-
         } catch (IOException e) {
             logger.error("Failed to load deck_flashcard_management.fxml", e);
             showAlert(Alert.AlertType.ERROR, "Failed to load Flashcard Management view.");
@@ -288,7 +276,7 @@ public class DeckManagementController implements Initializable {
         }
 
         try {
-            List<Deck> decks = deckDataAccess.getUserDecks(userId);
+            List<Deck> decks = deckService.getUserDecks(userId);
             decksObservableList.setAll(decks);
             logger.info("Loaded {} decks for userId: {}", decks.size(), userId);
         } catch (Exception e) {
@@ -308,6 +296,7 @@ public class DeckManagementController implements Initializable {
         }
     }
 
+
     private void showAlert(Alert.AlertType alertType, String message) {
         logger.debug("Displaying alert of type '{}' with message: {}", alertType, message);
         Alert alert = new Alert(alertType);
@@ -316,85 +305,98 @@ public class DeckManagementController implements Initializable {
         logger.debug("Alert displayed");
     }
 
-private class DeckListCell extends ListCell<Deck> {
-    private TextField textField;
+    private class DeckListCell extends ListCell<Deck> {
+        private TextField textField;
 
-    public DeckListCell() {
-        this.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && !isEmpty()) {
-                startEdit();
+        public DeckListCell() {
+            this.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !isEmpty()) {
+                    startEdit();
+                }
+            });
+        }
+
+        @Override
+        public void startEdit() {
+            super.startEdit();
+            if (textField == null) {
+                createTextField();
             }
-        });
-    }
-
-    @Override
-    public void startEdit() {
-        super.startEdit();
-        if (textField == null) {
-            createTextField();
-        }
-        setText(null);
-        setGraphic(textField);
-        textField.selectAll();
-        textField.getStyleClass().add("editing-cell"); // Add CSS class
-    }
-
-    @Override
-    public void cancelEdit() {
-        super.cancelEdit();
-        setText(getItem().getDeckName());
-        setGraphic(null);
-        if (textField != null) {
-            textField.getStyleClass().remove("editing-cell"); // Remove CSS class
-        }
-    }
-
-    @Override
-    public void updateItem(Deck item, boolean empty) {
-        super.updateItem(item, empty);
-
-        if (empty || item == null) {
             setText(null);
+            setGraphic(textField);
+            textField.selectAll();
+            textField.getStyleClass().add("editing-cell");
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+            setText(getItem().getDeckName());
             setGraphic(null);
-        } else {
-            if (isEditing()) {
-                if (textField != null) {
-                    textField.setText(item.getDeckName());
-                }
+            if (textField != null) {
+                textField.getStyleClass().remove("editing-cell");
+            }
+        }
+
+        @Override
+        public void updateItem(Deck item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty || item == null) {
                 setText(null);
-                setGraphic(textField);
-                textField.getStyleClass().add("editing-cell"); // Ensure CSS class is applied
-            } else {
-                setText(item.getDeckName());
                 setGraphic(null);
-                if (textField != null) {
-                    textField.getStyleClass().remove("editing-cell"); // Ensure CSS class is removed
+            } else {
+                if (isEditing()) {
+                    if (textField != null) {
+                        textField.setText(item.getDeckName());
+                    }
+                    setText(null);
+                    setGraphic(textField);
+                    textField.getStyleClass().add("editing-cell");
+                } else {
+                    setText(item.getDeckName());
+                    setGraphic(null);
+                    if (textField != null) {
+                        textField.getStyleClass().remove("editing-cell");
+                    }
                 }
             }
         }
-    }
 
-    private void createTextField() {
-        textField = new TextField(getItem().getDeckName());
-        textField.setOnAction(evt -> commitEdit(getItem()));
-        textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-            if (!isNowFocused) {
-                commitEdit(getItem());
+        private void createTextField() {
+            textField = new TextField(getItem().getDeckName());
+            textField.setOnAction(evt -> commitEdit(getItem()));
+            textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                if (!isNowFocused) {
+                    commitEdit(getItem());
+                }
+            });
+        }
+
+        @Override
+        public void commitEdit(Deck newValue) {
+            String newDeckName = textField.getText().trim();
+            Deck deck = getItem();
+
+            if (newDeckName.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Deck name cannot be empty.");
+                cancelEdit();
+                return;
             }
-        });
-    }
 
-    @Override
-    public void commitEdit(Deck newValue) {
-        String newDeckName = textField.getText();
-        Deck deck = getItem();
-        deck.setDeckName(newDeckName);
-        super.commitEdit(deck);
-        boolean success = deckDataAccess.updateDeck(deck.getDeckId(), newDeckName);
-        if (!success) {
-            showAlert(Alert.AlertType.ERROR, "Failed to update deck name in database.");
-        } else {
-            logger.info("Deck name updated to '{}' in database for deckId {}", newDeckName, deck.getDeckId());
+            deck.setDeckName(newDeckName);
+            super.commitEdit(deck);
+
+            try {
+                boolean success = deckService.updateDeckName(deck.getDeckId(), newDeckName);
+                if (!success) {
+                    showAlert(Alert.AlertType.ERROR, "Failed to update deck name in database.");
+                } else {
+                    logger.info("Deck name updated to '{}' in database for deckId {}", newDeckName, deck.getDeckId());
+                }
+            } catch (Exception e) {
+                logger.error("Exception occurred while updating deck name for deckId {}", deck.getDeckId(), e);
+                showAlert(Alert.AlertType.ERROR, "An error occurred while updating the deck name.");
             }
         }
     }
@@ -408,8 +410,9 @@ private class DeckListCell extends ListCell<Deck> {
         }
         try {
             // Load the deck preview FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/deck_preview.fxml"));
-            loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controller factory is set
+            String fxmlPath = "/com/socslingo/views/deck_preview.fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory(ControllerManager.getInstance());
             Node newContent = loader.load();
 
             // Get the controller and pass the selected deck
@@ -420,18 +423,14 @@ private class DeckListCell extends ListCell<Deck> {
             PrimaryController primaryController = PrimaryController.getInstance();
             if (primaryController != null) {
                 primaryController.switchContentNode(newContent);
-                // Optionally, update the active button if needed
                 primaryController.setActiveButton(null);
             } else {
                 logger.error("PrimaryController instance is null.");
                 showAlert(Alert.AlertType.ERROR, "Failed to switch content.");
             }
-
         } catch (IOException e) {
             logger.error("Failed to load deck preview", e);
             showAlert(Alert.AlertType.ERROR, "Failed to load deck preview.");
         }
     }
-
-
 }

@@ -2,7 +2,6 @@ package com.socslingo.dataAccess;
 
 import com.socslingo.managers.DatabaseManager;
 import com.socslingo.models.Flashcard;
-import com.socslingo.models.Deck;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,18 +20,7 @@ public class FlashcardDataAccess {
         logger.info("FlashcardDataAccess initialized with DatabaseManager");
     }
 
-    // ----------------------
-    // Existing Flashcard Methods
-    // ----------------------
 
-    /**
-     * Inserts a new flashcard into the database.
-     *
-     * @param userId      ID of the user creating the flashcard.
-     * @param frontText   Text on the front side of the flashcard.
-     * @param backText    Text on the back side of the flashcard.
-     * @param createdDate Date when the flashcard was created.
-     */
     public void insertFlashcard(int userId, String frontText, String backText, String createdDate) {
         String sql = "INSERT INTO flashcards_table(user_id, front_text, back_text, created_date) VALUES(?, ?, ?, ?)";
 
@@ -52,13 +40,6 @@ public class FlashcardDataAccess {
         }
     }
 
-    /**
-     * Updates an existing flashcard in the database.
-     *
-     * @param id           ID of the flashcard to update.
-     * @param newFrontText New text for the front side.
-     * @param newBackText  New text for the back side.
-     */
     public void updateFlashcard(int id, String newFrontText, String newBackText) {
         String sql = "UPDATE flashcards_table SET front_text = ?, back_text = ? WHERE flashcard_id = ?";
 
@@ -81,12 +62,6 @@ public class FlashcardDataAccess {
         }
     }
 
-    /**
-     * Retrieves all flashcards for a specific user.
-     *
-     * @param userId ID of the user.
-     * @return List of Flashcard objects.
-     */
     public List<Flashcard> retrieveAllFlashcards(int userId) {
         List<Flashcard> flashcards = new ArrayList<>();
         String sql = "SELECT flashcard_id, front_text, back_text FROM flashcards_table WHERE user_id = ?";
@@ -114,5 +89,24 @@ public class FlashcardDataAccess {
         return flashcards;
     }
 
-    // You can add more methods with similar logging as needed
+    public Flashcard retrieveFlashcardById(int flashcardId) {
+        String sql = "SELECT flashcard_id, front_text, back_text FROM flashcards_table WHERE flashcard_id = ?";
+        try (Connection conn = databaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, flashcardId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String frontText = rs.getString("front_text");
+                String backText = rs.getString("back_text");
+                Flashcard flashcard = new Flashcard(flashcardId, frontText, backText);
+                logger.debug("Retrieved Flashcard: {}", flashcard);
+                return flashcard;
+            }
+        } catch (SQLException e) {
+            logger.error("Error retrieving flashcard with id: {}", flashcardId, e);
+        }
+        logger.warn("Flashcard with id {} not found.", flashcardId);
+        return null;
+    }
+
 }

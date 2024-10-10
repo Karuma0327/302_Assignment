@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 
     
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.socslingo.controllers.DeckFlashcardManagementController"
             stylesheets="@../css/deck_management.css">
     <top>
 
     </top>
     <center>
-        <VBox fx:id="firstTimeFlashcardPage" VBox.vgrow="ALWAYS" styleClass="first-time-flashcard-page">
+        <VBox spacing="20" alignment="CENTER" styleClass="main-content-container">
             <!-- Deck Creation Section -->
             <VBox spacing="20" alignment="CENTER">
                 <Label fx:id="deckNameLabel" text="Managing Flashcards for Deck: " styleClass="deck-title"/>
@@ -46,11 +46,11 @@
                             styleClass="generic-button-medium"/>
                 </HBox>
             </VBox>
-        </VBox>
+        </VBox> 
     </center>
 
     <!-- Properly set padding using Insets -->
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets top="75" right="75" bottom="75" left="75"/>
     </padding>
 </BorderPane>

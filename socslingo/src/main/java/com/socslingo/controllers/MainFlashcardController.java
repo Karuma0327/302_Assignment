@@ -23,7 +23,6 @@ public class MainFlashcardController {
 
     @FXML
     private void initialize() {
-        // Map button IDs to FXML files
         buttonToFXMLMap = new HashMap<>();
         buttonToFXMLMap.put("switch_to_flashcard_editing_button", "/com/socslingo/views/edit_flashcard.fxml");
         buttonToFXMLMap.put("switch_to_flashcard_creation_button", "/com/socslingo/views/create_flashcard.fxml");
@@ -36,7 +35,6 @@ public class MainFlashcardController {
         String fxmlPath = buttonToFXMLMap.get(clickedButton.getId());
 
         if (fxmlPath != null) {
-            // Access the PrimaryController and switch content
             PrimaryController primaryController = PrimaryController.getInstance();
             if (primaryController != null) {
                 primaryController.switchContent(fxmlPath);

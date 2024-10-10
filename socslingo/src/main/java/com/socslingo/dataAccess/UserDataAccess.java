@@ -1,14 +1,11 @@
 package com.socslingo.dataAccess;
 
+import java.sql.*;
+
 import com.socslingo.managers.DatabaseManager;
 import com.socslingo.models.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 public class UserDataAccess {
     private static final Logger logger = LoggerFactory.getLogger(UserDataAccess.class);
@@ -20,14 +17,6 @@ public class UserDataAccess {
         logger.info("UserDataAccess initialized with DatabaseManager");
     }
 
-    /**
-     * Inserts a new user into the database.
-     *
-     * @param username       Username of the new user.
-     * @param email          Email of the new user.
-     * @param hashedPassword Hashed password of the new user.
-     * @return true if insertion is successful, false otherwise.
-     */
     public boolean insertUser(String username, String email, String hashedPassword) {
         String sql = "INSERT INTO user_table(username, email, password) VALUES(?, ?, ?)";
 
@@ -52,12 +41,6 @@ public class UserDataAccess {
         return false;
     }
 
-    /**
-     * Checks if a username is already taken.
-     *
-     * @param username Username to check.
-     * @return true if username exists, false otherwise.
-     */
     public boolean isUsernameTaken(String username) {
         String sql = "SELECT user_id FROM user_table WHERE username = ?";
 
@@ -82,13 +65,6 @@ public class UserDataAccess {
         return false;
     }
 
-    /**
-     * Retrieves a user by username and hashed password.
-     *
-     * @param username       Username of the user.
-     * @param hashedPassword Hashed password of the user.
-     * @return User object if credentials are valid, null otherwise.
-     */
     public User getUserByUsernameAndPassword(String username, String hashedPassword) {
         String sql = "SELECT user_id, username, password FROM user_table WHERE username = ? AND password = ?";
 
@@ -115,5 +91,4 @@ public class UserDataAccess {
         return null;
     }
 
-    // You can add more methods with similar logging as needed
 }

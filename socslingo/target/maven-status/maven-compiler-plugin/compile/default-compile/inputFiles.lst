@@ -1,13 +1,16 @@
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\App.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DatabaseController.java
-C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\Deck_Controller.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckFlashcardManagementController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckManagementController.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckPreviewController.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckPreviewRightSidebarController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\FlashcardController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\HomeController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\LoginController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\MainFlashcardController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\PrimaryController.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\ProfileController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\RegistrationController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\RightSidebarController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\StartupController.java
@@ -21,6 +24,7 @@ C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\soc
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\Deck.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\Flashcard.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\User.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\services\DeckService.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\services\FlashcardService.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\services\UserService.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\utils\DateUtils.java

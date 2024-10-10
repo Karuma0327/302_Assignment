@@ -1,27 +1,20 @@
 package com.socslingo.controllers;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-
-import javafx.scene.transform.Rotate;
-import javafx.util.Duration;
-import com.socslingo.models.Flashcard;
-import com.socslingo.services.FlashcardService;
-
+import com.socslingo.models.*;
+import com.socslingo.services.*;
 import com.socslingo.utils.DateUtils;
 import com.socslingo.managers.SessionManager;
 
-import java.util.List;
+import javafx.animation.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
+
+import java.util.*;
 
 public class FlashcardController {
 
@@ -68,28 +61,23 @@ public class FlashcardController {
     @FXML
     private void handleLogout() {
         logger.info("Logout button clicked");
-        // Implement logout functionality here
         logger.info("User logged out successfully");
     }
 
     @FXML
     public void handleSaveFlashcardAction() {
         logger.info("Save Flashcard button clicked");
-        // Retrieve text from TextFields
         String frontText = frontTextField.getText().trim();
         String backText = backTextField.getText().trim();
 
-        // Validate input
         if (frontText.isEmpty() || backText.isEmpty()) {
             logger.warn("Attempted to save flashcard with empty front or back text");
-            // Optionally, display an error message to the user
             return;
         }
 
         int userId = getUserId();
         String createdDate = getCurrentDate();
 
-        // Save flashcard to database using flashcardService
         try {
             flashcardService.createFlashcard(userId, frontText, backText, createdDate);
             logger.info("Flashcard saved successfully for userId: {}", userId);
@@ -126,7 +114,7 @@ public class FlashcardController {
             logger.info("Number of flashcards retrieved: {}", flashcards.size());
 
             if (!flashcards.isEmpty()) {
-                currentIndex = 0; // Reset to the first flashcard
+                currentIndex = 0;
                 displayFlashcard(flashcards.get(currentIndex));
                 logger.debug("Displayed flashcard at index: {}", currentIndex);
             } else {
@@ -251,7 +239,6 @@ public class FlashcardController {
 
         if (frontText.isEmpty() || backText.isEmpty()) {
             logger.warn("Attempted to preview flashcard with empty front or back text");
-            // Optionally, display an error message to the user
             return;
         }
 

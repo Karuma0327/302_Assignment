@@ -1,30 +1,24 @@
 package com.socslingo.controllers;
 
-import com.socslingo.dataAccess.DeckDataAccess;
-import com.socslingo.dataAccess.FlashcardDataAccess;
-import com.socslingo.managers.DatabaseManager;
-import com.socslingo.managers.SessionManager;
-import com.socslingo.models.Deck;
-import com.socslingo.models.Flashcard;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.event.ActionEvent;
-import javafx.util.Callback;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import org.slf4j.*;
+
+import com.socslingo.dataAccess.*;
+import com.socslingo.managers.*;
+import com.socslingo.models.*;
+
+import javafx.collections.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 public class DeckController implements Initializable {
+
 
     // Initialize Logger
     private static final Logger logger = LoggerFactory.getLogger(DeckController.class);
@@ -59,7 +53,6 @@ public class DeckController implements Initializable {
 
     // Data Access
     private DeckDataAccess deckDataAccess;
-    private FlashcardDataAccess flashcardDataAccess;
 
     // Observable Lists for UI
     private ObservableList<Deck> decksObservableList;
@@ -74,7 +67,7 @@ public class DeckController implements Initializable {
         try {
             DatabaseManager dbManager = DatabaseManager.getInstance();
             deckDataAccess = new DeckDataAccess(dbManager);
-            flashcardDataAccess = new FlashcardDataAccess(dbManager);
+            new FlashcardDataAccess(dbManager);
             logger.info("Data Access Objects initialized successfully");
         } catch (Exception e) {
             logger.error("Failed to initialize Data Access Objects", e);
@@ -194,7 +187,7 @@ public class DeckController implements Initializable {
                 logger.info("Deck '{}' created successfully with ID: {}", deckName, deckId);
                 showAlert(Alert.AlertType.INFORMATION, "Deck created successfully with ID: " + deckId);
                 deck_name_text_field.clear();
-                loadUserDecks(); // Refresh deck list in UI
+                loadUserDecks();
             } else {
                 logger.error("Failed to create deck '{}'", deckName);
                 showAlert(Alert.AlertType.ERROR, "Failed to create deck.");
@@ -314,8 +307,8 @@ public class DeckController implements Initializable {
             if (success) {
                 logger.info("FlashcardId: {} added to DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard added to deck successfully.");
-                deckFlashcardsObservableList.add(selectedFlashcard); // Add to deck's flashcards list
-                availableFlashcardsObservableList.remove(selectedFlashcard); // Remove from available list
+                deckFlashcardsObservableList.add(selectedFlashcard);
+                availableFlashcardsObservableList.remove(selectedFlashcard);
             } else {
                 logger.error("Failed to add FlashcardId: {} to DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
                 showAlert(Alert.AlertType.ERROR, "Failed to add flashcard to deck.");
@@ -358,8 +351,8 @@ public class DeckController implements Initializable {
             if (success) {
                 logger.info("FlashcardId: {} removed from DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard removed from deck successfully.");
-                deckFlashcardsObservableList.remove(selectedFlashcard); // Remove from deck's flashcards list
-                availableFlashcardsObservableList.add(selectedFlashcard); // Add back to available list
+                deckFlashcardsObservableList.remove(selectedFlashcard);
+                availableFlashcardsObservableList.add(selectedFlashcard);
             } else {
                 logger.error("Failed to remove FlashcardId: {} from DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
                 showAlert(Alert.AlertType.ERROR, "Failed to remove flashcard from deck.");
@@ -402,9 +395,9 @@ public class DeckController implements Initializable {
                 if (success) {
                     logger.info("DeckId: {} deleted successfully.", selectedDeck.getDeckId());
                     showAlert(Alert.AlertType.INFORMATION, "Deck deleted successfully.");
-                    loadUserDecks(); // Refresh deck list in UI
+                    loadUserDecks();
                     selectedDeckLabel.setText("No Deck Selected");
-                    deckFlashcardsListView.setItems(FXCollections.observableArrayList()); // Reset flashcards list
+                    deckFlashcardsListView.setItems(FXCollections.observableArrayList());
                     availableFlashcardsListView.setDisable(true);
                     addFlashcardToDeckButton.setDisable(true);
                     removeFlashcardFromDeckButton.setDisable(true);
@@ -432,7 +425,6 @@ public class DeckController implements Initializable {
             Deck selectedDeck = decksListView.getSelectionModel().getSelectedItem();
             if (selectedDeck != null) {
                 logger.info("DeckId: {} was double-clicked.", selectedDeck.getDeckId());
-                // Implement any action on double-click, e.g., open deck details or edit deck
                 showAlert(Alert.AlertType.INFORMATION, "Double-clicked on deck: " + selectedDeck.getDeckName());
             }
         }

@@ -11,6 +11,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        
         // Initialize SceneManager with the primary stage
         SceneManager.initialize(stage);
         stage.initStyle(StageStyle.UNIFIED);

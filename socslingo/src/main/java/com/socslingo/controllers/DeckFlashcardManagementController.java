@@ -1,34 +1,22 @@
 package com.socslingo.controllers;
 
 import com.socslingo.dataAccess.DeckDataAccess;
-import com.socslingo.dataAccess.FlashcardDataAccess;
-import com.socslingo.managers.ControllerManager;
-import com.socslingo.managers.DatabaseManager;
-import com.socslingo.models.Deck;
-import com.socslingo.models.Flashcard;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.socslingo.managers.*;
+import com.socslingo.models.*;
+import com.socslingo.services.DeckService;
+
+import javafx.collections.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.stage.Stage;
+import javafx.scene.input.*;
 import javafx.scene.Node;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.slf4j.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Map;
+import java.util.*;
 
 public class DeckFlashcardManagementController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(DeckFlashcardManagementController.class);
@@ -48,9 +36,6 @@ public class DeckFlashcardManagementController implements Initializable {
     @FXML
     private Button removeFlashcardFromDeckButton;
 
-    private DeckDataAccess deckDataAccess;
-    private FlashcardDataAccess flashcardDataAccess;
-
     private ObservableList<Flashcard> availableFlashcardsObservableList;
     private ObservableList<Flashcard> deckFlashcardsObservableList;
 
@@ -61,19 +46,20 @@ public class DeckFlashcardManagementController implements Initializable {
 
     private Deck currentDeck;
 
+    private DeckService deckService;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logger.info("Initializing FlashcardManagementController");
+        logger.info("Initializing DeckFlashcardManagementController");
         buttonToFXMLMap = new HashMap<>();
         buttonToFXMLMap.put("switch_to_deck_management_button", "/com/socslingo/views/deck_management.fxml");
 
         try {
             DatabaseManager dbManager = DatabaseManager.getInstance();
-            deckDataAccess = new DeckDataAccess(dbManager);
-            flashcardDataAccess = new FlashcardDataAccess(dbManager);
-            logger.info("Data Access Objects initialized successfully");
+            deckService = new DeckService(new DeckDataAccess(dbManager));
+            logger.info("DeckService initialized successfully");
         } catch (Exception e) {
-            logger.error("Failed to initialize Data Access Objects", e);
+            logger.error("Failed to initialize DeckService", e);
             showAlert(Alert.AlertType.ERROR, "Failed to initialize application components.");
             return;
         }
@@ -183,7 +169,6 @@ public class DeckFlashcardManagementController implements Initializable {
 
         // Optional: Handle drag done if you need to perform additional actions
         source.setOnDragDone(event -> {
-            // You can add additional logic here if needed
             event.consume();
         });
     }
@@ -211,7 +196,7 @@ public class DeckFlashcardManagementController implements Initializable {
      */
     private void handleDragAddFlashcardToDeck(Flashcard flashcard) {
         try {
-            boolean success = deckDataAccess.addFlashcardToDeck(currentDeck.getDeckId(), flashcard.getId());
+            boolean success = deckService.addFlashcardToDeck(currentDeck.getDeckId(), flashcard.getId());
             if (success) {
                 logger.info("FlashcardId: {} added to DeckId: {} via drag-and-drop", flashcard.getId(), currentDeck.getDeckId());
                 availableFlashcardsObservableList.remove(flashcard);
@@ -234,7 +219,7 @@ public class DeckFlashcardManagementController implements Initializable {
      */
     private void handleDragRemoveFlashcardFromDeck(Flashcard flashcard) {
         try {
-            boolean success = deckDataAccess.removeFlashcardFromDeck(currentDeck.getDeckId(), flashcard.getId());
+            boolean success = deckService.removeFlashcardFromDeck(currentDeck.getDeckId(), flashcard.getId());
             if (success) {
                 logger.info("FlashcardId: {} removed from DeckId: {} via drag-and-drop", flashcard.getId(), currentDeck.getDeckId());
                 deckFlashcardsObservableList.remove(flashcard);
@@ -249,7 +234,7 @@ public class DeckFlashcardManagementController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "An error occurred while removing the flashcard from the deck.");
         }
     }
-
+    
     public void setDeck(Deck deck) {
         this.currentDeck = deck;
         deckNameLabel.setText("Managing Flashcards for Deck: " + deck.getDeckName());
@@ -264,16 +249,14 @@ public class DeckFlashcardManagementController implements Initializable {
         }
 
         logger.debug("Loading flashcards for deckId: {}", currentDeck.getDeckId());
-
         logger.debug("Loading flashcards for userId: {}", currentDeck.getUserId());
 
         try {
-            List<Flashcard> availableFlashcards = deckDataAccess.getFlashcardsNotInDeck(currentDeck.getUserId(), currentDeck.getDeckId());
-
+            List<Flashcard> availableFlashcards = deckService.getFlashcardsNotInDeck(currentDeck.getUserId(), currentDeck.getDeckId());
             logger.info("Loaded {} available flashcards.", availableFlashcards.size());
             availableFlashcardsObservableList.setAll(availableFlashcards);
 
-            List<Flashcard> deckFlashcards = deckDataAccess.getFlashcardsInDeck(currentDeck.getDeckId());
+            List<Flashcard> deckFlashcards = deckService.getFlashcardsInDeck(currentDeck.getDeckId());
             logger.info("Loaded {} flashcards in deck.", deckFlashcards.size());
             deckFlashcardsObservableList.setAll(deckFlashcards);
 
@@ -297,7 +280,7 @@ public class DeckFlashcardManagementController implements Initializable {
         }
 
         try {
-            boolean success = deckDataAccess.addFlashcardToDeck(currentDeck.getDeckId(), selectedFlashcard.getId());
+            boolean success = deckService.addFlashcardToDeck(currentDeck.getDeckId(), selectedFlashcard.getId());
             if (success) {
                 logger.info("FlashcardId: {} added to DeckId: {}", selectedFlashcard.getId(), currentDeck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard added to deck successfully.");
@@ -310,7 +293,7 @@ public class DeckFlashcardManagementController implements Initializable {
         } catch (Exception e) {
             logger.error("Exception occurred while adding FlashcardId: {} to DeckId: {}", 
                          selectedFlashcard.getId(), currentDeck.getDeckId(), e);
-            showAlert(Alert.AlertType.ERROR, "An error occurred while adding the flashcard to the deck.");
+            showAlert(Alert.AlertType.ERROR, e.getMessage());
         }
     }
 
@@ -328,7 +311,7 @@ public class DeckFlashcardManagementController implements Initializable {
         }
 
         try {
-            boolean success = deckDataAccess.removeFlashcardFromDeck(currentDeck.getDeckId(), selectedFlashcard.getId());
+            boolean success = deckService.removeFlashcardFromDeck(currentDeck.getDeckId(), selectedFlashcard.getId());
             if (success) {
                 logger.info("FlashcardId: {} removed from DeckId: {}", selectedFlashcard.getId(), currentDeck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard removed from deck successfully.");
@@ -341,25 +324,22 @@ public class DeckFlashcardManagementController implements Initializable {
         } catch (Exception e) {
             logger.error("Exception occurred while removing FlashcardId: {} from DeckId: {}", 
                          selectedFlashcard.getId(), currentDeck.getDeckId(), e);
-            showAlert(Alert.AlertType.ERROR, "An error occurred while removing the flashcard from the deck.");
+            showAlert(Alert.AlertType.ERROR, e.getMessage());
         }
     }
-
-    // DeckFlashcardManagementController.java
 
     @FXML
     private void navigateBackToDeckManagement(ActionEvent event) {
         try {
             String fxmlPath = "/com/socslingo/views/deck_management.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controller factory is set
+            loader.setControllerFactory(ControllerManager.getInstance());
             Node newContent = loader.load();
 
             // Use the PrimaryController to switch content
             PrimaryController primaryController = PrimaryController.getInstance();
             if (primaryController != null) {
                 primaryController.switchContentNode(newContent);
-                // Optionally, update the active button
                 primaryController.setActiveButton(primaryController.getDeckManagementButton());
             } else {
                 logger.error("PrimaryController instance is null.");
@@ -371,7 +351,6 @@ public class DeckFlashcardManagementController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Failed to load Deck Management view.");
         }
     }
-
 
     private void showAlert(Alert.AlertType alertType, String message) {
         logger.debug("Displaying alert of type '{}' with message: {}", alertType, message);

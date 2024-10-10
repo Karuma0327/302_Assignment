@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="rightSidebar" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox fx:id="rightSidebar" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" 
     fx:controller="com.socslingo.controllers.RightSidebarController" spacing="10" alignment="TOP_CENTER" 
     styleClass="right-sidebar" stylesheets="@../css/right_sidebar.css">
     <children>
@@ -18,9 +18,7 @@
             </padding>
             <Label text="Functional Bar" styleClass="right-sidebar-title"/>
         </HBox>
-        <Button text="Option 1" onAction="#handleOption1"/>
-        <Button text="Option 2" onAction="#handleOption2"/>
-        <Button text="Option 3" onAction="#handleOption3"/>
+        <Button text="RIGHT SIDEBAR SHOW FLASHCARD TEST BUTTON" onAction="#handleDeckPreviewRightSidebar"/>
         <!-- Dynamic Content Container -->
         <StackPane fx:id="dynamicContent" VBox.vgrow="ALWAYS">
             <!-- Initial dynamic content can be placed here if needed -->

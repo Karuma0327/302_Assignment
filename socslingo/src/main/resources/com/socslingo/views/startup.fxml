@@ -20,7 +20,7 @@
 
 
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.StartupController">
+<HBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.StartupController">
     <children>
         <VBox styleClass="launch-landing-page-main-container" HBox.hgrow="ALWAYS" alignment="center">
             <children>

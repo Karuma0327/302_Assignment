@@ -1,62 +1,39 @@
 package com.socslingo.managers;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.stage.Screen;
-import javafx.geometry.Rectangle2D;
+import java.util.*;
 
-/**
- * SceneManager is responsible for handling scene transitions within the application.
- * It follows the Singleton pattern to ensure only one instance manages the scenes.
- */
+import javafx.animation.*;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.*;
+import javafx.scene.image.Image;
+import javafx.stage.*;
+import javafx.util.Duration;
+
 public class SceneManager {
 
     private Stage primaryStage;
     private static SceneManager instance;
 
-    // Map to store preloaded Parent nodes keyed by their FXML paths
     private final Map<String, Parent> preloadedRoots = new HashMap<>();
 
-    // Variable to keep track of the current active scene
     private Scene currentScene;
 
-    /**
-     * Private constructor to enforce Singleton pattern.
-     *
-     * @param stage The primary stage of the application.
-     */
     private SceneManager(Stage stage) {
         this.primaryStage = stage;
-        preloadScenes(); // Preload Login and Registration scenes at startup
+
+        setupWindowedMode98Percent();
+
+        preloadScenes();
     }
 
-    /**
-     * Initializes the SceneManager with the primary stage.
-     * Should be called once during application startup.
-     *
-     * @param stage The primary stage of the application.
-     */
     public static void initialize(Stage stage) {
         if (instance == null) {
             instance = new SceneManager(stage);
         }
     }
 
-    /**
-     * Retrieves the singleton instance of SceneManager.
-     *
-     * @return The SceneManager instance.
-     * @throws IllegalStateException If SceneManager is not initialized.
-     */
     public static SceneManager getInstance() {
         if (instance == null) {
             throw new IllegalStateException("SceneManager not initialized. Call initialize() first.");
@@ -64,25 +41,15 @@ public class SceneManager {
         return instance;
     }
 
-    /**
-     * Preloads specific scenes to eliminate lag during scene switching.
-     * Currently preloads Login and Registration scenes.
-     */
     private void preloadScenes() {
         preloadScene("/com/socslingo/views/login.fxml", "/com/socslingo/css/login.css");
         preloadScene("/com/socslingo/views/registration.fxml", "/com/socslingo/css/registration.css");
     }
 
-    /**
-     * Helper method to preload a single scene.
-     *
-     * @param fxmlPath The path to the FXML file.
-     * @param cssPath  The path to the CSS file.
-     */
     private void preloadScene(String fxmlPath, String cssPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controllers are managed properly
+            loader.setControllerFactory(ControllerManager.getInstance());
             Parent root = loader.load();
             if (cssPath != null && !cssPath.isEmpty()) {
                 root.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
@@ -94,20 +61,12 @@ public class SceneManager {
         }
     }
 
-    /**
-     * Private method to handle the actual scene switching logic.
-     *
-     * @param fxmlPath       The path to the FXML file.
-     * @param cssPath        The path to the CSS file (can be null or empty).
-     * @param fadeInDuration The duration of the fade-in transition (can be null for no transition).
-     */
     private void switchSceneInternal(String fxmlPath, String cssPath, Duration fadeInDuration) {
         try {
             Rectangle2D screenBounds = Screen.getPrimary().getBounds();
             double screenWidth = screenBounds.getWidth();
             double screenHeight = screenBounds.getHeight();
 
-            // Calculate 95% of the screen dimensions
             double sceneWidth = screenWidth * 0.95;
             double sceneHeight = screenHeight * 0.95;
             Parent root;
@@ -115,23 +74,20 @@ public class SceneManager {
                 root = preloadedRoots.get(fxmlPath);
             } else {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-                loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controllers are managed properly
+                loader.setControllerFactory(ControllerManager.getInstance());
                 root = loader.load();
                 if (cssPath != null && !cssPath.isEmpty()) {
                     root.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
                 }
             }
 
-            // If the currentScene is null, set it for the first time
             if (currentScene == null) {
                 currentScene = new Scene(root, sceneWidth, sceneHeight);
                 primaryStage.setScene(currentScene);
                 primaryStage.show();
 
-                // Center the stage on the screen
                 primaryStage.centerOnScreen();
 
-                // Apply fade-in transition if specified
                 if (fadeInDuration != null) {
                     FadeTransition fadeIn = new FadeTransition(fadeInDuration, root);
                     fadeIn.setFromValue(0.0);
@@ -139,39 +95,33 @@ public class SceneManager {
                     fadeIn.play();
                 }
             } else {
-                // Use the existing scene
                 Parent oldRoot = currentScene.getRoot();
 
                 if (fadeInDuration != null) {
-                    // Apply fade-out to the current root
                     FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.2), oldRoot);
                     fadeOut.setFromValue(1.0);
                     fadeOut.setToValue(0.0);
                     fadeOut.setOnFinished(event -> {
                         currentScene.setRoot(root);
-                        currentScene.getStylesheets().clear(); // Clear previous stylesheets
+                        currentScene.getStylesheets().clear();
                         if (cssPath != null && !cssPath.isEmpty()) {
                             currentScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
                         }
-                        // Apply fade-in to the new root
                         FadeTransition fadeIn = new FadeTransition(fadeInDuration, root);
                         fadeIn.setFromValue(0.0);
                         fadeIn.setToValue(1.0);
                         fadeIn.play();
 
-                        // Update the currentScene variable
                         currentScene = primaryStage.getScene();
                     });
                     fadeOut.play();
                 } else {
-                    // No transition; simply switch the root
                     currentScene.setRoot(root);
-                    currentScene.getStylesheets().clear(); // Clear previous stylesheets
+                    currentScene.getStylesheets().clear();
                     if (cssPath != null && !cssPath.isEmpty()) {
                         currentScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
                     }
 
-                    // Update the currentScene variable
                     currentScene = primaryStage.getScene();
                 }
             }
@@ -182,46 +132,27 @@ public class SceneManager {
         }
     }
 
-    /**
-     * Switches the current scene to the specified FXML file without any transition.
-     *
-     * @param fxmlPath The path to the FXML file.
-     * @param cssPath  The path to the CSS file (can be null or empty).
-     */
     public void switchScene(String fxmlPath, String cssPath) {
         switchSceneInternal(fxmlPath, cssPath, null);
     }
 
-    /**
-     * Switches the current scene to the specified FXML file with a fade transition.
-     *
-     * @param fxmlPath       The path to the FXML file.
-     * @param cssPath        The path to the CSS file (can be null or empty).
-     * @param fadeInDuration The duration of the fade-in transition.
-     */
     public void switchScene(String fxmlPath, String cssPath, Duration fadeInDuration) {
         switchSceneInternal(fxmlPath, cssPath, fadeInDuration);
     }
 
-    /**
-     * Shows the startup scene with fade-in and automatic transition to the registration scene.
-     */
     public void showStartupScene() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/startup.fxml"));
-            loader.setControllerFactory(ControllerManager.getInstance()); // Ensure controllers are managed properly
+            loader.setControllerFactory(ControllerManager.getInstance());
             Parent root = loader.load();
 
-            // Retrieve screen dimensions
             Rectangle2D screenBounds = Screen.getPrimary().getBounds();
             double screenWidth = screenBounds.getWidth();
             double screenHeight = screenBounds.getHeight();
 
-            // Calculate 95% of the screen dimensions
             double sceneWidth = screenWidth * 0.95;
             double sceneHeight = screenHeight * 0.95;
 
-            // Create the scene with 95% of the screen size
             Scene scene = new Scene(root, sceneWidth, sceneHeight);
             scene.getStylesheets().add(getClass().getResource("/com/socslingo/css/startup.css").toExternalForm());
 
@@ -231,13 +162,10 @@ public class SceneManager {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            // Center the stage on the screen
             primaryStage.centerOnScreen();
 
-            // Set the currentScene variable
             currentScene = scene;
 
-            // Fade-in and transition logic
             FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.2), root);
             fadeIn.setFromValue(0.0);
             fadeIn.setToValue(1.0);
@@ -254,27 +182,18 @@ public class SceneManager {
         }
     }
 
-    /**
-     * Transitions from the startup scene to the registration scene with fade effects.
-     *
-     * @param currentRoot The root node of the current (startup) scene.
-     */
     public void transitionToRegistration(Parent currentRoot) {
-        // Fade out the current (startup) scene
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), currentRoot);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(event -> {
-            // Switch to the registration scene
             switchToRegistration();
             Scene registrationScene = primaryStage.getScene();
 
             if (registrationScene != null) {
                 Parent registrationRoot = registrationScene.getRoot();
-                // Ensure the registration scene starts with opacity 0
                 registrationRoot.setOpacity(0.0);
 
-                // Fade in the registration scene
                 FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), registrationRoot);
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
@@ -286,21 +205,10 @@ public class SceneManager {
         fadeOut.play();
     }
 
-    /**
-     * Retrieves the currently active scene.
-     *
-     * @return The current Scene.
-     */
     public Scene getCurrentScene() {
         return currentScene;
     }
 
-    /**
-     * Utility method to show error alerts to the user.
-     *
-     * @param title   The title of the alert dialog.
-     * @param message The content message of the alert.
-     */
     private void showErrorAlert(String title, String message) {
         javafx.application.Platform.runLater(() -> {
             javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
@@ -311,22 +219,15 @@ public class SceneManager {
         });
     }
 
-    // Specific Scene Switching Methods
 
-    /**
-     * Switches to the Registration scene with a fade transition.
-     */
     public void switchToRegistrationWithFade() {
         switchScene(
             "/com/socslingo/views/registration.fxml",
             "/com/socslingo/css/registration.css",
-            Duration.seconds(1) // Fade duration
+            Duration.seconds(1)
         );
     }
 
-    /**
-     * Switches to the Registration scene without any transition.
-     */
     public void switchToRegistration() {
         switchScene(
             "/com/socslingo/views/registration.fxml",
@@ -334,9 +235,6 @@ public class SceneManager {
         );
     }
 
-    /**
-     * Switches to the Login scene without any transition.
-     */
     public void switchToLogin() {
         switchScene(
             "/com/socslingo/views/login.fxml",
@@ -344,12 +242,6 @@ public class SceneManager {
         );
     }
 
-    /**
-     * Switches to the Main scene without any transition.
-     *
-     * @param fxmlPath The path to the main FXML file.
-     * @param cssPath  The path to the main CSS file.
-     */
     public void switchToMain(String fxmlPath, String cssPath) {
         switchScene(
             fxmlPath,
@@ -357,13 +249,6 @@ public class SceneManager {
         );
     }
 
-    /**
-     * Switches to the Main scene with a fade transition.
-     *
-     * @param fxmlPath       The path to the main FXML file.
-     * @param cssPath        The path to the main CSS file.
-     * @param fadeInDuration The duration of the fade-in transition.
-     */
     public void switchToMain(String fxmlPath, String cssPath, Duration fadeInDuration) {
         switchScene(
             fxmlPath,
@@ -372,5 +257,23 @@ public class SceneManager {
         );
     }
 
-    // ... Add more specific methods for other scenes as needed
+
+    private void setupWindowedMode98Percent() {
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+        double width = screenBounds.getWidth() * 0.98;
+        double height = screenBounds.getHeight() * 0.98;
+
+        double xPos = screenBounds.getMinX() + (screenBounds.getWidth() - width) / 2;
+        double yPos = screenBounds.getMinY() + (screenBounds.getHeight() - height) / 2;
+
+        primaryStage.setX(xPos);
+        primaryStage.setY(yPos);
+        primaryStage.setWidth(width);
+        primaryStage.setHeight(height);
+    }
+
+
 }

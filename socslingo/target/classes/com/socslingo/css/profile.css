@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+
+.profile-banner {
+    -fx-background-color: lightcoral;
+
+}
+
+
+
+.light-blue-background {
+    -fx-background-color: lightblue;
+
+}
+
+.light-green-background {
+    -fx-background-color: lightgreen;
+}
+
+.light-yellow-background {
+    -fx-background-color: lightgoldenrodyellow;
+}
+
+.main-content-container {
+    -fx-background-color: #c16ed1;
+
+}
+
+.profile-scroll-pane-main-container {
+    -fx-hbar-policy: "never";
+    -fx-vbar-policy: "never";
+}

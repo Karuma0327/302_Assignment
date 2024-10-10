@@ -1,19 +1,12 @@
 package com.socslingo.dataAccess;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.*;
 
 import com.socslingo.managers.DatabaseManager;
-import com.socslingo.models.Deck;
-import com.socslingo.models.Flashcard;
+import com.socslingo.models.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 public class DeckDataAccess {
 
@@ -26,18 +19,6 @@ public class DeckDataAccess {
         logger.info("DeckDataAccess initialized with DatabaseManager");
     }
 
-    // ----------------------
-    // New Deck Methods
-    // ----------------------
-
-    /**
-     * Creates a new flashcard deck for a user.
-     *
-     * @param userId      ID of the user creating the deck.
-     * @param deckName    Name of the deck.
-     * @param createdDate Date when the deck was created.
-     * @return The deck ID of the newly created deck, or -1 if creation failed.
-     */
     public int createDeck(int userId, String deckName, String createdDate) {
         String sql = "INSERT INTO flashcard_decks_table(user_id, deck_name, created_date) VALUES(?, ?, ?)";
 
@@ -72,12 +53,6 @@ public class DeckDataAccess {
         }
     }
 
-    /**
-     * Retrieves all decks for a specific user.
-     *
-     * @param userId ID of the user.
-     * @return List of Deck objects.
-     */
     public List<Deck> getUserDecks(int userId) {
         List<Deck> decks = new ArrayList<>();
         String sql = "SELECT deck_id, deck_name, created_date FROM flashcard_decks_table WHERE user_id = ?";
@@ -105,13 +80,6 @@ public class DeckDataAccess {
         return decks;
     }
 
-    /**
-     * Updates the name of an existing deck.
-     *
-     * @param deckId      ID of the deck to update.
-     * @param newDeckName New name for the deck.
-     * @return true if update was successful, false otherwise.
-     */
     public boolean updateDeck(int deckId, String newDeckName) {
         String sql = "UPDATE flashcard_decks_table SET deck_name = ? WHERE deck_id = ?";
 
@@ -137,12 +105,6 @@ public class DeckDataAccess {
         }
     }
 
-    /**
-     * Deletes a flashcard deck and its associations.
-     *
-     * @param deckId ID of the deck to delete.
-     * @return true if deletion was successful, false otherwise.
-     */
     public boolean deleteDeck(int deckId) {
         String sql = "DELETE FROM flashcard_decks_table WHERE deck_id = ?";
 
@@ -167,13 +129,6 @@ public class DeckDataAccess {
         }
     }
 
-    /**
-     * Associates a flashcard with a deck.
-     *
-     * @param deckId      ID of the deck.
-     * @param flashcardId ID of the flashcard.
-     * @return true if association was successful, false otherwise.
-     */
     public boolean addFlashcardToDeck(int deckId, int flashcardId) {
         String sql = "INSERT INTO deck_flashcards_table(deck_id, flashcard_id) VALUES(?, ?)";
 
@@ -193,13 +148,6 @@ public class DeckDataAccess {
         }
     }
 
-    /**
-     * Removes a flashcard from a deck.
-     *
-     * @param deckId      ID of the deck.
-     * @param flashcardId ID of the flashcard.
-     * @return true if removal was successful, false otherwise.
-     */
     public boolean removeFlashcardFromDeck(int deckId, int flashcardId) {
         String sql = "DELETE FROM deck_flashcards_table WHERE deck_id = ? AND flashcard_id = ?";
 
@@ -225,12 +173,6 @@ public class DeckDataAccess {
         }
     }
 
-    /**
-     * Retrieves all flashcards in a specific deck.
-     *
-     * @param deckId ID of the deck.
-     * @return List of Flashcard objects in the deck.
-     */
     public List<Flashcard> getFlashcardsInDeck(int deckId) {
         List<Flashcard> flashcards = new ArrayList<>();
         String sql = "SELECT f.flashcard_id, f.front_text, f.back_text FROM flashcards_table f " +
@@ -261,12 +203,6 @@ public class DeckDataAccess {
         return flashcards;
     }
 
-    /**
-     * Retrieves all flashcards not associated with any deck for a user.
-     *
-     * @param userId ID of the user.
-     * @return List of Flashcard objects not in any deck.
-     */
     public List<Flashcard> getFlashcardsNotInAnyDeck1(int userId) {
         List<Flashcard> flashcards = new ArrayList<>();
         String sql = "SELECT f.flashcard_id, f.front_text, f.back_text FROM flashcards_table f " +
@@ -297,45 +233,36 @@ public class DeckDataAccess {
         return flashcards;
     }
 
-public List<Flashcard> getFlashcardsNotInDeck(int userId, int deckId) {
-    List<Flashcard> flashcards = new ArrayList<>();
-    String sql = "SELECT f.flashcard_id, f.front_text, f.back_text FROM flashcards_table f " +
-                 "WHERE f.user_id = ? AND f.flashcard_id NOT IN ( " +
-                 "SELECT flashcard_id FROM deck_flashcards_table WHERE deck_id = ?)";
+    public List<Flashcard> getFlashcardsNotInDeck(int userId, int deckId) {
+        List<Flashcard> flashcards = new ArrayList<>();
+        String sql = "SELECT f.flashcard_id, f.front_text, f.back_text FROM flashcards_table f " +
+                     "WHERE f.user_id = ? AND f.flashcard_id NOT IN ( " +
+                     "SELECT flashcard_id FROM deck_flashcards_table WHERE deck_id = ?)";
     
-    logger.debug("Retrieving flashcards not in deckId: {} for userId: {}", deckId, userId);
-    try (Connection conn = databaseManager.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        logger.debug("Retrieving flashcards not in deckId: {} for userId: {}", deckId, userId);
+        try (Connection conn = databaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        pstmt.setInt(1, userId);
-        pstmt.setInt(2, deckId);
-        ResultSet rs = pstmt.executeQuery();
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, deckId);
+            ResultSet rs = pstmt.executeQuery();
 
-        while (rs.next()) {
-            int flashcardId = rs.getInt("flashcard_id");
-            String frontText = rs.getString("front_text");
-            String backText = rs.getString("back_text");
-            flashcards.add(new Flashcard(flashcardId, frontText, backText));
-            logger.debug("Flashcard not in deck retrieved: ID={}, Front='{}', Back='{}'", flashcardId, frontText, backText);
+            while (rs.next()) {
+                int flashcardId = rs.getInt("flashcard_id");
+                String frontText = rs.getString("front_text");
+                String backText = rs.getString("back_text");
+                flashcards.add(new Flashcard(flashcardId, frontText, backText));
+                logger.debug("Flashcard not in deck retrieved: ID={}, Front='{}', Back='{}'", flashcardId, frontText, backText);
+            }
+
+            logger.info("Total flashcards not in deckId {} retrieved for userId {}: {}", deckId, userId, flashcards.size());
+
+        } catch (SQLException e) {
+            logger.error("Error retrieving flashcards not in deckId: {} for userId: {}", deckId, userId, e);
         }
-
-        logger.info("Total flashcards not in deckId {} retrieved for userId {}: {}", deckId, userId, flashcards.size());
-
-    } catch (SQLException e) {
-        logger.error("Error retrieving flashcards not in deckId: {} for userId: {}", deckId, userId, e);
+        return flashcards;
     }
-    return flashcards;
-}
-    // ----------------------
-    // Additional Helper Methods (Optional)
-    // ----------------------
 
-    /**
-     * Deletes all flashcards associated with a specific deck.
-     *
-     * @param deckId ID of the deck.
-     * @return true if deletion was successful, false otherwise.
-     */
     public boolean deleteAllFlashcardsInDeck(int deckId) {
         String sql = "DELETE FROM deck_flashcards_table WHERE deck_id = ?";
 
@@ -359,6 +286,4 @@ public List<Flashcard> getFlashcardsNotInDeck(int userId, int deckId) {
             return false;
         }
     }
-
-
 }
