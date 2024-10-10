@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<ScrollPane fitToWidth="true" pannable="true" styleClass="profile-scroll-pane-main-container" style="-fx-background-color: white;" stylesheets="@../css/profile.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ProfileController">
+   <content>
+      <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: white;">
+          <children>
+              <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1200.0">
+               <children>
+                  <Pane prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: lightblue;" />
+               </children>
+              </HBox>
+            <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1200.0">
+               <children>
+                  <VBox prefHeight="126.0" prefWidth="593.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: lightcoral;" text="Taitranz">
+                           <font>
+                              <Font name="DINRoundPro-Bold Regular" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="41.0" prefWidth="175.0" style="-fx-background-color: pink;" text="Joined August 2024">
+                           <font>
+                              <Font name="DINRoundPro-Bold Regular" size="17.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="45.0" prefWidth="593.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="593.0" style="-fx-background-color: lightyellow;" text="FLAG 1, FLAG 2, FLAG 3">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="18.0" prefWidth="1200.0">
+               <children>
+                  <Separator prefHeight="41.0" prefWidth="600.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1200.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: grey;" />
+               </children>
+            </HBox>
+              <HBox alignment="CENTER" prefHeight="664.0" prefWidth="1200.0" spacing="10">
+               <children>
+                  <VBox prefHeight="500.0" prefWidth="600.0">
+                     <children>
+                        <VBox prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: purple;">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="52.0" prefWidth="104.0" text="Label">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <GridPane prefHeight="154.0" prefWidth="600.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 1" />
+                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 3" GridPane.rowIndex="1" />
+                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 2" GridPane.columnIndex="1" />
+                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <VBox prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: purple;">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="52.0" prefWidth="104.0" text="Label">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="411.0" prefWidth="600.0">
+                           <children>
+                              <VBox prefHeight="137.0" prefWidth="100.0" style="-fx-background-color: lightblue;">
+                                 <children>
+                                    <HBox prefHeight="137.0" prefWidth="600.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="178.0" style="-fx-background-color: aqua;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="137.0" prefWidth="600.0" style="-fx-background-color: gold;">
+                                 <children>
+                                    <HBox prefHeight="137.0" prefWidth="178.0">
+                                       <children>
+                                          <HBox prefHeight="137.0" prefWidth="180.0" style="-fx-background-color: pink;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="137.0" prefWidth="600.0" style="-fx-background-color: green;">
+                                 <children>
+                                      <HBox prefHeight="137.0" prefWidth="288.0" spacing="10">
+                                       <children>
+                                          <HBox prefHeight="137.0" prefWidth="180.0" style="-fx-background-color: brown;" />
+                                       </children>
+                                      </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+              </HBox>
+          </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

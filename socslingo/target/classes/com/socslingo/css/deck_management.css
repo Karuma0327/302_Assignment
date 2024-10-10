@@ -1,0 +1,202 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+
+.left-sidebar-column{
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 0 1px 0 0; /* Top, Right, Bottom, Left */
+
+    -fx-background-color: #ffffff;
+
+}
+
+.middle-column{
+    -fx-background-color: #ffffff;
+
+}
+
+.first-time-flashcard-text{
+    -fx-font-size: 24px;
+    -fx-text-fill: #292936;
+    -fx-font-weight: bold;
+}
+
+.main-content-container{
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.20), 4, 0, 0, 0);
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-pref-height: 800px;
+    
+    -fx-border-width: 0;
+    -fx-padding: 50px; 
+    -fx-spacing: 50px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+
+.create-flash-card-button{
+    -fx-background-color: #f5d78e; 
+    -fx-pref-width: 190px;
+    -fx-pref-height: 45px;
+    -fx-border-color: #f2c868; 
+    -fx-border-width: 2; 
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px; 
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-weight: bold;
+
+}
+.create-flash-card-button:hover{
+    -fx-background-color: #f7dfa3; 
+
+}
+
+.deck-name-text-field{
+    -fx-pref-width: 347px;
+    -fx-pref-height: 44px;
+    -fx-font-size: 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px; /* Top, Right, Bottom, Left */
+    -fx-padding: 8px 14px 8px 14px;
+    -fx-background-color: #f7f7f7;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-color: #f7f7f7; /* Light grey */
+}
+
+.back-of-card-text-field{
+    -fx-pref-width: 347px;
+    -fx-pref-height: 44px;
+    -fx-font-size: 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px; /* Top, Right, Bottom, Left */
+    -fx-padding: 8px 14px 8px 14px;
+    -fx-background-color: #f7f7f7;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-color: #f7f7f7; /* Light grey */
+}
+
+
+
+.flashcard-label{
+    -fx-pref-width: 800px;
+    -fx-pref-height: 500px;
+    -fx-font-size: 32px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px; /* Top, Right, Bottom, Left */
+    -fx-padding: 8px 14px 8px 14px;
+    -fx-background-color: #f7f7f7;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-background-color: #f7f7f7; /* Light grey */
+}
+
+.generic-button-medium{
+    -fx-background-color: #FFD580; 
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 168px;
+    -fx-pref-height: 48px;
+    -fx-border-color: #F9C969; /* Outline color */
+    -fx-border-width: 0px 0px 2px 0px; /* Outline width */
+    -fx-background-radius: 12px; /* Rounded corners */
+    -fx-border-radius: 12px; /* Rounded corners */
+    -fx-font-size: 15px;
+    -fx-line-spacing: 0.8px;
+    -fx-border-style: solid; 
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+}
+
+.generic-button-medium-large{
+    -fx-background-color: #FFD580; 
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 203px;
+    -fx-pref-height: 48px;
+    -fx-border-color: #F9C969; /* Outline color */
+    -fx-border-width: 0px 0px 2px 0px; /* Outline width */
+    -fx-background-radius: 12px; /* Rounded corners */
+    -fx-border-radius: 12px; /* Rounded corners */
+    -fx-font-size: 15px;
+    -fx-line-spacing: 0.8px;
+    -fx-border-style: solid; 
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+}
+.generic-button-medium:pressed{
+    -fx-border-width: 0px 0px 0px 0px; /* Outline width */
+    -fx-translate-y: 2px; /* Move the button downwards */
+}
+
+.generic-button-medium:hover{
+    -fx-background-color: #ffdb94;
+}
+
+
+.text-field.editing-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: inherit;
+    -fx-font-size: 12px;
+    -fx-font-family: 'Arial';
+}
+
+
+.deck-title{
+    -fx-font-size: 36px;
+    -fx-padding: 0px 0px 0px 280px; /* Top, Right, Bottom, Left */
+    -fx-font-family: 'DINRoundPro';
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFD681;
+}
+
+.list-view {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-background-color: white; /* Ensure background is white or desired color */
+}
+
+/* Style when a drag is over the ListView */
+.list-view.drag-over {
+    -fx-border-color: #66afe9; /* Highlight border color */
+    -fx-border-width: 2px;
+    -fx-background-color: #e6f7ff; /* Light blue background to indicate drop zone */
+}

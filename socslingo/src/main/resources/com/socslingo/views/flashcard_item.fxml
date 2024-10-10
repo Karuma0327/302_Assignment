@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.socslingo.controllers.FlashcardItemController" spacing="10" padding="5" style="-fx-border-color: #ccc; -fx-border-radius: 5; -fx-padding: 5;">
+    <Label fx:id="frontLabel" text="Front Side" style="-fx-font-weight: bold;" />
+    <Label fx:id="backLabel" text="Back Side" />
+</HBox>

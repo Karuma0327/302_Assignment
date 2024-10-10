@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.socslingo.controllers.DeckManagementController"
+            stylesheets="@../css/deck_management.css">
+    
+    <center>
+        <VBox spacing="20" alignment="CENTER" styleClass="main-content-container">
+            
+            <!-- Decks List Section -->
+            <VBox spacing="10">
+                <!-- Wrap Label in HBox for center-left alignment -->
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Your Decks" styleClass="deck-title"/>
+                </HBox>
+                
+                <!-- Wrap ListView in HBox for center alignment -->
+                <HBox alignment="CENTER">
+                    <ListView fx:id="decksListView" prefHeight="300" prefWidth="800" maxWidth="800"/>
+                </HBox>
+            </VBox>
+
+            <!-- Navigation Buttons to Flashcard Management -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="previewDeckButton" text="Preview Deck" onAction="#handlePreviewDeck"
+                        styleClass="generic-button-medium"/>
+                <Button fx:id="deleteDeckButton" text="Delete Deck" onAction="#handleDeleteDeck"
+                        styleClass="generic-button-medium"/>
+                <Button fx:id="switch_to_deck_flashcard_management_button" text="Manage Flashcards" onAction="#navigateToFlashcardManagement"
+                        styleClass="generic-button-medium"/>
+                <Button fx:id="createDeckButton" text="Create Deck" onAction="#handleCreateDeck"
+                        styleClass="generic-button-medium"/>
+            </HBox>
+            
+            <!-- Optional: Add more sections or components as needed -->
+            
+        </VBox>
+    </center>
+    
+    <!-- Properly set padding using Insets -->
+    <padding>
+        <Insets top="75" right="75" bottom="75" left="75"/>
+    </padding>
+</BorderPane>

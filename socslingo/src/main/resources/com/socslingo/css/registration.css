@@ -1,138 +1,64 @@
-@font-face{
+@font-face {
     font-family: 'DINRoundPro';
-    src: url('DINRoundPro.ttf');
+    src: url('../fonts/DINRoundPro.ttf');
 }
 
-.window-control-button, .window-control-exit-button {
-    -fx-background-color: #ffffff;
-    -fx-pref-height: 35px;  
-    -fx-pref-width: 45px;
-    -fx-min-width: 45px; /* Ensure width remains the same */
-    -fx-max-width: 45px; /* Ensure width remains the same */
-    -fx-min-height: 35px; /* Ensure height remains the same */
-    -fx-max-height: 35px; /* Ensure height remains the same */
-    -fx-background-radius: 0px;
-    -fx-border-width: 0px;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
-.window-control-button:hover {
-    -fx-background-color: #efefef;
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
 }
 
-.window-control-exit-button:hover {
-    -fx-background-color: #cf382f;
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
 }
 
-.window-control-bar {
-    -fx-background-color: #ffffff;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
 }
 
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
 
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
 
 .socslingo-logo-name {
     -fx-font-size: 46px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
-    -fx-padding: 15px 0px 5px 0px; /* Top, Right, Bottom, Left */
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-text-fill: #FFD681;
-    -fx-translate-y: -75px; 
-    
+    -fx-padding: 15px 0px 5px 0px;
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-text-fill: rgb(255, 198, 92);
+    -fx-translate-y: -75px;
 }
 
-.mascot-image{
-    -fx-translate-y: -75px; 
-}
-.left-sidebar-button-active{
-    -fx-background-color: #ffd681;
-    -fx-pref-width: 222px;
-    -fx-border-color: #ffc44b;
-    -fx-pref-height: 52px;
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
+.mascot-image {
+    -fx-translate-y: -75px;
 }
 
-.left-sidebar-button{
-    -fx-background-color: #ffffff;
-    -fx-pref-width: 222px;
-    -fx-pref-height: 52px;
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-}
-.left-sidebar-button:hover{
-    -fx-background-color: #efefef; 
-    -fx-pref-width: 222px;
-    -fx-pref-height: 52px;
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-}
-
-.left-sidebar-button-selected{
-    -fx-background-color: #f5d78e; 
-    -fx-pref-width: 222px;
-    -fx-pref-height: 52px;
-    -fx-border-color: #f2c868; /* Outline color */
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-
-
-}
-
-.left-sidebar-column{
+.left-sidebar-column {
     -fx-border-color: #ffffff;
--fx-border-width: 0 1px 0 0; /* Top, Right, Bottom, Left */
-
+    -fx-border-width: 0 1px 0 0;
     -fx-background-color: #f4f4f4;
 
 }
 
-.middle-column{
-
-
+.middle-column {
     -fx-background-color: #ffffff;
 
 }
 
-.first-time-flashcard-text{
+.first-time-flashcard-text {
     -fx-font-size: 24px;
     -fx-text-fill: #292936;
     -fx-font-weight: bold;
@@ -141,100 +67,144 @@
 .first-time-flashcard-page {
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.20), 4, 0, 5, 5);
-    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px;
     -fx-pref-width: 935px;
     -fx-pref-height: 580px;
     -fx-border-width: 2;
-    -fx-padding: 15px 15px 25px 30px; /* Top, Right, Bottom, Left */
+    -fx-padding: 15px 15px 25px 30px;
     -fx-spacing: 50px;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
 
-.create-flash-card-button{
-    -fx-background-color: #f5d78e; 
+.create-flash-card-button {
+    -fx-background-color: #f5d78e;
     -fx-pref-width: 190px;
     -fx-pref-height: 45px;
-    -fx-border-color: #f2c868; /* Outline color */
-    -fx-border-width: 2; /* Outline width */
+    -fx-border-color: #f2c868;
+    -fx-border-width: 2;
     -fx-text-fill: rgb(255, 255, 255);
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 18px;
+    -fx-font-family: 'DINNextW10-Heavy';
     -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-    
-
 }
 
-.right-sidebar-column{
+.right-sidebar-column {
     -fx-border-color: #ffffff;
-    -fx-border-width: 0 0 0 2px; /* Top, Right, Bottom, Left */
+    -fx-border-width: 0 0 0 2px;
     -fx-background-color: #ffffff;
 }
 
-.registration-container{
+.registration-container {
     -fx-pref-height: 500px;
-    -fx-translate-y: -100px; 
+    -fx-translate-y: -100px;
 }
-.registration-text-field{
+
+.registration-text-field {
     -fx-pref-width: 347px;
     -fx-pref-height: 44px;
     -fx-font-size: 20px;
     -fx-border-color: #e5e5e5;
-    -fx-border-width: 2px; /* Top, Right, Bottom, Left */
+    -fx-border-width: 2px;
     -fx-padding: 8px 14px 8px 14px;
     -fx-background-color: #f7f7f7;
-    -fx-font-family: 'DINRoundPro';
+    -fx-font-family: 'DINRoundPro-Bold';
     -fx-font-weight: bold;
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-color: #f7f7f7; /* Light grey */
-} 
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #f7f7f7;
+}
 
-.create-your-profile-sub-heading-text{
+
+.registration-text-field-password {
+    -fx-pref-width: 347px;
+    -fx-pref-height: 44px;
+    -fx-font-size: 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-padding: 8px 14px 8px 14px;
+    -fx-background-color: #f7f7f7;
+    -fx-font-family: 'Arial';
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+
+.create-your-profile-sub-heading-text {
     -fx-font-size: 24px;
     -fx-text-fill: #3c3c3c;
     -fx-font-weight: bold;
-
-
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-translate-y: -10px;
 
 }
 
-.login-button{
-    -fx-background-color: #ffffff; 
-    -fx-pref-width: 81px;
+.login-button {
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 98px;
     -fx-pref-height: 48px;
-    -fx-border-color: #e5e5e5; /* Outline color */
-    -fx-border-width: 2px 2px 4px 2px; /* Outline width */
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px 2px 4px 2px;
     -fx-text-fill: #f5d78e;
-    -fx-background-radius: 12px; /* Rounded corners */
-    -fx-border-radius: 12px; /* Rounded corners */
-    -fxd-padding: 0px 5px 0px 5px; /* Top, Right, Bottom, Left */
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fxd-padding: 0px 5px 0px 5px;
     -fx-font-size: 15px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
+    -fx-font-family: 'DINNextW10-Heavy';
+    -fx-cursor: hand;
 }
+
+.login-button:pressed {
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-translate-y: 2px;
+}
+
+.login-button:hover {
+    -fx-background-color: #e5e5e5;
+    -fx-border-color: #cecece;
+    -fx-text-fill: #f5d78e;
+}
+
 .create-account-button {
-    -fx-background-color: #f5d78e; 
+    -fx-background-color: rgb(255, 198, 92);
     -fx-pref-width: 375px;
-    
     -fx-pref-height: 50px;
-    -fx-border-color: #f2c868; /* Outline color */
-    -fx-border-width: 0 0 2px 0; /* Outline width */
+    -fx-border-color: rgb(255, 184, 51);
+    -fx-border-width: 0 0 2px 0;
     -fx-text-fill: rgb(255, 255, 255);
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 18px;
+    -fx-font-family: 'DINNextW10-Heavy';
+    -fx-cursor: hand;
+}
+
+.create-account-button .circle {
+    -fx-stroke: transparent;
+    -fx-fill: transparent;
+}
+
+.create-account-button:pressed {
+    -fx-border-width: 0;
+    -fx-translate-y: 3px;
+}
+
+
+.error-message-label {
+    -fx-font-size: 18px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(234, 43, 43);
     -fx-font-weight: bold;
-    -fx-line-height: 1.5;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-alignment: left;
+}
+
+.invalid-field {
+    -fx-border-color: rgb(234, 43, 43);
+    -fx-border-width: 2px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
 }

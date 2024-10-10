@@ -1,6 +1,20 @@
 {
     "version": "0.2.0",
     "configurations": [
+        // {
+        //     "type": "java",
+        //     "name": "Launch Java Application",
+        //     "request": "launch",
+        //     "mainClass": "com.socslingo.App", // Replace with your main class
+        //     "preLaunchTask": "maven clean install"
+        // },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.socslingo.App",
+            "projectName": "socslingo"
+        },
         {
             "type": "java",
             "name": "App",
@@ -15,26 +29,26 @@
             "mainClass": "${file}",
             "vmArgs": "--module-path ${env:PATH_TO_FX} --add-modules javafx.controls,javafx.fxml"
         },
-        {
-            "type": "java",
-            "name": "Database",
-            "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.controllers.Database",
-            "projectName": "socslingo"
-        },
-        {
-            "type": "java",
-            "name": "DatabaseCreate",
-            "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.DatabaseCreate",
-            "projectName": "socslingo"
-        },
-                {
-            "type": "java",
-            "name": "DatabaseController",
-            "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.controllers.database.DatabaseController",
-            "projectName": "socslingo"
-        },
+        // {
+        //     "type": "java",
+        //     "name": "Database",
+        //     "request": "launch",
+        //     "mainClass": "com.socslingo/com.socslingo.controllers.Database",
+        //     "projectName": "socslingo"
+        // },
+        // {
+        //     "type": "java",
+        //     "name": "DatabaseController",
+        //     "request": "launch",
+        //     "mainClass": "com.socslingo/com.socslingo.controllers.database.DatabaseController",
+        //     "projectName": "socslingo"
+        // },
+        // {
+        //     "type": "java",
+        //     "name": "DatabaseController",
+        //     "request": "launch",
+        //     "mainClass": "com.socslingo.controllers.database.DatabaseController",
+        //     "projectName": "socslingo"
+        // },
     ]
 }

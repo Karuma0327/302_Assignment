@@ -1,96 +1,38 @@
-@font-face{
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
     font-family: 'DINRoundPro';
-    src: url('DINRoundPro.ttf');
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
 }
 
-.window-control-button, .window-control-exit-button {
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+
+
+
+.based-background{
     -fx-background-color: #ffffff;
-    -fx-pref-height: 35px;  
-    -fx-pref-width: 45px;
-    -fx-min-width: 45px; /* Ensure width remains the same */
-    -fx-max-width: 45px; /* Ensure width remains the same */
-    -fx-min-height: 35px; /* Ensure height remains the same */
-    -fx-max-height: 35px; /* Ensure height remains the same */
-    -fx-background-radius: 0px;
-    -fx-border-width: 0px;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
-
-.window-control-button:hover {
-    -fx-background-color: #efefef;
-}
-
-.window-control-exit-button:hover {
-    -fx-background-color: #cf382f;
-}
-
-.window-control-bar {
-    -fx-background-color: #ffffff;
-    -fx-padding: 0px; /* Ensure no padding */
-    -fx-margin: 0px; /* Ensure no margin */
-}
-
-.socslingo-logo-name {
-    -fx-font-size: 46px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
-    -fx-padding: 15px 0px 5px 0px; /* Top, Right, Bottom, Left */
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-text-fill: #FFD681;
-}
-
-.left-sidebar-button{
-    -fx-background-color: #ffffff;
-    -fx-pref-width: 222px;
-    -fx-pref-height: 52px;
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-}
-.left-sidebar-button:hover{
-    -fx-background-color: #efefef; 
-    -fx-pref-width: 222px;
-    -fx-pref-height: 52px;
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-}
-
-.left-sidebar-button-selected{
-    -fx-background-color: #f5d78e; 
-    -fx-pref-width: 222px;
-    -fx-pref-height: 52px;
-    -fx-border-color: #f2c868; /* Outline color */
-    -fx-border-width: 2; /* Outline width */
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-padding: 0px 0px 0px 20px; /* Top, Right, Bottom, Left */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-font-size: 17px;
-    -fx-line-spacing: 5%;
-    -fx-line-height: 24px;
-    -fx-font-family: 'DINRoundPro';
-    -fx-font-weight: bold;
-    -fx-line-height: 1.5;
-
-
 }
 
 .left-sidebar-column{

@@ -1,15 +1,24 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx16G -Xms100m -Xlog:disable",
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx16G -Xms1G -Xlog:disable",
     "cSpell.words": [
         "dropshadow",
         "hgrow",
         "javafx",
-        "jdbc",
-        "JDBC",
-        "KAHOOT",
-        "pstmt"
+        "KAHOOT"
     ],
-    "css.lint.vendorPrefix": "ignore"
-
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "default": true
+        }
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:socslingo}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }

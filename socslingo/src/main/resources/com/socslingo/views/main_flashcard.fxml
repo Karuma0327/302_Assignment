@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="com.socslingo.controllers.MainFlashcardController" stylesheets="@../css/main_flashcard.css" spacing="10" alignment="CENTER">
+    <children>
+        <VBox fx:id="rightSidebarColumn" styleClass="middle-column" spacing="10" alignment="CENTER">
+            <children>
+                <Label fx:id="rightSidebarTaskLabel" styleClass=""/>
+                <VBox fx:id="firstTimeFlashcardPage" VBox.vgrow="NEVER" alignment="CENTER" styleClass="first-time-flashcard-page">
+                    <children>
+                        <HBox styleClass="pane-outline" 
+                              alignment="CENTER" 
+                              spacing="10">
+                            <children>
+                                <Button fx:id="switch_to_flashcard_editing_button" text="EDIT FLASHCARDS" 
+                                            onAction="#handleButtonAction" styleClass="generic-button-medium"/>
+                                <Button fx:id="switch_to_flashcard_creation_button" text="CREATE FLASH" 
+                                            onAction="#handleButtonAction" styleClass="generic-button-medium"/>
+                                <Button fx:id="switch_to_flashcard_viewing_button" text="VIEW FLASHCARDS" 
+                                        onAction="#handleButtonAction" styleClass="generic-button-medium"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="50.0" left="60.0" right="60.0" top="30.0" />
+            </padding>
+        </VBox>
+    </children> 
+</VBox>

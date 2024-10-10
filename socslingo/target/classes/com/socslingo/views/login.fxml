@@ -14,17 +14,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.LoginController">
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.LoginController">
     <children>
-        <!-- Custom Window Controls -->
-        <HBox fx:id="windowControls" styleClass="window-control-bar" alignment="TOP_RIGHT" spacing="0">
-            <children>
-                <Button text="_" styleClass="window-control-button" onAction="#minimizeWindow"/>
-                <Button text="⬜" styleClass="window-control-button" onAction="#maximizeWindow"/>
-                <Button text="X" styleClass="window-control-exit-button" onAction="#closeWindow"/>
-            </children>
-        </HBox>
-        
         <!-- Main Content Area -->
         <HBox VBox.vgrow="ALWAYS">
             <children>
@@ -51,11 +42,23 @@
                                 <Button fx:id="switchToRegistrationButton" text="SIGN UP" onAction="#switchToRegistrationFXML" alignment="CENTER" styleClass="sign-up-button"/>
                             </children>
                         </HBox>
-                        <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="16" maxWidth="371">
+                        <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="10" maxWidth="371">
                             <children>
                                 <Label fx:id="rightSidebarTaskLabel" text="Log in" styleClass="create-your-profile-sub-heading-text"/>
-                                <TextField styleClass="registration-text-field" fx:id="usernameField" promptText="Username"/>
-                                <PasswordField styleClass="registration-text-field" fx:id="passwordField" promptText="Password"/>
+                                <VBox spacing="20"> 
+                                    <children>
+                                        <TextField styleClass="registration-text-field" fx:id="usernameField" promptText="Username"/>
+                                        <PasswordField styleClass="registration-text-field-password" fx:id="passwordField" promptText="Password"/>
+                                    </children>
+                                </VBox>
+                                <HBox alignment="CENTER_LEFT" spacing="5">
+                                    <ImageView fx:id="errorIcon" fitHeight="20" fitWidth="20" visible="false">
+                                        <image>
+                                            <Image url="@../images/error_icon.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <Label fx:id="errorMessageLabel" text="" styleClass="error-message"/>
+                                </HBox>
                                 <Button fx:id="loginButton" text="LOG IN" onAction="#handleLogin" alignment="CENTER" styleClass="create-account-button" graphicTextGap="12"/>
                             </children>
                         </VBox>

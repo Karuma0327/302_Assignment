@@ -1,0 +1,215 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+.socslingo-logo-name {
+    -fx-font-size: 46px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
+    -fx-padding: 15px 0px 5px 0px;
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-text-fill: rgb(255, 198, 92);
+}
+
+
+.left-sidebar-button-active {
+    -fx-background-color: rgb(255, 228, 179);
+    -fx-pref-width: 222px;
+    -fx-border-color: rgb(255, 219, 153);
+    -fx-pref-height: 52px;
+    -fx-border-width: 2px;
+    -fx-text-fill: rgb(255, 198, 92);
+    -fx-padding: 0px 0px 0px 20px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 18px;
+    -fx-font-family: 'DINNextW10-Heavy';
+}
+
+.left-sidebar-button {
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 222px;
+    -fx-pref-height: 52px;
+    -fx-border-width: 2;
+    -fx-text-fill: #3f3f3f;
+    -fx-padding: 0px 0px 0px 20px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 18px;
+    -fx-font-family: 'DINNextW10-Heavy';
+    -fx-cursor: hand;
+}
+
+.left-sidebar-button:hover {
+    -fx-background-color: #efefef;
+    -fx-border-width: 2;
+    -fx-text-fill: rgb(0, 0, 0);
+}
+
+.based-background {
+    -fx-background-color: #ffffff;
+}
+
+.left-sidebar-column {
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 0 1px 0 0;
+    -fx-background-color: #ffffff;
+}
+
+.middle-column {
+    -fx-background-color: #ffffff;
+}
+
+.right-sidebar-column {
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 0 0 0 2px;
+    -fx-background-color: #ffffff;
+}
+
+.right-sidebar-task-label {
+    -fx-font-size: 46px;
+    -fx-padding: 15px 0px 0px 25px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #FFD681;
+}
+
+.right-sidebar-tile {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e5e5;
+    -fx-pref-width: 310;
+    -fx-pref-height: 250px;
+    -fx-border-width: 2;
+    -fx-padding: 15px 15px 25px 30px;
+    -fx-spacing: 50px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.custom-context-menu {
+    -fx-border-color: #000000;
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 222px;
+    -fx-pref-height: 102px;
+    -fx-border-width: 2;
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.custom-context-menu:hover {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-pref-width: 222px;
+    -fx-pref-height: 102px;
+    -fx-border-width: 2;
+    -fx-text-fill: rgb(0, 0, 0);
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.custom-context-menu-item-container {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 30px 0px;
+}
+
+.custom-context-menu-item {
+    -fx-text-fill: #000000;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 18px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.toggle-sidebar-button {
+    -fx-border-radius: 0px;
+    -fx-border-color: #f2f2f2;
+    -fx-background-color: #f2f2f2;
+    -fx-opacity: 0.5;
+    -fx-border-radius: 10px;
+}
+
+.toggle-sidebar-button:hover {
+    -fx-border-radius: 0px;
+    -fx-border-color: #f2f2f2;
+    -fx-background-color: #f2f2f2;
+    -fx-opacity: 0.8;
+}
+
+.toggle-sidebar-button .image-view {
+    -fx-opacity: 0.5;
+    -fx-border-radius: 10px;
+}
+
+.toggle-sidebar-button:hover .image-view {
+    -fx-opacity: 0.8;
+}
+
+.toggle-right-sidebar-button {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+}
+
+.toggle-right-sidebar-button .image-view {
+    -fx-rotate: 0;
+}
+
+.status-bar {
+    -fx-background-color: #ffd681;
+    -fx-pref-height: 5px;
+    -fx-padding: 0;
+    -fx-max-height: 5px;
+}
+
+.status-bar-active {
+    -fx-background-color: orange;
+}
+
+.status-bar-glow {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 255, 0.6), 30, 0.0, 0, 10);
+}
+
+.status-bar-overlay {
+    -fx-background-color: rgba(44, 62, 80, 0.5);
+    -fx-padding: 0;
+}
+
+.status-label {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+.middle-column {
+    -fx-background-color: #ffffff;
+}
+
+.toggle-sidebar-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.toggle-sidebar-button .image-view {}

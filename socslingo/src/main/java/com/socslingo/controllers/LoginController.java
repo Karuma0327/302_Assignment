@@ -1,27 +1,28 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 
+import javafx.animation.*;
+import javafx.beans.value.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.animation.FadeTransition;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.util.Duration;
-import com.socslingo.App;
-import com.socslingo.controllers.database.UserDatabaseController;
+
+import com.socslingo.managers.*;
+import com.socslingo.services.UserService;
+import com.socslingo.models.User;
 
 public class LoginController {
+
+    private UserService userService;
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @FXML
     private Button loginButton;
@@ -39,75 +40,64 @@ public class LoginController {
     private Button closeButton;
 
     @FXML
-    private Button maximizeButton;
+    private Label errorMessageLabel;
 
     @FXML
-    private Button minimizeButton;
+    private ImageView errorIcon;
 
     @FXML
-    private HBox windowControls;
+    private javafx.scene.layout.Pane rootPane;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
-
-
-
-    @FXML
-    private void closeWindow() {
-        Stage stage = (Stage) windowControls.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void maximizeWindow() {
-        Stage stage = (Stage) windowControls.getScene().getWindow();
-        stage.setMaximized(!stage.isMaximized());
-    }
-
-    @FXML
-    private void minimizeWindow() {
-        Stage stage = (Stage) windowControls.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
- 
+    private boolean canSwitch = true;
+    private final PauseTransition cooldown = new PauseTransition(Duration.seconds(1));
 
     @FXML
     private void initialize() {
-        // Add event handler for Enter key press
         usernameField.setOnKeyPressed(this::handleEnterKeyPress);
         passwordField.setOnKeyPressed(this::handleEnterKeyPress);
-        windowControls.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-
-        windowControls.setOnMouseDragged(event -> {
-            Stage stage = (Stage) windowControls.getScene().getWindow();
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        });
+        ChangeListener<javafx.scene.Scene> sceneChangeListener = new ChangeListener<javafx.scene.Scene>() {
+            @Override
+            public void changed(ObservableValue<? extends javafx.scene.Scene> observable, javafx.scene.Scene oldScene, javafx.scene.Scene newScene) {
+                if (newScene != null) {
+                    newScene.addEventFilter(KeyEvent.KEY_PRESSED, LoginController.this::handleTabKeyPress);
+                }
+            }
+        };
+        usernameField.sceneProperty().addListener(sceneChangeListener);
+        passwordField.sceneProperty().addListener(sceneChangeListener);
+        cooldown.setOnFinished(event -> canSwitch = true);
+        errorMessageLabel.visibleProperty().bind(errorMessageLabel.textProperty().isNotEmpty());
+        errorMessageLabel.managedProperty().bind(errorMessageLabel.textProperty().isNotEmpty());
+        errorIcon.visibleProperty().bind(errorMessageLabel.textProperty().isNotEmpty());
+        errorIcon.managedProperty().bind(errorMessageLabel.textProperty().isNotEmpty());
     }
 
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
-        // Hash the password
         String hashedPassword = hashPassword(password);
-        // Validate user credentials
-        boolean isValidUser = UserDatabaseController.validateUser(username, hashedPassword);
-
-        // If login is successful, switch to the main application FXML
-        if (isValidUser) {
-            try {
-                switchToMainAppFXML();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        User user = userService.validateUser(username, hashedPassword);
+        if (user != null) {
+            System.out.println("Login successful, User ID: " + user.getId());
+            SessionManager.getInstance().setCurrentUser(user);
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), rootPane);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+            fadeTransition.setOnFinished(event -> {
+                SceneManager.getInstance().switchScene(
+                    "/com/socslingo/views/main.fxml",
+                    "/com/socslingo/css/main.css"
+                );
+                FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(1), rootPane);
+                fadeInTransition.setFromValue(0.0);
+                fadeInTransition.setToValue(1.0);
+                fadeInTransition.play();
+            });
+            fadeTransition.play();
         } else {
             System.out.println("Invalid username or password. Please try again.");
+            errorMessageLabel.setText("Wrong login. Please try again.");
         }
     }
 
@@ -131,31 +121,27 @@ public class LoginController {
         }
     }
 
+    private void handleTabKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.TAB && canSwitch) {
+            Scene currentScene = SceneManager.getInstance().getCurrentScene();
+            Scene buttonScene = this.loginButton.getScene();
+            
+            if (currentScene != null && buttonScene != null && currentScene.getRoot().equals(buttonScene.getRoot())) {
+                if (usernameField.isFocused()) {
+                    passwordField.requestFocus();
+                    event.consume();
+                } else {
+                    SceneManager.getInstance().switchToRegistration();
+                    event.consume();
+                    canSwitch = false;
+                    cooldown.playFromStart();
+                }
+            }
+        }
+    }
+
     @FXML
-    private void switchToMainAppFXML() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/mainHome.fxml"));
-        VBox root = loader.load();
-        Scene scene = new Scene(root, getScreenWidth() * 0.95, getScreenHeight() * 0.95);
-        String css = getClass().getResource("/com/socslingo/css/mainHome.css").toExternalForm();
-        scene.getStylesheets().add(css);
-
-        Stage stage = (Stage) loginButton.getScene().getWindow();
-        stage.setScene(scene);
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), root);
-        fadeOut.setFromValue(0);
-        fadeOut.setToValue(1);
-        fadeOut.play();
-    }
-
-    private double getScreenWidth() {
-        return Screen.getPrimary().getBounds().getWidth();
-    }
-
-    private double getScreenHeight() {
-        return Screen.getPrimary().getBounds().getHeight();
-    }
-    @FXML
-    private void switchToRegistrationFXML() throws IOException {
-        App.getInstance().switchToRegistrationScene();
+    private void switchToRegistrationFXML() {
+        SceneManager.getInstance().switchToRegistration();
     }
 }

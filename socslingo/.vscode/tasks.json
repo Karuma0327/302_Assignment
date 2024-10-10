@@ -2,6 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "maven clean install",
+            "type": "shell",
+            "command": "mvn clean install",
+            "problemMatcher": ["$maven"]
+        },
+        {
             "label": "Run App",
             "type": "shell",
             "command": "code",
@@ -13,7 +19,8 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "dependsOn": "maven clean install"
         }
     ]
 }
