@@ -58,3 +58,12 @@
     -fx-hbar-policy: "never";
     -fx-vbar-policy: "never";
 }
+
+.profile-banner-image-view{ 
+    -fx-max-height: 700px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
+    -fx-smooth: true;
+    -fx-border-radius: 10px;
+    -fx-max-width: 400px;
+}

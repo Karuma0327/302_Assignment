@@ -13,12 +13,21 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
-    <BorderPane fx:id="rootPane" styleClass="based-background">
+<StackPane fx:id="stack_pane" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
+    <BorderPane fx:id="root_pane" styleClass="based-background">
         <left>
-            <VBox fx:id="leftSidebar" alignment="CENTER" maxWidth="250" onMouseClicked="#handleSidebarMouseClicked" spacing="10" styleClass="left-sidebar-column">
+            <VBox fx:id="left_sidebar" alignment="CENTER" maxWidth="250" onMouseClicked="#handleSidebarMouseClicked" spacing="10" styleClass="left-sidebar-column">
                 <children>
-                    <Label fx:id="socslingoLogoName" alignment="CENTER" styleClass="socslingo-logo-name" text="socslingo" />
+                    <Label fx:id="socslingo_logo_name" alignment="CENTER" styleClass="socslingo-logo-name" text="socslingo" />
+                    <Button fx:id="switch_to_activity_main_button" alignment="CENTER_LEFT" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button" text="LEARN">
+                        <graphic>
+                            <ImageView fitWidth="21" preserveRatio="true">
+                                <image>
+                                    <Image url="@../images/house.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
                     <Button fx:id="sidebar_switch_to_home_button" alignment="CENTER_LEFT" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button-active" text="HOME">
                         <graphic>
                             <ImageView fitWidth="21" preserveRatio="true">
@@ -46,15 +55,6 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="switch_to_deck_creation_button" alignment="CENTER_LEFT" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button" text="CONVO???">
-                        <graphic>
-                            <ImageView fitWidth="21" preserveRatio="true">
-                                <image>
-                                    <Image url="@../images/house.png" />
-                                </image>
-                            </ImageView>
-                        </graphic>
-                    </Button>
                     <Button fx:id="switch_to_flashcard_management_button" alignment="CENTER_LEFT" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button" text="PET">
                         <graphic>
                             <ImageView fitWidth="21" preserveRatio="true">
@@ -76,7 +76,7 @@
                         </graphic>
                     </Button>
 
-                    <Button fx:id="moreButton" alignment="CENTER_LEFT" graphicTextGap="12" styleClass="left-sidebar-button" text="MORE">
+                    <Button fx:id="more_button" alignment="CENTER_LEFT" graphicTextGap="12" styleClass="left-sidebar-button" text="MORE">
                         <graphic>
                             <ImageView fitWidth="21" preserveRatio="true">
                                 <image>
@@ -86,7 +86,7 @@
                         </graphic>
                         <!-- ContextMenu Definition -->
                         <contextMenu>
-                            <ContextMenu fx:id="moreContextMenu" styleClass="more-context-menu-container">
+                            <ContextMenu fx:id="more_context_menu" styleClass="more-context-menu-container">
                                 <items>
                                     <MenuItem onAction="#handleSettings" styleClass="more-context-menu-item" text="USERNAME" />
                                     <MenuItem onAction="#handleHelp" styleClass="more-context-menu-item" text="HELP" />
@@ -105,7 +105,7 @@
         
         <center>
             <!-- Dynamic Content Area -->
-            <VBox fx:id="contentArea" alignment="CENTER" styleClass="middle-column">
+            <VBox fx:id="content_area" alignment="CENTER" styleClass="middle-column">
                 <!-- Initial Content Can Be Loaded Here -->
             </VBox>
         </center>
@@ -119,12 +119,11 @@
         </bottom>
     </BorderPane>
 
-
-    <HBox fx:id="statusBar" styleClass="status-bar" StackPane.alignment="BOTTOM_CENTER">
+    <HBox fx:id="status_bar" styleClass="status-bar" StackPane.alignment="BOTTOM_CENTER">
     </HBox>
     
     <!-- Overlayed Toggle Buttons (Initially Hidden) -->
-    <Button fx:id="toggleSidebarButton" graphicTextGap="12" onAction="#handleToggleSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_LEFT">
+    <Button fx:id="toggle_sidebar_button" graphicTextGap="12" onAction="#handleToggleSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_LEFT">
         <graphic>
             <ImageView fitWidth="21" preserveRatio="true" styleClass="image-view">
                 <image>
@@ -134,7 +133,7 @@
         </graphic>
     </Button>
 
-    <Button fx:id="toggleRightSidebarButton" graphicTextGap="12" onAction="#handleToggleRightSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+    <Button fx:id="toggle_right_sidebar_button" graphicTextGap="12" onAction="#handleToggleRightSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_RIGHT">
         <graphic>
             <ImageView fitWidth="21" preserveRatio="true" styleClass="image-view">
                 <image>

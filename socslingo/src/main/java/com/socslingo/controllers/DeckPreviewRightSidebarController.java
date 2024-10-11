@@ -17,30 +17,31 @@ import java.util.*;
 
 public class DeckPreviewRightSidebarController implements Initializable {
 
-    private static final Logger logger = LoggerFactory.getLogger(DeckPreviewRightSidebarController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DeckPreviewRightSidebarController.class);
 
     @FXML
-    private ListView<Flashcard> flashcardsListView;
+    private ListView<Flashcard> flashcards_list_view;
 
-    private ObservableList<Flashcard> flashcardsObservableList;
+    private ObservableList<Flashcard> flashcards_observable_list;
 
-    private FlashcardService flashcardService;
+    private FlashcardService flashcard_service;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            DatabaseManager dbManager = DatabaseManager.getInstance();
-            flashcardService = new FlashcardService(new com.socslingo.dataAccess.FlashcardDataAccess(dbManager));
-            new DeckService(new DeckDataAccess(dbManager));
-            logger.info("FlashcardService and DeckService initialized successfully");
+            DatabaseManager database_manager = DatabaseManager.getInstance();
+            flashcard_service = new FlashcardService(new com.socslingo.dataAccess.FlashcardDataAccess(database_manager));
+            new DeckService(new DeckDataAccess(database_manager));
+            LOGGER.info("FlashcardService and DeckService initialized successfully");
         } catch (Exception e) {
-            logger.error("Failed to initialize services", e);
+            LOGGER.error("Failed to initialize services", e);
             return;
         }
 
-        flashcardsObservableList = FXCollections.observableArrayList();
-        flashcardsListView.setItems(flashcardsObservableList);
+        flashcards_observable_list = FXCollections.observableArrayList();
+        flashcards_list_view.setItems(flashcards_observable_list);
 
-        flashcardsListView.setCellFactory(param -> new ListCell<Flashcard>() {
+        flashcards_list_view.setCellFactory(param -> new ListCell<Flashcard>() {
             @Override
             protected void updateItem(Flashcard item, boolean empty) {
                 super.updateItem(item, empty);
@@ -54,16 +55,16 @@ public class DeckPreviewRightSidebarController implements Initializable {
 
         loadUserFlashcards();
 
-        flashcardsListView.setOnDragDetected(event -> {
-            Flashcard selectedFlashcard = flashcardsListView.getSelectionModel().getSelectedItem();
-            if (selectedFlashcard == null) {
+        flashcards_list_view.setOnDragDetected(event -> {
+            Flashcard selected_flashcard = flashcards_list_view.getSelectionModel().getSelectedItem();
+            if (selected_flashcard == null) {
                 return;
             }
 
-            Dragboard db = flashcardsListView.startDragAndDrop(TransferMode.COPY);
+            Dragboard dragboard = flashcards_list_view.startDragAndDrop(TransferMode.COPY);
             ClipboardContent content = new ClipboardContent();
-            content.putString(String.valueOf(selectedFlashcard.getId()));
-            db.setContent(content);
+            content.putString(String.valueOf(selected_flashcard.getId()));
+            dragboard.setContent(content);
 
             event.consume();
         });
@@ -71,12 +72,12 @@ public class DeckPreviewRightSidebarController implements Initializable {
 
     private void loadUserFlashcards() {
         try {
-            int userId = getCurrentUserId();
-            List<Flashcard> userFlashcards = flashcardService.getUserFlashcards(userId);
-            flashcardsObservableList.setAll(userFlashcards);
-            logger.info("Loaded {} flashcards for userId {}", userFlashcards.size(), userId);
+            int user_id = getCurrentUserId();
+            List<Flashcard> user_flashcards = flashcard_service.getUserFlashcards(user_id);
+            flashcards_observable_list.setAll(user_flashcards);
+            LOGGER.info("Loaded {} flashcards for userId {}", user_flashcards.size(), user_id);
         } catch (Exception e) {
-            logger.error("Failed to load user flashcards", e);
+            LOGGER.error("Failed to load user flashcards", e);
         }
     }
 

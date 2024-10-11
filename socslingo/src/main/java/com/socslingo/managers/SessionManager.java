@@ -2,10 +2,10 @@ package com.socslingo.managers;
 
 import com.socslingo.models.User;
 
+
 public class SessionManager {
     private static SessionManager instance;
-    private User currentUser;
-
+    private User current_user;
     private SessionManager() {
     }
 
@@ -17,14 +17,15 @@ public class SessionManager {
     }
 
     public void setCurrentUser(User user) {
-        this.currentUser = user;
+        this.current_user = user;
     }
 
     public User getCurrentUser() {
-        return currentUser;
+        return current_user;
     }
 
     public int getCurrentUserId() {
-        return currentUser != null ? currentUser.getId() : -1;
+        return current_user != null ? current_user.getId() : -1;
     }
+    
 }

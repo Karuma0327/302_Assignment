@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.socslingo.controllers.DeckController"
             stylesheets="@../css/deck_creation.css">
     <center>
@@ -23,7 +23,7 @@
                     <Label text="Deck Name:"/>
                     <TextField fx:id="deck_name_text_field" promptText="Enter deck name" prefWidth="300" />
                 </HBox>
-                <Button fx:id="createDeckButton" text="Create Deck" onAction="#handleCreateDeck"
+                <Button fx:id="create_deck_button" text="Create Deck" onAction="#handleCreateDeck"
                         styleClass="generic-button-medium"/>
             </VBox>
 
@@ -33,33 +33,33 @@
             <!-- Decks List Section -->
             <VBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Your Decks" styleClass="section-title"/>
-                <ListView fx:id="decksListView" prefHeight="200" />
+                <ListView fx:id="decks_list_view" prefHeight="200" />
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Button fx:id="deleteDeckButton" text="Delete Deck" onAction="#handleDeleteDeck"
+                    <Button fx:id="delete_deck_button" text="Delete Deck" onAction="#handleDeleteDeck"
                             styleClass="generic-button-small"/>
                 </HBox>
             </VBox>
 
             <!-- Flashcards Management Section -->
             <VBox spacing="10" alignment="CENTER_LEFT">
-                <Label fx:id="selectedDeckLabel" text="No Deck Selected" styleClass="section-subtitle"/>
+                <Label fx:id="selected_deck_label" text="No Deck Selected" styleClass="section-subtitle"/>
                 <HBox spacing="20" alignment="CENTER">
                     <!-- Available Flashcards List -->
                     <VBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="Available Flashcards" styleClass="list-title"/>
-                        <ListView fx:id="availableFlashcardsListView" prefWidth="250" prefHeight="200" />
+                        <ListView fx:id="available_flashcards_list_view" prefWidth="250" prefHeight="200" />
                     </VBox>
 
                     <!-- Deck's Flashcards List -->
                     <VBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="Flashcards in Deck" styleClass="list-title"/>
-                        <ListView fx:id="deckFlashcardsListView" prefWidth="250" prefHeight="200" />
+                        <ListView fx:id="deck_flashcards_list_view" prefWidth="250" prefHeight="200" />
                     </VBox>
                 </HBox>
                 <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="addFlashcardToDeckButton" text="Add >>" onAction="#handleAddFlashcardToDeck"
+                    <Button fx:id="add_flashcard_to_deck_button" text="Add >>" onAction="#handleAddFlashcardToDeck"
                             styleClass="generic-button-small"/>
-                    <Button fx:id="removeFlashcardFromDeckButton" text=" Remove" onAction="#handleRemoveFlashcardFromDeck"
+                    <Button fx:id="remove_flashcard_from_deck_button" text=" Remove" onAction="#handleRemoveFlashcardFromDeck"
                             styleClass="generic-button-small"/>
                 </HBox>
             </VBox>

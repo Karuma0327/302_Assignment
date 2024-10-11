@@ -1,4 +1,9 @@
 {
+    "github.copilot.chat.experimental.codeGeneration.instructions": [
+        {
+            "file": "code-style.md"
+        }
+    ],
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx16G -Xms1G -Xlog:disable",
     "cSpell.words": [
@@ -20,5 +25,6 @@
             "addWords": true,
             "scope": "workspace"
         }
-    }
+    },
+    "maven.view": "flat",
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.socslingo.controllers.DeckManagementController"
             stylesheets="@../css/deck_management.css">
     
@@ -25,19 +25,19 @@
                 
                 <!-- Wrap ListView in HBox for center alignment -->
                 <HBox alignment="CENTER">
-                    <ListView fx:id="decksListView" prefHeight="300" prefWidth="800" maxWidth="800"/>
+                    <ListView fx:id="decks_list_view" prefHeight="300" prefWidth="800" maxWidth="800"/>
                 </HBox>
             </VBox>
 
             <!-- Navigation Buttons to Flashcard Management -->
             <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="previewDeckButton" text="Preview Deck" onAction="#handlePreviewDeck"
+                <Button fx:id="preview_deck_button" text="Preview Deck" onAction="#handlePreviewDeck"
                         styleClass="generic-button-medium"/>
-                <Button fx:id="deleteDeckButton" text="Delete Deck" onAction="#handleDeleteDeck"
+                <Button fx:id="delete_deck_button" text="Delete Deck" onAction="#handleDeleteDeck"
                         styleClass="generic-button-medium"/>
                 <Button fx:id="switch_to_deck_flashcard_management_button" text="Manage Flashcards" onAction="#navigateToFlashcardManagement"
                         styleClass="generic-button-medium"/>
-                <Button fx:id="createDeckButton" text="Create Deck" onAction="#handleCreateDeck"
+                <Button fx:id="create_deck_button" text="Create Deck" onAction="#handleCreateDeck"
                         styleClass="generic-button-medium"/>
             </HBox>
             

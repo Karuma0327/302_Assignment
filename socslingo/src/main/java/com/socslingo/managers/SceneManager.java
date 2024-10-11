@@ -13,15 +13,15 @@ import javafx.util.Duration;
 
 public class SceneManager {
 
-    private Stage primaryStage;
+    private Stage primary_stage;
     private static SceneManager instance;
 
-    private final Map<String, Parent> preloadedRoots = new HashMap<>();
+    private final Map<String, Parent> preloaded_roots = new HashMap<>();
 
-    private Scene currentScene;
+    private Scene current_scene;
 
     private SceneManager(Stage stage) {
-        this.primaryStage = stage;
+        this.primary_stage = stage;
 
         setupWindowedMode98Percent();
 
@@ -46,98 +46,98 @@ public class SceneManager {
         preloadScene("/com/socslingo/views/registration.fxml", "/com/socslingo/css/registration.css");
     }
 
-    private void preloadScene(String fxmlPath, String cssPath) {
+    private void preloadScene(String fxml_path, String css_path) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
             loader.setControllerFactory(ControllerManager.getInstance());
             Parent root = loader.load();
-            if (cssPath != null && !cssPath.isEmpty()) {
-                root.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+            if (css_path != null && !css_path.isEmpty()) {
+                root.getStylesheets().add(getClass().getResource(css_path).toExternalForm());
             }
-            preloadedRoots.put(fxmlPath, root);
+            preloaded_roots.put(fxml_path, root);
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Error", "Unable to preload the scene: " + fxmlPath);
+            showErrorAlert("Error", "Unable to preload the scene: " + fxml_path);
         }
     }
 
-    private void switchSceneInternal(String fxmlPath, String cssPath, Duration fadeInDuration) {
+    private void switchSceneInternal(String fxml_path, String css_path, Duration fade_in_duration) {
         try {
-            Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-            double screenWidth = screenBounds.getWidth();
-            double screenHeight = screenBounds.getHeight();
+            Rectangle2D screen_bounds = Screen.getPrimary().getBounds();
+            double screen_width = screen_bounds.getWidth();
+            double screen_height = screen_bounds.getHeight();
 
-            double sceneWidth = screenWidth * 0.95;
-            double sceneHeight = screenHeight * 0.95;
+            double scene_width = screen_width * 0.95;
+            double scene_height = screen_height * 0.95;
             Parent root;
-            if (preloadedRoots.containsKey(fxmlPath)) {
-                root = preloadedRoots.get(fxmlPath);
+            if (preloaded_roots.containsKey(fxml_path)) {
+                root = preloaded_roots.get(fxml_path);
             } else {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
                 loader.setControllerFactory(ControllerManager.getInstance());
                 root = loader.load();
-                if (cssPath != null && !cssPath.isEmpty()) {
-                    root.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+                if (css_path != null && !css_path.isEmpty()) {
+                    root.getStylesheets().add(getClass().getResource(css_path).toExternalForm());
                 }
             }
 
-            if (currentScene == null) {
-                currentScene = new Scene(root, sceneWidth, sceneHeight);
-                primaryStage.setScene(currentScene);
-                primaryStage.show();
+            if (current_scene == null) {
+                current_scene = new Scene(root, scene_width, scene_height);
+                primary_stage.setScene(current_scene);
+                primary_stage.show();
 
-                primaryStage.centerOnScreen();
+                primary_stage.centerOnScreen();
 
-                if (fadeInDuration != null) {
-                    FadeTransition fadeIn = new FadeTransition(fadeInDuration, root);
-                    fadeIn.setFromValue(0.0);
-                    fadeIn.setToValue(1.0);
-                    fadeIn.play();
+                if (fade_in_duration != null) {
+                    FadeTransition fade_in = new FadeTransition(fade_in_duration, root);
+                    fade_in.setFromValue(0.0);
+                    fade_in.setToValue(1.0);
+                    fade_in.play();
                 }
             } else {
-                Parent oldRoot = currentScene.getRoot();
+                Parent old_root = current_scene.getRoot();
 
-                if (fadeInDuration != null) {
-                    FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.2), oldRoot);
-                    fadeOut.setFromValue(1.0);
-                    fadeOut.setToValue(0.0);
-                    fadeOut.setOnFinished(event -> {
-                        currentScene.setRoot(root);
-                        currentScene.getStylesheets().clear();
-                        if (cssPath != null && !cssPath.isEmpty()) {
-                            currentScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+                if (fade_in_duration != null) {
+                    FadeTransition fade_out = new FadeTransition(Duration.seconds(0.2), old_root);
+                    fade_out.setFromValue(1.0);
+                    fade_out.setToValue(0.0);
+                    fade_out.setOnFinished(event -> {
+                        current_scene.setRoot(root);
+                        current_scene.getStylesheets().clear();
+                        if (css_path != null && !css_path.isEmpty()) {
+                            current_scene.getStylesheets().add(getClass().getResource(css_path).toExternalForm());
                         }
-                        FadeTransition fadeIn = new FadeTransition(fadeInDuration, root);
-                        fadeIn.setFromValue(0.0);
-                        fadeIn.setToValue(1.0);
-                        fadeIn.play();
+                        FadeTransition fade_in = new FadeTransition(fade_in_duration, root);
+                        fade_in.setFromValue(0.0);
+                        fade_in.setToValue(1.0);
+                        fade_in.play();
 
-                        currentScene = primaryStage.getScene();
+                        current_scene = primary_stage.getScene();
                     });
-                    fadeOut.play();
+                    fade_out.play();
                 } else {
-                    currentScene.setRoot(root);
-                    currentScene.getStylesheets().clear();
-                    if (cssPath != null && !cssPath.isEmpty()) {
-                        currentScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+                    current_scene.setRoot(root);
+                    current_scene.getStylesheets().clear();
+                    if (css_path != null && !css_path.isEmpty()) {
+                        current_scene.getStylesheets().add(getClass().getResource(css_path).toExternalForm());
                     }
 
-                    currentScene = primaryStage.getScene();
+                    current_scene = primary_stage.getScene();
                 }
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorAlert("Error", "Unable to load the scene: " + fxmlPath);
+            showErrorAlert("Error", "Unable to load the scene: " + fxml_path);
         }
     }
 
-    public void switchScene(String fxmlPath, String cssPath) {
-        switchSceneInternal(fxmlPath, cssPath, null);
+    public void switchScene(String fxml_path, String css_path) {
+        switchSceneInternal(fxml_path, css_path, null);
     }
 
-    public void switchScene(String fxmlPath, String cssPath, Duration fadeInDuration) {
-        switchSceneInternal(fxmlPath, cssPath, fadeInDuration);
+    public void switchScene(String fxml_path, String css_path, Duration fade_in_duration) {
+        switchSceneInternal(fxml_path, css_path, fade_in_duration);
     }
 
     public void showStartupScene() {
@@ -146,35 +146,35 @@ public class SceneManager {
             loader.setControllerFactory(ControllerManager.getInstance());
             Parent root = loader.load();
 
-            Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-            double screenWidth = screenBounds.getWidth();
-            double screenHeight = screenBounds.getHeight();
+            Rectangle2D screen_bounds = Screen.getPrimary().getBounds();
+            double screen_width = screen_bounds.getWidth();
+            double screen_height = screen_bounds.getHeight();
 
-            double sceneWidth = screenWidth * 0.95;
-            double sceneHeight = screenHeight * 0.95;
+            double scene_width = screen_width * 0.95;
+            double scene_height = screen_height * 0.95;
 
-            Scene scene = new Scene(root, sceneWidth, sceneHeight);
+            Scene scene = new Scene(root, scene_width, scene_height);
             scene.getStylesheets().add(getClass().getResource("/com/socslingo/css/startup.css").toExternalForm());
 
-            primaryStage.setTitle("Socslingo");
+            primary_stage.setTitle("Socslingo");
             Image icon = new Image(getClass().getResourceAsStream("/com/socslingo/images/mascot.png"));
-            primaryStage.getIcons().add(icon);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            primary_stage.getIcons().add(icon);
+            primary_stage.setScene(scene);
+            primary_stage.show();
 
-            primaryStage.centerOnScreen();
+            primary_stage.centerOnScreen();
 
-            currentScene = scene;
+            current_scene = scene;
 
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.2), root);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.setOnFinished(event -> {
+            FadeTransition fade_in = new FadeTransition(Duration.seconds(0.2), root);
+            fade_in.setFromValue(0.0);
+            fade_in.setToValue(1.0);
+            fade_in.setOnFinished(event -> {
                 PauseTransition delay = new PauseTransition(Duration.seconds(0.8));
-                delay.setOnFinished(pauseEvent -> transitionToRegistration(root));
+                delay.setOnFinished(pause_event -> transitionToRegistration(root));
                 delay.play();
             });
-            fadeIn.play();
+            fade_in.play();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -182,31 +182,31 @@ public class SceneManager {
         }
     }
 
-    public void transitionToRegistration(Parent currentRoot) {
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), currentRoot);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        fadeOut.setOnFinished(event -> {
+    public void transitionToRegistration(Parent current_root) {
+        FadeTransition fade_out = new FadeTransition(Duration.seconds(1), current_root);
+        fade_out.setFromValue(1.0);
+        fade_out.setToValue(0.0);
+        fade_out.setOnFinished(event -> {
             switchToRegistration();
-            Scene registrationScene = primaryStage.getScene();
+            Scene registration_scene = primary_stage.getScene();
 
-            if (registrationScene != null) {
-                Parent registrationRoot = registrationScene.getRoot();
-                registrationRoot.setOpacity(0.0);
+            if (registration_scene != null) {
+                Parent registration_root = registration_scene.getRoot();
+                registration_root.setOpacity(0.0);
 
-                FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), registrationRoot);
-                fadeIn.setFromValue(0.0);
-                fadeIn.setToValue(1.0);
-                fadeIn.play();
+                FadeTransition fade_in = new FadeTransition(Duration.seconds(1), registration_root);
+                fade_in.setFromValue(0.0);
+                fade_in.setToValue(1.0);
+                fade_in.play();
             } else {
                 System.err.println("Registration scene not found in SceneManager.");
             }
         });
-        fadeOut.play();
+        fade_out.play();
     }
 
     public Scene getCurrentScene() {
-        return currentScene;
+        return current_scene;
     }
 
     private void showErrorAlert(String title, String message) {
@@ -218,7 +218,6 @@ public class SceneManager {
             alert.showAndWait();
         });
     }
-
 
     public void switchToRegistrationWithFade() {
         switchScene(
@@ -242,38 +241,35 @@ public class SceneManager {
         );
     }
 
-    public void switchToMain(String fxmlPath, String cssPath) {
+    public void switchToMain(String fxml_path, String css_path) {
         switchScene(
-            fxmlPath,
-            cssPath
+            fxml_path,
+            css_path
         );
     }
 
-    public void switchToMain(String fxmlPath, String cssPath, Duration fadeInDuration) {
+    public void switchToMain(String fxml_path, String css_path, Duration fade_in_duration) {
         switchScene(
-            fxmlPath,
-            cssPath,
-            fadeInDuration
+            fxml_path,
+            css_path,
+            fade_in_duration
         );
     }
-
 
     private void setupWindowedMode98Percent() {
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primary_stage.initStyle(StageStyle.UNDECORATED);
 
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        Rectangle2D screen_bounds = Screen.getPrimary().getVisualBounds();
 
-        double width = screenBounds.getWidth() * 0.98;
-        double height = screenBounds.getHeight() * 0.98;
+        double width = screen_bounds.getWidth() * 0.98;
+        double height = screen_bounds.getHeight() * 0.98;
 
-        double xPos = screenBounds.getMinX() + (screenBounds.getWidth() - width) / 2;
-        double yPos = screenBounds.getMinY() + (screenBounds.getHeight() - height) / 2;
+        double x_pos = screen_bounds.getMinX() + (screen_bounds.getWidth() - width) / 2;
+        double y_pos = screen_bounds.getMinY() + (screen_bounds.getHeight() - height) / 2;
 
-        primaryStage.setX(xPos);
-        primaryStage.setY(yPos);
-        primaryStage.setWidth(width);
-        primaryStage.setHeight(height);
+        primary_stage.setX(x_pos);
+        primary_stage.setY(y_pos);
+        primary_stage.setWidth(width);
+        primary_stage.setHeight(height);
     }
-
-
 }

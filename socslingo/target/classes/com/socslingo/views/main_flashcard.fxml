@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
     fx:controller="com.socslingo.controllers.MainFlashcardController" stylesheets="@../css/main_flashcard.css" spacing="10" alignment="CENTER">
     <children>
-        <VBox fx:id="rightSidebarColumn" styleClass="middle-column" spacing="10" alignment="CENTER">
+        <VBox fx:id="right_sidebar_column" styleClass="middle-column" spacing="10" alignment="CENTER">
             <children>
-                <Label fx:id="rightSidebarTaskLabel" styleClass=""/>
-                <VBox fx:id="firstTimeFlashcardPage" VBox.vgrow="NEVER" alignment="CENTER" styleClass="first-time-flashcard-page">
+                <Label fx:id="right_sidebar_task_label" styleClass=""/>
+                <VBox fx:id="first_time_flashcard_page" VBox.vgrow="NEVER" alignment="CENTER" styleClass="first-time-flashcard-page">
                     <children>
                         <HBox styleClass="pane-outline" 
                               alignment="CENTER" 

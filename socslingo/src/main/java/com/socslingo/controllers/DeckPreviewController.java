@@ -6,13 +6,19 @@ import com.socslingo.models.*;
 import com.socslingo.services.FlashcardService;
 
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.*;
+
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
+
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.transform.*;
 import javafx.util.Duration;
 
@@ -27,43 +33,42 @@ public class DeckPreviewController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(DeckPreviewController.class);
 
     @FXML
-    private Label deckNameLabel;
+    private Label deck_name_label;
 
     @FXML
-    private TextField deckNameTextField;
+    private TextField deck_name_text_field;
 
     @FXML
-    private Label frontLabel;
+    private Label front_label;
 
     @FXML
-    private Label backLabel;
+    private Label back_label;
 
     @FXML
-    private StackPane flashcardPane;
+    private StackPane flashcard_pane;
 
     @FXML
-    private Button previousFlashcardButton;
+    private Button previous_flashcard_button;
 
     @FXML
-    private Button nextFlashcardButton;
+    private Button next_flashcard_button;
 
     private List<Flashcard> flashcards;
-    private int currentIndex = 0;
+    private int current_index = 0;
 
-    private DeckDataAccess deckDataAccess;
-    private FlashcardService flashcardService;
+    private DeckDataAccess deck_data_access;
+    private FlashcardService flashcard_service;
 
-    private Deck currentDeck;
+    private Deck current_deck;
 
-    private ObservableList<Flashcard> allUserFlashcards;
+    private ObservableList<Flashcard> all_user_flashcards;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize Data Access Objects
         try {
-            DatabaseManager dbManager = DatabaseManager.getInstance();
-            deckDataAccess = new DeckDataAccess(dbManager);
-            flashcardService = new FlashcardService(new com.socslingo.dataAccess.FlashcardDataAccess(dbManager));
+            DatabaseManager database_manager = DatabaseManager.getInstance();
+            deck_data_access = new DeckDataAccess(database_manager);
+            flashcard_service = new FlashcardService(new com.socslingo.dataAccess.FlashcardDataAccess(database_manager));
             logger.info("DeckDataAccess and FlashcardService initialized successfully");
         } catch (Exception e) {
             logger.error("Failed to initialize services", e);
@@ -71,46 +76,39 @@ public class DeckPreviewController implements Initializable {
             return;
         }
 
-        allUserFlashcards = FXCollections.observableArrayList();
+        all_user_flashcards = FXCollections.observableArrayList();
         try {
-            int userId = getCurrentUserId();
-            List<Flashcard> userFlashcards = flashcardService.getUserFlashcards(userId);
-            allUserFlashcards.setAll(userFlashcards);
-            logger.info("Loaded {} flashcards for userId {}", userFlashcards.size(), userId);
+            int user_id = getCurrentUserId();
+            List<Flashcard> user_flashcards = flashcard_service.getUserFlashcards(user_id);
+            all_user_flashcards.setAll(user_flashcards);
+            logger.info("Loaded {} flashcards for userId {}", user_flashcards.size(), user_id);
         } catch (Exception e) {
             logger.error("Failed to load all user flashcards", e);
             showAlert(Alert.AlertType.ERROR, "Failed to load user flashcards.");
         }
 
-        // Set up double-click on deckNameLabel to enter edit mode
-        deckNameLabel.setOnMouseClicked(event -> {
+        deck_name_label.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 enterEditMode();
             }
         });
 
-        // Handle when the TextField loses focus to save the new name
-        deckNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+        deck_name_text_field.focusedProperty().addListener((observable, old_value, new_value) -> {
+            if (!new_value) {
                 exitEditMode();
             }
         });
 
-        // Handle pressing Enter in the TextField to save the new name
-        deckNameTextField.setOnAction(event -> {
+        deck_name_text_field.setOnAction(event -> {
             exitEditMode();
         });
 
-        // Add a global mouse click listener to detect clicks outside the TextField
-        // This ensures that clicking anywhere in the application will trigger exitEditMode
-        // when in edit mode
-        // We attach the listener once the scene is available
-        deckNameLabel.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                newScene.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+        deck_name_label.sceneProperty().addListener((obs, old_scene, new_scene) -> {
+            if (new_scene != null) {
+                new_scene.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                     Node target = event.getPickResult().getIntersectedNode();
-                    if (deckNameTextField.isVisible()) {
-                        if (!isDescendant(deckNameTextField, target) && target != deckNameLabel) {
+                    if (deck_name_text_field.isVisible()) {
+                        if (!isDescendant(deck_name_text_field, target) && target != deck_name_label) {
                             exitEditMode();
                         }
                     }
@@ -121,42 +119,56 @@ public class DeckPreviewController implements Initializable {
         initializeDragAndDrop();
     }
 
+    private double calculateTextWidth(String text, Font font) {
+        Text temp_text = new Text(text);
+        temp_text.setFont(font);
+        return temp_text.getLayoutBounds().getWidth();
+    }
+
+    private void adjustTextFieldWidth() {
+        String label_text = deck_name_label.getText();
+        Font label_font = deck_name_label.getFont();
+        double text_width = calculateTextWidth(label_text, label_font);
+        double padding = 20; // Adjust padding as needed
+        deck_name_text_field.setPrefWidth(text_width + padding);
+    }
+
     private void initializeDragAndDrop() {
-        flashcardPane.setOnDragOver(event -> {
-            if (event.getGestureSource() != flashcardPane && event.getDragboard().hasString()) {
+        flashcard_pane.setOnDragOver(event -> {
+            if (event.getGestureSource() != flashcard_pane && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.COPY);
             }
             event.consume();
         });
 
-        flashcardPane.setOnDragEntered(event -> {
-            if (event.getGestureSource() != flashcardPane && event.getDragboard().hasString()) {
-                flashcardPane.getStyleClass().add("drag-over");
+        flashcard_pane.setOnDragEntered(event -> {
+            if (event.getGestureSource() != flashcard_pane && event.getDragboard().hasString()) {
+                flashcard_pane.getStyleClass().add("drag-over");
             }
             event.consume();
         });
 
-        flashcardPane.setOnDragExited(event -> {
-            flashcardPane.getStyleClass().remove("drag-over");
+        flashcard_pane.setOnDragExited(event -> {
+            flashcard_pane.getStyleClass().remove("drag-over");
             event.consume();
         });
 
-        flashcardPane.setOnDragDropped(event -> {
+        flashcard_pane.setOnDragDropped(event -> {
             boolean success = false;
-            Dragboard db = event.getDragboard();
-            if (db.hasString()) {
+            Dragboard dragboard = event.getDragboard();
+            if (dragboard.hasString()) {
                 try {
-                    int flashcardId = Integer.parseInt(db.getString());
-                    Flashcard flashcard = findFlashcardById(flashcardId);
+                    int flashcard_id = Integer.parseInt(dragboard.getString());
+                    Flashcard flashcard = findFlashcardById(flashcard_id);
                     if (flashcard != null) {
                         addFlashcardToDeck(flashcard);
                         success = true;
                     } else {
-                        logger.error("Flashcard with id {} not found.", flashcardId);
+                        logger.error("Flashcard with id {} not found.", flashcard_id);
                         showAlert(Alert.AlertType.ERROR, "Flashcard not found.");
                     }
                 } catch (NumberFormatException e) {
-                    logger.error("Invalid flashcard ID format: {}", db.getString(), e);
+                    logger.error("Invalid flashcard ID format: {}", dragboard.getString(), e);
                     showAlert(Alert.AlertType.ERROR, "Invalid flashcard data.");
                 }
             }
@@ -166,9 +178,9 @@ public class DeckPreviewController implements Initializable {
     }
 
     private Flashcard findFlashcardById(int id) {
-        for (Flashcard fc : allUserFlashcards) {
-            if (fc.getId() == id) {
-                return fc;
+        for (Flashcard flashcard : all_user_flashcards) {
+            if (flashcard.getId() == id) {
+                return flashcard;
             }
         }
         return null;
@@ -180,27 +192,29 @@ public class DeckPreviewController implements Initializable {
             return;
         }
         try {
-            boolean success = deckDataAccess.addFlashcardToDeck(currentDeck.getDeckId(), flashcard.getId());
+            boolean success = deck_data_access.addFlashcardToDeck(current_deck.getDeckId(), flashcard.getId());
             if (success) {
-                logger.info("FlashcardId: {} added to DeckId: {}", flashcard.getId(), currentDeck.getDeckId());
+                logger.info("FlashcardId: {} added to DeckId: {}", flashcard.getId(), current_deck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard added to deck successfully.");
-                flashcards = deckDataAccess.getFlashcardsInDeck(currentDeck.getDeckId());
-                allUserFlashcards.remove(flashcard);
+                flashcards = deck_data_access.getFlashcardsForDeck(current_deck.getDeckId());
+                all_user_flashcards.remove(flashcard);
                 if (!flashcards.isEmpty()) {
-                    currentIndex = 0;
-                    displayFlashcard(flashcards.get(currentIndex));
+                    current_index = 0;
+                    displayFlashcard(flashcards.get(current_index));
                 }
             } else {
-                logger.error("Failed to add FlashcardId: {} to DeckId: {}", flashcard.getId(), currentDeck.getDeckId());
+                logger.error("Failed to add FlashcardId: {} to DeckId: {}", flashcard.getId(), current_deck.getDeckId());
                 showAlert(Alert.AlertType.ERROR, "Failed to add flashcard to deck.");
             }
         } catch (Exception e) {
-            logger.error("Exception occurred while adding FlashcardId: {} to DeckId: {}", flashcard.getId(), currentDeck.getDeckId(), e);
+            logger.error("Exception occurred while adding FlashcardId: {} to DeckId: {}", flashcard.getId(),
+                    current_deck.getDeckId(), e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while adding the flashcard to the deck.");
         }
     }
-    private boolean isFlashcardInDeck(int flashcardId) {
-        return flashcards.stream().anyMatch(fc -> fc.getId() == flashcardId);
+
+    private boolean isFlashcardInDeck(int flashcard_id) {
+        return flashcards.stream().anyMatch(flashcard -> flashcard.getId() == flashcard_id);
     }
 
     /**
@@ -209,19 +223,21 @@ public class DeckPreviewController implements Initializable {
      * @param deck The Deck object to preview.
      */
     public void setDeck(Deck deck) {
-        this.currentDeck = deck;
-        deckNameLabel.setText(deck.getDeckName());
-        deckNameTextField.setText(deck.getDeckName());
+        this.current_deck = deck;
+        deck_name_label.setText(deck.getDeckName());
+        deck_name_text_field.setText(deck.getDeckName());
+        adjustTextFieldWidth(); // Adjust TextField width based on Label
+
         try {
-            flashcards = deckDataAccess.getFlashcardsInDeck(deck.getDeckId());
+            flashcards = deck_data_access.getFlashcardsForDeck(deck.getDeckId());
             if (!flashcards.isEmpty()) {
-                currentIndex = 0;
-                displayFlashcard(flashcards.get(currentIndex));
+                current_index = 0;
+                displayFlashcard(flashcards.get(current_index));
             } else {
-                frontLabel.setText("No flashcards in this deck.");
-                backLabel.setText("");
-                nextFlashcardButton.setDisable(true);
-                previousFlashcardButton.setDisable(true);
+                front_label.setText("No flashcards in this deck.");
+                back_label.setText("");
+                next_flashcard_button.setDisable(true);
+                previous_flashcard_button.setDisable(true);
             }
         } catch (Exception e) {
             logger.error("Error loading flashcards for deck: " + deck.getDeckName(), e);
@@ -233,10 +249,18 @@ public class DeckPreviewController implements Initializable {
      * Enters edit mode by showing the TextField and hiding the Label.
      */
     private void enterEditMode() {
-        deckNameLabel.setVisible(false);
-        deckNameTextField.setVisible(true);
-        deckNameTextField.requestFocus();
-        deckNameTextField.selectAll();
+        deck_name_label.setVisible(false);
+        deck_name_text_field.setVisible(true);
+        deck_name_text_field.requestFocus();
+        deck_name_text_field.selectAll();
+        adjustTextFieldWidth(); // Adjust width based on current label text
+
+        // Add listener to adjust width as the user types
+        deck_name_text_field.textProperty().addListener((obs, old_text, new_text) -> {
+            double text_width = calculateTextWidth(new_text, deck_name_text_field.getFont());
+            double padding = 20; // Adjust padding as needed
+            deck_name_text_field.setPrefWidth(text_width + padding);
+        });
     }
 
     /**
@@ -244,14 +268,15 @@ public class DeckPreviewController implements Initializable {
      * Also saves the new deck name to the database if it has changed.
      */
     private void exitEditMode() {
-        String newDeckName = deckNameTextField.getText().trim();
-        if (!newDeckName.isEmpty() && !newDeckName.equals(currentDeck.getDeckName())) {
+        String new_deck_name = deck_name_text_field.getText().trim();
+        if (!new_deck_name.isEmpty() && !new_deck_name.equals(current_deck.getDeckName())) {
             try {
-                boolean success = deckDataAccess.updateDeck(currentDeck.getDeckId(), newDeckName);
+                boolean success = deck_data_access.updateDeck(current_deck.getDeckId(), new_deck_name);
                 if (success) {
-                    logger.info("Deck name updated successfully to: " + newDeckName);
-                    currentDeck.setDeckName(newDeckName);
-                    deckNameLabel.setText(newDeckName);
+                    logger.info("Deck name updated successfully to: " + new_deck_name);
+                    current_deck.setDeckName(new_deck_name);
+                    deck_name_label.setText(new_deck_name);
+                    adjustTextFieldWidth(); // Adjust TextField width based on new label text
                     showAlert(Alert.AlertType.INFORMATION, "Deck name updated successfully.");
                 } else {
                     logger.error("Failed to update deck name in the database.");
@@ -262,8 +287,11 @@ public class DeckPreviewController implements Initializable {
                 showAlert(Alert.AlertType.ERROR, "An error occurred while updating the deck name.");
             }
         }
-        deckNameLabel.setVisible(true);
-        deckNameTextField.setVisible(false);
+        deck_name_label.setVisible(true);
+        deck_name_text_field.setVisible(false);
+
+        // Remove the listener to prevent memory leaks
+        deck_name_text_field.textProperty().removeListener(text_change_listener);
     }
 
     /**
@@ -272,45 +300,45 @@ public class DeckPreviewController implements Initializable {
      * @param flashcard The Flashcard to display.
      */
     private void displayFlashcard(Flashcard flashcard) {
-        frontLabel.setText(flashcard.getFront());
-        backLabel.setText(flashcard.getBack());
-        frontLabel.setVisible(true);
-        backLabel.setVisible(false);
+        front_label.setText(flashcard.getFront());
+        back_label.setText(flashcard.getBack());
+        front_label.setVisible(true);
+        back_label.setVisible(false);
 
-        flashcardPane.setOnMouseClicked(event -> {
-            boolean isFrontVisible = frontLabel.isVisible();
+        flashcard_pane.setOnMouseClicked(event -> {
+            boolean is_front_visible = front_label.isVisible();
 
-            RotateTransition rotateOutFront = new RotateTransition(Duration.millis(150), frontLabel);
-            rotateOutFront.setFromAngle(0);
-            rotateOutFront.setToAngle(90);
-            rotateOutFront.setAxis(Rotate.X_AXIS);
+            RotateTransition rotate_out_front = new RotateTransition(Duration.millis(150), front_label);
+            rotate_out_front.setFromAngle(0);
+            rotate_out_front.setToAngle(90);
+            rotate_out_front.setAxis(Rotate.X_AXIS);
 
-            RotateTransition rotateInBack = new RotateTransition(Duration.millis(150), backLabel);
-            rotateInBack.setFromAngle(-90);
-            rotateInBack.setToAngle(0);
-            rotateInBack.setAxis(Rotate.X_AXIS);
+            RotateTransition rotate_in_back = new RotateTransition(Duration.millis(150), back_label);
+            rotate_in_back.setFromAngle(-90);
+            rotate_in_back.setToAngle(0);
+            rotate_in_back.setAxis(Rotate.X_AXIS);
 
-            RotateTransition rotateOutBack = new RotateTransition(Duration.millis(150), backLabel);
-            rotateOutBack.setFromAngle(0);
-            rotateOutBack.setToAngle(90);
-            rotateOutBack.setAxis(Rotate.X_AXIS);
+            RotateTransition rotate_out_back = new RotateTransition(Duration.millis(150), back_label);
+            rotate_out_back.setFromAngle(0);
+            rotate_out_back.setToAngle(90);
+            rotate_out_back.setAxis(Rotate.X_AXIS);
 
-            RotateTransition rotateInFront = new RotateTransition(Duration.millis(150), frontLabel);
-            rotateInFront.setFromAngle(-90);
-            rotateInFront.setToAngle(0);
-            rotateInFront.setAxis(Rotate.X_AXIS);
+            RotateTransition rotate_in_front = new RotateTransition(Duration.millis(150), front_label);
+            rotate_in_front.setFromAngle(-90);
+            rotate_in_front.setToAngle(0);
+            rotate_in_front.setAxis(Rotate.X_AXIS);
 
-            SequentialTransition flipToBack = new SequentialTransition(rotateOutFront, rotateInBack);
-            SequentialTransition flipToFront = new SequentialTransition(rotateOutBack, rotateInFront);
+            SequentialTransition flip_to_back = new SequentialTransition(rotate_out_front, rotate_in_back);
+            SequentialTransition flip_to_front = new SequentialTransition(rotate_out_back, rotate_in_front);
 
-            if (isFrontVisible) {
-                backLabel.setVisible(true);
-                flipToBack.setOnFinished(e -> frontLabel.setVisible(false));
-                flipToBack.play();
+            if (is_front_visible) {
+                back_label.setVisible(true);
+                flip_to_back.setOnFinished(e -> front_label.setVisible(false));
+                flip_to_back.play();
             } else {
-                frontLabel.setVisible(true);
-                flipToFront.setOnFinished(e -> backLabel.setVisible(false));
-                flipToFront.play();
+                front_label.setVisible(true);
+                flip_to_front.setOnFinished(e -> back_label.setVisible(false));
+                flip_to_front.play();
             }
         });
     }
@@ -323,8 +351,8 @@ public class DeckPreviewController implements Initializable {
     @FXML
     private void handleNextFlashcardAction(ActionEvent event) {
         if (flashcards != null && !flashcards.isEmpty()) {
-            currentIndex = (currentIndex + 1) % flashcards.size();
-            displayFlashcard(flashcards.get(currentIndex));
+            current_index = (current_index + 1) % flashcards.size();
+            displayFlashcard(flashcards.get(current_index));
         }
     }
 
@@ -336,8 +364,8 @@ public class DeckPreviewController implements Initializable {
     @FXML
     private void handlePreviousFlashcardAction(ActionEvent event) {
         if (flashcards != null && !flashcards.isEmpty()) {
-            currentIndex = (currentIndex - 1 + flashcards.size()) % flashcards.size();
-            displayFlashcard(flashcards.get(currentIndex));
+            current_index = (current_index - 1 + flashcards.size()) % flashcards.size();
+            displayFlashcard(flashcards.get(current_index));
         }
     }
 
@@ -351,12 +379,12 @@ public class DeckPreviewController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/deck_management.fxml"));
             loader.setControllerFactory(ControllerManager.getInstance());
-            Node deckManagementContent = loader.load();
+            Node deck_management_content = loader.load();
 
-            PrimaryController primaryController = PrimaryController.getInstance();
-            if (primaryController != null) {
-                primaryController.switchContentNode(deckManagementContent);
-                primaryController.setActiveButton(null);
+            PrimaryController primary_controller = PrimaryController.getInstance();
+            if (primary_controller != null) {
+                primary_controller.switchContentNode(deck_management_content);
+                primary_controller.setActiveButton(null);
             } else {
                 logger.error("PrimaryController instance is null.");
                 showAlert(Alert.AlertType.ERROR, "Failed to switch to Deck Management.");
@@ -374,9 +402,9 @@ public class DeckPreviewController implements Initializable {
      * @param alertType Type of the alert.
      * @param message   Message to display.
      */
-    private void showAlert(Alert.AlertType alertType, String message) {
-        logger.debug("Displaying alert of type '{}' with message: {}", alertType, message);
-        Alert alert = new Alert(alertType);
+    private void showAlert(Alert.AlertType alert_type, String message) {
+        logger.debug("Displaying alert of type '{}' with message: {}", alert_type, message);
+        Alert alert = new Alert(alert_type);
         alert.setContentText(message);
         alert.showAndWait();
         logger.debug("Alert displayed");
@@ -402,4 +430,10 @@ public class DeckPreviewController implements Initializable {
     private int getCurrentUserId() {
         return SessionManager.getInstance().getCurrentUserId();
     }
+
+    private ChangeListener<String> text_change_listener = (obs, old_text, new_text) -> {
+        double text_width = calculateTextWidth(new_text, deck_name_text_field.getFont());
+        double padding = 20; // Adjust padding as needed
+        deck_name_text_field.setPrefWidth(text_width + padding);
+    };
 }

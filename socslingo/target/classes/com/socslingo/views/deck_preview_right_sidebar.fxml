@@ -3,10 +3,9 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="com.socslingo.controllers.DeckPreviewRightSidebarController" spacing="10" alignment="TOP_CENTER">
     
-    <ListView fx:id="flashcardsListView" prefWidth="250" prefHeight="400" maxWidth="250"/>
-    
+    <ListView fx:id="flashcards_list_view" prefWidth="250" prefHeight="400" maxWidth="250"/>
     
 </VBox>

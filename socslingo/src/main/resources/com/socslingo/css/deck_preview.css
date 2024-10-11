@@ -179,7 +179,6 @@
 .deck-title{
     -fx-font-size: 36px;
     -fx-font-family: 'DINRoundPro-Bold';
-    -fx-font-weight: bold;
     -fx-text-fill: #FFD681;
     -fx-alignment: CENTER_LEFT;
 }
@@ -189,7 +188,7 @@
 .deck-title-textfield{
     -fx-font-size: 36px;
     -fx-font-family: 'DINRoundPro-Bold';
-    -fx-font-weight: bold;
+
     -fx-text-fill: #FFD681;
     -fx-alignment: CENTER_LEFT;
 }

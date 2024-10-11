@@ -1,54 +1,54 @@
 package com.socslingo.models;
 
 public class Deck {
-    private int deckId;
-    private int userId;
-    private String deckName;
-    private String createdDate;
+    private int deck_id;
+    private int user_id;
+    private String deck_name;
+    private String created_date;
 
-    public Deck(int deckId, int userId, String deckName, String createdDate) {
-        this.deckId = deckId;
-        this.userId = userId;
-        this.deckName = deckName;
-        this.createdDate = createdDate;
+    public Deck(int deck_id, int user_id, String deck_name, String created_date) {
+        this.deck_id = deck_id;
+        this.user_id = user_id;
+        this.deck_name = deck_name;
+        this.created_date = created_date;
     }
 
     // Getters and Setters
 
     public int getDeckId() {
-        return deckId;
+        return deck_id;
     }
 
-    public void setDeckId(int deckId) {
-        this.deckId = deckId;
+    public void setDeckId(int deck_id) {
+        this.deck_id = deck_id;
     }
 
     public int getUserId() {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getDeckName() {
-        return deckName;
+        return deck_name;
     }
 
-    public void setDeckName(String deckName) {
-        this.deckName = deckName;
+    public void setDeckName(String deck_name) {
+        this.deck_name = deck_name;
     }
 
     public String getCreatedDate() {
-        return createdDate;
+        return created_date;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+    public void setCreatedDate(String created_date) {
+        this.created_date = created_date;
     }
 
     @Override
     public String toString() {
-        return deckName; // Display deck name in ListView
+        return deck_name; // Display deck name in ListView
     }
 }

@@ -5,25 +5,28 @@ import com.socslingo.models.User;
 
 public class UserService {
 
-    public UserService() {
-    }
-    private UserDataAccess userDataAccess;
+    private UserDataAccess user_data_access;
 
-
-    public UserService(UserDataAccess userDataAccess) {
-        this.userDataAccess = userDataAccess;
+    public UserService(UserDataAccess user_data_access) {
+        this.user_data_access = user_data_access;
     }
 
-    public boolean registerUser(String username, String email,String hashedPassword) {
-        if (userDataAccess.isUsernameTaken(username)) {
+    public boolean registerUser(String username, String email, String hashed_password) {
+        if (user_data_access.isUsernameTaken(username)) {
             System.out.println("Username already taken");
             return false;
         }
 
-        return userDataAccess.insertUser(username, email, hashedPassword);
+        
+        return user_data_access.insertUser(username, email, hashed_password);
     }
 
-    public User validateUser(String username, String hashedPassword) {
-        return userDataAccess.getUserByUsernameAndPassword(username, hashedPassword);
+    public User validateUser(String username, String hashed_password) {
+        return user_data_access.getUserByUsernameAndPassword(username, hashed_password);
+    }
+
+    // New method to update the user's profile banner
+    public boolean updateUserProfileBanner(int user_id, String profile_banner_path) {
+        return user_data_access.updateUserProfileBanner(user_id, profile_banner_path);
     }
 }

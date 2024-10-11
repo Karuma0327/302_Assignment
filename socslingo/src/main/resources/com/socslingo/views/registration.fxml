@@ -1,93 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.shape.Circle?>
 
-<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.RegistrationController">
+<VBox prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/registration.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.RegistrationController">
     <children>
         <!-- Main Content Area -->
         <HBox VBox.vgrow="ALWAYS">
             <children>
-                <VBox styleClass="left-sidebar-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
+                <VBox alignment="CENTER" spacing="10" styleClass="left-sidebar-column" HBox.hgrow="ALWAYS">
                     <children>
-                        <ImageView fx:id="mascotImageView" fitWidth="500" preserveRatio="true" styleClass="mascot-image">
+                        <ImageView fx:id="mascot_image_view" fitWidth="500" preserveRatio="true" styleClass="mascot-image">
                             <image>
-                                <Image url="@../images/threadjump_grey.gif"/>
+                                <Image url="@../images/threadjump_grey.gif" />
                             </image>
                         </ImageView>
-                        <Label fx:id="socslingoLogoName" text="socslingo" styleClass="socslingo-logo-name"/>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="100.0" prefWidth="162.0">
+                           <children>
+                                    <Label fx:id="socslingo_logo_name" alignment="CENTER" prefHeight="83.0" prefWidth="260.0" styleClass="socslingo-logo-name" text="socslingo" textAlignment="CENTER" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
                     </children>
                 </VBox>
                 
                 <!-- Second Column -->
-                <VBox styleClass="right-sidebar-column" HBox.hgrow="ALWAYS" alignment="center">
+                <VBox alignment="center" styleClass="right-sidebar-column" HBox.hgrow="ALWAYS">
                     <children>
                         <HBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
                             <padding>
-                                <Insets top="25" right="25" bottom="25" left="25"/>
+                                <Insets bottom="25" left="25" right="25" top="25" />
                             </padding>
                             <children>
-                                <Region HBox.hgrow="ALWAYS"/>
-                                <Button fx:id="switchToLoginButton" text="LOGIN" onAction="#switchToLoginFXML" alignment="CENTER" styleClass="login-button"/>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button fx:id="switch_to_login_button" alignment="CENTER" onAction="#switchToLoginFXML" styleClass="login-button" text="LOGIN" />
                             </children>
                         </HBox>
-                        <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="14" maxWidth="371">
+                        <VBox alignment="CENTER" maxWidth="371" spacing="14" styleClass="registration-container" VBox.vgrow="ALWAYS">
                             <children>
-                                <Label fx:id="rightSidebarTaskLabel" text="Create your profile" styleClass="create-your-profile-sub-heading-text"/>
-                                <TextField styleClass="registration-text-field" fx:id="usernameField" promptText="Username"/>
+                                <Label fx:id="right_sidebar_task_label" styleClass="create-your-profile-sub-heading-text" text="Create your profile" />
+                                <TextField fx:id="username_field" promptText="Username" styleClass="registration-text-field" />
                                 <HBox alignment="CENTER_LEFT" spacing="5">
-                                    <ImageView fx:id="usernameErrorIcon" fitHeight="20" fitWidth="20" visible="false">
+                                    <ImageView fx:id="username_error_icon" fitHeight="20" fitWidth="20" visible="false">
                                         <image>
-                                            <Image url="@../images/error_icon.png"/>
+                                            <Image url="@../images/error_icon.png" />
                                         </image>
                                     </ImageView>                              
-                                    <Label fx:id="usernameErrorLabel" text="" styleClass="error-message-label"/>
+                                    <Label fx:id="username_error_label" styleClass="error-message-label" text="" />
                                 </HBox>
-                                <TextField styleClass="registration-text-field" fx:id="emailField" promptText="Email"/>
+                                <TextField fx:id="email_field" promptText="Email" styleClass="registration-text-field" />
                                 <HBox alignment="CENTER_LEFT" spacing="5">
-                                    <ImageView fx:id="emailErrorIcon" fitHeight="20" fitWidth="20" visible="false">
+                                    <ImageView fx:id="email_error_icon" fitHeight="20" fitWidth="20" visible="false">
                                         <image>
-                                            <Image url="@../images/error_icon.png"/>
+                                            <Image url="@../images/error_icon.png" />
                                         </image>
                                     </ImageView>
-                                    <Label fx:id="emailErrorLabel" text="" styleClass="error-message-label"/>
+                                    <Label fx:id="email_error_label" styleClass="error-message-label" text="" />
                                 </HBox>
-                                <PasswordField styleClass="registration-text-field-password" fx:id="passwordField" promptText="Password"/>
+                                <PasswordField fx:id="password_field" promptText="Password" styleClass="registration-text-field-password" />
                                 <HBox alignment="CENTER_LEFT" spacing="5">
-                                    <ImageView fx:id="passwordErrorIcon" fitHeight="20" fitWidth="20" visible="false">
+                                    <ImageView fx:id="password_error_icon" fitHeight="20" fitWidth="20" visible="false">
                                         <image>
-                                            <Image url="@../images/error_icon.png"/>
+                                            <Image url="@../images/error_icon.png" />
                                         </image>
                                     </ImageView>
-                                    <Label fx:id="passwordErrorLabel" text="" styleClass="error-message-label"/>
+                                    <Label fx:id="password_error_label" styleClass="error-message-label" text="" />
                                 </HBox>
-                                <PasswordField styleClass="registration-text-field-password" fx:id="confirmPasswordField" promptText="Confirm Password"/>
+                                <PasswordField fx:id="confirm_password_field" promptText="Confirm Password" styleClass="registration-text-field-password" />
                                 <HBox alignment="CENTER_LEFT" spacing="5">
-                                    <ImageView fx:id="confirmPasswordErrorIcon" fitHeight="20" fitWidth="20" visible="false">
+                                    <ImageView fx:id="confirm_password_error_icon" fitHeight="20" fitWidth="20" visible="false">
                                         <image>
-                                            <Image url="@../images/error_icon.png"/>
+                                            <Image url="@../images/error_icon.png" />
                                         </image>
                                     </ImageView>
-                                    <Label fx:id="confirmPasswordErrorLabel" text="" styleClass="error-message-label"/>
+                                    <Label fx:id="confirm_password_error_label" styleClass="error-message-label" text="" />
                                 </HBox>
-                                <Button fx:id="registerButton" 
-                                            text="CREATE ACCOUNT" 
-                                            onAction="#handleRegistration" 
-                                            alignment="CENTER" 
-                                            styleClass="create-account-button" 
-                                            graphicTextGap="12"/>
+                                <Button fx:id="register_button" alignment="CENTER" graphicTextGap="12" onAction="#handleRegistration" styleClass="create-account-button" text="CREATE ACCOUNT" />
                             </children>
                         </VBox>
                     </children>

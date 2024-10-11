@@ -8,20 +8,20 @@ import com.socslingo.services.*;
 public class ControllerManager implements Callback<Class<?>, Object> {
     private static ControllerManager instance;
 
-    private UserService userService;
-    private FlashcardService flashcardService;
-    private DeckService deckService;
+    private UserService user_service;
+    private FlashcardService flashcard_service;
+    private DeckService deck_service;
 
-    private PrimaryController primaryController;
+    private PrimaryController primary_controller;
 
     private ControllerManager() {
-        DatabaseManager databaseManager = DatabaseManager.getInstance();
-        UserDataAccess userDataAccess = new UserDataAccess(databaseManager);
-        FlashcardDataAccess flashcardDataAccess = new FlashcardDataAccess(databaseManager);
-        DeckDataAccess deckDataAccess = new DeckDataAccess(databaseManager);
-        userService = new UserService(userDataAccess);
-        flashcardService = new FlashcardService(flashcardDataAccess);
-        deckService = new DeckService(deckDataAccess);
+        DatabaseManager database_manager = DatabaseManager.getInstance();
+        UserDataAccess user_data_access = new UserDataAccess(database_manager);
+        FlashcardDataAccess flashcard_data_access = new FlashcardDataAccess(database_manager);
+        DeckDataAccess deck_data_access = new DeckDataAccess(database_manager);
+        user_service = new UserService(user_data_access);
+        flashcard_service = new FlashcardService(flashcard_data_access);
+        deck_service = new DeckService(deck_data_access);
     }
 
     public static ControllerManager getInstance() {
@@ -32,33 +32,33 @@ public class ControllerManager implements Callback<Class<?>, Object> {
     }
 
     public FlashcardService getFlashcardService() {
-        return flashcardService;
+        return flashcard_service;
     }
 
     public DeckService getDeckService() {
-        return deckService;
+        return deck_service;
     }
 
     @Override
-    public Object call(Class<?> controllerClass) {
+    public Object call(Class<?> controller_class) {
         try {
-            if (controllerClass == LoginController.class) {
-                return new LoginController(userService);
-            } else if (controllerClass == RegistrationController.class) {
-                return new RegistrationController(userService);
-            } else if (controllerClass == FlashcardController.class) {
-                return new FlashcardController(flashcardService);
-            } else if (controllerClass == DeckPreviewController.class) {
+            if (controller_class == LoginController.class) {
+                return new LoginController(user_service);
+            } else if (controller_class == RegistrationController.class) {
+                return new RegistrationController(user_service);
+            } else if (controller_class == FlashcardController.class) {
+                return new FlashcardController(flashcard_service);
+            } else if (controller_class == DeckPreviewController.class) {
                 return new DeckPreviewController();
-            } else if (controllerClass == DeckPreviewRightSidebarController.class) {
+            } else if (controller_class == DeckPreviewRightSidebarController.class) {
                 return new DeckPreviewRightSidebarController();
-            } else if (controllerClass == PrimaryController.class) {
-                if (primaryController == null) {
-                    primaryController = new PrimaryController();
+            } else if (controller_class == PrimaryController.class) {
+                if (primary_controller == null) {
+                    primary_controller = new PrimaryController();
                 }
-                return primaryController;
+                return primary_controller;
             } else {
-                return controllerClass.getDeclaredConstructor().newInstance();
+                return controller_class.getDeclaredConstructor().newInstance();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

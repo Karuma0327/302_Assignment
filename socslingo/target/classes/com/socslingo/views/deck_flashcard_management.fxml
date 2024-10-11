@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-    
-<BorderPane xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.socslingo.controllers.DeckFlashcardManagementController"
             stylesheets="@../css/deck_management.css">
     <top>
@@ -20,19 +19,19 @@
         <VBox spacing="20" alignment="CENTER" styleClass="main-content-container">
             <!-- Deck Creation Section -->
             <VBox spacing="20" alignment="CENTER">
-                <Label fx:id="deckNameLabel" text="Managing Flashcards for Deck: " styleClass="deck-title"/>
+                <Label fx:id="deck_name_label" text="Managing Flashcards for Deck: " styleClass="deck-title"/>
                 <!-- Flashcards List Section -->
                 <HBox spacing="20" alignment="CENTER">
                     <!-- Available Flashcards List -->
                     <VBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="Available Flashcards" styleClass="section-subtitle"/>
-                        <ListView fx:id="availableFlashcardsListView" prefWidth="250" prefHeight="200" />
+                        <ListView fx:id="available_flashcards_list_view" prefWidth="250" prefHeight="200" />
                     </VBox>
 
                     <!-- Deck's Flashcards List -->
                     <VBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="Flashcards in Deck" styleClass="section-subtitle"/>
-                        <ListView fx:id="deckFlashcardsListView" prefWidth="250" prefHeight="200" />
+                        <ListView fx:id="deck_flashcards_list_view" prefWidth="250" prefHeight="200" />
                     </VBox>
                 </HBox>
 
@@ -40,9 +39,9 @@
                 <HBox spacing="10" alignment="CENTER">
                     <Button fx:id="switch_to_deck_management_button" text="Back to Deck Management" onAction="#handleButtonAction"
                         styleClass="generic-button-medium-large"/>
-                    <Button fx:id="addFlashcardToDeckButton" text="Add >>" onAction="#handleAddFlashcardToDeck"
+                    <Button fx:id="add_flashcard_to_deck_button" text="Add >>" onAction="#handleAddFlashcardToDeck"
                             styleClass="generic-button-medium"/>
-                    <Button fx:id="removeFlashcardFromDeckButton" text=" Remove" onAction="#handleRemoveFlashcardFromDeck"
+                    <Button fx:id="remove_flashcard_from_deck_button" text=" Remove" onAction="#handleRemoveFlashcardFromDeck"
                             styleClass="generic-button-medium"/>
                 </HBox>
             </VBox>

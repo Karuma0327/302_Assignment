@@ -23,7 +23,7 @@
 
 <?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.FlashcardController" stylesheets="@../css/create_flashcard.css" spacing="10" alignment="CENTER">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.FlashcardController" stylesheets="@../css/create_flashcard.css" spacing="10" alignment="CENTER">
     <children>
         <VBox fx:id="rightSidebarColumn" styleClass="middle-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
             <children>
@@ -46,8 +46,8 @@
                         </HBox>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
                             <children>
-                                <TextField styleClass="front-of-card-text-field" fx:id="frontTextField" promptText="Enter Front of Card" />
-                                <TextField styleClass="back-of-card-text-field" fx:id="backTextField" promptText="Enter Back of Card" />
+                                <TextField styleClass="front-of-card-text-field" fx:id="front_text_field" promptText="Enter Front of Card" />
+                                <TextField styleClass="back-of-card-text-field" fx:id="back_text_field" promptText="Enter Back of Card" />
                             </children>
                         </HBox>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10">

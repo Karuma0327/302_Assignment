@@ -19,25 +19,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-
-
 <?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.FlashcardController" stylesheets="@../css/create_flashcard.css" spacing="10" alignment="CENTER">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.FlashcardController" stylesheets="@../css/create_flashcard.css" spacing="10" alignment="CENTER">
     <children>
-        <VBox fx:id="rightSidebarColumn" styleClass="middle-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
+        <VBox fx:id="right_sidebar_column" styleClass="middle-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
             <children>
-                <Label fx:id="rightSidebarTaskLabel" styleClass=""/>
-                <VBox fx:id="firstTimeFlashcardPage" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="first-time-flashcard-page">
+                <Label fx:id="right_sidebar_task_label" styleClass=""/>
+                <VBox fx:id="first_time_flashcard_page" VBox.vgrow="ALWAYS" alignment="CENTER" styleClass="first-time-flashcard-page">
                     <children>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
                             <children>
                                     <HBox>
                                         <children>
-                                            <StackPane fx:id="stackPane" styleClass="flashcard-container">
+                                            <StackPane fx:id="stack_pane" styleClass="flashcard-container">
                                                 <children>
-                                                    <Label fx:id="frontLabel" styleClass="flashcard-label"/>
-                                                    <Label fx:id="backLabel" styleClass="flashcard-label" visible="false"/>
+                                                    <Label fx:id="front_label" styleClass="flashcard-label"/>
+                                                    <Label fx:id="back_label" styleClass="flashcard-label" visible="false"/>
                                                 </children>
                                             </StackPane>
                                         </children>
@@ -46,14 +44,14 @@
                         </HBox>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
                             <children>
-                                <TextField styleClass="front-of-card-text-field" fx:id="frontTextField" promptText="Enter Front of Card" />
-                                <TextField styleClass="back-of-card-text-field" fx:id="backTextField" promptText="Enter Back of Card" />
+                                <TextField styleClass="front-of-card-text-field" fx:id="front_text_field" promptText="Enter Front of Card" />
+                                <TextField styleClass="back-of-card-text-field" fx:id="back_text_field" promptText="Enter Back of Card" />
                             </children>
                         </HBox>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10">
-                            <Button fx:id="previewFlashcardButton" text="PREVIEW" onAction="#handlePreviewFlashcardAction" styleClass="generic-button-medium" />
+                            <Button fx:id="preview_flashcard_button" text="PREVIEW" onAction="#handlePreviewFlashcardAction" styleClass="generic-button-medium" />
                             <Button text="ADD FLASHCARD"  onAction="#handleNextFlashcardAction" styleClass="generic-button-medium" />
-                            <Button text="SAVE FLASHCARD" fx:id="saveFlashcardButton" onAction="#handleSaveFlashcardAction" styleClass="generic-button-medium" />
+                            <Button text="SAVE FLASHCARD" fx:id="save_flashcard_button" onAction="#handleSaveFlashcardAction" styleClass="generic-button-medium" />
                         </HBox>
                     </children>
                 </VBox>

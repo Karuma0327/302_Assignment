@@ -8,29 +8,33 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" stylesheets="@../css/deck_preview.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.DeckPreviewController">
+<VBox alignment="CENTER" spacing="20.0" stylesheets="@../css/deck_preview.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.DeckPreviewController">
     <children>
         <HBox alignment="CENTER">
-            <Label styleClass="deck-title" text="Previewing Deck: " />
-            <StackPane alignment="CENTER_LEFT">
+         <HBox alignment="CENTER" prefWidth="200.0" HBox.hgrow="ALWAYS">
+            <children>
+                  <Label styleClass="deck-title" text="Previewing Deck: " />
+                  <StackPane alignment="CENTER_LEFT">
+                      <children>
+                          <Label fx:id="deck_name_label" styleClass="deck-title" StackPane.alignment="CENTER_LEFT" />
+                          <TextField fx:id="deck_name_text_field" styleClass="deck-title-textfield" visible="false" StackPane.alignment="CENTER_LEFT" />
+                      </children>
+                  </StackPane>
+            </children>
+         </HBox>
+        </HBox>
+        <HBox alignment="CENTER" prefWidth="800.0">
+            <StackPane fx:id="flashcard_pane" styleClass="flashcard-container">
                 <children>
-                    <Label fx:id="deckNameLabel" styleClass="deck-title" />
-                    <TextField fx:id="deckNameTextField" styleClass="deck-title-textfield" visible="false" />
+                    <Label fx:id="front_label" styleClass="flashcard-label" />
+                    <Label fx:id="back_label" styleClass="flashcard-label" visible="false" />
                 </children>
             </StackPane>
         </HBox>
-        <HBox alignment="CENTER" spacing="10">
-            <StackPane fx:id="flashcardPane" styleClass="flashcard-container">
-                <children>
-                    <Label fx:id="frontLabel" styleClass="flashcard-label" />
-                    <Label fx:id="backLabel" styleClass="flashcard-label" visible="false" />
-                </children>
-            </StackPane>
-        </HBox>
-        <HBox alignment="CENTER" spacing="10">
+        <HBox alignment="CENTER" spacing="10.0">
             <Button onAction="#handleBackToDeckManagement" styleClass="generic-button-medium-large" text="Back to Deck Management" />
-            <Button fx:id="previousFlashcardButton" onAction="#handlePreviousFlashcardAction" styleClass="generic-button-medium" text="Previous" />
-            <Button fx:id="nextFlashcardButton" onAction="#handleNextFlashcardAction" styleClass="generic-button-medium" text="Next" />
+            <Button fx:id="previous_flashcard_button" onAction="#handlePreviousFlashcardAction" styleClass="generic-button-medium" text="Previous" />
+            <Button fx:id="next_flashcard_button" onAction="#handleNextFlashcardAction" styleClass="generic-button-medium" text="Next" />
         </HBox>
     </children>
     <padding>

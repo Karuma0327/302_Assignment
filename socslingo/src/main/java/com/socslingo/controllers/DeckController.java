@@ -17,57 +17,51 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+
 public class DeckController implements Initializable {
 
-
-    // Initialize Logger
     private static final Logger logger = LoggerFactory.getLogger(DeckController.class);
 
-    // UI Components
     @FXML
     private TextField deck_name_text_field;
 
     @FXML
-    private Button createDeckButton;
+    private Button create_deck_button;
 
     @FXML
-    private ListView<Deck> decksListView;
+    private ListView<Deck> decks_list_view;
 
     @FXML
-    private ListView<Flashcard> availableFlashcardsListView;
+    private ListView<Flashcard> available_flashcards_list_view;
 
     @FXML
-    private ListView<Flashcard> deckFlashcardsListView;
+    private ListView<Flashcard> deck_flashcards_list_view;
 
     @FXML
-    private Button addFlashcardToDeckButton;
+    private Button add_flashcard_to_deck_button;
 
     @FXML
-    private Button removeFlashcardFromDeckButton;
+    private Button remove_flashcard_from_deck_button;
 
     @FXML
-    private Label selectedDeckLabel;
+    private Label selected_deck_label;
 
     @FXML
-    private Button deleteDeckButton; // Optional: For deleting decks
+    private Button delete_deck_button;
 
-    // Data Access
-    private DeckDataAccess deckDataAccess;
-
-    // Observable Lists for UI
-    private ObservableList<Deck> decksObservableList;
-    private ObservableList<Flashcard> availableFlashcardsObservableList;
-    private ObservableList<Flashcard> deckFlashcardsObservableList;
+    private DeckDataAccess deck_data_access;
+    private ObservableList<Deck> decks_observable_list;
+    private ObservableList<Flashcard> available_flashcards_observable_list;
+    private ObservableList<Flashcard> deck_flashcards_observable_list;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logger.info("Initializing Deck_Controller");
 
-        // Initialize Data Access Objects
         try {
-            DatabaseManager dbManager = DatabaseManager.getInstance();
-            deckDataAccess = new DeckDataAccess(dbManager);
-            new FlashcardDataAccess(dbManager);
+            DatabaseManager db_manager = DatabaseManager.getInstance();
+            deck_data_access = new DeckDataAccess(db_manager);
+            new FlashcardDataAccess(db_manager);
             logger.info("Data Access Objects initialized successfully");
         } catch (Exception e) {
             logger.error("Failed to initialize Data Access Objects", e);
@@ -75,36 +69,15 @@ public class DeckController implements Initializable {
             return;
         }
 
-        // Initialize Observable Lists
-        decksObservableList = FXCollections.observableArrayList();
-        availableFlashcardsObservableList = FXCollections.observableArrayList();
-        deckFlashcardsObservableList = FXCollections.observableArrayList();
+        decks_observable_list = FXCollections.observableArrayList();
+        available_flashcards_observable_list = FXCollections.observableArrayList();
+        deck_flashcards_observable_list = FXCollections.observableArrayList();
 
-        // Set up ListViews
-        decksListView.setItems(decksObservableList);
-        availableFlashcardsListView.setItems(availableFlashcardsObservableList);
-        deckFlashcardsListView.setItems(deckFlashcardsObservableList);
+        decks_list_view.setItems(decks_observable_list);
+        available_flashcards_list_view.setItems(available_flashcards_observable_list);
+        deck_flashcards_list_view.setItems(deck_flashcards_observable_list);
 
-        // Customize ListView Cells for Flashcards
-        availableFlashcardsListView.setCellFactory(new Callback<ListView<Flashcard>, ListCell<Flashcard>>() {
-            @Override
-            public ListCell<Flashcard> call(ListView<Flashcard> param) {
-                return new ListCell<Flashcard>() {
-                    @Override
-                    protected void updateItem(Flashcard item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty || item == null) {
-                            setText(null);
-                        } else {
-                            // Display only the front and back text for clarity
-                            setText("Front: " + item.getFront() + " | Back: " + item.getBack());
-                        }
-                    }
-                };
-            }
-        });
-
-        deckFlashcardsListView.setCellFactory(new Callback<ListView<Flashcard>, ListCell<Flashcard>>() {
+        available_flashcards_list_view.setCellFactory(new Callback<ListView<Flashcard>, ListCell<Flashcard>>() {
             @Override
             public ListCell<Flashcard> call(ListView<Flashcard> param) {
                 return new ListCell<Flashcard>() {
@@ -121,8 +94,24 @@ public class DeckController implements Initializable {
             }
         });
 
-        // Customize ListView Cells for Decks
-        decksListView.setCellFactory(new Callback<ListView<Deck>, ListCell<Deck>>() {
+        deck_flashcards_list_view.setCellFactory(new Callback<ListView<Flashcard>, ListCell<Flashcard>>() {
+            @Override
+            public ListCell<Flashcard> call(ListView<Flashcard> param) {
+                return new ListCell<Flashcard>() {
+                    @Override
+                    protected void updateItem(Flashcard item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText("Front: " + item.getFront() + " | Back: " + item.getBack());
+                        }
+                    }
+                };
+            }
+        });
+
+        decks_list_view.setCellFactory(new Callback<ListView<Deck>, ListCell<Deck>>() {
             @Override
             public ListCell<Deck> call(ListView<Deck> param) {
                 return new ListCell<Deck>() {
@@ -139,17 +128,14 @@ public class DeckController implements Initializable {
             }
         });
 
-        // Load initial data
         loadUserDecks();
         loadAvailableFlashcards();
 
-        // Add listener to decksListView to display selected deck's flashcards
-        decksListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        decks_list_view.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             displaySelectedDeck(newValue);
         });
 
-        // Optionally, set up double-click handler for decksListView
-        decksListView.setOnMouseClicked(this::handleDeckDoubleClick);
+        decks_list_view.setOnMouseClicked(this::handleDeckDoubleClick);
 
         logger.info("Deck_Controller initialized successfully");
     }
@@ -161,39 +147,38 @@ public class DeckController implements Initializable {
      */
     @FXML
     private void handleCreateDeck(ActionEvent event) {
-        String deckName = deck_name_text_field.getText().trim();
-        logger.debug("Attempting to create deck with name: '{}'", deckName);
+        String deck_name = deck_name_text_field.getText().trim();
+        logger.debug("Attempting to create deck with name: '{}'", deck_name);
 
-        if (deckName.isEmpty()) {
+        if (deck_name.isEmpty()) {
             logger.warn("Deck creation failed: Deck name is empty");
             showAlert(Alert.AlertType.ERROR, "Deck name cannot be empty.");
             return;
         }
 
-        // Retrieve the current user's ID using SessionManager
-        int userId = SessionManager.getInstance().getCurrentUserId();
-        if (userId == -1) {
+        int user_id = SessionManager.getInstance().getCurrentUserId();
+        if (user_id == -1) {
             logger.warn("Deck creation failed: No user is currently logged in.");
             showAlert(Alert.AlertType.ERROR, "No user is currently logged in.");
             return;
         }
 
-        String createdDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        logger.debug("Creating deck for userId: {} at {}", userId, createdDate);
+        String created_date = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        logger.debug("Creating deck for userId: {} at {}", user_id, created_date);
 
         try {
-            int deckId = deckDataAccess.createDeck(userId, deckName, createdDate);
-            if (deckId != -1) {
-                logger.info("Deck '{}' created successfully with ID: {}", deckName, deckId);
-                showAlert(Alert.AlertType.INFORMATION, "Deck created successfully with ID: " + deckId);
+            int deck_id = deck_data_access.createDeck(user_id, deck_name, created_date);
+            if (deck_id != -1) {
+                logger.info("Deck '{}' created successfully with ID: {}", deck_name, deck_id);
+                showAlert(Alert.AlertType.INFORMATION, "Deck created successfully with ID: " + deck_id);
                 deck_name_text_field.clear();
                 loadUserDecks();
             } else {
-                logger.error("Failed to create deck '{}'", deckName);
+                logger.error("Failed to create deck '{}'", deck_name);
                 showAlert(Alert.AlertType.ERROR, "Failed to create deck.");
             }
         } catch (Exception e) {
-            logger.error("Exception occurred while creating deck '{}'", deckName, e);
+            logger.error("Exception occurred while creating deck '{}'", deck_name, e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while creating the deck.");
         }
     }
@@ -203,19 +188,19 @@ public class DeckController implements Initializable {
      */
     private void loadUserDecks() {
         logger.debug("Loading decks for current user");
-        int userId = SessionManager.getInstance().getCurrentUserId();
-        if (userId == -1) {
+        int user_id = SessionManager.getInstance().getCurrentUserId();
+        if (user_id == -1) {
             logger.warn("Failed to load decks: No user is currently logged in.");
             showAlert(Alert.AlertType.ERROR, "No user is currently logged in.");
             return;
         }
 
         try {
-            List<Deck> decks = deckDataAccess.getUserDecks(userId);
-            decksObservableList.setAll(decks);
-            logger.info("Loaded {} decks for userId: {}", decks.size(), userId);
+            List<Deck> decks = deck_data_access.getUserDecks(user_id);
+            decks_observable_list.setAll(decks);
+            logger.info("Loaded {} decks for userId: {}", decks.size(), user_id);
         } catch (Exception e) {
-            logger.error("Exception occurred while loading decks for userId: {}", userId, e);
+            logger.error("Exception occurred while loading decks for userId: {}", user_id, e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while loading decks.");
         }
     }
@@ -225,19 +210,19 @@ public class DeckController implements Initializable {
      */
     private void loadAvailableFlashcards() {
         logger.debug("Loading available flashcards for current user");
-        int userId = SessionManager.getInstance().getCurrentUserId();
-        if (userId == -1) {
+        int user_id = SessionManager.getInstance().getCurrentUserId();
+        if (user_id == -1) {
             logger.warn("Failed to load flashcards: No user is currently logged in.");
             showAlert(Alert.AlertType.ERROR, "No user is currently logged in.");
             return;
         }
 
         try {
-            List<Flashcard> availableFlashcards = deckDataAccess.getFlashcardsNotInAnyDeck1(userId);
-            availableFlashcardsObservableList.setAll(availableFlashcards);
-            logger.info("Loaded {} available flashcards for userId: {}", availableFlashcards.size(), userId);
+            List<Flashcard> available_flashcards = deck_data_access.getUnassignedFlashcardsForUser(user_id);
+            available_flashcards_observable_list.setAll(available_flashcards);
+            logger.info("Loaded {} available flashcards for userId: {}", available_flashcards.size(), user_id);
         } catch (Exception e) {
-            logger.error("Exception occurred while loading available flashcards for userId: {}", userId, e);
+            logger.error("Exception occurred while loading available flashcards for userId: {}", user_id, e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while loading available flashcards.");
         }
     }
@@ -250,26 +235,25 @@ public class DeckController implements Initializable {
     private void displaySelectedDeck(Deck deck) {
         if (deck == null) {
             logger.debug("No deck selected. Displaying all available flashcards.");
-            selectedDeckLabel.setText("No Deck Selected");
-            deckFlashcardsListView.setItems(FXCollections.observableArrayList());
-            availableFlashcardsListView.setDisable(true);
-            addFlashcardToDeckButton.setDisable(true);
-            removeFlashcardFromDeckButton.setDisable(true);
+            selected_deck_label.setText("No Deck Selected");
+            deck_flashcards_list_view.setItems(FXCollections.observableArrayList());
+            available_flashcards_list_view.setDisable(true);
+            add_flashcard_to_deck_button.setDisable(true);
+            remove_flashcard_from_deck_button.setDisable(true);
             return;
         }
 
-        selectedDeckLabel.setText("Selected Deck: " + deck.getDeckName());
+        selected_deck_label.setText("Selected Deck: " + deck.getDeckName());
         logger.debug("Displaying flashcards for deckId: {}", deck.getDeckId());
 
         try {
-            List<Flashcard> flashcardsInDeck = deckDataAccess.getFlashcardsInDeck(deck.getDeckId());
-            deckFlashcardsObservableList.setAll(flashcardsInDeck);
-            logger.info("Loaded {} flashcards for deckId: {}", flashcardsInDeck.size(), deck.getDeckId());
+            List<Flashcard> flashcards_in_deck = deck_data_access.getFlashcardsForDeck(deck.getDeckId());
+            deck_flashcards_observable_list.setAll(flashcards_in_deck);
+            logger.info("Loaded {} flashcards for deckId: {}", flashcards_in_deck.size(), deck.getDeckId());
 
-            // Enable add/remove buttons and available flashcards list
-            availableFlashcardsListView.setDisable(false);
-            addFlashcardToDeckButton.setDisable(false);
-            removeFlashcardFromDeckButton.setDisable(false);
+            available_flashcards_list_view.setDisable(false);
+            add_flashcard_to_deck_button.setDisable(false);
+            remove_flashcard_from_deck_button.setDisable(false);
         } catch (Exception e) {
             logger.error("Exception occurred while loading flashcards for deckId: {}", deck.getDeckId(), e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while loading flashcards for the selected deck.");
@@ -283,39 +267,39 @@ public class DeckController implements Initializable {
      */
     @FXML
     private void handleAddFlashcardToDeck(ActionEvent event) {
-        Deck selectedDeck = decksListView.getSelectionModel().getSelectedItem();
-        Flashcard selectedFlashcard = availableFlashcardsListView.getSelectionModel().getSelectedItem();
+        Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
+        Flashcard selected_flashcard = available_flashcards_list_view.getSelectionModel().getSelectedItem();
 
         logger.debug("Attempting to add flashcardId: {} to deckId: {}", 
-                     selectedFlashcard != null ? selectedFlashcard.getId() : "null", 
-                     selectedDeck != null ? selectedDeck.getDeckId() : "null");
+                     selected_flashcard != null ? selected_flashcard.getId() : "null", 
+                     selected_deck != null ? selected_deck.getDeckId() : "null");
 
-        if (selectedDeck == null) {
+        if (selected_deck == null) {
             logger.warn("Add operation failed: No deck selected.");
             showAlert(Alert.AlertType.ERROR, "Please select a deck.");
             return;
         }
 
-        if (selectedFlashcard == null) {
+        if (selected_flashcard == null) {
             logger.warn("Add operation failed: No flashcard selected.");
             showAlert(Alert.AlertType.ERROR, "Please select a flashcard to add.");
             return;
         }
 
         try {
-            boolean success = deckDataAccess.addFlashcardToDeck(selectedDeck.getDeckId(), selectedFlashcard.getId());
+            boolean success = deck_data_access.addFlashcardToDeck(selected_deck.getDeckId(), selected_flashcard.getId());
             if (success) {
-                logger.info("FlashcardId: {} added to DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
+                logger.info("FlashcardId: {} added to DeckId: {}", selected_flashcard.getId(), selected_deck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard added to deck successfully.");
-                deckFlashcardsObservableList.add(selectedFlashcard);
-                availableFlashcardsObservableList.remove(selectedFlashcard);
+                deck_flashcards_observable_list.add(selected_flashcard);
+                available_flashcards_observable_list.remove(selected_flashcard);
             } else {
-                logger.error("Failed to add FlashcardId: {} to DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
+                logger.error("Failed to add FlashcardId: {} to DeckId: {}", selected_flashcard.getId(), selected_deck.getDeckId());
                 showAlert(Alert.AlertType.ERROR, "Failed to add flashcard to deck.");
             }
         } catch (Exception e) {
             logger.error("Exception occurred while adding FlashcardId: {} to DeckId: {}", 
-                         selectedFlashcard.getId(), selectedDeck.getDeckId(), e);
+                         selected_flashcard.getId(), selected_deck.getDeckId(), e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while adding the flashcard to the deck.");
         }
     }
@@ -327,39 +311,39 @@ public class DeckController implements Initializable {
      */
     @FXML
     private void handleRemoveFlashcardFromDeck(ActionEvent event) {
-        Deck selectedDeck = decksListView.getSelectionModel().getSelectedItem();
-        Flashcard selectedFlashcard = deckFlashcardsListView.getSelectionModel().getSelectedItem();
+        Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
+        Flashcard selected_flashcard = deck_flashcards_list_view.getSelectionModel().getSelectedItem();
 
         logger.debug("Attempting to remove flashcardId: {} from deckId: {}", 
-                     selectedFlashcard != null ? selectedFlashcard.getId() : "null", 
-                     selectedDeck != null ? selectedDeck.getDeckId() : "null");
+                     selected_flashcard != null ? selected_flashcard.getId() : "null", 
+                     selected_deck != null ? selected_deck.getDeckId() : "null");
 
-        if (selectedDeck == null) {
+        if (selected_deck == null) {
             logger.warn("Remove operation failed: No deck selected.");
             showAlert(Alert.AlertType.ERROR, "Please select a deck.");
             return;
         }
 
-        if (selectedFlashcard == null) {
+        if (selected_flashcard == null) {
             logger.warn("Remove operation failed: No flashcard selected.");
             showAlert(Alert.AlertType.ERROR, "Please select a flashcard to remove.");
             return;
         }
 
         try {
-            boolean success = deckDataAccess.removeFlashcardFromDeck(selectedDeck.getDeckId(), selectedFlashcard.getId());
+            boolean success = deck_data_access.removeFlashcardFromDeck(selected_deck.getDeckId(), selected_flashcard.getId());
             if (success) {
-                logger.info("FlashcardId: {} removed from DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
+                logger.info("FlashcardId: {} removed from DeckId: {}", selected_flashcard.getId(), selected_deck.getDeckId());
                 showAlert(Alert.AlertType.INFORMATION, "Flashcard removed from deck successfully.");
-                deckFlashcardsObservableList.remove(selectedFlashcard);
-                availableFlashcardsObservableList.add(selectedFlashcard);
+                deck_flashcards_observable_list.remove(selected_flashcard);
+                available_flashcards_observable_list.add(selected_flashcard);
             } else {
-                logger.error("Failed to remove FlashcardId: {} from DeckId: {}", selectedFlashcard.getId(), selectedDeck.getDeckId());
+                logger.error("Failed to remove FlashcardId: {} from DeckId: {}", selected_flashcard.getId(), selected_deck.getDeckId());
                 showAlert(Alert.AlertType.ERROR, "Failed to remove flashcard from deck.");
             }
         } catch (Exception e) {
             logger.error("Exception occurred while removing FlashcardId: {} from DeckId: {}", 
-                         selectedFlashcard.getId(), selectedDeck.getDeckId(), e);
+                         selected_flashcard.getId(), selected_deck.getDeckId(), e);
             showAlert(Alert.AlertType.ERROR, "An error occurred while removing the flashcard from the deck.");
         }
     }
@@ -371,12 +355,12 @@ public class DeckController implements Initializable {
      */
     @FXML
     private void handleDeleteDeck(ActionEvent event) {
-        Deck selectedDeck = decksListView.getSelectionModel().getSelectedItem();
+        Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
 
         logger.debug("Attempting to delete deckId: {}", 
-                     selectedDeck != null ? selectedDeck.getDeckId() : "null");
+                     selected_deck != null ? selected_deck.getDeckId() : "null");
 
-        if (selectedDeck == null) {
+        if (selected_deck == null) {
             logger.warn("Delete operation failed: No deck selected.");
             showAlert(Alert.AlertType.ERROR, "Please select a deck to delete.");
             return;
@@ -385,28 +369,28 @@ public class DeckController implements Initializable {
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Delete Deck");
         confirmation.setHeaderText(null);
-        confirmation.setContentText("Are you sure you want to delete the deck \"" + selectedDeck.getDeckName() + "\"?");
+        confirmation.setContentText("Are you sure you want to delete the deck \"" + selected_deck.getDeckName() + "\"?");
         Optional<ButtonType> result = confirmation.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                boolean success = deckDataAccess.deleteDeck(selectedDeck.getDeckId());
+                boolean success = deck_data_access.deleteDeck(selected_deck.getDeckId());
 
                 if (success) {
-                    logger.info("DeckId: {} deleted successfully.", selectedDeck.getDeckId());
+                    logger.info("DeckId: {} deleted successfully.", selected_deck.getDeckId());
                     showAlert(Alert.AlertType.INFORMATION, "Deck deleted successfully.");
                     loadUserDecks();
-                    selectedDeckLabel.setText("No Deck Selected");
-                    deckFlashcardsListView.setItems(FXCollections.observableArrayList());
-                    availableFlashcardsListView.setDisable(true);
-                    addFlashcardToDeckButton.setDisable(true);
-                    removeFlashcardFromDeckButton.setDisable(true);
+                    selected_deck_label.setText("No Deck Selected");
+                    deck_flashcards_list_view.setItems(FXCollections.observableArrayList());
+                    available_flashcards_list_view.setDisable(true);
+                    add_flashcard_to_deck_button.setDisable(true);
+                    remove_flashcard_from_deck_button.setDisable(true);
                 } else {
-                    logger.error("Failed to delete DeckId: {}", selectedDeck.getDeckId());
+                    logger.error("Failed to delete DeckId: {}", selected_deck.getDeckId());
                     showAlert(Alert.AlertType.ERROR, "Failed to delete deck.");
                 }
             } catch (Exception e) {
-                logger.error("Exception occurred while deleting DeckId: {}", selectedDeck.getDeckId(), e);
+                logger.error("Exception occurred while deleting DeckId: {}", selected_deck.getDeckId(), e);
                 showAlert(Alert.AlertType.ERROR, "An error occurred while deleting the deck.");
             }
         } else {
@@ -422,10 +406,10 @@ public class DeckController implements Initializable {
     @FXML
     private void handleDeckDoubleClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            Deck selectedDeck = decksListView.getSelectionModel().getSelectedItem();
-            if (selectedDeck != null) {
-                logger.info("DeckId: {} was double-clicked.", selectedDeck.getDeckId());
-                showAlert(Alert.AlertType.INFORMATION, "Double-clicked on deck: " + selectedDeck.getDeckName());
+            Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
+            if (selected_deck != null) {
+                logger.info("DeckId: {} was double-clicked.", selected_deck.getDeckId());
+                showAlert(Alert.AlertType.INFORMATION, "Double-clicked on deck: " + selected_deck.getDeckName());
             }
         }
     }
@@ -436,9 +420,9 @@ public class DeckController implements Initializable {
      * @param alertType Type of the alert.
      * @param message   Message to display.
      */
-    private void showAlert(Alert.AlertType alertType, String message) {
-        logger.debug("Displaying alert of type '{}' with message: {}", alertType, message);
-        Alert alert = new Alert(alertType);
+    private void showAlert(Alert.AlertType alert_type, String message) {
+        logger.debug("Displaying alert of type '{}' with message: {}", alert_type, message);
+        Alert alert = new Alert(alert_type);
         alert.setContentText(message);
         alert.showAndWait();
         logger.debug("Alert displayed");

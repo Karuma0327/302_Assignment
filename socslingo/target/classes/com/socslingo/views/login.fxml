@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.LoginController">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.LoginController" stylesheets="@../css/login.css">
     <children>
         <!-- Main Content Area -->
         <HBox VBox.vgrow="ALWAYS">
@@ -26,7 +26,15 @@
                                 <Image url="@../images/threadjump_grey.gif"/>
                             </image>
                         </ImageView>
-                        <Label fx:id="socslingoLogoName" text="socslingo" styleClass="socslingo-logo-name"/>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Pane prefHeight="100.0" prefWidth="162.0">
+                            <children>
+                                        <Label fx:id="socslingoLogoName" alignment="CENTER" prefHeight="83.0" prefWidth="260.0" styleClass="socslingo-logo-name" text="socslingo" textAlignment="CENTER" />
+                            </children>
+                            </Pane>
+                        </children>
+                    </HBox>
                     </children>
                 </VBox>
                 
@@ -39,7 +47,7 @@
                             </padding>
                             <children>
                                 <Region HBox.hgrow="ALWAYS"/>
-                                <Button fx:id="switchToRegistrationButton" text="SIGN UP" onAction="#switchToRegistrationFXML" alignment="CENTER" styleClass="sign-up-button"/>
+                                <Button fx:id="switch_to_registration_button" text="SIGN UP" onAction="#switchToRegistrationFXML" alignment="CENTER" styleClass="sign-up-button"/>
                             </children>
                         </HBox>
                         <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="10" maxWidth="371">
@@ -47,19 +55,19 @@
                                 <Label fx:id="rightSidebarTaskLabel" text="Log in" styleClass="create-your-profile-sub-heading-text"/>
                                 <VBox spacing="20"> 
                                     <children>
-                                        <TextField styleClass="registration-text-field" fx:id="usernameField" promptText="Username"/>
-                                        <PasswordField styleClass="registration-text-field-password" fx:id="passwordField" promptText="Password"/>
+                                        <TextField styleClass="registration-text-field" fx:id="username_field" promptText="Username"/>
+                                        <PasswordField styleClass="registration-text-field-password" fx:id="password_field" promptText="Password"/>
                                     </children>
                                 </VBox>
                                 <HBox alignment="CENTER_LEFT" spacing="5">
-                                    <ImageView fx:id="errorIcon" fitHeight="20" fitWidth="20" visible="false">
+                                    <ImageView fx:id="error_icon" fitHeight="20" fitWidth="20" visible="false">
                                         <image>
                                             <Image url="@../images/error_icon.png"/>
                                         </image>
                                     </ImageView>
-                                    <Label fx:id="errorMessageLabel" text="" styleClass="error-message"/>
+                                    <Label fx:id="error_message_label" text="" styleClass="error-message"/>
                                 </HBox>
-                                <Button fx:id="loginButton" text="LOG IN" onAction="#handleLogin" alignment="CENTER" styleClass="create-account-button" graphicTextGap="12"/>
+                                <Button fx:id="login_button" text="LOG IN" onAction="#handleLogin" alignment="CENTER" styleClass="create-account-button" graphicTextGap="12"/>
                             </children>
                         </VBox>
                     </children>
