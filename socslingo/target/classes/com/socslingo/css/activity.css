@@ -1,0 +1,353 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+/* StackPane Hover Styles */
+.activity-button-stackpane-type-hover:hover .activity-button--large-type-hover,
+.activity-button-stackpane-type-hover:hover .activity-button--medium-type-hover,
+.activity-button-stackpane-type-hover:hover .activity-button--small-type-hover {
+    -fx-background-color: #e5e5e5;
+    -fx-border-color: #cecece;
+}
+
+.activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--large-type-hover,
+.activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--medium-type-hover,
+.activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--small-type-hover {
+    -fx-fill: #cecece;
+}
+
+.activity-button-stackpane-type-hover:pressed .activity-button--large-type-hover,
+.activity-button-stackpane-type-hover:pressed .activity-button--medium-type-hover,
+.activity-button-stackpane-type-hover:pressed .activity-button--small-type-hover,
+.activity-button-stackpane-type-hover:pressed .activity-button__label--large-type-hover,
+.activity-button-stackpane-type-hover:pressed .activity-button__label--medium-type-hover,
+.activity-button-stackpane-type-hover:pressed .activity-button__label--small-type-hover,
+.activity-button-stackpane-type-default:pressed .activity-button--large-type-default,
+.activity-button-stackpane-type-default:pressed .activity-button--medium-type-default,
+.activity-button-stackpane-type-default:pressed .activity-button--small-type-default,
+.activity-button-stackpane-type-default:pressed .activity-button__label--large-type-default,
+.activity-button-stackpane-type-default:pressed .activity-button__label--medium-type-default,
+.activity-button-stackpane-type-default:pressed .activity-button__label--medium-type-default {
+    -fx-translate-y: 0;
+}
+
+
+.activity-button-stackpane-type-pressed:pressed .activity-button--large-type-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button--medium-type-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button--small-type-pressed{
+    -fx-translate-y: 0;
+
+}
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--large-type-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--medium-type-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--small-type-pressed {
+
+    -fx-translate-y: 0;
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-background-radius: 12px;
+}
+
+.activity-button--large-type-pressed:selected {
+    -fx-background-color: rgb(240, 250, 255);
+}
+
+
+.activity-button__label--large-type-pressed {
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent; /* No background by default */
+    -fx-background-radius: 12px;
+}
+
+.activity-button__label--large-type-pressed:pressed { 
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-background-radius: 12px;
+
+}
+
+
+
+
+
+.label-active {
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-background-radius: 12px;
+    -fx-text-fill: rgb(24, 153, 214);
+}
+
+.activity-button--large-type-pressed {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button--large-type-pressed:selected {
+    -fx-background-color: rgb(240, 250, 255);
+}
+.activity-button__background-rectangle--large-type-pressed {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+
+
+
+/* Block: activity-button */
+.activity-button__background-rectangle--large-type-default {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-button__label--large-type-default {
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
+    -fx-pref-width: 128x;
+    -fx-pref-height: 36px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-button--large-type-default {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button__background-rectangle--large-type-hover {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-button__label--large-type-hover {
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
+    -fx-pref-width: 128x;
+    -fx-pref-height: 36px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-button--large-type-hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+
+.activity-button__background-rectangle--medium-type-default {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-button__label--medium-type-default {
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-button--medium-type-default {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button__background-rectangle--medium-type-hover {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-button--medium-type-hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button__label--medium-type-hover {
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-button--small-type-default {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 86px;
+    -fx-pref-height: 68px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button__background-rectangle--small-type-default {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-button--small-type-hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 86px;
+    -fx-pref-height: 68px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}

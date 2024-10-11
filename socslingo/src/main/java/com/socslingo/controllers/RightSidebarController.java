@@ -1,29 +1,23 @@
 package com.socslingo.controllers;
 
-import java.io.IOException;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 
 import com.socslingo.managers.ControllerManager;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import java.io.IOException;
 
 public class RightSidebarController {
 
+    @FXML
+    private VBox right_sidebar;
 
     @FXML
-    private VBox rightSidebar;
+    private StackPane dynamic_content;
 
-    @FXML
-    private StackPane dynamicContent;
-
-    private ContextMenu sidebarContextMenu;
+    private ContextMenu sidebar_context_menu;
 
     @FXML
     private void initialize() {
@@ -31,24 +25,21 @@ public class RightSidebarController {
         loadDefaultContent();
     }
 
-
     @FXML
     private void handleDeckPreviewRightSidebar() {
         System.out.println("Deck Preview Right Sidebar selected");
         loadContent("/com/socslingo/views/deck_preview_right_sidebar.fxml");
     }
 
-
-
     private void setupContextMenu() {
-        sidebarContextMenu = new ContextMenu();
-        MenuItem hideSidebarItem = new MenuItem("Hide Sidebar");
-        hideSidebarItem.setOnAction(e -> handleHideSidebar());
-        sidebarContextMenu.getItems().add(hideSidebarItem);
+        sidebar_context_menu = new ContextMenu();
+        MenuItem hide_sidebar_item = new MenuItem("Hide Sidebar");
+        hide_sidebar_item.setOnAction(e -> handleHideSidebar());
+        sidebar_context_menu.getItems().add(hide_sidebar_item);
 
-        rightSidebar.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        right_sidebar.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getButton() == MouseButton.SECONDARY) {
-                sidebarContextMenu.show(rightSidebar, event.getScreenX(), event.getScreenY());
+                sidebar_context_menu.show(right_sidebar, event.getScreenX(), event.getScreenY());
             }
         });
     }
@@ -69,13 +60,13 @@ public class RightSidebarController {
      *
      * @param fxmlPath The path to the FXML file to load.
      */
-    public void loadContent(String fxmlPath) {
+    public void loadContent(String fxml_path) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
             loader.setControllerFactory(ControllerManager.getInstance());
             Node content = loader.load();
-            dynamicContent.getChildren().clear();
-            dynamicContent.getChildren().add(content);
+            dynamic_content.getChildren().clear();
+            dynamic_content.getChildren().add(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
