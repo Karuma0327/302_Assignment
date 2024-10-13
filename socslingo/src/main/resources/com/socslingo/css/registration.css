@@ -33,8 +33,13 @@
     src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
 }
 
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
 .socslingo-logo-name {
-    -fx-font-size: 46px;
+    -fx-font-size: 56px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
     -fx-padding: 15px 0px 5px 0px;
     -fx-font-family: 'DINRoundPro-Black';
@@ -110,7 +115,7 @@
     -fx-border-width: 2px;
     -fx-padding: 8px 14px 8px 14px;
     -fx-background-color: #f7f7f7;
-    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-family: 'DINNextW10-Bold';
     -fx-font-weight: bold;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;

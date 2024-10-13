@@ -5,10 +5,8 @@ import java.security.*;
 import java.util.regex.Pattern;
 
 import javafx.animation.*;
-import javafx.beans.value.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -22,182 +20,152 @@ import com.socslingo.services.UserService;
 
 
 public class RegistrationController {
-    private UserService userService;
+    private UserService user_service;
 
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
+    public RegistrationController(UserService user_service) {
+        this.user_service = user_service;
     }
 
     @SuppressWarnings("unused")
-    private boolean isAnimating = false;
+    private boolean is_animating = false;
 
     @FXML
-    private Button registerButton;
+    private Button register_button;
 
     @FXML
-    private Button switchToLoginButton;
+    private Button switch_to_login_button;
 
     @FXML
-    private TextField usernameField;
+    private TextField username_field;
 
     @FXML
-    private TextField emailField;
+    private TextField email_field;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField password_field;
 
     @FXML
-    private PasswordField confirmPasswordField;
+    private PasswordField confirm_password_field;
 
     @FXML
-    private Label usernameErrorLabel;
+    private Label username_error_label;
 
     @FXML
-    private ImageView usernameErrorIcon;
+    private ImageView username_error_icon;
 
     @FXML
-    private Label emailErrorLabel;
+    private Label email_error_label;
 
     
     @FXML
-    private ImageView emailErrorIcon;
+    private ImageView email_error_icon;
 
     @FXML
-    private Label passwordErrorLabel;
+    private Label password_error_label;
 
     @FXML
-    private ImageView passwordErrorIcon;
+    private ImageView password_error_icon;
 
     @FXML
-    private Label confirmPasswordErrorLabel;
+    private Label confirm_password_error_label;
 
     @FXML
-    private ImageView confirmPasswordErrorIcon;
+    private ImageView confirm_password_error_icon;
 
 
-    private boolean canSwitch = true;
+    @SuppressWarnings("unused")
+    private boolean can_switch = true;
     private final PauseTransition cooldown = new PauseTransition(Duration.seconds(1));
 
     @FXML
     private void initialize() {
-        usernameField.setOnKeyPressed(this::handleEnterKeyPress);
-        emailField.setOnKeyPressed(this::handleEnterKeyPress);
-        passwordField.setOnKeyPressed(this::handleEnterKeyPress);
-        confirmPasswordField.setOnKeyPressed(this::handleEnterKeyPress);
+        username_field.setOnKeyPressed(this::handleEnterKeyPress);
+        email_field.setOnKeyPressed(this::handleEnterKeyPress);
+        password_field.setOnKeyPressed(this::handleEnterKeyPress);
+        confirm_password_field.setOnKeyPressed(this::handleEnterKeyPress);
 
-        ChangeListener<javafx.scene.Scene> sceneChangeListener = new ChangeListener<javafx.scene.Scene>() {
-            @Override
-            public void changed(ObservableValue<? extends javafx.scene.Scene> observable, javafx.scene.Scene oldScene, javafx.scene.Scene newScene) {
-                if (newScene != null) {
-                    newScene.addEventFilter(KeyEvent.KEY_PRESSED, RegistrationController.this::handleTabKeyPress);
-                }
-            }
-        };
-        usernameField.sceneProperty().addListener(sceneChangeListener);
-        emailField.sceneProperty().addListener(sceneChangeListener);
-        passwordField.sceneProperty().addListener(sceneChangeListener);
-        confirmPasswordField.sceneProperty().addListener(sceneChangeListener);
+        cooldown.setOnFinished(event -> can_switch = true);
 
-        cooldown.setOnFinished(event -> canSwitch = true);
-
-        bindErrorLabel(usernameErrorLabel, usernameErrorIcon);
-        bindErrorLabel(emailErrorLabel, emailErrorIcon);
-        bindErrorLabel(passwordErrorLabel, passwordErrorIcon);
-        bindErrorLabel(confirmPasswordErrorLabel, confirmPasswordErrorIcon);
+        bindErrorLabel(username_error_label, username_error_icon);
+        bindErrorLabel(email_error_label, email_error_icon);
+        bindErrorLabel(password_error_label, password_error_icon);
+        bindErrorLabel(confirm_password_error_label, confirm_password_error_icon);
     }
 
-    /**
-     * Binds the visibility and managed properties of an error label and its icon.
-     *
-     * @param errorLabel The Label displaying the error message.
-     * @param errorIcon  The ImageView displaying the error icon.
-     */
-    private void bindErrorLabel(Label errorLabel, ImageView errorIcon) {
-        errorLabel.visibleProperty().bind(errorLabel.textProperty().isNotEmpty());
-        errorLabel.managedProperty().bind(errorLabel.textProperty().isNotEmpty());
-        errorIcon.visibleProperty().bind(errorLabel.textProperty().isNotEmpty());
-        errorIcon.managedProperty().bind(errorLabel.textProperty().isNotEmpty());
+    private void bindErrorLabel(Label error_label, ImageView error_icon) {
+        error_label.visibleProperty().bind(error_label.textProperty().isNotEmpty());
+        error_label.managedProperty().bind(error_label.textProperty().isNotEmpty());
+        error_icon.visibleProperty().bind(error_label.textProperty().isNotEmpty());
+        error_icon.managedProperty().bind(error_label.textProperty().isNotEmpty());
     }
 
-    /**
-     * Handles the registration process when the Register button is clicked or Enter key is pressed.
-     */
     @FXML
     private void handleRegistration() {
-        String username = usernameField.getText().trim();
-        String email = emailField.getText().trim();
-        String password = passwordField.getText();
-        String confirmPassword = confirmPasswordField.getText();
+        String username = username_field.getText().trim();
+        String email = email_field.getText().trim();
+        String password = password_field.getText();
+        String confirm_password = confirm_password_field.getText();
 
         clearErrors();
 
-        boolean hasError = false;
+        boolean has_error = false;
 
-        String usernameValidationResult = validateUsername(username);
-        if (!usernameValidationResult.isEmpty()) {
-            usernameErrorLabel.setText(usernameValidationResult);
-            usernameField.getStyleClass().add("invalid-field");
-            hasError = true;
+        String username_validation_result = validateUsername(username);
+        if (!username_validation_result.isEmpty()) {
+            username_error_label.setText(username_validation_result);
+            username_field.getStyleClass().add("invalid-field");
+            has_error = true;
         }
 
-        String emailValidationResult = validateEmail(email);
-        if (!emailValidationResult.isEmpty()) {
-            emailErrorLabel.setText(emailValidationResult);
-            emailField.getStyleClass().add("invalid-field");
-            hasError = true;
+        String email_validation_result = validateEmail(email);
+        if (!email_validation_result.isEmpty()) {
+            email_error_label.setText(email_validation_result);
+            email_field.getStyleClass().add("invalid-field");
+            has_error = true;
         }
 
-        String passwordValidationResult = validatePassword(password);
-        if (!passwordValidationResult.isEmpty()) {
-            passwordErrorLabel.setText(passwordValidationResult);
-            passwordField.getStyleClass().add("invalid-field");
-            hasError = true;
+        String password_validation_result = validatePassword(password);
+        if (!password_validation_result.isEmpty()) {
+            password_error_label.setText(password_validation_result);
+            password_field.getStyleClass().add("invalid-field");
+            has_error = true;
         }
 
-        String confirmPasswordValidationResult = validateConfirmPassword(password, confirmPassword);
-        if (!confirmPasswordValidationResult.isEmpty()) {
-            confirmPasswordErrorLabel.setText(confirmPasswordValidationResult);
-            confirmPasswordField.getStyleClass().add("invalid-field");
-            hasError = true;
+        String confirm_password_validation_result = validateConfirmPassword(password, confirm_password);
+        if (!confirm_password_validation_result.isEmpty()) {
+            confirm_password_error_label.setText(confirm_password_validation_result);
+            confirm_password_field.getStyleClass().add("invalid-field");
+            has_error = true;
         }
 
-        if (hasError) {
+        if (has_error) {
             return;
         }
 
-        String hashedPassword = hashPassword(password);
-        boolean isRegistered = userService.registerUser(username, email, hashedPassword);
+        String hashed_password = hashPassword(password);
+        boolean is_registered = user_service.registerUser(username, email, hashed_password);
 
-        if (isRegistered) {
-            isAnimating = true;
+        if (is_registered) {
+            is_animating = true;
             animateDotsAndSwitchScene();
         } else {
-            usernameErrorLabel.setText("Registration failed. Username may already exist.");
-            usernameField.getStyleClass().add("invalid-field");
+            username_error_label.setText("Registration failed. Username may already exist.");
+            username_field.getStyleClass().add("invalid-field");
         }
     }
 
-    /**
-     * Clears all error messages and removes the 'invalid-field' style from input fields.
-     */
     private void clearErrors() {
-        usernameErrorLabel.setText("");
-        emailErrorLabel.setText("");
-        passwordErrorLabel.setText("");
-        confirmPasswordErrorLabel.setText("");
+        username_error_label.setText("");
+        email_error_label.setText("");
+        password_error_label.setText("");
+        confirm_password_error_label.setText("");
 
-        usernameField.getStyleClass().remove("invalid-field");
-        emailField.getStyleClass().remove("invalid-field");
-        passwordField.getStyleClass().remove("invalid-field");
-        confirmPasswordField.getStyleClass().remove("invalid-field");
+        username_field.getStyleClass().remove("invalid-field");
+        email_field.getStyleClass().remove("invalid-field");
+        password_field.getStyleClass().remove("invalid-field");
+        confirm_password_field.getStyleClass().remove("invalid-field");
     }
 
-    /**
-     * Validates the username based on defined rules.
-     *
-     * @param username The username to validate.
-     * @return An error message if invalid; otherwise, an empty string.
-     */
     private String validateUsername(String username) {
         if (username.isEmpty()) {
             return "Username is required.";
@@ -211,12 +179,6 @@ public class RegistrationController {
         return "";
     }
 
-    /**
-     * Validates the email format using regex.
-     *
-     * @param email The email address to validate.
-     * @return An error message if invalid; otherwise, an empty string.
-     */
     private String validateEmail(String email) {
         if (email.isEmpty()) {
             return "Email is required.";
@@ -227,12 +189,6 @@ public class RegistrationController {
         return "";
     }
 
-    /**
-     * Validates the password based on defined rules.
-     *
-     * @param password The password to validate.
-     * @return An error message if invalid; otherwise, an empty string.
-     */
     private String validatePassword(String password) {
         if (password.isEmpty()) {
             return "Password is required.";
@@ -246,173 +202,113 @@ public class RegistrationController {
         return "";
     }
 
-    /**
-     * Validates that the confirmation password matches the original password.
-     *
-     * @param password        The original password.
-     * @param confirmPassword The confirmation password.
-     * @return An error message if invalid; otherwise, an empty string.
-     */
-    private String validateConfirmPassword(String password, String confirmPassword) {
-        if (confirmPassword.isEmpty()) {
+    private String validateConfirmPassword(String password, String confirm_password) {
+        if (confirm_password.isEmpty()) {
             return "Confirm Password is required.";
         }
-        if (!password.equals(confirmPassword)) {
+        if (!password.equals(confirm_password)) {
             return "Passwords do not match.";
         }
         return "";
     }
 
-    /**
-     * Hashes the password using SHA-256.
-     *
-     * @param password The plain text password.
-     * @return The hashed password as a hexadecimal string.
-     */
     private static String hashPassword(String password) {
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes("UTF-8"));
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
+            MessageDigest message_digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashed_bytes = message_digest.digest(password.getBytes("UTF-8"));
+            StringBuilder string_builder = new StringBuilder();
+            for (byte b : hashed_bytes) {
+                string_builder.append(String.format("%02x", b));
             }
-            return sb.toString();
+            return string_builder.toString();
         } catch (NoSuchAlgorithmException | IOException e) {
             throw new RuntimeException("Error hashing password", e);
         }
     }
 
-    /**
-     * Handles the Enter key press event to trigger registration.
-     *
-     * @param event The KeyEvent triggered by key press.
-     */
     private void handleEnterKeyPress(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             handleRegistration();
         }
     }
 
-    /**
-     * Handles the Tab key press event to switch scenes if applicable.
-     *
-     * @param event The KeyEvent triggered by key press.
-     */
-    private void handleTabKeyPress(KeyEvent event) {
-        if (event.getCode() == KeyCode.TAB && canSwitch) {
-            Scene currentScene = SceneManager.getInstance().getCurrentScene();
-            Scene buttonScene = this.registerButton.getScene();
-            
-            if (currentScene != null && buttonScene != null && currentScene.getRoot().equals(buttonScene.getRoot())) {
-                if (usernameField.isFocused()) {
-                    passwordField.requestFocus();
-                    event.consume();
-                } else if (passwordField.isFocused()) {
-                    confirmPasswordField.requestFocus();
-                    event.consume();
-                } else {
-                    SceneManager.getInstance().switchToLogin();
-                    event.consume();
-                    canSwitch = false;
-                    cooldown.playFromStart();
-                }
-            }
-        }
-    }
 
-    /**
-     * Switches the scene to the login view.
-     */
+
     @FXML
     private void switchToLoginFXML() {
         SceneManager.getInstance().switchToLogin();
     }
 
-    /**
-     * Validates the email format using regex.
-     *
-     * @param email The email address to validate.
-     * @return True if valid; otherwise, false.
-     */
     private boolean isValidEmail(String email) {
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
-        Pattern pattern = Pattern.compile(emailRegex);
+        String email_regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        Pattern pattern = Pattern.compile(email_regex);
         return pattern.matcher(email).matches();
     }
 
-    /**
-     * Animates the three dots replacing the button's text and then switches to the login scene.
-     * The dots' fill colors change sequentially using shades of grey with varying transparency.
-     */
     private void animateDotsAndSwitchScene() {
-        registerButton.setText("");
+        register_button.setText("");
 
-        Circle dot1 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
-        Circle dot2 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
-        Circle dot3 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
+        Circle dot_1 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
+        Circle dot_2 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
+        Circle dot_3 = new Circle(5, Color.rgb(128, 128, 128, 0.15));
 
-        HBox dotsBox = new HBox(5);
-        dotsBox.setAlignment(Pos.CENTER);
-        dotsBox.getChildren().addAll(dot1, dot2, dot3);
+        HBox dots_box = new HBox(5);
+        dots_box.setAlignment(Pos.CENTER);
+        dots_box.getChildren().addAll(dot_1, dot_2, dot_3);
 
-        registerButton.setGraphic(dotsBox);
+        register_button.setGraphic(dots_box);
 
 
-        Color greyLowOpacity = Color.rgb(128, 128, 128, 0.15);
-        Color greyMediumOpacity = Color.rgb(128, 128, 128, 0.35);
+        Color grey_low_opacity = Color.rgb(128, 128, 128, 0.15);
+        Color grey_medium_opacity = Color.rgb(128, 128, 128, 0.35);
         @SuppressWarnings("unused")
-        Color greyHighOpacity = Color.rgb(128, 128, 128, 0.55);
+        Color grey_high_opacity = Color.rgb(128, 128, 128, 0.55);
 
-        int cycleCount = 2;
+        int cycle_count = 2;
 
-        Duration durationPerCycle = Duration.seconds(0.6);
+        Duration duration_per_cycle = Duration.seconds(0.6);
 
         Timeline timeline = new Timeline();
 
-        for (int cycle = 0; cycle < cycleCount; cycle++) {
-            double timeOffset = cycle * durationPerCycle.toSeconds();
+        for (int cycle = 0; cycle < cycle_count; cycle++) {
+            double time_offset = cycle * duration_per_cycle.toSeconds();
 
-            KeyFrame kf1 = new KeyFrame(Duration.seconds(timeOffset + 0.1),
-                new KeyValue(dot1.fillProperty(), greyMediumOpacity));
+            KeyFrame keyframe_1 = new KeyFrame(Duration.seconds(time_offset + 0.1),
+                new KeyValue(dot_1.fillProperty(), grey_medium_opacity));
 
-            KeyFrame kf1Reset = new KeyFrame(Duration.seconds(timeOffset + 0.3),
-                new KeyValue(dot1.fillProperty(), greyLowOpacity));
+            KeyFrame keyframe_1_reset = new KeyFrame(Duration.seconds(time_offset + 0.3),
+                new KeyValue(dot_1.fillProperty(), grey_low_opacity));
 
-            KeyFrame kf2 = new KeyFrame(Duration.seconds(timeOffset + 0.3),
-                new KeyValue(dot2.fillProperty(), greyMediumOpacity));
+            KeyFrame keyframe_2 = new KeyFrame(Duration.seconds(time_offset + 0.3),
+                new KeyValue(dot_2.fillProperty(), grey_medium_opacity));
 
-            KeyFrame kf2Reset = new KeyFrame(Duration.seconds(timeOffset + 0.5),
-                new KeyValue(dot2.fillProperty(), greyLowOpacity));
+            KeyFrame keyframe_2_reset = new KeyFrame(Duration.seconds(time_offset + 0.5),
+                new KeyValue(dot_2.fillProperty(), grey_low_opacity));
 
-            KeyFrame kf3 = new KeyFrame(Duration.seconds(timeOffset + 0.5),
-                new KeyValue(dot3.fillProperty(), greyMediumOpacity));
+            KeyFrame keyframe_3 = new KeyFrame(Duration.seconds(time_offset + 0.5),
+                new KeyValue(dot_3.fillProperty(), grey_medium_opacity));
 
-            KeyFrame kf3Reset = new KeyFrame(Duration.seconds(timeOffset + 0.7),
-                new KeyValue(dot3.fillProperty(), greyLowOpacity));
+            KeyFrame keyframe_3_reset = new KeyFrame(Duration.seconds(time_offset + 0.7),
+                new KeyValue(dot_3.fillProperty(), grey_low_opacity));
 
-            timeline.getKeyFrames().addAll(kf1, kf1Reset, kf2, kf2Reset, kf3, kf3Reset);
+            timeline.getKeyFrames().addAll(keyframe_1, keyframe_1_reset, keyframe_2, keyframe_2_reset, keyframe_3, keyframe_3_reset);
         }
 
         timeline.setOnFinished(event -> {
-            usernameField.clear();
-            emailField.clear();
-            passwordField.clear();
-            confirmPasswordField.clear();
+            username_field.clear();
+            email_field.clear();
+            password_field.clear();
+            confirm_password_field.clear();
 
-            registerButton.setText("CREATE ACCOUNT");
-            registerButton.setGraphic(null);
+            register_button.setText("CREATE ACCOUNT");
+            register_button.setGraphic(null);
 
             SceneManager.getInstance().switchToLogin();
 
-            isAnimating = false;
+            is_animating = false;
         });
 
         timeline.play();
     }
 
 }
-
-
-
-
