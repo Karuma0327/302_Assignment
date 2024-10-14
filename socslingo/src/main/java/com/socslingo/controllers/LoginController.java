@@ -1,27 +1,23 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import com.socslingo.cache.ImageCache;
-import com.socslingo.managers.SceneManager;
-import com.socslingo.managers.SessionManager;
-import com.socslingo.models.User;
-import com.socslingo.services.UserService;
+import java.security.*;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+
+import com.socslingo.cache.ImageCache;
+import com.socslingo.managers.SceneManager;
+import com.socslingo.managers.SessionManager;
+import com.socslingo.services.UserService;
+import com.socslingo.models.User;
 
 public class LoginController {
 
