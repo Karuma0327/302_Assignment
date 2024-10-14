@@ -12,4 +12,5 @@ English : 4b4b4b
 Japanese : afafaf
 
 Very Light Blue : rgb(241, 251, 255)
-Light Blue : rgb(24, 153, 214)
+Text Blue : rgb(24, 153, 214)
+Border Blue : rgb(132, 216, 255)

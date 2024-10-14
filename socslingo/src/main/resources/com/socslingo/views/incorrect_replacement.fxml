@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.StackPane?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER">
+    <children>
+        <StackPane alignment="CENTER" styleClass="activity-skip-button-stackpane-type-hover">
+            <children>
+                <Circle fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <ImageView fitHeight="60.0" fitWidth="60.0">
+                    <image>
+                        <Image url="@../images/incorrect.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </StackPane>
+    </children>
+</VBox>

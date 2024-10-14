@@ -217,11 +217,6 @@ public class DeckPreviewController implements Initializable {
         return flashcards.stream().anyMatch(flashcard -> flashcard.getId() == flashcard_id);
     }
 
-    /**
-     * Sets the deck to be previewed.
-     *
-     * @param deck The Deck object to preview.
-     */
     public void setDeck(Deck deck) {
         this.current_deck = deck;
         deck_name_label.setText(deck.getDeckName());
@@ -245,9 +240,6 @@ public class DeckPreviewController implements Initializable {
         }
     }
 
-    /**
-     * Enters edit mode by showing the TextField and hiding the Label.
-     */
     private void enterEditMode() {
         deck_name_label.setVisible(false);
         deck_name_text_field.setVisible(true);
@@ -263,10 +255,6 @@ public class DeckPreviewController implements Initializable {
         });
     }
 
-    /**
-     * Exits edit mode by hiding the TextField and showing the Label.
-     * Also saves the new deck name to the database if it has changed.
-     */
     private void exitEditMode() {
         String new_deck_name = deck_name_text_field.getText().trim();
         if (!new_deck_name.isEmpty() && !new_deck_name.equals(current_deck.getDeckName())) {
@@ -294,11 +282,6 @@ public class DeckPreviewController implements Initializable {
         deck_name_text_field.textProperty().removeListener(text_change_listener);
     }
 
-    /**
-     * Displays the specified flashcard.
-     *
-     * @param flashcard The Flashcard to display.
-     */
     private void displayFlashcard(Flashcard flashcard) {
         front_label.setText(flashcard.getFront());
         back_label.setText(flashcard.getBack());
@@ -343,11 +326,6 @@ public class DeckPreviewController implements Initializable {
         });
     }
 
-    /**
-     * Handles the action for the "Next" button.
-     *
-     * @param event The ActionEvent triggered by clicking the "Next" button.
-     */
     @FXML
     private void handleNextFlashcardAction(ActionEvent event) {
         if (flashcards != null && !flashcards.isEmpty()) {
@@ -356,11 +334,6 @@ public class DeckPreviewController implements Initializable {
         }
     }
 
-    /**
-     * Handles the action for the "Previous" button.
-     *
-     * @param event The ActionEvent triggered by clicking the "Previous" button.
-     */
     @FXML
     private void handlePreviousFlashcardAction(ActionEvent event) {
         if (flashcards != null && !flashcards.isEmpty()) {
@@ -369,11 +342,6 @@ public class DeckPreviewController implements Initializable {
         }
     }
 
-    /**
-     * Handles the action for the "Back to Deck Management" button.
-     *
-     * @param event The ActionEvent triggered by clicking the button.
-     */
     @FXML
     private void handleBackToDeckManagement(ActionEvent event) {
         try {
@@ -396,12 +364,6 @@ public class DeckPreviewController implements Initializable {
         }
     }
 
-    /**
-     * Utility method to display alerts.
-     *
-     * @param alertType Type of the alert.
-     * @param message   Message to display.
-     */
     private void showAlert(Alert.AlertType alert_type, String message) {
         logger.debug("Displaying alert of type '{}' with message: {}", alert_type, message);
         Alert alert = new Alert(alert_type);
@@ -410,13 +372,6 @@ public class DeckPreviewController implements Initializable {
         logger.debug("Alert displayed");
     }
 
-    /**
-     * Helper method to determine if a node is a descendant of another node.
-     *
-     * @param parent The potential ancestor node.
-     * @param child  The node to check.
-     * @return True if 'child' is a descendant of 'parent', false otherwise.
-     */
     private boolean isDescendant(Node parent, Node child) {
         while (child != null) {
             if (child == parent) {

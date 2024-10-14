@@ -13,8 +13,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stack_pane" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
-    <BorderPane fx:id="root_pane" styleClass="based-background">
+<StackPane fx:id="stack_pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
+    <BorderPane fx:id="root_pane" styleClass="based-background"  maxWidth="Infinity" maxHeight="Infinity"> 
         <left>
             <VBox fx:id="left_sidebar" alignment="CENTER" maxWidth="250" onMouseClicked="#handleSidebarMouseClicked" spacing="10" styleClass="left-sidebar-column">
                 <children>
@@ -105,7 +105,7 @@
         
         <center>
             <!-- Dynamic Content Area -->
-            <VBox fx:id="content_area" alignment="CENTER" styleClass="middle-column">
+            <VBox VBox.vgrow="ALWAYS" fx:id="content_area" maxHeight="Infinity" maxWidth="Infinity" styleClass="middle-column">
                 <!-- Initial Content Can Be Loaded Here -->
             </VBox>
         </center>

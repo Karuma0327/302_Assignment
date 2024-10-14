@@ -33,17 +33,24 @@
     src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
 }
 
+
 /* StackPane Hover Styles */
 .activity-button-stackpane-type-hover:hover .activity-button--large-type-hover,
 .activity-button-stackpane-type-hover:hover .activity-button--medium-type-hover,
-.activity-button-stackpane-type-hover:hover .activity-button--small-type-hover {
-    -fx-background-color: #e5e5e5;
-    -fx-border-color: #cecece;
+.activity-button-stackpane-type-hover:hover .activity-button--small-type-hover,
+.activity-skip-button-stackpane-type-hover:hover .activity-skip-button--large-type-hover,
+.activity-skip-button-stackpane-type-hover:hover .activity-skip-button--medium-type-hover,
+.activity-skip-button-stackpane-type-hover:hover .activity-skip-button--small-type-hover {
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-border-color: rgb(206, 206, 206);
 }
 
 .activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--large-type-hover,
 .activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--medium-type-hover,
-.activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--small-type-hover {
+.activity-button-stackpane-type-hover:hover .activity-button__background-rectangle--small-type-hover,
+.activity-skip-button-stackpane-type-hover:hover .activity-skip-button__background-rectangle--large-type-hover,
+.activity-skip-button-stackpane-type-hover:hover .activity-skip-button__background-rectangle--medium-type-hover,
+.activity-skip-button-stackpane-type-hover:hover .activity-skip-button__background-rectangle--small-type-hover {
     -fx-fill: #cecece;
 }
 
@@ -53,6 +60,11 @@
 .activity-button-stackpane-type-hover:pressed .activity-button__label--large-type-hover,
 .activity-button-stackpane-type-hover:pressed .activity-button__label--medium-type-hover,
 .activity-button-stackpane-type-hover:pressed .activity-button__label--small-type-hover,
+.activity-skip-button-stackpane-type-hover:pressed .activity-skip-button--large-type-hover,
+.activity-skip-button-stackpane-type-hover:pressed .activity-skip-button--medium-type-hover,
+.activity-skip-button-stackpane-type-hover:pressed .activity-skip-button--small-type-hover,
+.activity-skip-button-stackpane-type-hover:pressed .activity-skip-button__label--large-type-hover,
+.activity-skip-button-stackpane-type-hover:pressed .activity-skip-button__label--medium-type-hover,
 .activity-button-stackpane-type-default:pressed .activity-button--large-type-default,
 .activity-button-stackpane-type-default:pressed .activity-button--medium-type-default,
 .activity-button-stackpane-type-default:pressed .activity-button--small-type-default,
@@ -62,66 +74,168 @@
     -fx-translate-y: 0;
 }
 
-
 .activity-button-stackpane-type-pressed:pressed .activity-button--large-type-pressed,
 .activity-button-stackpane-type-pressed:pressed .activity-button--medium-type-pressed,
-.activity-button-stackpane-type-pressed:pressed .activity-button--small-type-pressed{
+.activity-button-stackpane-type-pressed:pressed .activity-button--small-type-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button--large-type-correct-answer-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button--medium-type-correct-answer-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button--small-type-correct-answer-pressed {
     -fx-translate-y: 0;
-
 }
+
 .activity-button-stackpane-type-pressed:pressed .activity-button__label--large-type-pressed,
 .activity-button-stackpane-type-pressed:pressed .activity-button__label--medium-type-pressed,
-.activity-button-stackpane-type-pressed:pressed .activity-button__label--small-type-pressed {
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--small-type-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--large-type-correct-answer-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--medium-type-correct-answer-pressed,
+.activity-button-stackpane-type-pressed:pressed .activity-button__label--small-type-correct-answer-pressed {
 
     -fx-translate-y: 0;
-    -fx-background-color: rgb(240, 250, 255);
-    -fx-pref-width: 146px;
-    -fx-pref-height: 41px;
-    -fx-background-radius: 12px;
-}
-
-.activity-button--large-type-pressed:selected {
-    -fx-background-color: rgb(240, 250, 255);
 }
 
 
-.activity-button__label--large-type-pressed {
-    -fx-font-size: 15px;
+.activity-toggle-button-stackpane:pressed .activity-toggle-button-unselected-state-pressed {
+        -fx-background-color: #ffffff;
+        -fx-text-fill: #4b4b4b;
+        -fx-pref-width: 255px;
+        -fx-pref-height: 72px;
+        -fx-border-color: #e5e5e5;
+        -fx-border-width: 2px;
+        -fx-border-radius: 12px;
+        -fx-background-radius: 12px;
+        -fx-font-size: 19px;
+        -fx-font-family: 'DINRoundPro-Bold';
+        -fx-cursor: hand;
+        -fx-background-insets: 1 0 1 0;
+        -fx-border-insets: 0 -1 0 -1;
+        -fx-translate-y: 0;
+
+}
+
+
+
+
+.activity-toggle-button-stackpane:pressed .activity-toggle-button-label-unselected-state-pressed {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
     -fx-font-family: 'DINRoundPro-Bold';
-    -fx-text-fill: #4b4b4b;
-    -fx-translate-y: -2;
     -fx-pref-width: 146px;
     -fx-pref-height: 41px;
     -fx-cursor: hand;
     -fx-alignment: center;
-    -fx-background-color: transparent; /* No background by default */
     -fx-background-radius: 12px;
 }
 
-.activity-button__label--large-type-pressed:pressed { 
-    -fx-background-color: rgb(240, 250, 255);
-    -fx-font-size: 15px;
+/* The label default state when the toggle button is not pressed and unselected */
+.activity-toggle-button-label-unselected-state-unpressed {
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
     -fx-pref-width: 146px;
+    -fx-border-width: 0;
     -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
     -fx-background-radius: 12px;
-
 }
 
-
-
-
-
-.label-active {
+.activity-toggle-button-label-unselected-state-pressed {
+    -fx-font-size: 19px;
     -fx-background-color: rgb(240, 250, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'DINRoundPro-Bold';
     -fx-pref-width: 146px;
     -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
     -fx-background-radius: 12px;
-    -fx-text-fill: rgb(24, 153, 214);
 }
 
-.activity-button--large-type-pressed {
+
+/* The label state when the toggle button is pressed down but not toggled */
+.activity-toggle-button-label-unselected-state-pressed {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+
+/* The label state when the button is fully toggled */
+.activity-toggle-button-label-selected-state-unpressed {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-translate-y: -2;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.activity-toggle-button-label-selected-state-unpressed {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-translate-y: -2;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+/* The label when the toggle button is pressed down and is already toggled on */
+.activity-toggle-button-label-selected-state-pressed {
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-font-size: 19px;
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-translate-y: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.activity-toggle-button-selected-animation-in-progress-state,
+.activity-toggle-button-unselected-state-unpressed{
     -fx-background-color: #ffffff;
     -fx-text-fill: #4b4b4b;
     -fx-pref-width: 255px;
@@ -130,7 +244,7 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
@@ -138,10 +252,63 @@
     -fx-translate-y: -2;
 }
 
-.activity-button--large-type-pressed:selected {
-    -fx-background-color: rgb(240, 250, 255);
+
+.activity-toggle-button-unselected-state-pressed{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
 }
-.activity-button__background-rectangle--large-type-pressed {
+.activity-toggle-button-selected-state-unpressed-border,
+.activity-toggle-button-selected-state-unpressed {
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-toggle-button-selected-state-pressed {
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
+}
+
+
+
+.activity-toggle-button-background-rectangle-unselected-state-unpressed,
+.activity-toggle-button-background-rectangle-unselected-state-pressed,
+.activity-toggle-button-background-rectangle-selected-animation-in-progress-state {
     -fx-fill: #e5e5e5;
     -fx-arc-width: 24;
     -fx-arc-height: 24;
@@ -151,8 +318,184 @@
     -fx-stroke-width: 1px;
 }
 
+.activity-toggle-button-background-rectangle-selected-state-unpressed,
+.activity-toggle-button-background-rectangle-selected-state-pressed {
+    -fx-fill: rgb(132, 216, 255);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(132, 216, 255);
+    -fx-stroke-width: 1px;
+}
+
+.activity-correct-response-toggle-button-stackpane:pressed .activity-correct-response-toggle-button,
+.activity-correct-response-toggle-button-stackpane:pressed .activity-correct-response-toggle-button-label {
+    -fx-translate-y: 0;
+
+}
+
+.activity-correct-response-toggle-button{
+        -fx-background-color: rgb(215, 255, 184);
+        -fx-text-fill: rgb(165, 237, 110);
+        -fx-pref-width: 255px;
+        -fx-pref-height: 72px;
+        -fx-border-color: rgb(165, 237, 110);;
+        -fx-border-width: 2px;
+        -fx-border-radius: 12px;
+        -fx-background-radius: 12px;
+        -fx-font-size: 19px;
+        -fx-font-family: 'DINRoundPro-Bold';
+        -fx-cursor: hand;
+        -fx-background-insets: 1 0 1 0;
+        -fx-border-insets: 0 -1 0 -1;
+        -fx-translate-y: -2;
+}
+.activity-correct-response-toggle-button-pressed {
+    -fx-background-color: rgb(215, 255, 184);
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(165, 237, 110);
+    
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
+}
+.activity-correct-response-toggle-button-label{
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(215, 255, 184);
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(165, 237, 110);        
+    -fx-translate-y: -2;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.activity-correct-response-toggle-button-label-pressed{
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(215, 255, 184);
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(165, 237, 110);
+    -fx-translate-y: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.activity-correct-response-toggle-button-background-rectangle{
+    -fx-fill: rgb(165, 237, 110);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(165, 237, 110);
+    -fx-stroke-width: 1px;
+}
 
 
+.activity-button__background-rectangle--large-type-correct-answer-pressed {
+    -fx-fill: rgb(165, 237, 110);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(165, 237, 110);
+    -fx-stroke-width: 1px;
+}
+
+.activity-button__label--large-type-correct-answer-pressed {
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+
+.activity-button--large-type-correct-answer-pressed {
+    -fx-background-color: rgb(215, 255, 184);
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(165, 237, 110);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button--large-type-incorrect-answer-pressed {
+    -fx-background-color: rgb(255, 223, 224);
+    -fx-text-fill: rgb(255, 0, 0);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(255, 178, 178);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-button__background-rectangle--large-type-incorrect-answer-pressed {
+    -fx-fill: rgb(255, 178, 178);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(255, 178, 178);
+    -fx-stroke-width: 1px;
+}
+
+.activity-button__label--large-type-incorrect-answer-pressed {
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(238, 75, 75);
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
 
 /* Block: activity-button */
 .activity-button__background-rectangle--large-type-default {
@@ -165,12 +508,13 @@
     -fx-stroke-width: 1px;
 }
 
+
 .activity-button__label--large-type-default {
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: #4b4b4b;
     -fx-translate-y: -2;
-    -fx-pref-width: 128x;
+    -fx-pref-width: 128px;
     -fx-pref-height: 36px;
     -fx-cursor: hand;
     -fx-alignment: center;
@@ -185,7 +529,7 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
@@ -204,11 +548,11 @@
 }
 
 .activity-button__label--large-type-hover {
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: #4b4b4b;
     -fx-translate-y: -2;
-    -fx-pref-width: 128x;
+    -fx-pref-width: 128px;
     -fx-pref-height: 36px;
     -fx-cursor: hand;
     -fx-alignment: center;
@@ -223,7 +567,7 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
@@ -243,7 +587,7 @@
 }
 
 .activity-button__label--medium-type-default {
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: #4b4b4b;
     -fx-translate-y: -2;
@@ -262,7 +606,7 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
@@ -289,7 +633,7 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
@@ -298,7 +642,7 @@
 }
 
 .activity-button__label--medium-type-hover {
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: #4b4b4b;
     -fx-translate-y: -2;
@@ -307,6 +651,212 @@
     -fx-cursor: hand;
     -fx-alignment: center;
 }
+
+
+.activity-skip-button__background-rectangle--medium-type-hover {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-skip-button__label--medium-type-hover {
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINNextW10-Bold';
+    -fx-text-fill: rgb(158, 158, 158);
+    -fx-translate-y: -2;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-skip-button--medium-type-hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: rgb(158, 158, 158);
+
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-continue-button-stackpane-type-correct-hover:hover .activity-continue-button--medium-type-correct-hover {
+    -fx-background-color: rgb(134, 219, 70);
+
+    -fx-border-color: rgb(119, 179, 56);
+}
+
+.activity-continue-button-stackpane-type-correct-hover:pressed .activity-continue-button--medium-type-correct-hover,
+.activity-continue-button-stackpane-type-correct-hover:pressed .activity-continue-button__label--medium-type-correct-hover {
+    -fx-translate-y: 0;
+}
+
+.activity-continue-button__background-rectangle--medium-type-correct-hover {
+    -fx-fill: rgb(108, 163, 51);
+    -fx-arc-width: 36;
+    -fx-arc-height: 36;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+
+}
+
+.activity-continue-button-stackpane-type-correct-hover:hover .activity-continue-button__background-rectangle--medium-type-correct-hover {
+    -fx-fill: rgb(119, 179, 56);
+}
+
+.activity-continue-button__label--medium-type-correct-hover {
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINNextW10-Bold';
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-translate-y: -4;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-continue-button--medium-type-correct-hover {
+    -fx-background-color: rgb(122, 199, 64);
+    -fx-text-fill: #ffffff;
+
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-width: 0;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-translate-y: -4;
+}
+
+.activity-continue-button--medium-type-correct-hover:hover {
+    -fx-background-color: rgb(134, 219, 70);
+    -fx-border-color: rgb(119, 179, 56);
+}
+
+
+.activity-continue-button-stackpane-type-incorrect-hover:hover .activity-continue-button--medium-type-incorrect-hover {
+    -fx-background-color: rgb(253, 102, 90);
+    -fx-border-color: rgb(253, 102, 90);
+}
+
+.activity-continue-button-stackpane-type-incorrect-hover:pressed .activity-continue-button--medium-type-incorrect-hover,
+.activity-continue-button-stackpane-type-incorrect-hover:pressed .activity-continue-button__label--medium-type-incorrect-hover {
+    -fx-translate-y: 0;
+}
+
+.activity-continue-button__background-rectangle--medium-type-incorrect-hover {
+    -fx-fill: rgb(188, 82, 64);
+    -fx-arc-width: 36;
+    -fx-arc-height: 36;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+
+}
+
+.activity-continue-button-stackpane-type-incorrect-hover:hover .activity-continue-button__background-rectangle--medium-type-incorrect-hover {
+    -fx-fill: rgb(231, 76, 60);
+}
+
+.activity-continue-button__label--medium-type-incorrect-hover {
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINNextW10-Bold';
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-translate-y: -4;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-continue-button--medium-type-incorrect-hover {
+    -fx-background-color: rgb(208, 104, 89);
+    -fx-text-fill: #ffffff;
+
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-width: 0;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-translate-y: -4;
+}
+
+.activity-continue-button--medium-type-incorrect-hover:hover {
+    -fx-background-color: rgb(253, 102, 90);
+    -fx-border-color: rgb(231, 76, 60);
+}
+
+
+.activity-button-stackpane-type-check-answer-unclickable {
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-border-width: 0px;
+}
+
+
+.activity-button__background-rectangle--medium-type-check-answer-unclickable {
+    -fx-fill: rgb(229, 229, 229);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-button__label--medium-type-check-answer-unclickable {
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(74, 74, 74);
+    -fx-translate-y: 0;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-width: 0px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-button--medium-type-check-answer-unclickable {
+
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-width: 0px;
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-translate-y: 0;
+}
+
+
+
 
 .activity-button--small-type-default {
     -fx-background-color: #ffffff;
@@ -317,13 +867,14 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
     -fx-border-insets: 0 -1 0 -1;
     -fx-translate-y: -2;
 }
+
 
 .activity-button__background-rectangle--small-type-default {
     -fx-fill: #e5e5e5;
@@ -344,10 +895,85 @@
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-    -fx-font-size: 15px;
+    -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
     -fx-border-insets: 0 -1 0 -1;
     -fx-translate-y: -2;
+}
+
+.exit-button {
+    -fx-background-color: transparent;
+
+}
+
+.activity-select-matching-pairs-title {
+    -fx-font-size: 36px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(60, 60, 60);
+}
+
+
+.bottom-section-neutral {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 2, 0, 0, 0;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.bottom-section-incorrect {
+    -fx-background-color: rgb(242, 224, 224);
+    -fx-border-width: 2, 0, 0, 0;
+    -fx-border-color: rgb(242, 224, 224);
+}
+
+.bottom-section-correct {
+    -fx-background-color: rgb(227, 250, 197);
+    -fx-border-width: 2, 0, 0, 0;
+    -fx-border-color: rgb(227, 250, 197);
+}
+
+
+
+
+
+.custom-progress-bar {
+    -fx-pref-height: 25px;
+    /* Adjust the height */
+    -fx-background-color: rgb(229, 229, 229);
+    /* Track color */
+    -fx-accent: rgb(122, 199, 64);
+    /* Progress bar color */
+    -fx-background-radius: 12.5px;
+    /* Rounded corners for the track */
+    -fx-padding: 2px;
+    /* Padding around the track */
+    -fx-border-width: 0px;
+    /* No border */
+}
+
+.custom-progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #76c7c0, #4caf50);
+    /* Gradient for progress */
+    -fx-background-radius: 12.5px;
+    /* Rounded corners for the bar */
+}
+
+.custom-progress-bar .track {
+    -fx-background-color: #d3d3d3;
+    /* Slightly darker track */
+    -fx-background-radius: 12.5px;
+    /* Rounded corners for the track */
+}
+
+
+
+/* styles.css */
+.animated-button {
+    -fx-background-color: transparent;
+    /* Transparent to let the animated background show */
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }

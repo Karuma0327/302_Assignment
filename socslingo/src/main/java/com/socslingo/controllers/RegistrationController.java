@@ -1,22 +1,30 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.security.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
-import javafx.animation.*;
+import com.socslingo.managers.SceneManager;
+import com.socslingo.services.UserService;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-
-import com.socslingo.managers.SceneManager;
-import com.socslingo.services.UserService;
 
 
 public class RegistrationController {

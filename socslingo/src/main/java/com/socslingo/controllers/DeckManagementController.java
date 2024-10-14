@@ -72,10 +72,6 @@ public class DeckManagementController implements Initializable {
         LOGGER.info("DeckManagementController initialized successfully");
     }
 
-    /**
-     * Adds a global mouse click listener to the scene to handle deselection
-     * when clicking outside the decksListView and interactive controls.
-     */
     private void addGlobalClickListener() {
         decks_list_view.sceneProperty().addListener((obs, old_scene, new_scene) -> {
             if (new_scene != null) {
@@ -98,13 +94,6 @@ public class DeckManagementController implements Initializable {
         });
     }
 
-    /**
-     * Helper method to determine if 'child' is a descendant of 'parent'.
-     *
-     * @param parent The potential ancestor node.
-     * @param child  The node to check.
-     * @return True if 'child' is a descendant of 'parent', false otherwise.
-     */
     private boolean isDescendant(Node parent, Node child) {
         if (child == null) return false;
         Node current = child;
@@ -115,13 +104,6 @@ public class DeckManagementController implements Initializable {
         return false;
     }
 
-    /**
-     * Helper method to determine if the clicked node is part of an interactive control.
-     * You can expand this method to include other interactive controls as needed.
-     *
-     * @param node The node that was clicked.
-     * @return True if the node is part of an interactive control, false otherwise.
-     */
     private boolean isDescendantOfInteractiveControl(Node node) {
         if (node == null) return false;
         Node current = node;

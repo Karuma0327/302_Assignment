@@ -6,23 +6,29 @@ import org.slf4j.LoggerFactory;
 public class CharacterRecognition {
     private static final Logger logger = LoggerFactory.getLogger(CharacterRecognition.class);
 
-    private final String katakana;
-    private final String hiragana;
+    private final int activityId;
+    private final String characterType; // "Hiragana", "Katakana", or "Kanji"
+    private final String character;     // The character itself
     private final String romaji;
 
-    public CharacterRecognition(String katakana, String hiragana, String romaji) {
-        this.katakana = katakana;
-        this.hiragana = hiragana;
+    public CharacterRecognition(int activityId, String characterType, String character, String romaji) {
+        this.activityId = activityId;
+        this.characterType = characterType;
+        this.character = character;
         this.romaji = romaji;
-        logger.info("LanguageCharacter created: {}", this);
+        logger.info("CharacterRecognition created: {}", this);
     }
 
-    public String getKatakana() {
-        return katakana;
+    public int getActivityId() {
+        return activityId;
     }
 
-    public String getHiragana() {
-        return hiragana;
+    public String getCharacterType() {
+        return characterType;
+    }
+
+    public String getCharacter() {
+        return character;
     }
 
     public String getRomaji() {
@@ -31,9 +37,10 @@ public class CharacterRecognition {
 
     @Override
     public String toString() {
-        return "LanguageCharacter{" +
-                "katakana='" + katakana + '\'' +
-                ", hiragana='" + hiragana + '\'' +
+        return "CharacterRecognition{" +
+                "activityId=" + activityId +
+                ", characterType='" + characterType + '\'' +
+                ", character='" + character + '\'' +
                 ", romaji='" + romaji + '\'' +
                 '}';
     }

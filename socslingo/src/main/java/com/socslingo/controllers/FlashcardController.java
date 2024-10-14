@@ -1,20 +1,26 @@
 package com.socslingo.controllers;
 
-import com.socslingo.models.*;
-import com.socslingo.services.*;
-import com.socslingo.utils.DateUtils;
-import com.socslingo.managers.SessionManager;
+import java.util.List;
 
-import javafx.animation.*;
-import javafx.fxml.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.socslingo.managers.SessionManager;
+import com.socslingo.models.Flashcard;
+import com.socslingo.services.FlashcardService;
+import com.socslingo.utils.DateUtils;
+
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-
-import org.slf4j.*;
-
-import java.util.*;
 
 public class FlashcardController {
 

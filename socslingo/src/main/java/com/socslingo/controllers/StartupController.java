@@ -5,7 +5,6 @@ package com.socslingo.controllers;
 
 
 import javafx.fxml.FXML;
-
 import javafx.scene.image.ImageView;
 
 

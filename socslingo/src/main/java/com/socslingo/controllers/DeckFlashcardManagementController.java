@@ -100,13 +100,6 @@ public class DeckFlashcardManagementController implements Initializable {
         LOGGER.info("FlashcardManagementController initialized successfully");
     }
 
-    /**
-     * Initializes drag-and-drop functionality between two ListViews.
-     *
-     * @param source The source ListView from which items are dragged.
-     * @param target The target ListView to which items are dropped.
-     * @param isAdding If true, dragging from available to deck; else, dragging from deck to available.
-     */
     private void initializeDragAndDrop(ListView<Flashcard> source, ListView<Flashcard> target, boolean isAdding) {
         source.setOnDragDetected(event -> {
             Flashcard selected_flashcard = source.getSelectionModel().getSelectedItem();
@@ -164,13 +157,6 @@ public class DeckFlashcardManagementController implements Initializable {
         });
     }
 
-    /**
-     * Finds a Flashcard by its ID in a given list.
-     *
-     * @param list The list to search.
-     * @param id The ID of the flashcard.
-     * @return The Flashcard object if found; otherwise, null.
-     */
     private Flashcard findFlashcardById(List<Flashcard> list, int id) {
         for (Flashcard fc : list) {
             if (fc.getId() == id) {
@@ -180,11 +166,6 @@ public class DeckFlashcardManagementController implements Initializable {
         return null;
     }
 
-    /**
-     * Handles adding a flashcard to the deck via drag-and-drop.
-     *
-     * @param flashcard The flashcard to add.
-     */
     private void handleDragAddFlashcardToDeck(Flashcard flashcard) {
         try {
             boolean success = deck_service.addFlashcardToDeck(current_deck.getDeckId(), flashcard.getId());
@@ -203,11 +184,6 @@ public class DeckFlashcardManagementController implements Initializable {
         }
     }
 
-    /**
-     * Handles removing a flashcard from the deck via drag-and-drop.
-     *
-     * @param flashcard The flashcard to remove.
-     */
     private void handleDragRemoveFlashcardFromDeck(Flashcard flashcard) {
         try {
             boolean success = deck_service.removeFlashcardFromDeck(current_deck.getDeckId(), flashcard.getId());

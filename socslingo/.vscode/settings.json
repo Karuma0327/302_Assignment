@@ -27,4 +27,5 @@
         }
     },
     "maven.view": "flat",
+    "css.lint.vendorPrefix": "ignore",
 }

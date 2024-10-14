@@ -17,14 +17,12 @@ public class DatabaseController {
         String folder_path = "src/main/database";
         String database_path = folder_path + "/socslingo_database.db";
 
-        // Create the database folder if it doesn't exist
         File folder = new File(folder_path);
         if (!folder.exists()) {
             folder.mkdirs();
             logger.info("Database folder created at: " + folder_path);
         }
 
-        // Check if the database file exists
         File database_file = new File(database_path);
         if (database_file.exists()) {
             try (Scanner scanner = new Scanner(System.in)) {
@@ -46,7 +44,7 @@ public class DatabaseController {
 
         String database_url = "jdbc:sqlite:" + database_path;
 
-        // Updated user_table_sql to include profile_banner_path
+        // Existing Tables
         String user_table_sql = "CREATE TABLE IF NOT EXISTS user_table (\n"
                 + " user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " username TEXT NOT NULL UNIQUE,\n"
@@ -58,7 +56,6 @@ public class DatabaseController {
                 + " FOREIGN KEY (pet_id) REFERENCES pet_table(pet_id)\n"
                 + ");";
 
-        // Existing Tables
         String pet_table_sql = "CREATE TABLE IF NOT EXISTS pet_table (\n"
                 + " pet_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " pet_name TEXT NOT NULL,\n"
@@ -163,6 +160,16 @@ public class DatabaseController {
                 + " created_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n"
                 + ");";
 
+        // 7. Word Recognition Activities Table (New)
+        String word_recognition_activities_table_sql = "CREATE TABLE IF NOT EXISTS word_recognition_activities_table (\n"
+                + " activity_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + " word_type TEXT NOT NULL CHECK (word_type IN ('Noun', 'Verb', 'Adjective', 'Adverb', 'Phrase')),\n"
+                + " word TEXT NOT NULL,\n"
+                + " meaning TEXT NOT NULL,\n"
+                + " romaji TEXT,\n"  // Optional: Include romaji if applicable
+                + " created_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n"
+                + ");";
+
         try {
             Class.forName("org.sqlite.JDBC");
 
@@ -188,6 +195,9 @@ public class DatabaseController {
                 // Execute new Character Recognition Activities table creation
                 statement.execute(character_recognition_activities_table_sql);
 
+                // Execute new Word Recognition Activities table creation
+                statement.execute(word_recognition_activities_table_sql);
+
                 // Optionally, create indexes for optimization
                 String index_conversation_user_id = "CREATE INDEX IF NOT EXISTS idx_conversation_user_id ON conversation_statistics(user_id);";
                 String index_flashcard_user_id = "CREATE INDEX IF NOT EXISTS idx_flashcard_user_id ON flashcard_statistics(user_id);";
@@ -202,6 +212,10 @@ public class DatabaseController {
                 // Create index on character_type for faster queries
                 String index_character_type = "CREATE INDEX IF NOT EXISTS idx_character_recognition_type ON character_recognition_activities_table(character_type);";
                 statement.execute(index_character_type);
+
+                // Create index on word_type for word recognition activities
+                String index_word_type = "CREATE INDEX IF NOT EXISTS idx_word_recognition_type ON word_recognition_activities_table(word_type);";
+                statement.execute(index_word_type);
 
                 logger.info("Database and all tables created successfully.");
             }
@@ -264,9 +278,143 @@ public class DatabaseController {
         }
     }
 
+    // New: Insert all Hiragana and Katakana characters
+    public static void insertAllHiraganaAndKatakana() {
+        String database_path = "src/main/database/socslingo_database.db";
+        String database_url = "jdbc:sqlite:" + database_path;
+
+        // All Hiragana characters
+        String[] hiragana = {
+            "あ","い","う","え","お",
+            "か","き","く","け","こ",
+            "さ","し","す","せ","そ",
+            "た","ち","つ","て","と",
+            "な","に","ぬ","ね","の",
+            "は","ひ","ふ","へ","ほ",
+            "ま","み","む","め","も",
+            "や","ゆ","よ",
+            "ら","り","る","れ","ろ",
+            "わ","を","ん"
+        };
+
+        // All Katakana characters
+        String[] katakana = {
+            "ア","イ","ウ","エ","オ",
+            "カ","キ","ク","ケ","コ",
+            "サ","シ","ス","セ","ソ",
+            "タ","チ","ツ","テ","ト",
+            "ナ","ニ","ヌ","ネ","ノ",
+            "ハ","ヒ","フ","ヘ","ホ",
+            "マ","ミ","ム","メ","モ",
+            "ヤ","ユ","ヨ",
+            "ラ","リ","ル","レ","ロ",
+            "ワ","ヲ","ン"
+        };
+
+        // Romaji mapping for Hiragana
+        String[] hiraganaRomaji = {
+            "a","i","u","e","o",
+            "ka","ki","ku","ke","ko",
+            "sa","shi","su","se","so",
+            "ta","chi","tsu","te","to",
+            "na","ni","nu","ne","no",
+            "ha","hi","fu","he","ho",
+            "ma","mi","mu","me","mo",
+            "ya","yu","yo",
+            "ra","ri","ru","re","ro",
+            "wa","wo","n"
+        };
+
+        // Romaji mapping for Katakana
+        String[] katakanaRomaji = {
+            "a","i","u","e","o",
+            "ka","ki","ku","ke","ko",
+            "sa","shi","su","se","so",
+            "ta","chi","tsu","te","to",
+            "na","ni","nu","ne","no",
+            "ha","hi","fu","he","ho",
+            "ma","mi","mu","me","mo",
+            "ya","yu","yo",
+            "ra","ri","ru","re","ro",
+            "wa","wo","n"
+        };
+
+        // Building the SQL insert statements
+        StringBuilder insertHiragana = new StringBuilder("INSERT INTO character_recognition_activities_table (character_type, character, romaji) VALUES ");
+        for (int i = 0; i < hiragana.length; i++) {
+            insertHiragana.append("('Hiragana', '").append(hiragana[i]).append("', '").append(hiraganaRomaji[i]).append("'),");
+        }
+        // Remove the last comma
+        insertHiragana.setLength(insertHiragana.length() - 1);
+        insertHiragana.append(";");
+
+        StringBuilder insertKatakana = new StringBuilder("INSERT INTO character_recognition_activities_table (character_type, character, romaji) VALUES ");
+        for (int i = 0; i < katakana.length; i++) {
+            insertKatakana.append("('Katakana', '").append(katakana[i]).append("', '").append(katakanaRomaji[i]).append("'),");
+        }
+        // Remove the last comma
+        insertKatakana.setLength(insertKatakana.length() - 1);
+        insertKatakana.append(";");
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+
+            try (Connection connection = DriverManager.getConnection(database_url);
+                 Statement statement = connection.createStatement()) {
+                 
+                // Disable auto-commit for batch insertion
+                connection.setAutoCommit(false);
+
+                // Insert Hiragana characters
+                statement.executeUpdate(insertHiragana.toString());
+                logger.info("All Hiragana characters inserted successfully.");
+
+                // Insert Katakana characters
+                statement.executeUpdate(insertKatakana.toString());
+                logger.info("All Katakana characters inserted successfully.");
+
+                // Commit the transaction
+                connection.commit();
+            } catch (SQLException e) {
+                logger.error("SQL error during character insertion: " + e.getMessage(), e);
+            }
+        } catch (ClassNotFoundException e) {
+            logger.error("SQLite JDBC driver not found.", e);
+        }
+    }
+
+    // Optional: Insert sample word recognition activities for testing
+    public static void insertSampleWordRecognitions() {
+        String database_path = "src/main/database/socslingo_database.db";
+        String database_url = "jdbc:sqlite:" + database_path;
+
+        String insert_word_recognition_sql = "INSERT INTO word_recognition_activities_table (word_type, word, meaning, romaji) VALUES "
+                + "('Noun', '猫', 'Cat', 'neko'),"
+                + "('Verb', '食べる', 'To eat', 'taberu'),"
+                + "('Adjective', '高い', 'High/Tall', 'takai'),"
+                + "('Adverb', '早く', 'Quickly', 'hayaku'),"
+                + "('Phrase', 'おはようございます', 'Good morning', 'ohayou gozaimasu');";
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+
+            try (Connection connection = DriverManager.getConnection(database_url);
+                 Statement statement = connection.createStatement()) {
+                statement.executeUpdate(insert_word_recognition_sql);
+                logger.info("Sample word recognition activities inserted successfully.");
+            }
+        } catch (ClassNotFoundException e) {
+            logger.error("SQLite JDBC driver not found.", e);
+        } catch (SQLException e) {
+            logger.error("SQL error: " + e.getMessage(), e);
+        }
+    }
+
     public static void main(String[] args) {
         createDatabase();
         insertSampleConversations(); // Optional: Insert sample conversation data
         insertSampleCharacterRecognitions(); // Optional: Insert sample character recognition data
+        insertAllHiraganaAndKatakana(); // Insert all Hiragana and Katakana characters
+        insertSampleWordRecognitions(); // Optional: Insert sample word recognition data
     }
 }

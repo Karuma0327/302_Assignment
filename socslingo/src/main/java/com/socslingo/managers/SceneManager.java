@@ -67,8 +67,8 @@ public class SceneManager {
             double screen_width = screen_bounds.getWidth();
             double screen_height = screen_bounds.getHeight();
 
-            double scene_width = screen_width * 0.95;
-            double scene_height = screen_height * 0.95;
+            double scene_width = screen_width;
+            double scene_height = screen_height;
             Parent root;
             if (preloaded_roots.containsKey(fxml_path)) {
                 root = preloaded_roots.get(fxml_path);
@@ -150,8 +150,8 @@ public class SceneManager {
             double screen_width = screen_bounds.getWidth();
             double screen_height = screen_bounds.getHeight();
 
-            double scene_width = screen_width * 0.95;
-            double scene_height = screen_height * 0.95;
+            double scene_width = screen_width;
+            double scene_height = screen_height;
 
             Scene scene = new Scene(root, scene_width, scene_height);
             scene.getStylesheets().add(getClass().getResource("/com/socslingo/css/startup.css").toExternalForm());
@@ -261,8 +261,8 @@ public class SceneManager {
 
         Rectangle2D screen_bounds = Screen.getPrimary().getVisualBounds();
 
-        double width = screen_bounds.getWidth() * 0.98;
-        double height = screen_bounds.getHeight() * 0.98;
+        double width = screen_bounds.getWidth();
+        double height = screen_bounds.getHeight();
 
         double x_pos = screen_bounds.getMinX() + (screen_bounds.getWidth() - width) / 2;
         double y_pos = screen_bounds.getMinY() + (screen_bounds.getHeight() - height) / 2;

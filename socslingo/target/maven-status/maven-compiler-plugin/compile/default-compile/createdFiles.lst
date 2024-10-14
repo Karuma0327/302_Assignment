@@ -8,6 +8,7 @@ com\socslingo\managers\ControllerManager.class
 com\socslingo\services\DeckService.class
 com\socslingo\dataAccess\UserPetDataAccess.class
 com\socslingo\managers\DatabaseManager.class
+com\socslingo\controllers\ActivityCharacterRecognition$1.class
 com\socslingo\models\Conversation.class
 com\socslingo\controllers\RightSidebarController.class
 com\socslingo\models\Deck.class
@@ -18,6 +19,7 @@ com\socslingo\App.class
 com\socslingo\models\Flashcard.class
 com\socslingo\controllers\DeckController$2$1.class
 com\socslingo\services\CharacterRecognitionService.class
+com\socslingo\controllers\ActivityMainController$1.class
 com\socslingo\controllers\DeckFlashcardManagementController$2.class
 com\socslingo\controllers\RegistrationController.class
 com\socslingo\cache\ImageCache$ImageLoadAllService.class
@@ -25,7 +27,6 @@ com\socslingo\controllers\ActivityMainController.class
 com\socslingo\dataAccess\UserStatisticsDataAccess.class
 com\socslingo\models\CharacterRecognition.class
 com\socslingo\cache\ImageCache$ImageLoadService.class
-com\socslingo\dataAccess\CharactersDataAccess.class
 com\socslingo\controllers\ActivityCharacterRecognition.class
 com\socslingo\controllers\LoginController.class
 com\socslingo\models\UserPet.class

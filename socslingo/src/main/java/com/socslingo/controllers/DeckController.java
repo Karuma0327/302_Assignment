@@ -140,11 +140,6 @@ public class DeckController implements Initializable {
         logger.info("Deck_Controller initialized successfully");
     }
 
-    /**
-     * Handles the creation of a new deck.
-     *
-     * @param event ActionEvent triggered by clicking the createDeckButton.
-     */
     @FXML
     private void handleCreateDeck(ActionEvent event) {
         String deck_name = deck_name_text_field.getText().trim();
@@ -183,9 +178,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Loads all decks associated with the current user and populates the decksListView.
-     */
     private void loadUserDecks() {
         logger.debug("Loading decks for current user");
         int user_id = SessionManager.getInstance().getCurrentUserId();
@@ -205,9 +197,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Loads all available flashcards (not associated with any deck) and populates the availableFlashcardsListView.
-     */
     private void loadAvailableFlashcards() {
         logger.debug("Loading available flashcards for current user");
         int user_id = SessionManager.getInstance().getCurrentUserId();
@@ -227,11 +216,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Displays the selected deck and its associated flashcards.
-     *
-     * @param deck The selected Deck object.
-     */
     private void displaySelectedDeck(Deck deck) {
         if (deck == null) {
             logger.debug("No deck selected. Displaying all available flashcards.");
@@ -260,11 +244,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Handles adding a selected flashcard to the selected deck.
-     *
-     * @param event ActionEvent triggered by clicking the addFlashcardToDeckButton.
-     */
     @FXML
     private void handleAddFlashcardToDeck(ActionEvent event) {
         Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
@@ -304,11 +283,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Handles removing a selected flashcard from the selected deck.
-     *
-     * @param event ActionEvent triggered by clicking the removeFlashcardFromDeckButton.
-     */
     @FXML
     private void handleRemoveFlashcardFromDeck(ActionEvent event) {
         Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
@@ -348,11 +322,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Handles deleting the selected deck.
-     *
-     * @param event ActionEvent triggered by clicking the deleteDeckButton.
-     */
     @FXML
     private void handleDeleteDeck(ActionEvent event) {
         Deck selected_deck = decks_list_view.getSelectionModel().getSelectedItem();
@@ -398,11 +367,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Handles double-click events on the decksListView.
-     *
-     * @param event MouseEvent triggered by double-clicking on a deck.
-     */
     @FXML
     private void handleDeckDoubleClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
@@ -414,12 +378,6 @@ public class DeckController implements Initializable {
         }
     }
 
-    /**
-     * Utility method to display alerts.
-     *
-     * @param alertType Type of the alert.
-     * @param message   Message to display.
-     */
     private void showAlert(Alert.AlertType alert_type, String message) {
         logger.debug("Displaying alert of type '{}' with message: {}", alert_type, message);
         Alert alert = new Alert(alert_type);
