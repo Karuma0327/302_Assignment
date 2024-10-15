@@ -1,26 +1,20 @@
 package com.socslingo.controllers;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.socslingo.managers.SessionManager;
-import com.socslingo.models.Flashcard;
-import com.socslingo.services.FlashcardService;
+import com.socslingo.models.*;
+import com.socslingo.services.*;
 import com.socslingo.utils.DateUtils;
+import com.socslingo.managers.SessionManager;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
+import javafx.animation.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+
+import org.slf4j.*;
+
+import java.util.*;
 
 public class FlashcardController {
 
@@ -300,12 +294,6 @@ public class FlashcardController {
         });
     }
 
-    /**
-     * Utility method to display alerts.
-     *
-     * @param alertType Type of the alert.
-     * @param message   Message to display.
-     */
     private void showAlert(Alert.AlertType alert_type, String message) {
         logger.debug("Displaying alert of type '{}' with message: {}", alert_type, message);
         Alert alert = new Alert(alert_type);
