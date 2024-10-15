@@ -1,18 +1,13 @@
 package com.socslingo.controllers;
 
-import java.io.IOException;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 
 import com.socslingo.managers.ControllerManager;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import java.io.IOException;
 
 public class RightSidebarController {
 
@@ -53,18 +48,10 @@ public class RightSidebarController {
         PrimaryController.getInstance().hideRightSidebar();
     }
 
-    /**
-     * Loads default content into the dynamicContent container.
-     */
     private void loadDefaultContent() {
         loadContent("/com/socslingo/views/default_sidebar_content.fxml");
     }
 
-    /**
-     * Loads the specified FXML into the dynamicContent container.
-     *
-     * @param fxmlPath The path to the FXML file to load.
-     */
     public void loadContent(String fxml_path) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
