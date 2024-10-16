@@ -101,9 +101,9 @@ public class LoginController {
                         "/com/socslingo/views/main.fxml","/com/socslingo/css/main.css",
                         Duration.seconds(1) // Duration for fade-in
                 );
-
+                
             });
-
+            
             fadeOut.play();
         } else {
             System.out.println("Invalid username or password. Please try again.");
