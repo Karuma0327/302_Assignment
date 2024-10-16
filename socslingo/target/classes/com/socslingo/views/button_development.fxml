@@ -18,92 +18,92 @@
 <?import javafx.scene.text.TextFlow?>
 
 <BorderPane stylesheets="@../css/activity.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ActivityMainController">
-    <center>
-        <VBox alignment="CENTER" prefHeight="900.0" prefWidth="1600.0" />
-    </center>
-    <top>
-        <HBox alignment="CENTER" prefWidth="1600.0" style="-fx-background-color: lightblue;" BorderPane.alignment="CENTER">
-            <children>
-                <GridPane prefHeight="22.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
-                        <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="40.0" prefWidth="40.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="849.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <ProgressBar prefWidth="849.0" progress="0.0" GridPane.columnIndex="2" />
-                        <Button fx:id="exit_button" mnemonicParsing="false" styleClass="exit-button">
-                            <graphic>
-                                <ImageView fitWidth="21" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/reject.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <GridPane.margin>
-                                <Insets />
-                            </GridPane.margin>
-                        </Button>
-                    </children>
-                    <HBox.margin>
+   <center>
+      <VBox alignment="CENTER" prefHeight="900.0" prefWidth="1600.0" />
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefWidth="1600.0" style="-fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="22.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
+                <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="40.0" prefWidth="40.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="849.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ProgressBar prefWidth="849.0" progress="0.0" GridPane.columnIndex="2" />
+                  <Button fx:id="exit_button" mnemonicParsing="false" styleClass="exit-button">
+                    <graphic>
+                        <ImageView fitWidth="21" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/reject.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                     <GridPane.margin>
                         <Insets />
-                    </HBox.margin>
-                </GridPane>
-            </children>
-            <padding>
-                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-            </padding>
-        </HBox>
-    </top>
-    <bottom>
-        <HBox fx:id="bottom_section" alignment="CENTER" prefHeight="153.0" prefWidth="1600.0" style="-fx-background-color: white; -fx-border-width: 2, 0, 0,0; -fx-border-color: grey;" BorderPane.alignment="CENTER">
-            <children>
-                <HBox fx:id="activity_information_container" alignment="CENTER" prefHeight="150.0" prefWidth="800.0">
-                    <children>
-                        <VBox fx:id="skip_control_container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lime;" HBox.hgrow="SOMETIMES">
-                            <StackPane alignment="CENTER"  GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                <children>
-                                    <Circle fill="WHITE" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                                    <ImageView fitHeight="100.0" fitWidth="100.0">
-                                        <image>
-                                            <Image url="@../images/incorrect.png" />
-                                        </image>
-                                    </ImageView>
-                                </children>
-                            </StackPane>
+                     </GridPane.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox fx:id="bottom_section" alignment="CENTER" prefHeight="153.0" prefWidth="1600.0" style="-fx-background-color: white; -fx-border-width: 2, 0, 0,0; -fx-border-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="activity_information_container" alignment="CENTER" prefHeight="150.0" prefWidth="800.0">
+               <children>
+                  <VBox fx:id="skip_control_container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lime;" HBox.hgrow="SOMETIMES">
+                    <StackPane alignment="CENTER"  GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <children>
+                           <Circle fill="WHITE" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                           <ImageView fitHeight="100.0" fitWidth="100.0">
+                              <image>
+                                 <Image url="@../images/incorrect.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                    </StackPane>
+                  </VBox>
+                  <VBox fx:id="explaination_container" prefHeight="150.0" prefWidth="495.0" style="-fx-background-color: orange;" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <TextFlow fx:id="correct_or_incorrect_text" prefHeight="200.0" prefWidth="200.0" />
+                              <TextFlow fx:id="if_incorrect_then_reason" prefHeight="200.0" prefWidth="200.0" />
+                              <Button fx:id="report_button" mnemonicParsing="false" text="Button" />
+                           </children>
                         </VBox>
-                        <VBox fx:id="explaination_container" prefHeight="150.0" prefWidth="495.0" style="-fx-background-color: orange;" HBox.hgrow="SOMETIMES">
-                            <children>
-                                <VBox prefHeight="200.0" prefWidth="100.0">
-                                    <children>
-                                        <TextFlow fx:id="correct_or_incorrect_text" prefHeight="200.0" prefWidth="200.0" />
-                                        <TextFlow fx:id="if_incorrect_then_reason" prefHeight="200.0" prefWidth="200.0" />
-                                        <Button fx:id="report_button" mnemonicParsing="false" text="Button" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </VBox>
+                     </children>
+                  </VBox>
 
-                        <!-- CHECK OR CONTINUE BUTTON -->
-                        <VBox fx:id="user_control_container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
-                            <StackPane fx:id="continue_button_stackpane" alignment="CENTER" styleClass="activity-continue-button-stackpane-type-incorrect-hover" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                  <!-- CHECK OR CONTINUE BUTTON -->
+                  <VBox fx:id="user_control_container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                    <StackPane fx:id="continue_button_stackpane" alignment="CENTER" styleClass="activity-continue-button-stackpane-type-incorrect-hover" GridPane.columnIndex="0" GridPane.rowIndex="1">
 
-                                <Rectangle fx:id="continue_button_background_rectangle" height="50.0" strokeType="INSIDE" styleClass="activity-continue-button__background-rectangle--medium-type-incorrect-hover" width="150.0" />
-                                <Button fx:id="continue_button" mnemonicParsing="false" styleClass="activity-continue-button--medium-type-incorrect-hover" />
-                                <Label fx:id="continue_button_label" styleClass="activity-continue-button__label--medium-type-incorrect-hover" text="CONTINUE" />
-                            </StackPane>
-                        </VBox>
-                    </children>
-                </HBox>
-            </children>
-        </HBox>
-    </bottom>
-    <padding>
-        <Insets bottom="5.0" />
-    </padding>
+                        <Rectangle fx:id="continue_button_background_rectangle" height="50.0" strokeType="INSIDE" styleClass="activity-continue-button__background-rectangle--medium-type-incorrect-hover" width="150.0" />
+                        <Button fx:id="continue_button" mnemonicParsing="false" styleClass="activity-continue-button--medium-type-incorrect-hover" />
+                        <Label fx:id="continue_button_label" styleClass="activity-continue-button__label--medium-type-incorrect-hover" text="CONTINUE" />
+                    </StackPane>
+                  </VBox>
+               </children>
+            </HBox> 
+         </children>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
 </BorderPane>

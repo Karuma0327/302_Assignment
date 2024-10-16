@@ -1,28 +1,247 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
 
-<VBox fx:id="right_sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.socslingo.controllers.RightSidebarController" spacing="10" alignment="TOP_CENTER"
-      styleClass="right-sidebar" stylesheets="@../css/right_sidebar.css">
-    <children>
-        <HBox>
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-            <Label text="Functional Bar" styleClass="right-sidebar-title"/>
-        </HBox>
-        <Button text="RIGHT SIDEBAR SHOW FLASHCARD TEST BUTTON" onAction="#handleDeckPreviewRightSidebar"/>
-        <!-- Dynamic Content Container -->
-        <StackPane fx:id="dynamic_content" VBox.vgrow="ALWAYS">
-            <!-- Initial dynamic content can be placed here if needed -->
-        </StackPane>
-        <!-- Add more controls as needed -->
-    </children>
+<VBox fx:id="right_sidebar" styleClass="right-sidebar" stylesheets="@../css/right_sidebar.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.RightSidebarController">
+    <!-- ScrollPane to make the sidebar scrollable -->
+    <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefWidth="543.0" styleClass="scroll-pane">
+        <content>
+            <VBox spacing="25.0" styleClass="sidebar-content">
+                <!-- Existing Content Starts Here -->
+                <HBox alignment="CENTER" maxWidth="369.0" minWidth="369.0" prefWidth="369.0">
+                    <children>
+                        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label alignment="CENTER_RIGHT">
+                                    <graphic>
+                                        <Group>
+                                            <!-- Rectangle Path -->
+                                            <SVGPath content="M194.727078,0 L890.272922,0 C957.98377,0 982.537359,7.05010505 1007.29143,20.2887285 C1032.04551,33.527352 1051.47265,52.9544938 1064.71127,77.7085675 C1077.94989,102.462641 1085,127.01623 1085,194.727078 L1085,642.272922 C1085,709.98377 1077.94989,734.537359 1064.71127,759.291433 C1051.47265,784.045506 1032.04551,803.472648 1007.29143,816.711271 C982.537359,829.949895 957.98377,837 890.272922,837 L194.727078,837 C127.01623,837 102.462641,829.949895 77.7085675,816.711271 C52.9544938,803.472648 33.527352,784.045506 20.2887285,759.291433 C7.05010505,734.537359 0,709.98377 0,642.272922 L0,194.727078 C0,127.01623 7.05010505,102.462641 20.2887285,77.7085675 C33.527352,52.9544938 52.9544938,33.527352 77.7085675,20.2887285 C102.462641,7.05010505 127.01623,0 194.727078,0 Z" fill="#EEEEEE" scaleX="0.035" scaleY="0.035" />
+                                            <!-- Circle Path -->
+                                            <SVGPath content="M542.5,418.5 m-217,0 a217,217 0 1,0 434,0 a217,217 0 1,0 -434,0" fill="#FF4B4B" scaleX="0.035" scaleY="0.035" />
+                                        </Group>
+                                    </graphic>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <!-- Deck ICON AND NUMBER OF DECKS COMPLETED -->
+                        <HBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                            <children>
+                                <ImageView fitWidth="38" preserveRatio="true" smooth="true">
+                                    <image>
+                                        <Image url="@../images/card_icon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="right-sidebar-label-text-deck" text="0" />
+                            </children>
+                        </HBox>
+
+                        <!-- JAPANESE CARD ICON AND NUMBER OF JAPANESE CARDS COMPLETED -->
+                        <HBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                            <children>
+                                <ImageView fitWidth="34" preserveRatio="true" smooth="true">
+                                    <image>
+                                        <Image url="@../images/jp_card.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="right-sidebar-label-text-jp-card" text="0" />
+                            </children>
+                        </HBox>
+                        
+                        <!-- ACTIVITIES COMPLETED ICON AND NUMBER OF ACTIVITIES COMPLETED -->
+                        <HBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                            <children>
+                                <ImageView fitWidth="38" preserveRatio="true" smooth="true">
+                                    <image>
+                                        <Image url="@../images/education_icon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="right-sidebar-label-text-activities-completed" text="0" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="30.0" />
+                    </padding>
+                </HBox>
+                
+                <!-- Flashcard Container -->
+                <VBox fx:id="flashcardContainer" styleClass="right-sidebar-container">
+                    <!-- Header: Label and Button -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" HBox.hgrow="SOMETIMES">
+                               <children>
+                                  <Label  fx:id="flashcardHeaderLabel" styleClass="right-sidebar-container-label-text" text="Flashcard" />
+                               </children>
+                            </HBox>
+                            <HBox alignment="CENTER_RIGHT" HBox.hgrow="SOMETIMES">
+                               <children>
+                                      <Button  fx:id="flashcardButton" mnemonicParsing="false" styleClass="right-sidebar-button" text="Quick Add" />
+                               </children>
+                            </HBox>
+                         </children>
+                    </HBox>
+                    <!-- Toggleable Content -->
+                    <VBox fx:id="flashcardContent" spacing="10" visible="false" managed="false">
+                        <padding>
+                            <Insets top="10" />
+                        </padding>
+                        <!-- Existing Flashcard Container Content -->
+                        <HBox minHeight="46.0" styleClass="quick-save-number-of-cards-container">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" HBox.hgrow="SOMETIMES">
+                                    <children>
+                                        <Label styleClass="quick-save-number-of-cards-title" text="Cards to Add:">
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_RIGHT" maxWidth="76.0" prefWidth="76.0">
+                                    <children>
+                                        <TextField fx:id="quickSaveNumberField" alignment="CENTER_RIGHT" prefWidth="76.0" promptText="0" styleClass="quick-save-number-of-card-text-field" text="3" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <VBox  fx:id="quickSaveFieldsContainer" spacing="10">
+                            <!-- <children>
+                                <HBox alignment="CENTER" styleClass="quick-save-text-field-container">
+                                    <children>
+                                        <TextField promptText="FRONT" styleClass="right-sidebar-left-text-field-quick-add" />
+                                        <TextField promptText="BACK" styleClass="right-sidebar-right-text-field-quick-add" />
+                                    </children>
+                                </HBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </VBox>
+                        <HBox alignment="CENTER" styleClass="quick-save-text-field-container">
+                            <children>
+                                <TextField promptText="FRONT" styleClass="right-sidebar-left-text-field-quick-add" />
+                                <TextField promptText="BACK" styleClass="right-sidebar-right-text-field-quick-add" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" styleClass="quick-save-text-field-container">
+                            <children>
+                                <TextField promptText="FRONT" styleClass="right-sidebar-left-text-field-quick-add" />
+                                <TextField promptText="BACK" styleClass="right-sidebar-right-text-field-quick-add" />
+                            </children>
+                        </HBox>
+                        -->
+                        </VBox> 
+                        <HBox alignment="CENTER">
+                            <children>
+                                <StackPane>
+                                    <children>
+                                        <Rectangle height="46" styleClass="quick-save-button-background-rectangle" width="322" />
+                                        <Button alignment="CENTER" mnemonicParsing="false" styleClass="quick-save-button" text="Save Flashcard" onAction="#handleSaveFlashcards" />
+                                    </children>
+                                </StackPane>
+                            </children>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
+                        </HBox>
+                        
+                    </VBox>
+                </VBox>
+
+                <!-- Deck Container -->
+                <VBox fx:id="deckContainer" styleClass="right-sidebar-container">
+                    <!-- Header: Label and Button -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" HBox.hgrow="SOMETIMES">
+                               <children>
+                                  <Label fx:id="deckHeaderLabel" styleClass="right-sidebar-container-label-text" text="Flashcard Decks" HBox.hgrow="SOMETIMES" />
+                               </children>
+          
+                            </HBox>
+                            <HBox alignment="CENTER_RIGHT" HBox.hgrow="SOMETIMES">
+                               <children>
+                                      <Button  fx:id="deckButton" mnemonicParsing="false" styleClass="right-sidebar-button" text="View All" />
+                               </children>
+                            </HBox>
+                         </children>
+                    </HBox>
+                    <!-- Toggleable Content -->
+                    <VBox fx:id="deckContent" spacing="10" visible="false" managed="false">
+                        <padding>
+                            <Insets top="10" />
+                        </padding>
+                        <!-- Existing Deck Container Content -->
+                        <HBox>
+                            <children>
+                                <StackPane>
+                                    <children>
+                                        <Label styleClass="right-sidebar-bottom-layer" />
+                                        <!-- ComboBox placed on top of the Rectangle -->
+                                        <ComboBox fx:id="comboBox" promptText="ALL DECK" styleClass="right-sidebar-dropdown-menu" />
+                                    </children>
+                                </StackPane>
+                                <TextField promptText="SEARCH DECKNAME" styleClass="right-sidebar-deck-search-text-field" HBox.hgrow="SOMETIMES" />
+                            </children>
+                        </HBox>
+                        <VBox>
+                            <children>
+                                <!-- ListView of the Decks -->
+                                <ListView fx:id="listView" styleClass="list-view-of-deck-container">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <!-- Existing items -->
+                                        </FXCollections>
+                                    </items>
+                                </ListView>
+                            </children>
+                        </VBox>
+                        <HBox alignment="CENTER" fillHeight="true">
+                            <children>
+                                <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <StackPane>
+                                            <children>
+                                                <Label styleClass="right-sidebar-navigation-background-label" />
+                                                <Button fx:id="backButton" onAction="#handleBackAction" alignment="CENTER" mnemonicParsing="false" styleClass="right-sidebar-navigation-button" text="BACK" />
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <StackPane>
+                                            <children>
+                                                <Label styleClass="right-sidebar-navigation-background-label" />
+                                                <Button fx:id="nextButton" onAction="#handleNextAction" alignment="CENTER" mnemonicParsing="false" styleClass="right-sidebar-navigation-button" text="NEXT" />
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- ... other content ... -->
+            </VBox>
+        </content>
+    </ScrollPane>
 </VBox>

@@ -2,9 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,8 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stack_pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
-    <BorderPane fx:id="root_pane" styleClass="based-background"  maxWidth="Infinity" maxHeight="Infinity">
+<StackPane fx:id="stack_pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
+    <BorderPane fx:id="root_pane" maxHeight="Infinity" maxWidth="Infinity" styleClass="based-background"> 
         <left>
             <VBox fx:id="left_sidebar" alignment="CENTER" maxWidth="250" onMouseClicked="#handleSidebarMouseClicked" spacing="10" styleClass="left-sidebar-column">
                 <children>
@@ -55,7 +53,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="switch_to_flashcard_management_button" alignment="CENTER_LEFT" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button" text="PET">
+                    <Button fx:id="switch_to_activity_main_test_button" alignment="CENTER_LEFT" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button" text="PET">
                         <graphic>
                             <ImageView fitWidth="21" preserveRatio="true">
                                 <image>
@@ -84,17 +82,8 @@
                                 </image>
                             </ImageView>
                         </graphic>
-                        <!-- ContextMenu Definition -->
-                        <contextMenu>
-                            <ContextMenu fx:id="more_context_menu" styleClass="more-context-menu-container">
-                                <items>
-                                    <MenuItem onAction="#handleSettings" styleClass="more-context-menu-item" text="USERNAME" />
-                                    <MenuItem onAction="#handleHelp" styleClass="more-context-menu-item" text="HELP" />
-                                    <MenuItem onAction="#handleHelp" styleClass="more-context-menu-item" text="SETTING" />
-                                    <MenuItem onAction="#handleLogout" styleClass="more-context-menu-item" text="LOG OUT" />
-                                </items>
-                            </ContextMenu>
-                        </contextMenu>
+                        <!-- Remove the inline ContextMenu -->
+                        <!-- ContextMenu Definition Removed -->
                     </Button>
                 </children>
                 <padding>
@@ -102,10 +91,10 @@
                 </padding>
             </VBox>
         </left>
-
+        
         <center>
             <!-- Dynamic Content Area -->
-            <VBox VBox.vgrow="ALWAYS" fx:id="content_area" maxHeight="Infinity" maxWidth="Infinity" styleClass="middle-column">
+            <VBox fx:id="content_area" maxHeight="Infinity" maxWidth="Infinity" styleClass="middle-column" VBox.vgrow="ALWAYS">
                 <!-- Initial Content Can Be Loaded Here -->
             </VBox>
         </center>
@@ -117,11 +106,17 @@
         <bottom>
             <!-- Placeholder for Bottom Bar -->
         </bottom>
+      <StackPane.margin>
+         <Insets />
+      </StackPane.margin>
+      <padding>
+         <Insets left="10.0" top="10.0" />
+      </padding>
     </BorderPane>
 
     <HBox fx:id="status_bar" styleClass="status-bar" StackPane.alignment="BOTTOM_CENTER">
     </HBox>
-
+    
     <!-- Overlayed Toggle Buttons (Initially Hidden) -->
     <Button fx:id="toggle_sidebar_button" graphicTextGap="12" onAction="#handleToggleSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_LEFT">
         <graphic>
@@ -142,5 +137,8 @@
             </ImageView>
         </graphic>
     </Button>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 
 </StackPane>

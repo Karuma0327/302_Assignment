@@ -33,6 +33,12 @@
     src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
 }
 
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');
+}
+
+
 
 /* StackPane Hover Styles */
 .activity-button-stackpane-type-hover:hover .activity-button--large-type-hover,
@@ -95,24 +101,38 @@
 
 
 .activity-toggle-button-stackpane:pressed .activity-toggle-button-unselected-state-pressed {
-        -fx-background-color: #ffffff;
-        -fx-text-fill: #4b4b4b;
-        -fx-pref-width: 255px;
-        -fx-pref-height: 72px;
-        -fx-border-color: #e5e5e5;
-        -fx-border-width: 2px;
-        -fx-border-radius: 12px;
-        -fx-background-radius: 12px;
-        -fx-font-size: 19px;
-        -fx-font-family: 'DINRoundPro-Bold';
-        -fx-cursor: hand;
-        -fx-background-insets: 1 0 1 0;
-        -fx-border-insets: 0 -1 0 -1;
-        -fx-translate-y: 0;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
 
 }
 
 
+
+.activity-toggle-button-stackpane:pressed .activity-toggle-button-label-unselected-state-pressed-grey {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(245, 245, 245);
+    -fx-text-fill: rgb(80, 80, 80);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-radius: 12px;
+}
 
 
 .activity-toggle-button-stackpane:pressed .activity-toggle-button-label-unselected-state-pressed {
@@ -128,6 +148,8 @@
     -fx-alignment: center;
     -fx-background-radius: 12px;
 }
+
+
 
 /* The label default state when the toggle button is not pressed and unselected */
 .activity-toggle-button-label-unselected-state-unpressed {
@@ -235,7 +257,7 @@
 }
 
 .activity-toggle-button-selected-animation-in-progress-state,
-.activity-toggle-button-unselected-state-unpressed{
+.activity-toggle-button-unselected-state-unpressed {
     -fx-background-color: #ffffff;
     -fx-text-fill: #4b4b4b;
     -fx-pref-width: 255px;
@@ -253,7 +275,7 @@
 }
 
 
-.activity-toggle-button-unselected-state-pressed{
+.activity-toggle-button-unselected-state-pressed {
     -fx-background-color: #ffffff;
     -fx-text-fill: #4b4b4b;
     -fx-pref-width: 255px;
@@ -269,6 +291,7 @@
     -fx-border-insets: 0 -1 0 -1;
     -fx-translate-y: 0;
 }
+
 .activity-toggle-button-selected-state-unpressed-border,
 .activity-toggle-button-selected-state-unpressed {
     -fx-background-color: rgb(221, 244, 255);
@@ -329,35 +352,16 @@
     -fx-stroke-width: 1px;
 }
 
-.activity-correct-response-toggle-button-stackpane:pressed .activity-correct-response-toggle-button,
-.activity-correct-response-toggle-button-stackpane:pressed .activity-correct-response-toggle-button-label {
-    -fx-translate-y: 0;
+.activity-correct-response-toggle-button-stackpane {}
 
-}
 
-.activity-correct-response-toggle-button{
-        -fx-background-color: rgb(215, 255, 184);
-        -fx-text-fill: rgb(165, 237, 110);
-        -fx-pref-width: 255px;
-        -fx-pref-height: 72px;
-        -fx-border-color: rgb(165, 237, 110);;
-        -fx-border-width: 2px;
-        -fx-border-radius: 12px;
-        -fx-background-radius: 12px;
-        -fx-font-size: 19px;
-        -fx-font-family: 'DINRoundPro-Bold';
-        -fx-cursor: hand;
-        -fx-background-insets: 1 0 1 0;
-        -fx-border-insets: 0 -1 0 -1;
-        -fx-translate-y: -2;
-}
-.activity-correct-response-toggle-button-pressed {
+
+.activity-correct-response-toggle-button {
     -fx-background-color: rgb(215, 255, 184);
     -fx-text-fill: rgb(165, 237, 110);
     -fx-pref-width: 255px;
     -fx-pref-height: 72px;
     -fx-border-color: rgb(165, 237, 110);
-
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
@@ -366,66 +370,11 @@
     -fx-cursor: hand;
     -fx-background-insets: 1 0 1 0;
     -fx-border-insets: 0 -1 0 -1;
-    -fx-translate-y: 0;
-}
-.activity-correct-response-toggle-button-label{
-    -fx-font-size: 19px;
-    -fx-background-color: rgb(215, 255, 184);
-    -fx-text-fill: rgb(165, 237, 110);
-    -fx-font-family: 'DINRoundPro-Bold';
-    -fx-pref-width: 255px;
-    -fx-pref-height: 72px;
-    -fx-border-color: rgb(165, 237, 110);
     -fx-translate-y: -2;
-    -fx-alignment: center;
-    -fx-cursor: hand;
-    -fx-background-insets: 1 0 1 0;
-    -fx-border-insets: 0 -1 0 -1;
-    -fx-border-width: 2;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-}
-
-.activity-correct-response-toggle-button-label-pressed{
-    -fx-font-size: 19px;
-    -fx-background-color: rgb(215, 255, 184);
-    -fx-text-fill: rgb(165, 237, 110);
-    -fx-font-family: 'DINRoundPro-Bold';
-    -fx-pref-width: 255px;
-    -fx-pref-height: 72px;
-    -fx-border-color: rgb(165, 237, 110);
-    -fx-translate-y: 0;
-    -fx-alignment: center;
-    -fx-cursor: hand;
-    -fx-background-insets: 1 0 1 0;
-    -fx-border-insets: 0 -1 0 -1;
-    -fx-border-width: 2;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-}
-
-.activity-correct-response-toggle-button-background-rectangle{
-    -fx-fill: rgb(165, 237, 110);
-    -fx-arc-width: 24;
-    -fx-arc-height: 24;
-    -fx-background-insets: 0 0 0 0;
-    -fx-border-insets: 0 0 0 0;
-    -fx-stroke: rgb(165, 237, 110);
-    -fx-stroke-width: 1px;
 }
 
 
-.activity-button__background-rectangle--large-type-correct-answer-pressed {
-    -fx-fill: rgb(165, 237, 110);
-    -fx-arc-width: 24;
-    -fx-arc-height: 24;
-    -fx-background-insets: 0 0 0 0;
-    -fx-border-insets: 0 0 0 0;
-    -fx-stroke: rgb(165, 237, 110);
-    -fx-stroke-width: 1px;
-}
-
-.activity-button__label--large-type-correct-answer-pressed {
+.activity-correct-response-toggle-button-label {
     -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: rgb(165, 237, 110);
@@ -434,32 +383,48 @@
     -fx-pref-height: 41px;
     -fx-cursor: hand;
     -fx-alignment: center;
-
     -fx-background-color: transparent;
     -fx-background-radius: 12px;
 }
 
-
-.activity-button--large-type-correct-answer-pressed {
-    -fx-background-color: rgb(215, 255, 184);
-    -fx-text-fill: rgb(165, 237, 110);
-    -fx-pref-width: 255px;
-    -fx-pref-height: 72px;
-    -fx-border-color: rgb(165, 237, 110);
-    -fx-border-width: 2px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
+.activity-correct-response-toggle-button-label-pressed {
     -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
-    -fx-cursor: hand;
-    -fx-background-insets: 1 0 1 0;
-    -fx-border-insets: 0 -1 0 -1;
+    -fx-text-fill: rgb(165, 237, 110);
     -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
 }
 
-.activity-button--large-type-incorrect-answer-pressed {
+.activity-correct-response-toggle-button-background-rectangle {
+    -fx-fill: rgb(165, 237, 110);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(165, 237, 110);
+    -fx-stroke-width: 1px;
+}
+
+
+
+
+
+
+.activity-incorrect-response-toggle-button-stackpane:pressed .activity-incorrect-response-toggle-button,
+.activity-incorrect-response-toggle-button-stackpane:pressed .activity-incorrect-response-toggle-button-label {
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
     -fx-background-color: rgb(255, 223, 224);
-    -fx-text-fill: rgb(255, 0, 0);
+}
+
+.activity-incorrect-response-toggle-button {
+    -fx-background-color: rgb(255, 223, 224);
+    -fx-text-fill: rgb(238, 75, 75);
     -fx-pref-width: 255px;
     -fx-pref-height: 72px;
     -fx-border-color: rgb(255, 178, 178);
@@ -474,17 +439,7 @@
     -fx-translate-y: -2;
 }
 
-.activity-button__background-rectangle--large-type-incorrect-answer-pressed {
-    -fx-fill: rgb(255, 178, 178);
-    -fx-arc-width: 24;
-    -fx-arc-height: 24;
-    -fx-background-insets: 0 0 0 0;
-    -fx-border-insets: 0 0 0 0;
-    -fx-stroke: rgb(255, 178, 178);
-    -fx-stroke-width: 1px;
-}
-
-.activity-button__label--large-type-incorrect-answer-pressed {
+.activity-incorrect-response-toggle-button-label {
     -fx-font-size: 19px;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-text-fill: rgb(238, 75, 75);
@@ -497,83 +452,20 @@
     -fx-background-radius: 12px;
 }
 
-/* Block: activity-button */
-.activity-button__background-rectangle--large-type-default {
-    -fx-fill: #e5e5e5;
+.activity-incorrect-response-toggle-button-background-rectangle {
+    -fx-fill: rgb(255, 178, 178);
     -fx-arc-width: 24;
     -fx-arc-height: 24;
     -fx-background-insets: 0 0 0 0;
     -fx-border-insets: 0 0 0 0;
-    -fx-stroke: #e5e5e5;
+    -fx-stroke: rgb(255, 178, 178);
     -fx-stroke-width: 1px;
 }
 
 
-.activity-button__label--large-type-default {
-    -fx-font-size: 19px;
-    -fx-font-family: 'DINRoundPro-Bold';
-    -fx-text-fill: #4b4b4b;
-    -fx-translate-y: -2;
-    -fx-pref-width: 128px;
-    -fx-pref-height: 36px;
-    -fx-cursor: hand;
-    -fx-alignment: center;
-}
 
-.activity-button--large-type-default {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #4b4b4b;
-    -fx-pref-width: 255px;
-    -fx-pref-height: 72px;
-    -fx-border-color: #e5e5e5;
-    -fx-border-width: 2px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-    -fx-font-size: 19px;
-    -fx-font-family: 'DINRoundPro-Bold';
-    -fx-cursor: hand;
-    -fx-background-insets: 1 0 1 0;
-    -fx-border-insets: 0 -1 0 -1;
-    -fx-translate-y: -2;
-}
 
-.activity-button__background-rectangle--large-type-hover {
-    -fx-fill: #e5e5e5;
-    -fx-arc-width: 24;
-    -fx-arc-height: 24;
-    -fx-background-insets: 0 0 0 0;
-    -fx-border-insets: 0 0 0 0;
-    -fx-stroke: #e5e5e5;
-    -fx-stroke-width: 1px;
-}
 
-.activity-button__label--large-type-hover {
-    -fx-font-size: 19px;
-    -fx-font-family: 'DINRoundPro-Bold';
-    -fx-text-fill: #4b4b4b;
-    -fx-translate-y: -2;
-    -fx-pref-width: 128px;
-    -fx-pref-height: 36px;
-    -fx-cursor: hand;
-    -fx-alignment: center;
-}
-
-.activity-button--large-type-hover {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #4b4b4b;
-    -fx-pref-width: 255px;
-    -fx-pref-height: 72px;
-    -fx-border-color: #e5e5e5;
-    -fx-border-width: 2px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
-    -fx-font-size: 19px;
-    -fx-font-family: 'DINRoundPro-Bold';
-    -fx-cursor: hand;
-    -fx-background-insets: 1 0 1 0;
-    -fx-border-insets: 0 -1 0 -1;
-    -fx-translate-y: -2;
-}
 
 
 .activity-button__background-rectangle--medium-type-default {
@@ -903,11 +795,6 @@
     -fx-translate-y: -2;
 }
 
-.exit-button {
-    -fx-background-color: transparent;
-
-}
-
 .activity-select-matching-pairs-title {
     -fx-font-size: 36px;
     -fx-font-family: 'DINRoundPro-Bold';
@@ -977,3 +864,452 @@
     -fx-background-radius: 10;
     -fx-border-radius: 10;
 }
+
+
+
+
+.activity-toggle-button-stackpane-japanese:pressed .activity-toggle-button-unselected-state-pressed-japanese {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
+
+}
+
+
+
+.activity-toggle-button-stackpane-japanese:pressed .activity-toggle-button-label-unselected-state-pressed-grey-japanese {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(245, 245, 245);
+    -fx-text-fill: rgb(80, 80, 80);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-radius: 12px;
+}
+
+
+.activity-toggle-button-stackpane-japanese:pressed .activity-toggle-button-label-unselected-state-pressed-japanese {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-radius: 12px;
+}
+
+
+
+/* The label default state when the toggle button is not pressed and unselected */
+.activity-toggle-button-label-unselected-state-unpressed-japanese {
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-text-fill: #4b4b4b;
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-border-width: 0;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+.activity-toggle-button-label-unselected-state-pressed-japanese {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+
+/* The label state when the toggle button is pressed down but not toggled */
+.activity-toggle-button-label-unselected-state-pressed-japanese {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(240, 250, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+
+/* The label state when the button is fully toggled */
+.activity-toggle-button-label-selected-state-unpressed-japanese {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-translate-y: -2;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.activity-toggle-button-label-selected-state-unpressed-japanese {
+    -fx-font-size: 19px;
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-translate-y: -2;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+/* The label when the toggle button is pressed down and is already toggled on */
+.activity-toggle-button-label-selected-state-pressed-japanese {
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-font-size: 19px;
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-translate-y: 0;
+    -fx-font-family: 'Meiryo';
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-translate-y: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.activity-toggle-button-selected-animation-in-progress-state-japanese,
+.activity-toggle-button-unselected-state-unpressed-japanese {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+
+.activity-toggle-button-unselected-state-pressed-japanese {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
+}
+
+.activity-toggle-button-selected-state-unpressed-border-japanese,
+.activity-toggle-button-selected-state-unpressed-japanese {
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-toggle-button-selected-state-pressed-japanese {
+    -fx-background-color: rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
+}
+
+
+
+.activity-toggle-button-background-rectangle-unselected-state-unpressed-japanese,
+.activity-toggle-button-background-rectangle-unselected-state-pressed-japanese,
+.activity-toggle-button-background-rectangle-selected-animation-in-progress-state-japanese {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+.activity-toggle-button-background-rectangle-selected-state-unpressed-japanese,
+.activity-toggle-button-background-rectangle-selected-state-pressed-japanese {
+    -fx-fill: rgb(132, 216, 255);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(132, 216, 255);
+    -fx-stroke-width: 1px;
+}
+
+.activity-correct-response-toggle-button-stackpane-japanese {}
+
+
+
+.activity-correct-response-toggle-button-japanese {
+    -fx-background-color: rgb(215, 255, 184);
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(165, 237, 110);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+
+.activity-correct-response-toggle-button-label-japanese {
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+.activity-correct-response-toggle-button-label-pressed-japanese {
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-text-fill: rgb(165, 237, 110);
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+.activity-correct-response-toggle-button-background-rectangle-japanese {
+    -fx-fill: rgb(165, 237, 110);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(165, 237, 110);
+    -fx-stroke-width: 1px;
+}
+
+
+
+
+
+
+.activity-incorrect-response-toggle-button-stackpane-japanese:pressed .activity-incorrect-response-toggle-button-japanese,
+.activity-incorrect-response-toggle-button-stackpane-japanese:pressed .activity-incorrect-response-toggle-button-label-japanese {
+    -fx-translate-y: 0;
+    -fx-border-width: 0;
+    -fx-background-color: rgb(255, 223, 224);
+}
+
+.activity-incorrect-response-toggle-button-japanese {
+    -fx-background-color: rgb(255, 223, 224);
+    -fx-text-fill: rgb(238, 75, 75);
+    -fx-pref-width: 255px;
+    -fx-pref-height: 72px;
+    -fx-border-color: rgb(255, 178, 178);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}
+
+.activity-incorrect-response-toggle-button-label-japanese {
+    -fx-font-size: 19px;
+    -fx-font-family: 'Meiryo';
+    -fx-text-fill: rgb(238, 75, 75);
+    -fx-translate-y: -2;
+    -fx-pref-width: 146px;
+    -fx-pref-height: 41px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 12px;
+}
+
+.activity-incorrect-response-toggle-button-background-rectangle-japanese {
+    -fx-fill: rgb(255, 178, 178);
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: rgb(255, 178, 178);
+    -fx-stroke-width: 1px;
+}
+
+
+/* Heart Outer Path Styling */
+.heart-outer {
+    -fx-fill: #FF4B4B;
+    /* Red color as per SVG */
+    /* Optional: Add stroke if needed */
+    /* -fx-stroke: #000000; */
+    /* -fx-stroke-width: 1; */
+}
+
+/* Heart Inner Path Styling */
+.heart-inner {
+    -fx-fill: white;
+    -fx-opacity: 0.3;
+    /* Matches the SVG opacity */
+}
+
+/* styles.css */
+
+.exit-button-background {
+    -fx-background-color: transparent;
+
+}
+
+/* Exit Button */
+.exit-button {
+    fill: #AFAFAF;
+    transition: fill 0.3s ease;
+}
+
+.exit-button:hover {
+    fill: #FF0000;
+    /* Change color on hover */
+}
+
+.exit-button:active {
+    fill: #990000;
+    /* Change color on click */
+}
+
+.activity-lives-counter {
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Bold';
+
+    -fx-text-fill: rgb(255, 75, 75);
+}
+
+
+
+.activity-sentence-body-container {
+
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.activity-sentence-word-container {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+
+/* .vbox {
+    -fx-border-color: red;
+    -fx-border-width: 1;
+}
+
+.hbox {
+    -fx-border-color: blue;
+    -fx-border-width: 1;
+}
+
+.label {
+    -fx-border-color: green;
+    -fx-border-width: 1;
+}
+
+
+.image-view {
+    -fx-border-color: purple;
+    -fx-border-width: 1;
+} */

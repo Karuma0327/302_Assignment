@@ -28,7 +28,15 @@
     src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
 }
 
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
 
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');   
+}
 
 
 
@@ -64,7 +72,7 @@
 
 
 .create-flash-card-button{
-    -fx-background-color: #f5d78e;
+    -fx-background-color: #f5d78e; 
     -fx-pref-width: 190px;
     -fx-pref-height: 45px;
     -fx-border-color: #f2c868; /* Outline color */
@@ -78,7 +86,7 @@
 
 }
 .create-flash-card-button:hover{
-    -fx-background-color: #f7dfa3;
+    -fx-background-color: #f7dfa3; 
 
 }
 
@@ -132,7 +140,7 @@
 }
 
 .generic-button-medium{
-    -fx-background-color: #FFD580;
+    -fx-background-color: #FFD580; 
     -fx-text-fill: #ffffff;
     -fx-pref-width: 168px;
     -fx-pref-height: 48px;
@@ -141,7 +149,7 @@
     -fx-background-radius: 12px; /* Rounded corners */
     -fx-border-radius: 12px; /* Rounded corners */
     -fx-font-size: 15px;
-    -fx-border-style: solid;
+    -fx-border-style: solid; 
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
 }
@@ -156,10 +164,15 @@
 }
 
 .right-sidebar{
-    -fx-pref-width: 360px;
-    -fx-border-color: #e5e5e5;
-    -fx-border-width: 0 0 0 1px; /* Top, Right, Bottom, Left */
     -fx-background-color: #ffffff;
+    -fx-alignment: TOP_CENTER;
+    -fx-spacing: 20px;
+    -fx-pref-width: 420px;
+
+    -fx-min-width: 420px;
+    -fx-max-width: 420px;
+
+
 }
 
 
@@ -174,4 +187,375 @@
     -fx-border-color: #e5e5e5;
     -fx-border-radius: 10px;
     -fx-font-weight: bold;
+}
+
+
+
+.right-sidebar-label-text-deck{
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-text-fill: rgb(153, 235, 251)
+
+
+
+}
+
+.right-sidebar-label-text-jp-card{
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-text-fill: rgb(255, 75, 75);
+
+}
+
+.right-sidebar-label-text-activities-completed{
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-text-fill: rgb(251, 211, 106);
+    
+}
+
+
+
+.right-sidebar-container{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-border-width: 2;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-padding: 18;
+    -fx-spacing: 14px;
+    -fx-pref-width: 369px;
+    -fx-max-width: 369px;
+    -fx-min-width: 369px;
+
+
+}
+
+.right-sidebar-container-label-text{
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(75, 75, 75);
+}
+
+.right-sidebar-button{
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(255, 198, 92);
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-border-width: 0;
+    -fx-alignment: center_right;    
+    -fx-cursor: hand;
+    
+}
+
+.right-sidebar-left-text-field-quick-add{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(255, 228, 179) rgb(200, 200, 200) rgb(255, 228, 179) rgb(255, 228, 179);
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 14px;
+    -fx-border-width: 2 0 2 2;
+    -fx-border-radius: 10px 0 0 10px;
+    -fx-background-radius: 10px 0 0 10px;
+    -fx-padding: 9px;
+    -fx-alignment: center;
+
+}
+
+.right-sidebar-right-text-field-quick-add{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(255, 228, 179) rgb(255, 228, 179)  rgb(255, 228, 179) rgb(200, 200, 200);
+    -fx-border-width: 2 2 2 2;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 14px;
+    -fx-border-radius: 0 10px 10px 0;
+    -fx-background-radius:  0 10px 10px 0;
+    -fx-padding: 9px;
+    -fx-alignment: center;
+
+}
+
+.quick-save-button-background-rectangle{
+    -fx-fill: rgb(255, 184, 51);
+    -fx-arc-width: 32;
+    -fx-arc-height: 32;
+
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+}
+
+.quick-save-button{
+    -fx-background-color: rgb(255, 198, 92);
+    -fx-pref-width: 322px;
+    -fx-pref-height: 46px;
+    -fx-background-radius: 16px;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-font-size: 17px;
+    
+    -fx-alignment: center;
+    -fx-translate-y: -5px;
+    -fx-cursor: hand;
+}
+
+.quick-save-button:pressed{
+    -fx-translate-y: 0px;
+}
+
+
+.quick-save-number-of-cards-title{
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(75, 75, 75);
+}
+
+.quick-save-number-of-card-text-field{
+    -fx-padding: 0 0 0 0;
+    -fx-font-size: 16px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-prompt-text-fill: rgb(75, 75, 75);
+    -fx-alignment: CENTER;
+}
+.quick-save-number-of-cards-container {
+    -fx-background-color: linear-gradient(to right, rgb(255, 184, 51), rgb(255, 255, 255)); /* Gradient from right to left */
+    -fx-padding: 10 2 10 2; /* Simulate border width */
+    -fx-background-insets: 0; /* Ensure the gradient covers the entire area */
+    -fx-border-radius: 10; /* Match the border radius if needed */
+    -fx-background-radius: 10; /* Match the border radius if needed */
+    
+}
+
+
+.quick-save-text-field-container{
+
+    -fx-padding: 0 3px 0 3px;
+}
+
+.right-sidebar-bottom-layer{
+    -fx-background-color: linear-gradient(to right, rgb(255, 184, 51), rgb(255, 208, 120));
+    -fx-border-color: linear-gradient(to right, rgb(255, 184, 51), rgb(255, 208, 120)); /* Gradient from left to right */
+
+    -fx-pref-width: 148px;
+    -fx-pref-height: 49px;
+    -fx-min-width: 148px;
+    -fx-min-height: 49px;
+    -fx-border-radius: 10px 0 0 10px; 
+    -fx-background-radius: 10px 0 0 10px; /* Rounded corners */
+
+    
+    
+
+}
+.right-sidebar-dropdown-menu{
+    -fx-background-color: rgb(255, 255, 255); /* Background color of the ComboBox */
+    -fx-border-color: linear-gradient(to right, rgb(255, 184, 51), rgb(255, 208, 120)); /* Gradient from left to right */
+
+    -fx-border-width: 2 2 2 2;
+
+    -fx-translate-y: -2px;
+    -fx-padding: 5px;
+    -fx-border-radius: 10px 0 0 10px; 
+    -fx-background-radius: 10px 0 0 10px; /* Rounded corners */
+    -fx-background-insets: 2 0 1 1;
+    -fx-border-insets: 1 0 0 1;
+    -fx-pref-width: 148px;
+    -fx-pref-height: 46px;
+    -fx-smooth: true;
+    -fx-font-smoothing-type: lcd; /* Use LCD font smoothing for better quality */
+    -fx-min-width: 148px;
+    -fx-cursor: hand;
+    -fx-min-height: 46px;
+    -fx-font-family: 'DINRoundPro-Bold'; /* Font family */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: rgb(150, 150, 150);  /* Text color */
+    -fx-prompt-text-fill: rgb(150, 150, 150); /* Prompt text color */
+}
+
+.right-sidebar-dropdown-menu .arrow {
+    -fx-background-color: rgb(150, 150, 150);
+}
+
+.right-sidebar-dropdown-menu .arrow {
+    -fx-background-color: rgb(255, 198, 92); /* Color of the arrow button */
+}
+
+.right-sidebar-dropdown-menu .list-cell {
+    -fx-background-color: rgb(255, 255, 255); /* Background color of list items */
+    -fx-text-fill: rgb(75, 75, 75); /* Text color of list items */
+}
+
+.right-sidebar-dropdown-menu .list-cell:hover {
+    -fx-background-color: rgb(255, 228, 179); /* Hover color for list items */
+}
+
+.right-sidebar-deck-search-text-field{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: linear-gradient(to left, rgb(255, 184, 51), rgb(255, 208, 120));
+    -fx-border-width: 2;
+
+    -fx-smooth: true;
+    -fx-font-smoothing-type: lcd; /* Use LCD font smoothing for better quality */
+    -fx-border-radius: 0 10px 10px 0;
+    -fx-background-radius: 10px;
+    -fx-font-family: 'DINRoundPro-Bold';
+
+    -fx-pref-width: 150px;
+    -fx-pref-height: 49px;
+    -fx-min-width: 150px;
+    -fx-min-height: 49px;
+    -fx-font-size: 14px;
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-prompt-text-fill: rgb(150, 150, 150);
+}
+
+
+.list-view-of-deck-container{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: linear-gradient(to bottom, rgb(255, 184, 51), rgb(250, 192, 84));
+    -fx-border-width: 2;
+    -fx-pref-height: 250px;
+    -fx-min-height: 250px;
+    -fx-min-width: 330px;
+    
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-padding: 0;
+    -fx-spacing: 0;
+}
+
+
+.right-sidebar-navigation-background-label{
+    -fx-background-color: rgb(255, 184, 51);
+    -fx-border-color: rgb(255, 184, 51);
+
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-pref-width: 90px;
+    -fx-max-width: 90px;
+    -fx-min-width: 90px;
+    
+    -fx-pref-height: 47px;
+    -fx-max-height: 47px;
+
+}
+.right-sidebar-navigation-button{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-text-fill: rgb(255, 184, 51);
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-border-color: rgb(255, 184, 51);
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-pref-height: 47px;
+    -fx-max-height: 47px;
+    -fx-translate-y: -4px;
+    -fx-pref-width: 88px;
+    -fx-max-width: 88px;
+    -fx-min-width: 88px;
+    
+}
+
+.right-sidebar-navigation-button:pressed{
+    -fx-translate-y: 0px;
+}
+
+.right-sidebar-navigation-button:hover{
+    -fx-text-fill: linear-gradient(to bottom, rgb(255, 184, 51), rgb(255, 145, 0));
+}
+
+
+.list-view-item-row{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+}
+
+.list-view-item-column-left{
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(255, 184, 51);
+    -fx-border-width: 0 1 0 0;
+    -fx-border-radius: 16px 0 0 16px;
+    -fx-background-radius: 16px 0 0 16px;
+    -fx-font-size: 16px;
+
+    -fx-font-family: 'DINRoundPro-Medi';
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-padding: 6px;
+    
+}
+
+.list-view-item-column-right{
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(255, 184, 51);
+    -fx-border-width: 0 0 0 1;
+    -fx-background-radius: 0 16px 16px 0;
+    -fx-border-radius: 0 16px 16px 0;
+    -fx-font-size: 16px;
+
+    -fx-font-family: 'DINRoundPro-Medi';
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-padding: 6px;
+
+}
+.list-view-of-deck-container .list-cell {
+    -fx-padding: 0;
+}
+
+/* Hide Vertical Scrollbar */
+.list-view-of-deck-container .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+}
+
+/* Hide Horizontal Scrollbar (if needed) */
+.list-view-of-deck-container .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+
+
+.scroll-pane {
+    -fx-vbar-policy: AS_NEEDED;
+    -fx-hbar-policy: AS_NEEDED;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+.scroll-pane .scroll-bar{
+    -fx-background-color: transparent; /* Removes scrollbar background */
+}
+/* Style for the ScrollPane */
+.scroll-pane .scroll-bar:vertical{
+    -fx-background-color: rgb(255, 255, 255); /* Makes the ScrollPane background transparent */
+    -fx-padding: 0; /* Removes padding inside the ScrollPane */
+    
+
+}
+
+.scroll-pane .scroll-bar:horizontal{
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+.scroll-pane .scroll-bar:vertical{
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+}
+
+
+.sidebar-content{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 0;
 }

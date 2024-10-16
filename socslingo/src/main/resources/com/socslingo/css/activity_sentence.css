@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');   
+}
+
+
+
+/* Apply a border to all elements */
+/* .vbox {
+    -fx-border-color: red;
+    -fx-border-width: 1;
+}
+
+.hbox {
+    -fx-border-color: blue;
+    -fx-border-width: 1;
+}
+
+
+.label {
+    -fx-border-color: green;
+    -fx-border-width: 1;
+}
+
+.image-view {
+    -fx-border-color: purple;
+    -fx-border-width: 1;
+} */
+
+
+
+.activity-sentence-body-container {
+
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.activity-sentence-word-container {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.activity-title {
+    -fx-font-size: 36px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(60, 60, 60);
+}
+
+.activity-sentence-toggle-button-stackpane:pressed .activity-toggle-button-unselected-state-pressed {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 148px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: 0;
+
+}
+
+.activity-sentence-toggle-button-background-rectangle-unselected-state-unpressed,
+.activity-sentence-toggle-button-background-rectangle-unselected-state-pressed,
+.activity-sentence-toggle-button-background-rectangle-selected-animation-in-progress-state {
+    -fx-fill: #e5e5e5;
+    -fx-arc-width: 24;
+    -fx-arc-height: 24;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-stroke: #e5e5e5;
+    -fx-stroke-width: 1px;
+}
+
+
+
+
+.activity-sentence-toggle-button-selected-animation-in-progress-state,
+.activity-sentence-toggle-button-unselected-state-unpressed {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4b4b4b;
+    -fx-pref-width: 128px;
+    -fx-pref-height: 72px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0 -1 0 -1;
+    -fx-translate-y: -2;
+}

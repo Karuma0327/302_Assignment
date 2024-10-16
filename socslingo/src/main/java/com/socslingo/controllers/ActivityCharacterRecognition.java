@@ -6,8 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-import javafx.animation.FillTransition;
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.util.Duration;
 import javafx.scene.layout.StackPane;
@@ -51,7 +53,7 @@ public class ActivityCharacterRecognition {
     private static final double SELECTED_HEIGHT = 72;
 
     // Animation duration in milliseconds
-    private static final double ANIMATION_DURATION = 300;
+    private static final double ANIMATION_DURATION = 150;
 
     @FXML
     public void initialize() {
@@ -85,17 +87,18 @@ public class ActivityCharacterRecognition {
         for (int i = 0; i < characterPairs.size(); i++) {
             CharacterRecognition pair = characterPairs.get(i);
 
-            // Left button: romaji
+            // Left button: romaji (first in pair)
             StackPane leftPane = leftButtonPanes.get(i);
-            setupButton(leftPane, pair.getRomaji(), "romaji", pair);
+            setupButton(leftPane, pair.getRomaji(), "romaji", pair, 1); // pairOrder = 1
 
-            // Right button: hiragana
+            // Right button: hiragana (second in pair)
             StackPane rightPane = rightButtonPanes.get(i);
-            setupButton(rightPane, pair.getCharacter(), "hiragana", pair);
+            setupButton(rightPane, pair.getCharacter(), "hiragana", pair, 2); // pairOrder = 2
         }
     }
 
-    private void setupButton(StackPane buttonStackPane, String text, String type, CharacterRecognition pair) {
+    private void setupButton(StackPane buttonStackPane, String text, String type, CharacterRecognition pair,
+            int pairOrder) {
         ToggleButton toggleButton = null;
         Label toggleButtonLabel = null;
         Rectangle toggleButtonBackground = null;
@@ -119,6 +122,7 @@ public class ActivityCharacterRecognition {
             finalToggleButtonLabel.setText(text);
             buttonToCharacterMap.put(finalToggleButton, pair);
             finalToggleButton.getProperties().put("type", type);
+            finalToggleButton.getProperties().put("pairOrder", pairOrder); // Assign pairOrder
 
             // Initialize label size to unselected state
             finalToggleButtonLabel.setPrefWidth(UNSELECTED_WIDTH);
@@ -153,47 +157,35 @@ public class ActivityCharacterRecognition {
                 handleButtonSelection(finalToggleButton);
             });
 
-
         }
     }
 
     private void handleToggle(ToggleButton toggleButton, boolean isSelected, Label label,
-                              Rectangle backgroundRectangle) {
-        if (isSelected) {
-            // When selected, perform the overshoot animation
-            double targetWidth = SELECTED_WIDTH;
-            double targetHeight = SELECTED_HEIGHT;
+            Rectangle backgroundRectangle) {
+        if (toggleButton.isDisabled()) {
+            return;
+        }
 
-            // Animate label size
-            animateLabelSize(toggleButton, targetWidth, targetHeight, () -> {
-                // Update styles after animation
+        if (isSelected) {
+            // Perform selection animations and style updates
+            animateLabelSize(toggleButton, SELECTED_WIDTH, SELECTED_HEIGHT, () -> {
                 updateLabelStyle(toggleButton, label, backgroundRectangle, isSelected, true);
-                // Animate button scale
                 animateButtonScale(toggleButton, () -> {
                     // Additional actions after animation if needed
                 });
             });
-
-            // Update styles immediately for pressed state
             updateLabelStyle(toggleButton, label, backgroundRectangle, isSelected, false);
         } else {
-            // When deselected, revert to unselected state without animation
-            double targetWidth = UNSELECTED_WIDTH;
-            double targetHeight = UNSELECTED_HEIGHT;
-
-            // Animate label size without overshoot
-            animateLabelSize(toggleButton, targetWidth, targetHeight, () -> {
-                // Update styles after animation
+            // Revert to unselected styles without animation
+            animateLabelSize(toggleButton, UNSELECTED_WIDTH, UNSELECTED_HEIGHT, () -> {
                 updateLabelStyle(toggleButton, label, backgroundRectangle, isSelected, true);
             });
-
-            // Update styles immediately
             updateLabelStyle(toggleButton, label, backgroundRectangle, isSelected, false);
         }
     }
 
     private void animateLabelSize(ToggleButton toggleButton, double targetWidth, double targetHeight,
-                                  Runnable onFinished) {
+            Runnable onFinished) {
         Label label = getLabelFromToggleButton(toggleButton);
         if (label == null)
             return;
@@ -216,7 +208,8 @@ public class ActivityCharacterRecognition {
     }
 
     /**
-     * Updated method to apply style classes based on the toggle button's state.
+     * Updated method to apply style classes based on the toggle button's state and
+     * type.
      *
      * @param toggleButton        The ToggleButton being updated.
      * @param label               The associated Label.
@@ -225,7 +218,7 @@ public class ActivityCharacterRecognition {
      * @param isPressed           Whether the toggle button is pressed.
      */
     private void updateLabelStyle(ToggleButton toggleButton, Label label, Rectangle backgroundRectangle,
-                                  boolean isSelected, boolean isAnimationComplete) {
+            boolean isSelected, boolean isPressed) {
         // Clear existing style classes
         label.getStyleClass().removeAll(
                 "activity-toggle-button-label-unselected-state-unpressed",
@@ -233,7 +226,15 @@ public class ActivityCharacterRecognition {
                 "activity-toggle-button-label-selected-state-unpressed",
                 "activity-toggle-button-label-selected-state-pressed",
                 "activity-toggle-button-label-selected-state-unpressed-border",
-                "activity-toggle-button-label-selected-animation-in-progress-state");
+                "activity-toggle-button-label-selected-animation-in-progress-state",
+                "activity-toggle-button-label-unselected-state-pressed-grey",
+                "activity-toggle-button-label-unselected-state-pressed-grey-japanese",
+                "activity-toggle-button-label-unselected-state-unpressed-japanese", // Added for Japanese
+                "activity-toggle-button-label-unselected-state-pressed-japanese", // Added for Japanese
+                "activity-toggle-button-label-selected-state-unpressed-japanese", // Added for Japanese
+                "activity-toggle-button-label-selected-state-pressed-japanese" // Added for Japanese
+
+        );
 
         backgroundRectangle.getStyleClass().removeAll(
                 "activity-toggle-button-background-rectangle-unselected-state-unpressed",
@@ -241,7 +242,12 @@ public class ActivityCharacterRecognition {
                 "activity-toggle-button-background-rectangle-selected-state-unpressed",
                 "activity-toggle-button-background-rectangle-selected-state-pressed",
                 "activity-toggle-button-background-rectangle-selected-state-unpressed-border",
-                "activity-toggle-button-background-rectangle-selected-animation-in-progress-state");
+                "activity-toggle-button-background-rectangle-selected-animation-in-progress-state",
+                "activity-toggle-button-background-rectangle-unselected-state-unpressed-japanese", // Added
+                "activity-toggle-button-background-rectangle-unselected-state-pressed-japanese", // Added
+                "activity-toggle-button-background-rectangle-selected-state-unpressed-japanese", // Added
+                "activity-toggle-button-background-rectangle-selected-state-pressed-japanese" // Added
+        );
 
         toggleButton.getStyleClass().removeAll(
                 "activity-toggle-button-unselected-state-pressed",
@@ -249,48 +255,87 @@ public class ActivityCharacterRecognition {
                 "activity-toggle-button-selected-state-unpressed",
                 "activity-toggle-button-selected-state-pressed",
                 "activity-toggle-button-selected-state-unpressed-border",
-                "activity-toggle-button-selected-animation-in-progress-state");
+                "activity-toggle-button-selected-animation-in-progress-state",
+                "activity-toggle-button-unselected-state-unpressed-japanese", // Added
+                "activity-toggle-button-unselected-state-pressed-japanese", // Added
+                "activity-toggle-button-selected-state-unpressed-japanese", // Added
+                "activity-toggle-button-selected-state-pressed-japanese" // Added
+        );
+
+        // Retrieve the button type
+        String type = (String) toggleButton.getProperties().get("type");
+
+        // Determine if the button is Japanese (hiragana)
+        boolean isJapanese = "hiragana".equalsIgnoreCase(type);
+
+        // Define style class suffix based on button type
+        String suffix = isJapanese ? "-japanese" : "";
 
         // Add the appropriate style class based on selection and animation state
         if (isSelected) {
             // If the toggle button is pressed and selected
             if (toggleButton.isPressed()) {
-                label.getStyleClass().add("activity-toggle-button-label-selected-state-pressed");
+                label.getStyleClass().add("activity-toggle-button-label-selected-state-pressed" + suffix);
                 backgroundRectangle.getStyleClass()
-                        .add("activity-toggle-button-background-rectangle-selected-state-pressed");
-                toggleButton.getStyleClass().add("activity-toggle-button-selected-state-pressed");
+                        .add("activity-toggle-button-background-rectangle-selected-state-pressed" + suffix);
+                toggleButton.getStyleClass().add("activity-toggle-button-selected-state-pressed" + suffix);
 
             } else {
                 // If the animation is complete and the button is selected
-                if (isAnimationComplete) {
+                if (isPressed) { // Changed from 'isAnimationComplete' to 'isPressed' to ensure correct state
                     label.getStyleClass()
-                            .add("activity-toggle-button-label-selected-state-unpressed");
+                            .add("activity-toggle-button-label-selected-state-unpressed" + suffix);
                     backgroundRectangle.getStyleClass()
-                            .add("activity-toggle-button-background-rectangle-selected-state-unpressed");
-                    toggleButton.getStyleClass().add("activity-toggle-button-selected-state-unpressed");
+                            .add("activity-toggle-button-background-rectangle-selected-state-unpressed" + suffix);
+                    toggleButton.getStyleClass().add("activity-toggle-button-selected-state-unpressed" + suffix);
 
                 } else {
                     // If the button is selected but the animation is not complete
-                    label.getStyleClass().add("activity-toggle-button-label-selected-state-unpressed");
+                    label.getStyleClass().add("activity-toggle-button-label-selected-state-unpressed" + suffix);
                     backgroundRectangle.getStyleClass()
-                            .add("activity-toggle-button-background-rectangle-selected-animation-in-progress-state");
-                    toggleButton.getStyleClass().add("activity-toggle-button-selected-animation-in-progress-state");
+                            .add("activity-toggle-button-background-rectangle-selected-animation-in-progress-state"
+                                    + suffix);
+                    toggleButton.getStyleClass()
+                            .add("activity-toggle-button-selected-animation-in-progress-state" + suffix);
                 }
             }
         } else {
             // If the toggle button is pressed and not selected
             if (toggleButton.isPressed()) {
-                label.getStyleClass().add("activity-toggle-button-label-unselected-state-pressed");
-                backgroundRectangle.getStyleClass()
-                        .add("activity-toggle-button-background-rectangle-unselected-state-pressed");
-                toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-pressed");
+                if (isJapanese) {
+                    Integer pairOrder = (Integer) toggleButton.getProperties().get("pairOrder");
+                    if (pairOrder != null && pairOrder == 2) {
+                        label.getStyleClass().add("activity-toggle-button-label-unselected-state-pressed-grey-japanese");
+                    } else {
+                        label.getStyleClass().add("activity-toggle-button-label-unselected-state-pressed-japanese");
+                    }
+                    backgroundRectangle.getStyleClass()
+                            .add("activity-toggle-button-background-rectangle-unselected-state-pressed-japanese");
+                    toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-pressed-japanese");
+                } else {
+                    Integer pairOrder = (Integer) toggleButton.getProperties().get("pairOrder");
+                    if (pairOrder != null && pairOrder == 2) {
+                        label.getStyleClass().add("activity-toggle-button-label-unselected-state-pressed-grey");
+                    } else {
+                        label.getStyleClass().add("activity-toggle-button-label-unselected-state-pressed");
+                    }
+                    backgroundRectangle.getStyleClass()
+                            .add("activity-toggle-button-background-rectangle-unselected-state-pressed");
+                    toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-pressed");
+                }
             } else {
                 // If the button is not selected and not pressed
-
-                label.getStyleClass().add("activity-toggle-button-label-unselected-state-unpressed");
-                backgroundRectangle.getStyleClass()
-                        .add("activity-toggle-button-background-rectangle-unselected-state-unpressed");
-                toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed");
+                if (isJapanese) {
+                    label.getStyleClass().add("activity-toggle-button-label-unselected-state-unpressed-japanese");
+                    backgroundRectangle.getStyleClass()
+                            .add("activity-toggle-button-background-rectangle-unselected-state-unpressed-japanese");
+                    toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed-japanese");
+                } else {
+                    label.getStyleClass().add("activity-toggle-button-label-unselected-state-unpressed");
+                    backgroundRectangle.getStyleClass()
+                            .add("activity-toggle-button-background-rectangle-unselected-state-unpressed");
+                    toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed");
+                }
             }
         }
 
@@ -330,7 +375,7 @@ public class ActivityCharacterRecognition {
 
     /**
      * Method to set the main controller reference.
-     *
+     * 
      * @param mainController The ActivityMainController instance.
      */
     public void setMainController(ActivityMainController mainController) {
@@ -346,6 +391,7 @@ public class ActivityCharacterRecognition {
             // The button was deselected
             if (toggleButton.equals(firstSelectedButton)) {
                 firstSelectedButton = null;
+                
             } else if (toggleButton.equals(secondSelectedButton)) {
                 secondSelectedButton = null;
             }
@@ -375,9 +421,6 @@ public class ActivityCharacterRecognition {
             applyCorrectMatchStyles(firstSelectedButton);
             applyCorrectMatchStyles(secondSelectedButton);
 
-            firstSelectedButton.setDisable(true);
-            secondSelectedButton.setDisable(true);
-
             // Increment correct matches counter
             correctMatches++;
 
@@ -404,12 +447,31 @@ public class ActivityCharacterRecognition {
             toggleButton.getStyleClass().clear();
             buttonStackPane.getStyleClass().clear();
 
-            // Apply correct answer styles
-            label.getStyleClass().add("activity-correct-response-toggle-button-label");
-            backgroundRectangle.getStyleClass()
-                    .add("activity-correct-response-toggle-button-background-rectangle");
-            toggleButton.getStyleClass().add("activity-correct-response-toggle-button");
-            buttonStackPane.getStyleClass().add("activity-button-stackpane-type-correct-answer-pressed");
+            // Determine if the button is Japanese (hiragana)
+            String type = (String) toggleButton.getProperties().get("type");
+            boolean isJapanese = "hiragana".equalsIgnoreCase(type);
+
+
+            // Apply correct answer styles based on type
+            if (isJapanese) {
+                label.getStyleClass().add("activity-correct-response-toggle-button-label-japanese");
+                backgroundRectangle.getStyleClass()
+                        .add("activity-correct-response-toggle-button-background-rectangle-japanese");
+                toggleButton.getStyleClass().add("activity-correct-response-toggle-button-japanese");
+                buttonStackPane.getStyleClass().add("activity-correct-response-toggle-button-stackpane-japanese");
+            } else {
+                label.getStyleClass().add("activity-correct-response-toggle-button-label");
+                backgroundRectangle.getStyleClass()
+                        .add("activity-correct-response-toggle-button-background-rectangle");
+                toggleButton.getStyleClass().add("activity-correct-response-toggle-button");
+                buttonStackPane.getStyleClass().add("activity-correct-response-toggle-button-stackpane");
+            }
+
+            // Disable the button to prevent further interactions
+            toggleButton.setDisable(true);
+
+            // Ensure the selected state is reset to prevent default styles
+            toggleButton.setSelected(false);
 
             // Perform overshoot animation
             Timeline timeline = new Timeline();
@@ -438,13 +500,27 @@ public class ActivityCharacterRecognition {
             toggleButton.getStyleClass().clear();
             buttonStackPane.getStyleClass().clear();
 
-            // Apply incorrect answer styles
-            label.getStyleClass().add("activity-button__label--large-type-incorrect-answer-pressed");
-            backgroundRectangle.getStyleClass()
-                    .add("activity-button__background-rectangle--large-type-incorrect-answer-pressed");
-            toggleButton.getStyleClass().add("activity-button--large-type-incorrect-answer-pressed");
-            buttonStackPane.getStyleClass().add("activity-button-stackpane-type-incorrect-answer-pressed");
+            // Determine if the button is Japanese (hiragana)
+            String type = (String) toggleButton.getProperties().get("type");
+            boolean isJapanese = "hiragana".equalsIgnoreCase(type);
 
+            // Apply incorrect answer styles based on type
+            if (isJapanese) {
+                label.getStyleClass().add("activity-incorrect-response-toggle-button-label-japanese");
+                backgroundRectangle.getStyleClass()
+                        .add("activity-incorrect-response-toggle-button-background-rectangle-japanese");
+                toggleButton.getStyleClass().add("activity-incorrect-response-toggle-button-japanese");
+                buttonStackPane.getStyleClass().add("activity-incorrect-response-toggle-button-stackpane-japanese");
+            } else {
+                label.getStyleClass().add("activity-incorrect-response-toggle-button-label");
+                backgroundRectangle.getStyleClass()
+                        .add("activity-incorrect-response-toggle-button-background-rectangle");
+                toggleButton.getStyleClass().add("activity-incorrect-response-toggle-button");
+                buttonStackPane.getStyleClass().add("activity-incorrect-response-toggle-button-stackpane");
+            }
+
+            // Ensure the selected state is reset to prevent default styles
+            toggleButton.setSelected(false);
             // Optional: Add animation for incorrect answers
             Timeline animationTimeline = new Timeline();
             KeyValue scaleUpX = new KeyValue(buttonStackPane.scaleXProperty(), 0.9, Interpolator.EASE_OUT);
@@ -486,29 +562,85 @@ public class ActivityCharacterRecognition {
     }
 
     private void resetStyles(ToggleButton toggleButton) {
-        StackPane buttonStackPane = (StackPane) toggleButton.getParent();
-        Label label = getLabelFromToggleButton(toggleButton);
-        Rectangle backgroundRectangle = getRectangleFromToggleButton(toggleButton);
+    StackPane buttonStackPane = (StackPane) toggleButton.getParent();
+    Label label = getLabelFromToggleButton(toggleButton);
+    Rectangle backgroundRectangle = getRectangleFromToggleButton(toggleButton);
 
-        if (label != null && backgroundRectangle != null) {
+    if (label != null && backgroundRectangle != null) {
+        // Step 1: Fade Out and Scale Down
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), buttonStackPane);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), buttonStackPane);
+        scaleDown.setFromX(1.0);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToX(0.9);
+        scaleDown.setToY(0.9);
+
+        ParallelTransition fadeAndScaleOut = new ParallelTransition(fadeOut, scaleDown);
+
+        fadeAndScaleOut.setOnFinished(evt -> {
             // Clear incorrect styles
-            label.getStyleClass().remove("activity-button__label--large-type-incorrect-answer-pressed");
-            backgroundRectangle.getStyleClass()
-                    .remove("activity-button__background-rectangle--large-type-incorrect-answer-pressed");
-            toggleButton.getStyleClass().remove("activity-button--large-type-incorrect-answer-pressed");
-            buttonStackPane.getStyleClass().remove("activity-button-stackpane-type-incorrect-answer-pressed");
+            label.getStyleClass().removeAll(
+                "activity-incorrect-response-toggle-button-label",
+                "activity-incorrect-response-toggle-button-label-japanese"
+            );
+            backgroundRectangle.getStyleClass().removeAll(
+                "activity-incorrect-response-toggle-button-background-rectangle",
+                "activity-incorrect-response-toggle-button-background-rectangle-japanese"
+            );
+            toggleButton.getStyleClass().removeAll(
+                "activity-incorrect-response-toggle-button",
+                "activity-incorrect-response-toggle-button-japanese"
+            );
+            buttonStackPane.getStyleClass().removeAll(
+                "activity-incorrect-response-toggle-button-stackpane",
+                "activity-incorrect-response-toggle-button-stackpane-japanese"
+            );
 
-            // Reapply default unselected styles
-            label.getStyleClass().add("activity-toggle-button-label-unselected-state-unpressed");
-            backgroundRectangle.getStyleClass()
-                    .add("activity-toggle-button-background-rectangle-unselected-state-unpressed");
-            toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed");
-            buttonStackPane.getStyleClass().add("activity-toggle-button-stackpane");
-        }
+            // Determine if the button is Japanese (hiragana)
+            String type = (String) toggleButton.getProperties().get("type");
+            boolean isJapanese = "hiragana".equalsIgnoreCase(type);
+
+            // Reapply default unselected styles based on type
+            if (isJapanese) {
+                label.getStyleClass().add("activity-toggle-button-label-unselected-state-unpressed-japanese");
+                backgroundRectangle.getStyleClass()
+                        .add("activity-toggle-button-background-rectangle-unselected-state-unpressed-japanese");
+                toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed-japanese");
+                buttonStackPane.getStyleClass().add("activity-toggle-button-stackpane-japanese");
+            } else {
+                label.getStyleClass().add("activity-toggle-button-label-unselected-state-unpressed");
+                backgroundRectangle.getStyleClass()
+                        .add("activity-toggle-button-background-rectangle-unselected-state-unpressed");
+                toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed");
+                buttonStackPane.getStyleClass().add("activity-toggle-button-stackpane");
+            }
+
+            // Step 2: Fade In and Scale Up
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), buttonStackPane);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+
+            ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), buttonStackPane);
+            scaleUp.setFromX(0.9);
+            scaleUp.setFromY(0.9);
+            scaleUp.setToX(1.0);
+            scaleUp.setToY(1.0);
+
+            ParallelTransition fadeAndScaleIn = new ParallelTransition(fadeIn, scaleUp);
+            fadeAndScaleIn.setOnFinished(event -> {
+                // Optionally, perform additional actions after the transition
+            });
+
+            fadeAndScaleIn.play();
+        });
+
+        // Play fade and scale out transitions
+        fadeAndScaleOut.play();
     }
-
-
-
+}
     private void animateButtonScale(ToggleButton toggleButton, Runnable onFinished) {
         StackPane buttonStackPane = (StackPane) toggleButton.getParent();
 

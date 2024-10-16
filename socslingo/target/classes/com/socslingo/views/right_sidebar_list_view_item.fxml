@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="root" alignment="CENTER" styleClass="list-view-item-row" stylesheets="@../css/right_sidebar.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23">
+    <HBox alignment="CENTER" maxWidth="Infinity" styleClass="list-view-item-column-left" HBox.hgrow="ALWAYS">
+        <children>
+            <Label fx:id="frontLabel" alignment="CENTER" text="FRONT" />
+        </children>
+    </HBox>
+    <HBox alignment="CENTER" maxWidth="Infinity" styleClass="list-view-item-column-right" HBox.hgrow="ALWAYS">
+        <children>
+            <Label fx:id="backLabel" alignment="CENTER" text="BACK" />
+        </children>
+    </HBox>
+</HBox>
