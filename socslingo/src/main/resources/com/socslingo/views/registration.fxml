@@ -24,18 +24,18 @@
                                 <Image url="@../images/threadjump_grey.gif" />
                             </image>
                         </ImageView>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-                                <Pane prefHeight="100.0" prefWidth="162.0">
-                                    <children>
-                                        <Label fx:id="socslingo_logo_name" alignment="CENTER" prefHeight="83.0" prefWidth="260.0" styleClass="socslingo-logo-name" text="socslingo" textAlignment="CENTER" />
-                                    </children>
-                                </Pane>
-                            </children>
-                        </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="100.0" prefWidth="162.0">
+                           <children>
+                                    <Label fx:id="socslingo_logo_name" alignment="CENTER" prefHeight="83.0" prefWidth="260.0" styleClass="socslingo-logo-name" text="socslingo" textAlignment="CENTER" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
                     </children>
                 </VBox>
-
+                
                 <!-- Second Column -->
                 <VBox alignment="center" styleClass="right-sidebar-column" HBox.hgrow="ALWAYS">
                     <children>
@@ -57,7 +57,7 @@
                                         <image>
                                             <Image url="@../images/error_icon.png" />
                                         </image>
-                                    </ImageView>
+                                    </ImageView>                              
                                     <Label fx:id="username_error_label" styleClass="error-message-label" text="" />
                                 </HBox>
                                 <TextField fx:id="email_field" promptText="Email" styleClass="registration-text-field" />

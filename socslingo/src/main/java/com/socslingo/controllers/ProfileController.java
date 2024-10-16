@@ -16,12 +16,20 @@ import java.util.ResourceBundle;
 import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.io.InputStream;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import java.util.function.Consumer;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.IIOImage;
+import javax.imageio.stream.ImageOutputStream;
 
 public class ProfileController implements Initializable {
 
@@ -38,6 +46,7 @@ public class ProfileController implements Initializable {
 
     private Image profile_banner_image;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("ProfileController initialized.");
@@ -50,7 +59,10 @@ public class ProfileController implements Initializable {
             joined_date_label.setText("Joined " + current_user.getCreatedDate());
 
             profile_banner_image = ImageCache.getInstance().getBannerImage(current_user.getId());
-
+            Rectangle clip = new Rectangle(profile_banner_image_view.getFitWidth(), profile_banner_image_view.getFitHeight());
+            clip.setArcWidth(30);
+            clip.setArcHeight(30);
+            profile_banner_image_view.setClip(clip);
             if (profile_banner_image != null) {
                 set_profile_banner(profile_banner_image);
             } else {
@@ -63,6 +75,8 @@ public class ProfileController implements Initializable {
             joined_date_label.setText("");
             set_profile_banner_placeholder();
         }
+
+        // Removed viewport settings
     }
 
     @FXML
@@ -72,7 +86,7 @@ public class ProfileController implements Initializable {
             FileChooser file_chooser = new FileChooser();
             file_chooser.setTitle("Select Profile Banner Image");
             file_chooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
             );
             File selected_file = file_chooser.showOpenDialog(profile_banner_image_view.getScene().getWindow());
 
@@ -89,6 +103,7 @@ public class ProfileController implements Initializable {
                             boolean deleted = oldImageFile.delete();
                             if (deleted) {
                                 System.out.println("Deleted old profile banner image: " + oldImageFile.getAbsolutePath());
+
                                 // Remove the old image from the cache
                                 ImageCache.getInstance().removeBannerImage(current_user.getId());
                             } else {
@@ -100,7 +115,7 @@ public class ProfileController implements Initializable {
                         }
                     }
 
-                    // Step 2: Save the new profile banner image
+                    // Step 2: Save the new profile banner image with resizing
                     String image_path = save_profile_banner_image(selected_file, current_user.getId());
 
                     if (image_path != null) {
@@ -124,9 +139,7 @@ public class ProfileController implements Initializable {
                         // Update the database with the new banner path
                         boolean success = user_service.updateUserProfileBanner(current_user.getId(), image_path);
 
-                        if (success) {
-                            System.out.println("Profile banner updated successfully in database.");
-                        } else {
+                        if (!success) {
                             System.err.println("Failed to update profile banner in the database.");
                             // Optionally, revert changes or notify the user
                         }
@@ -143,32 +156,57 @@ public class ProfileController implements Initializable {
         }
     }
 
-    private void set_profile_banner(Image image) {
-        if (image != null) {
-            profile_banner_image_view.setImage(image);
-            profile_banner_image_view.setStyle("");
-            System.out.println("Profile banner set successfully.");
+    /**
+     * Resizes and crops the given BufferedImage to exactly fit the specified width and height.
+     *
+     * @param originalImage The original BufferedImage.
+     * @param targetWidth   The target width.
+     * @param targetHeight  The target height.
+     * @param hasAlpha      Whether the target format supports alpha transparency.
+     * @return The resized and cropped BufferedImage.
+     */
+    private BufferedImage resizeAndCropImage(BufferedImage originalImage, int targetWidth, int targetHeight, boolean hasAlpha) {
+        int originalWidth = originalImage.getWidth();
+        int originalHeight = originalImage.getHeight();
+
+        double ratio = (double) targetWidth / originalWidth;
+        int scaledHeight = (int) (originalHeight * ratio);
+
+        // Choose image type based on alpha support
+        int imageType = hasAlpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
+
+        // Resize the image to targetWidth while maintaining aspect ratio
+        BufferedImage resizedImage = new BufferedImage(targetWidth, scaledHeight, imageType);
+        Graphics2D g = resizedImage.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.drawImage(originalImage, 0, 0, targetWidth, scaledHeight, null);
+        g.dispose();
+
+        // Crop the image if necessary
+        if (scaledHeight > targetHeight) {
+            BufferedImage croppedImage = resizedImage.getSubimage(0, (scaledHeight - targetHeight) / 2, targetWidth, targetHeight);
+            return croppedImage;
+        } else {
+            // If scaled height is less than targetHeight, center the image vertically
+            BufferedImage finalImage = new BufferedImage(targetWidth, targetHeight, imageType);
+            Graphics2D gFinal = finalImage.createGraphics();
+            gFinal.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            int y = (targetHeight - scaledHeight) / 2;
+            gFinal.drawImage(resizedImage, 0, y, null);
+            gFinal.dispose();
+            return finalImage;
         }
     }
 
-    private void set_profile_banner_placeholder() {
-        profile_banner_image_view.setImage(null);
-        profile_banner_image_view.setStyle("-fx-background-color: grey;");
-        System.out.println("Profile banner placeholder set.");
-    }
-
-    private void set_default_banner_image() {
-        try {
-            Image defaultImage = new Image(getClass().getResourceAsStream("/com/socslingo/images/default_banner.png"));
-            profile_banner_image_view.setImage(defaultImage);
-            profile_banner_image_view.setStyle("");
-            System.out.println("Default profile banner set.");
-        } catch (Exception e) {
-            System.err.println("Failed to load default banner image.");
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Saves the profile banner image after resizing and cropping it to exactly 700x400 pixels.
+     *
+     * @param selected_file The original uploaded file.
+     * @param user_id       The ID of the current user.
+     * @return The relative path to the saved image, or null if failed.
+     */
     private String save_profile_banner_image(File selected_file, int user_id) {
         try {
             String current_dir = System.getProperty("user.dir");
@@ -181,24 +219,79 @@ public class ProfileController implements Initializable {
                 System.out.println("Destination directory already exists.");
             }
 
-            String file_extension = get_file_extension(selected_file.getName());
+            String file_extension = get_file_extension(selected_file.getName()).toLowerCase();
+            // Ensure the file extension is suitable for ImageIO
+            if (!file_extension.equals(".png") && !file_extension.equals(".jpg") && 
+                !file_extension.equals(".jpeg") && !file_extension.equals(".gif")) {
+                System.err.println("Unsupported file extension: " + file_extension);
+                return null;
+            }
+
+            String formatName = file_extension.substring(1); // Remove the leading dot
+
             String new_file_name = "banner_user_" + user_id + "_" + System.currentTimeMillis() + file_extension;
             File dest_file = new File(dest_dir, new_file_name);
 
             System.out.println("Destination file path: " + dest_file.getAbsolutePath());
 
-            Files.copy(selected_file.toPath(), dest_file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            // Load original image
+            BufferedImage originalImage = ImageIO.read(selected_file);
+            if (originalImage == null) {
+                System.err.println("Failed to read the image file.");
+                return null;
+            }
 
-            if (dest_file.exists()) {
-                System.out.println("File copied successfully to: " + dest_file.getAbsolutePath());
+            // Determine if the target format supports alpha transparency
+            boolean hasAlpha = formatName.equals("png") || formatName.equals("gif");
+
+            // Resize and crop image to 700x400
+            BufferedImage finalImage = resizeAndCropImage(originalImage, 720, 405, hasAlpha);
+
+            // If saving as JPEG, ensure the image does not have an alpha channel
+            if (!hasAlpha) {
+                BufferedImage rgbImage = new BufferedImage(finalImage.getWidth(), finalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+                Graphics2D g = rgbImage.createGraphics();
+                // Fill the background with white to replace transparency
+                g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                g.setColor(java.awt.Color.WHITE);
+                g.fillRect(0, 0, rgbImage.getWidth(), rgbImage.getHeight());
+                g.drawImage(finalImage, 0, 0, null);
+                g.dispose();
+                finalImage = rgbImage;
+            }
+
+            boolean writeSuccess;
+
+            if (formatName.equals("jpg") || formatName.equals("jpeg")) {
+                // Use ImageWriter for JPEG to set compression quality
+                ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+                ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
+                jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+                jpgWriteParam.setCompressionQuality(1.0f); // Maximum quality
+
+                try (ImageOutputStream outputStream = ImageIO.createImageOutputStream(dest_file)) {
+                    jpgWriter.setOutput(outputStream);
+                    IIOImage outputImage = new IIOImage(finalImage, null, null);
+                    jpgWriter.write(null, outputImage, jpgWriteParam);
+                    writeSuccess = true;
+                } finally {
+                    jpgWriter.dispose();
+                }
+            } else {
+                // For PNG and GIF, use default ImageIO write
+                writeSuccess = ImageIO.write(finalImage, formatName, dest_file);
+            }
+
+            if (writeSuccess && dest_file.exists()) {
+                System.out.println("Resized and cropped image saved successfully to: " + dest_file.getAbsolutePath());
                 return "profile_banners/" + new_file_name;
             } else {
-                System.err.println("File copy failed.");
+                System.err.println("Image save failed.");
                 return null;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error copying the image file: " + e.getMessage());
+            System.err.println("Error processing the image file: " + e.getMessage());
             return null;
         }
     }
@@ -243,7 +336,8 @@ public class ProfileController implements Initializable {
                     return;
                 }
 
-                Image image = new Image(image_file.toURI().toString(), 700, 400, true, true);
+                // **Updated Line:** Load image without specifying width and height
+                Image image = new Image(image_file.toURI().toString());
 
                 if (image.isError()) {
                     System.err.println("Error loading image: " + image.getException());
@@ -251,12 +345,45 @@ public class ProfileController implements Initializable {
                 }
 
                 profile_banner_image_view.setImage(image);
+                // Removed viewport settings
                 profile_banner_image_view.setStyle("");
-                System.out.println("Profile banner updated successfully.");
+                System.out.println("Profile banner updated successfully with dynamic sizing.");
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("Error updating the profile banner: " + e.getMessage());
             }
+        }
+    }
+
+    private void set_profile_banner(Image image) {
+        if (image != null) {
+            profile_banner_image_view.setImage(image);
+            // Removed viewport settings
+            profile_banner_image_view.setStyle("");
+            profile_banner_image_view.setSmooth(true);
+            System.out.println("Profile banner set successfully with dynamic sizing.");
+        }
+    }
+
+    private void set_profile_banner_placeholder() {
+        profile_banner_image_view.setImage(null);
+        profile_banner_image_view.setStyle("-fx-background-color: grey;");
+        System.out.println("Profile banner placeholder set.");
+    }
+
+    private void set_default_banner_image() {
+        try (InputStream is = getClass().getResourceAsStream("/com/socslingo/images/profile_default.png")) {
+            if (is == null) {
+                System.err.println("Failed to locate default banner image at /com/socslingo/images/profile_default.png");
+                return;
+            }
+            Image defaultImage = new Image(is);
+            profile_banner_image_view.setImage(defaultImage);
+            profile_banner_image_view.setStyle("");
+            System.out.println("Default profile banner set.");
+        } catch (Exception e) {
+            System.err.println("Failed to load default banner image.");
+            e.printStackTrace();
         }
     }
 }

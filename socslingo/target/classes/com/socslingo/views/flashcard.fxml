@@ -30,16 +30,16 @@
                     <children>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
                             <children>
-                                <HBox>
-                                    <children>
-                                        <StackPane fx:id="stack_pane" styleClass="flashcard-container">
-                                            <children>
-                                                <Label fx:id="front_label" styleClass="flashcard-label"/>
-                                                <Label fx:id="back_label" styleClass="flashcard-label" visible="false"/>
-                                            </children>
-                                        </StackPane>
-                                    </children>
-                                </HBox>
+                                    <HBox>
+                                        <children>
+                                            <StackPane fx:id="stack_pane" styleClass="flashcard-container">
+                                                <children>
+                                                    <Label fx:id="front_label" styleClass="flashcard-label"/>
+                                                    <Label fx:id="back_label" styleClass="flashcard-label" visible="false"/>
+                                                </children>
+                                            </StackPane>
+                                        </children>
+                                    </HBox>
                             </children>
                         </HBox>
                         <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
@@ -60,5 +60,5 @@
                 <Insets bottom="50.0" left="60.0" right="60.0" top="30.0" />
             </padding>
         </VBox>
-    </children>
+    </children> 
 </VBox>

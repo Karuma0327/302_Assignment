@@ -11,9 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -57,9 +59,8 @@ public class PrimaryController {
 
     @FXML
     private Button switch_to_deck_management_button;
-
     @FXML
-    private Button switch_to_flashcard_management_button;
+    private Button switch_to_activity_main_test_button;
 
     @FXML
     private Button switch_to_profile_button;
@@ -89,8 +90,19 @@ public class PrimaryController {
     private HBox status_bar;
 
     private Set<String> fxmlWithHiddenSidebar = new HashSet<>(Arrays.asList(
-            "/com/socslingo/views/activity_main.fxml"
+        "/com/socslingo/views/activity_main.fxml"
     ));
+    
+    @FXML
+    private Button toggle_right_sidebar_button;
+
+    // New instance variables for managing context menu state
+    private boolean is_context_menu_visible = false;
+    private PauseTransition hidePause;
+
+    private BorderPane preloadedIntermissionScreen;
+private ImageView preloadedMascotImageView;
+
     @FXML
     private void initialize() {
         logger.info("Initializing PrimaryController");
@@ -111,15 +123,18 @@ public class PrimaryController {
             button_to_fxml_map.put("switch_to_registration_page_button", "/com/socslingo/views/registration.fxml");
             button_to_fxml_map.put("switch_to_registration_fxml_button", "/com/socslingo/views/registration.fxml");
             button_to_fxml_map.put("switch_to_activity_main_button", "/com/socslingo/views/activity_main.fxml");
+            button_to_fxml_map.put("switch_to_activity_main_test_button", "/com/socslingo/views/activity_main_test.fxml");
 
             sidebar_buttons = Arrays.asList(
                     sidebar_switch_to_home_button,
                     sidebar_switch_to_main_flashcard_button,
                     switch_to_activity_main_button,
                     switch_to_deck_management_button,
-                    switch_to_flashcard_management_button,
+                    switch_to_activity_main_test_button,
                     switch_to_profile_button,
                     more_button);
+
+            preloadIntermissionScreen();
 
             setActiveButton(sidebar_switch_to_home_button);
 
@@ -144,6 +159,7 @@ public class PrimaryController {
         }
     }
 
+    
     public void setActiveButton(Button active_button) {
         logger.debug("Setting active button: {}", active_button != null ? active_button.getId() : "None");
         for (Button button : sidebar_buttons) {
@@ -178,28 +194,34 @@ public class PrimaryController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
         loader.setControllerFactory(ControllerManager.getInstance());
         Node node = loader.load();
-
+    
         if (controller_consumer != null) {
             controller_consumer.accept(loader);
         }
-
+    
         content_area.getChildren().clear();
         logger.debug("Cleared existing content in content_area");
-
-        content_area.getChildren().add(node);
-        logger.debug("Added new content to content_area");
-
-        FadeTransition fade_in = new FadeTransition(Duration.millis(500), node);
-        fade_in.setFromValue(0);
-        fade_in.setToValue(1);
-        fade_in.play();
-        logger.debug("Applied fade-in transition to new content");
+    
+        if (fxml_path.equals("/com/socslingo/views/activity_main.fxml")) {
+            // Load the startup screen first
+            loadStartupScreen(node);
+        } else {
+            content_area.getChildren().add(node);
+            logger.debug("Added new content to content_area");
+    
+            FadeTransition fade_in = new FadeTransition(Duration.millis(500), node);
+            fade_in.setFromValue(0);
+            fade_in.setToValue(1);
+            fade_in.play();
+            logger.debug("Applied fade-in transition to new content");
+        }
+    
         if (fxmlWithHiddenSidebar.contains(fxml_path)) {
             setSidebarVisibility(false);
         } else {
             setSidebarVisibility(true);
         }
-
+    
         if (shouldShowRightSidebar(fxml_path)) {
             loadRightSidebar();
         } else {
@@ -211,6 +233,7 @@ public class PrimaryController {
         switchContent(fxml_path, null);
     }
 
+    
     private boolean shouldShowRightSidebar(String fxml_path) {
         List<String> fxml_with_sidebar = Arrays.asList(
                 "/com/socslingo/views/home.fxml",
@@ -221,6 +244,97 @@ public class PrimaryController {
         return should_show;
     }
 
+    private void preloadIntermissionScreen() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/intermission.fxml"));
+            preloadedIntermissionScreen = loader.load();
+            VBox vbox = (VBox) preloadedIntermissionScreen.getCenter();
+            preloadedMascotImageView = (ImageView) vbox.getChildren().get(0);
+            
+            // Set up the bindings
+            preloadedIntermissionScreen.prefWidthProperty().bind(content_area.widthProperty());
+            preloadedIntermissionScreen.prefHeightProperty().bind(content_area.heightProperty());
+            
+            // Adjust the image size (e.g., 30% of the parent's width)
+            preloadedMascotImageView.fitWidthProperty().bind(preloadedIntermissionScreen.widthProperty().multiply(0.40));
+            preloadedMascotImageView.setPreserveRatio(true);
+        } catch (IOException e) {
+            logger.error("Failed to preload intermission screen", e);
+            showAlert(Alert.AlertType.ERROR, "Failed to preload the intermission screen.");
+        }
+    }
+    private void loadStartupScreen(Node nextContent) {
+        try {
+            // Create a white pane for the fade transition
+            Pane whitePane = new Pane();
+            whitePane.setStyle("-fx-background-color: white;");
+            whitePane.prefWidthProperty().bind(content_area.widthProperty());
+            whitePane.prefHeightProperty().bind(content_area.heightProperty());
+            whitePane.setOpacity(0);
+    
+            // Add the white pane to the content area
+            content_area.getChildren().add(whitePane);
+    
+            // Fade to white
+            FadeTransition fadeToWhite = new FadeTransition(Duration.seconds(1), whitePane);
+            fadeToWhite.setFromValue(0);
+            fadeToWhite.setToValue(1);
+    
+            // Hide sidebar
+            TranslateTransition hideSidebar = new TranslateTransition(Duration.millis(300), left_sidebar);
+            hideSidebar.setToX(-left_sidebar.getWidth());
+    
+            // Use the preloaded intermission screen
+            BorderPane startupScreen = preloadedIntermissionScreen;
+            ImageView mascotImageView = preloadedMascotImageView;
+    
+            // Create a fade transition for the startup screen
+            FadeTransition fadeInStartup = new FadeTransition(Duration.seconds(1), startupScreen);
+            fadeInStartup.setFromValue(0);
+            fadeInStartup.setToValue(1);
+    
+            FadeTransition fadeOutStartup = new FadeTransition(Duration.seconds(1), startupScreen);
+            fadeOutStartup.setFromValue(1.0);
+            fadeOutStartup.setToValue(0.0);
+    
+            // Create the sequence of transitions
+            SequentialTransition sequence = new SequentialTransition(
+                fadeToWhite,
+                hideSidebar,
+                new PauseTransition(Duration.millis(300)), // Short pause before showing intermission
+                new Transition() { // Custom transition to swap content
+                    { setCycleDuration(Duration.millis(1)); }
+                    @Override
+                    protected void interpolate(double frac) {
+                        if (frac == 1.0) {
+                            content_area.getChildren().setAll(startupScreen);
+                        }
+                    }
+                },
+                fadeInStartup,
+                new PauseTransition(Duration.seconds(3)), // Display intermission for 3 seconds
+                fadeOutStartup
+            );
+    
+            sequence.setOnFinished(event -> {
+                // Replace the startup screen with the actual content
+                content_area.getChildren().setAll(nextContent);
+    
+                // Apply fade-in transition to the new content
+                FadeTransition fadeInContent = new FadeTransition(Duration.millis(500), nextContent);
+                fadeInContent.setFromValue(0);
+                fadeInContent.setToValue(1);
+                fadeInContent.play();
+            });
+    
+            sequence.play();
+    
+        } catch (Exception e) {
+            logger.error("Failed to load startup screen", e);
+            showAlert(Alert.AlertType.ERROR, "Failed to load the startup screen.");
+        }
+    }
+    
     private void loadRightSidebar() throws IOException {
         logger.debug("Loading right sidebar");
         if (right_sidebar == null) {
@@ -263,8 +377,8 @@ public class PrimaryController {
         }
     }
 
-    @FXML
-    private void handleLogout(ActionEvent event) {
+
+    public void handleLogout(ActionEvent event) {
         logger.info("Logout initiated");
         System.out.println("Logging out...");
         showAlert(Alert.AlertType.INFORMATION, "Logging out...");
@@ -277,13 +391,13 @@ public class PrimaryController {
         logger.info("Logout successful and switched to login ");
     }
 
-    private void clearUserSession() {
+    public void clearUserSession() {
         SessionManager.getInstance().setCurrentUser(null);
         logger.debug("User session cleared");
     }
 
-    @FXML
-    private void handleSettings(ActionEvent event) {
+
+    public void handleSettings(ActionEvent event) {
         logger.info("Settings button clicked");
         try {
             switchContent("/com/socslingo/views/settings.fxml");
@@ -295,8 +409,7 @@ public class PrimaryController {
         more_context_menu.hide();
     }
 
-    @FXML
-    private void handleHelp(ActionEvent event) {
+    public void handleHelp(ActionEvent event) {
         logger.info("Help option selected from ContextMenu");
         try {
             switchContent("/com/socslingo/views/help.fxml");
@@ -307,45 +420,80 @@ public class PrimaryController {
         }
         more_context_menu.hide();
     }
-
+    public ContextMenu getMoreContextMenu() {
+        return more_context_menu;
+    }
     private void setupContextMenu() {
         logger.debug("Setting up ContextMenu for 'More' button");
-        more_context_menu.hide();
-        final boolean[] is_context_menu_visible = { false };
 
-        more_button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            if (!is_context_menu_visible[0]) {
-                logger.debug("Mouse entered 'More' button");
-                Bounds more_button_bounds = more_button.localToScreen(more_button.getBoundsInLocal());
-                more_context_menu.show(more_button, more_button_bounds.getMaxX() + 10, more_button_bounds.getMinY());
-                is_context_menu_visible[0] = true;
-                logger.info("'More' ContextMenu displayed");
-            }
-        });
+        try {
+            FXMLLoader contextMenuLoader = new FXMLLoader(getClass().getResource("/com/socslingo/views/more_context_menu.fxml"));
+            contextMenuLoader.setControllerFactory(ControllerManager.getInstance());
+            more_context_menu = contextMenuLoader.load();
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(1));
-        pause.setOnFinished(event -> {
-            more_context_menu.hide();
-            is_context_menu_visible[0] = false;
-            logger.debug("'More' ContextMenu hidden after delay");
-        });
+            more_button.setContextMenu(more_context_menu);
 
-        more_button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            logger.debug("Mouse exited 'More' button");
-            pause.playFromStart();
-        });
+            // Initialize the hidePause as an instance variable
+            hidePause = new PauseTransition(Duration.seconds(3));
+            hidePause.setOnFinished(event -> {
+                more_context_menu.hide();
+                is_context_menu_visible = false;
+                logger.debug("'More' ContextMenu hidden after 3-second delay");
+            });
 
-        more_context_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            logger.debug("Mouse entered ContextMenu");
-            pause.stop();
-        });
+            more_button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                if (!is_context_menu_visible) {
+                    logger.debug("Mouse entered 'More' button");
+                    Bounds more_button_bounds = more_button.localToScreen(more_button.getBoundsInLocal());
+                    more_context_menu.show(more_button, more_button_bounds.getMaxX() + 10, more_button_bounds.getMinY());
+                    is_context_menu_visible = true;
+                    logger.info("'More' ContextMenu displayed");
+                }
+                hidePause.stop(); // Stop the hide delay when mouse re-enters
+            });
 
-        more_context_menu.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            logger.debug("Mouse exited ContextMenu");
-            pause.playFromStart();
-        });
+            more_button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                logger.debug("Mouse exited 'More' button");
+                hidePause.playFromStart(); // Start the hide delay when mouse exits
+            });
 
-        logger.info("ContextMenu setup completed");
+            more_context_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                logger.debug("Mouse entered ContextMenu");
+                hidePause.stop(); // Stop the hide delay when mouse enters the context menu
+            });
+
+            more_context_menu.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                logger.debug("Mouse exited ContextMenu");
+                hidePause.playFromStart(); // Start the hide delay when mouse exits the context menu
+            });
+
+            // Add a listener for window focus events
+            stack_pane.sceneProperty().addListener((observable, oldScene, newScene) -> {
+                if (newScene != null) {
+                    newScene.windowProperty().addListener((obs, oldWindow, newWindow) -> {
+                        if (newWindow != null) {
+                            newWindow.focusedProperty().addListener((obsFocus, wasFocused, isFocused) -> {
+                                if (isFocused) {
+                                    hidePause.stop(); // Reset the hide delay when window regains focus
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            // **New Addition**: Reset visibility flag when the context menu is hidden
+            more_context_menu.setOnHidden(event -> {
+                logger.debug("'More' ContextMenu has been hidden");
+                is_context_menu_visible = false;
+                hidePause.stop(); // Ensure no pending hide transitions
+            });
+
+            logger.info("ContextMenu setup completed with 3-second hide delay");
+        } catch (IOException e) {
+            logger.error("Failed to load more_context_menu.fxml", e);
+            showAlert(Alert.AlertType.ERROR, "Failed to load the 'More' menu.");
+        }
     }
 
     private void showAlert(Alert.AlertType alert_type, String message) {
@@ -464,9 +612,6 @@ public class PrimaryController {
     public Button getDeckManagementButton() {
         return switch_to_deck_management_button;
     }
-
-    @FXML
-    private Button toggle_right_sidebar_button;
 
     public void showRightSidebar() {
         if (right_sidebar != null && !is_right_sidebar_visible) {
