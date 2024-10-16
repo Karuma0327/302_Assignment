@@ -31,7 +31,10 @@
 
             <!-- Navigation Buttons to Flashcard Management -->
             <HBox spacing="10" alignment="CENTER">
+                
                 <Button fx:id="preview_deck_button" text="Preview Deck" onAction="#handlePreviewDeck"
+                        styleClass="generic-button-medium"/>
+                <Button fx:id="switch_to_flashcard_creation_button" text="Create Flashcard" onAction="#handleButtonAction"
                         styleClass="generic-button-medium"/>
                 <Button fx:id="delete_deck_button" text="Delete Deck" onAction="#handleDeleteDeck"
                         styleClass="generic-button-medium"/>

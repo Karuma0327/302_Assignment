@@ -37,6 +37,10 @@ public class DeckManagementController implements Initializable {
     private Button delete_deck_button;
 
     private ObservableList<Deck> decks_observable_list;
+
+    @FXML
+    private Button switch_to_flashcard_creation_button;
+
     private Map<String, String> button_to_fxml_map;
 
     @FXML 
@@ -50,6 +54,7 @@ public class DeckManagementController implements Initializable {
 
         button_to_fxml_map = new HashMap<>();
         button_to_fxml_map.put("switch_to_deck_flashcard_management_button", "/com/socslingo/views/deck_flashcard_management.fxml");
+        button_to_fxml_map.put("switch_to_flashcard_creation_button", "/com/socslingo/views/create_flashcard.fxml");
 
         try {
             DatabaseManager database_manager = DatabaseManager.getInstance();
@@ -405,4 +410,7 @@ public class DeckManagementController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Failed to load deck preview.");
         }
     }
+
+
+
 }

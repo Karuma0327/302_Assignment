@@ -16,115 +16,115 @@
 
 
 <VBox alignment="CENTER" spacing="25.0" stylesheets="@../css/activity.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ActivityCharacterRecognition">
-   <children>
-      <VBox>
-         <children>
-            <Label prefWidth="481.0" styleClass="activity-select-matching-pairs-title" text="Select the matching pairs">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="-40.0" />
-               </padding></Label>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
-      <BorderPane >
-         <center>
-            <HBox alignment="CENTER" prefHeight="900">
-               <children>
-                  <VBox alignment="CENTER">
-                     <children>
-                        <GridPane fx:id="gridPane" alignment="CENTER" hgap="20.0" vgap="20.0">
-                          <!-- Define 2 Columns with dynamic sizing -->
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" />
-                            <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" />
-                          </columnConstraints>
-                          <!-- Define 3 Rows with dynamic sizing -->
-                          <rowConstraints>
-                            <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
-                            <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
-                            <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
-                              <RowConstraints />
-                              <RowConstraints />
-                          </rowConstraints>
-                          <children>
-                              
-                            <!-- First Row, First Column -->
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_JP" />
-                            </StackPane>
-    
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_ENG" />
-                            </StackPane>
-      
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD2_JP" />
-                            </StackPane>
-    
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD2_ENG" />
-                            </StackPane>
-                              
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD3_JP" />
-                            </StackPane>
-    
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD3_ENG" />
-                            </StackPane>
-      
-      
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD4_JP" />
-                            </StackPane>
-    
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD4_ENG" />
-                            </StackPane>      
+    <children>
+        <VBox>
+            <children>
+                <Label prefWidth="481.0" styleClass="activity-select-matching-pairs-title" text="Select the matching pairs">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <padding>
+                        <Insets left="-40.0" />
+                    </padding></Label>
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </VBox>
+        <BorderPane >
+            <center>
+                <HBox alignment="CENTER" prefHeight="900">
+                    <children>
+                        <VBox alignment="CENTER">
+                            <children>
+                                <GridPane fx:id="gridPane" alignment="CENTER" hgap="20.0" vgap="20.0">
+                                    <!-- Define 2 Columns with dynamic sizing -->
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" />
+                                    </columnConstraints>
+                                    <!-- Define 3 Rows with dynamic sizing -->
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
+                                        <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
+                                        <RowConstraints minHeight="50.0" vgrow="ALWAYS" />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                    <children>
 
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="4">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_JP" />
-                            </StackPane>
-    
-                            <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                  <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
-                                  <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
-                                  <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_ENG" />
-                            </StackPane>     
+                                        <!-- First Row, First Column -->
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_JP" />
+                                        </StackPane>
 
-                          </children>
-                        </GridPane>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </center>
-      </BorderPane>
-   </children>
-   <padding>
-      <Insets bottom="70.0" left="70.0" right="70.0" top="50.0" />
-   </padding>
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_ENG" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD2_JP" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD2_ENG" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD3_JP" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD3_ENG" />
+                                        </StackPane>
+
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD4_JP" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD4_ENG" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_JP" />
+                                        </StackPane>
+
+                                        <StackPane alignment="CENTER" styleClass="activity-toggle-button-stackpane" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                            <Rectangle height="72.0" strokeType="INSIDE" styleClass="activity-toggle-button-background-rectangle-unselected-state-unpressed" width="257.0" />
+                                            <ToggleButton mnemonicParsing="false" styleClass="activity-toggle-button-unselected-state-unpressed" />
+                                            <Label styleClass="activity-toggle-button-label-unselected-state-unpressed" MouseTransparent="true"  text="WORD1_ENG" />
+                                        </StackPane>
+
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </center>
+        </BorderPane>
+    </children>
+    <padding>
+        <Insets bottom="70.0" left="70.0" right="70.0" top="50.0" />
+    </padding>
 </VBox>

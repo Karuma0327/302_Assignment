@@ -158,7 +158,7 @@ public class ActivityCharacterRecognition {
     }
 
     private void handleToggle(ToggleButton toggleButton, boolean isSelected, Label label,
-            Rectangle backgroundRectangle) {
+                              Rectangle backgroundRectangle) {
         if (isSelected) {
             // When selected, perform the overshoot animation
             double targetWidth = SELECTED_WIDTH;
@@ -193,7 +193,7 @@ public class ActivityCharacterRecognition {
     }
 
     private void animateLabelSize(ToggleButton toggleButton, double targetWidth, double targetHeight,
-            Runnable onFinished) {
+                                  Runnable onFinished) {
         Label label = getLabelFromToggleButton(toggleButton);
         if (label == null)
             return;
@@ -225,7 +225,7 @@ public class ActivityCharacterRecognition {
      * @param isPressed           Whether the toggle button is pressed.
      */
     private void updateLabelStyle(ToggleButton toggleButton, Label label, Rectangle backgroundRectangle,
-            boolean isSelected, boolean isAnimationComplete) {
+                                  boolean isSelected, boolean isAnimationComplete) {
         // Clear existing style classes
         label.getStyleClass().removeAll(
                 "activity-toggle-button-label-unselected-state-unpressed",
@@ -293,7 +293,7 @@ public class ActivityCharacterRecognition {
                 toggleButton.getStyleClass().add("activity-toggle-button-unselected-state-unpressed");
             }
         }
-        
+
     }
 
     /**
@@ -330,7 +330,7 @@ public class ActivityCharacterRecognition {
 
     /**
      * Method to set the main controller reference.
-     * 
+     *
      * @param mainController The ActivityMainController instance.
      */
     public void setMainController(ActivityMainController mainController) {

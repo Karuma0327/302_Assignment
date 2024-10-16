@@ -89,7 +89,7 @@ public class PrimaryController {
     private HBox status_bar;
 
     private Set<String> fxmlWithHiddenSidebar = new HashSet<>(Arrays.asList(
-        "/com/socslingo/views/activity_main.fxml"
+            "/com/socslingo/views/activity_main.fxml"
     ));
     @FXML
     private void initialize() {

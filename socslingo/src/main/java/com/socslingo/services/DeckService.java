@@ -18,6 +18,20 @@ public class DeckService {
         this.deck_data_access = deck_data_access;
     }
 
+    public Deck getDeckByName(int userId, String deckName) {
+        try {
+            List<Deck> userDecks = deck_data_access.getUserDecks(userId);
+            for (Deck deck : userDecks) {
+                if (deck.getDeckName().equals(deckName)) {
+                    return deck;
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            logger.error("Exception occurred while retrieving deck '{}' for userId: {}", deckName, userId, e);
+            throw new RuntimeException("Failed to retrieve deck by name.", e);
+        }
+    }
     public Deck createDeck(int user_id, String deck_name) {
         if (deck_name == null || deck_name.trim().isEmpty()) {
             logger.warn("Attempted to create a deck with an empty name.");

@@ -72,7 +72,7 @@ public class ProfileController implements Initializable {
             FileChooser file_chooser = new FileChooser();
             file_chooser.setTitle("Select Profile Banner Image");
             file_chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
             );
             File selected_file = file_chooser.showOpenDialog(profile_banner_image_view.getScene().getWindow());
 

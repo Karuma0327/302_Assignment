@@ -117,8 +117,8 @@ public class ImageCache {
                             String fileName = imageFile.getName();
                             Integer userId = extractUserIdFromFilename(fileName);
                             if (userId != null) {
-                                // Load image at original size
-                                Image image = new Image(imageFile.toURI().toString(), 0, 0, true, true);
+                                // Load image at original size with maximum quality parameters
+                                Image image = new Image(imageFile.toURI().toString(), 0, 0, true, true, true);
                                 userBannerImages.put(userId, image);
                                 System.out.println("Preloaded banner image for user ID: " + userId);
                             } else {
@@ -165,8 +165,8 @@ public class ImageCache {
                 protected Image call() throws Exception {
                     File imageFile = new File(System.getProperty("user.dir"), imagePath);
                     if (imageFile.exists()) {
-                        // Load image at original size
-                        return new Image(imageFile.toURI().toString(), 0, 0, true, true);
+                        // Load image at original size with maximum quality parameters
+                        return new Image(imageFile.toURI().toString(), 0, 0, true, true, true);
                     } else {
                         System.err.println("Image file not found: " + imageFile.getAbsolutePath());
                         return null;

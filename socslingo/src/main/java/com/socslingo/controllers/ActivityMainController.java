@@ -39,7 +39,7 @@ public class ActivityMainController {
 
     @FXML
     private Label continue_button_label;
-    
+
     @FXML
     private Rectangle continue_button_background_rectangle;
 
@@ -50,7 +50,7 @@ public class ActivityMainController {
     private Button skip_button;
 
     @FXML
-    private VBox skip_control_container;    
+    private VBox skip_control_container;
 
     @FXML
     private Button report_button;
@@ -114,7 +114,7 @@ public class ActivityMainController {
         // Initialize bottom_section background to neutral color
         bottom_section.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255), CornerRadii.EMPTY, null)));
     }
-        
+
     /**
      * Animates the background color of bottom_section.
      *
@@ -145,8 +145,8 @@ public class ActivityMainController {
 
         // Create and play the timeline for color transition
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.ZERO, new KeyValue(colorProperty, currentColor)),
-            new KeyFrame(Duration.millis(durationMillis), new KeyValue(colorProperty, targetColor))
+                new KeyFrame(Duration.ZERO, new KeyValue(colorProperty, currentColor)),
+                new KeyFrame(Duration.millis(durationMillis), new KeyValue(colorProperty, targetColor))
         );
 
         timeline.play();
@@ -182,20 +182,20 @@ public class ActivityMainController {
     private void setContinueButtonToIncorrectHover() {
         // Remove existing style classes related to the default or enabled state
         continue_button_label.getStyleClass().removeAll(
-            "activity-continue-button__label--medium-type-hover",
-            "activity-button__label--medium-type-check-answer-unclickable"
+                "activity-continue-button__label--medium-type-hover",
+                "activity-button__label--medium-type-check-answer-unclickable"
         );
         continue_button.getStyleClass().removeAll(
-            "activity-continue-button--medium-type-hover",
-            "activity-button--medium-type-check-answer-unclickable"
+                "activity-continue-button--medium-type-hover",
+                "activity-button--medium-type-check-answer-unclickable"
         );
         continue_button_background_rectangle.getStyleClass().removeAll(
-            "activity-continue-button__background-rectangle--medium-type-hover",
-            "activity-button__background-rectangle--medium-type-check-answer-unclickable"
+                "activity-continue-button__background-rectangle--medium-type-hover",
+                "activity-button__background-rectangle--medium-type-check-answer-unclickable"
         );
         continue_button_stackpane.getStyleClass().removeAll(
-            "activity-continue-button-stackpane-type-hover",
-            "activity-button-stackpane-type-check-answer-unclickable"
+                "activity-continue-button-stackpane-type-hover",
+                "activity-button-stackpane-type-check-answer-unclickable"
         );
 
         // Add 'incorrect-hover' style classes
@@ -297,12 +297,12 @@ public class ActivityMainController {
      */
     private void animateProgressBar(double targetProgress, double durationMillis) {
         Timeline timeline = new Timeline(
-            new KeyFrame(Duration.ZERO,
-                new KeyValue(progress_bar.progressProperty(), progress_bar.getProgress())
-            ),
-            new KeyFrame(Duration.millis(durationMillis),
-                new KeyValue(progress_bar.progressProperty(), targetProgress)
-            )
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(progress_bar.progressProperty(), progress_bar.getProgress())
+                ),
+                new KeyFrame(Duration.millis(durationMillis),
+                        new KeyValue(progress_bar.progressProperty(), targetProgress)
+                )
         );
         timeline.play();
     }
@@ -342,26 +342,26 @@ public class ActivityMainController {
     private void resetContinueButtonStyles() {
         // Remove 'incorrect-hover' and 'hover' style classes from the label
         continue_button_label.getStyleClass().removeAll(
-            "activity-continue-button__label--medium-type-incorrect-hover",
-            "activity-continue-button__label--medium-type-hover"
+                "activity-continue-button__label--medium-type-incorrect-hover",
+                "activity-continue-button__label--medium-type-hover"
         );
-        
+
         // Remove 'incorrect-hover' and 'hover' style classes from the button
         continue_button.getStyleClass().removeAll(
-            "activity-continue-button--medium-type-incorrect-hover",
-            "activity-continue-button--medium-type-hover"
+                "activity-continue-button--medium-type-incorrect-hover",
+                "activity-continue-button--medium-type-hover"
         );
-        
+
         // Remove 'incorrect-hover' and 'hover' style classes from the background rectangle
         continue_button_background_rectangle.getStyleClass().removeAll(
-            "activity-continue-button__background-rectangle--medium-type-incorrect-hover",
-            "activity-continue-button__background-rectangle--medium-type-hover"
+                "activity-continue-button__background-rectangle--medium-type-incorrect-hover",
+                "activity-continue-button__background-rectangle--medium-type-hover"
         );
-        
+
         // Remove 'incorrect-hover' and 'hover' style classes from the stack pane
         continue_button_stackpane.getStyleClass().removeAll(
-            "activity-continue-button-stackpane-type-incorrect-hover",
-            "activity-continue-button-stackpane-type-hover"
+                "activity-continue-button-stackpane-type-incorrect-hover",
+                "activity-continue-button-stackpane-type-hover"
         );
 
         // Re-add 'check-answer-unclickable' style classes
@@ -382,7 +382,7 @@ public class ActivityMainController {
      */
     private void loadCharacterRecognitionActivity() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/socslingo/views/activity_character_recognition.fxml"));
-        
+
         if (loader.getLocation() == null) {
             throw new IOException("FXML file not found at /com/socslingo/views/activity_character_recognition.fxml");
         }
@@ -442,7 +442,7 @@ public class ActivityMainController {
     public void enableCheckButton() {
         continue_button.setDisable(false);
         continue_button_label.setDisable(false);
-        
+
         // Remove classes related to the unclickable state
         continue_button_label.getStyleClass().remove("activity-button__label--medium-type-check-answer-unclickable");
         continue_button.getStyleClass().remove("activity-button--medium-type-check-answer-unclickable");

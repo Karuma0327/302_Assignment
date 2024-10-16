@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="right_sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
-    fx:controller="com.socslingo.controllers.RightSidebarController" spacing="10" alignment="TOP_CENTER" 
-    styleClass="right-sidebar" stylesheets="@../css/right_sidebar.css">
+<VBox fx:id="right_sidebar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.socslingo.controllers.RightSidebarController" spacing="10" alignment="TOP_CENTER"
+      styleClass="right-sidebar" stylesheets="@../css/right_sidebar.css">
     <children>
-        <HBox> 
+        <HBox>
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>

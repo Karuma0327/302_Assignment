@@ -64,7 +64,7 @@
 
 
 .create-flash-card-button{
-    -fx-background-color: #f5d78e; 
+    -fx-background-color: #f5d78e;
     -fx-pref-width: 190px;
     -fx-pref-height: 45px;
     -fx-border-color: #f2c868; /* Outline color */
@@ -78,7 +78,7 @@
 
 }
 .create-flash-card-button:hover{
-    -fx-background-color: #f7dfa3; 
+    -fx-background-color: #f7dfa3;
 
 }
 
@@ -132,7 +132,7 @@
 }
 
 .generic-button-medium{
-    -fx-background-color: #FFD580; 
+    -fx-background-color: #FFD580;
     -fx-text-fill: #ffffff;
     -fx-pref-width: 168px;
     -fx-pref-height: 48px;
@@ -141,7 +141,7 @@
     -fx-background-radius: 12px; /* Rounded corners */
     -fx-border-radius: 12px; /* Rounded corners */
     -fx-font-size: 15px;
-    -fx-border-style: solid; 
+    -fx-border-style: solid;
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-cursor: hand;
 }

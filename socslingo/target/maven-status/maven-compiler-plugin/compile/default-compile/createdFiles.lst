@@ -1,5 +1,6 @@
 com\socslingo\cache\ImageCache$ImageLoadService$1.class
 com\socslingo\services\UserService.class
+com\socslingo\controllers\ActivityMainTestController.class
 com\socslingo\dataAccess\UserDataAccess.class
 com\socslingo\controllers\ProfileController$2.class
 com\socslingo\dataAccess\ConversationDataAccess.class
@@ -8,7 +9,6 @@ com\socslingo\managers\ControllerManager.class
 com\socslingo\services\DeckService.class
 com\socslingo\dataAccess\UserPetDataAccess.class
 com\socslingo\managers\DatabaseManager.class
-com\socslingo\controllers\ActivityCharacterRecognition$1.class
 com\socslingo\models\Conversation.class
 com\socslingo\controllers\RightSidebarController.class
 com\socslingo\models\Deck.class
@@ -25,6 +25,7 @@ com\socslingo\controllers\RegistrationController.class
 com\socslingo\cache\ImageCache$ImageLoadAllService.class
 com\socslingo\controllers\ActivityMainController.class
 com\socslingo\dataAccess\UserStatisticsDataAccess.class
+com\socslingo\controllers\ActivitySentenceController.class
 com\socslingo\models\CharacterRecognition.class
 com\socslingo\cache\ImageCache$ImageLoadService.class
 com\socslingo\controllers\ActivityCharacterRecognition.class
@@ -47,6 +48,7 @@ com\socslingo\dataAccess\FlashcardDataAccess.class
 com\socslingo\cache\ImageCache.class
 com\socslingo\services\UserStatisticsService.class
 com\socslingo\dataAccess\CharacterRecognitionDataAccess.class
+com\socslingo\controllers\ActivityMainTestController$1.class
 com\socslingo\controllers\DeckPreviewController.class
 com\socslingo\controllers\DeckFlashcardManagementController.class
 com\socslingo\controllers\DeckController$2.class

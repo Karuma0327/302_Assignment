@@ -357,7 +357,7 @@
     -fx-pref-width: 255px;
     -fx-pref-height: 72px;
     -fx-border-color: rgb(165, 237, 110);
-    
+
     -fx-border-width: 2px;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
@@ -375,7 +375,7 @@
     -fx-font-family: 'DINRoundPro-Bold';
     -fx-pref-width: 255px;
     -fx-pref-height: 72px;
-    -fx-border-color: rgb(165, 237, 110);        
+    -fx-border-color: rgb(165, 237, 110);
     -fx-translate-y: -2;
     -fx-alignment: center;
     -fx-cursor: hand;

@@ -1,30 +1,22 @@
 package com.socslingo.controllers;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.regex.Pattern;
 
-import com.socslingo.managers.SceneManager;
-import com.socslingo.services.UserService;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+
+import com.socslingo.managers.SceneManager;
+import com.socslingo.services.UserService;
 
 
 public class RegistrationController {
@@ -64,7 +56,7 @@ public class RegistrationController {
     @FXML
     private Label email_error_label;
 
-    
+
     @FXML
     private ImageView email_error_icon;
 
@@ -282,22 +274,22 @@ public class RegistrationController {
             double time_offset = cycle * duration_per_cycle.toSeconds();
 
             KeyFrame keyframe_1 = new KeyFrame(Duration.seconds(time_offset + 0.1),
-                new KeyValue(dot_1.fillProperty(), grey_medium_opacity));
+                    new KeyValue(dot_1.fillProperty(), grey_medium_opacity));
 
             KeyFrame keyframe_1_reset = new KeyFrame(Duration.seconds(time_offset + 0.3),
-                new KeyValue(dot_1.fillProperty(), grey_low_opacity));
+                    new KeyValue(dot_1.fillProperty(), grey_low_opacity));
 
             KeyFrame keyframe_2 = new KeyFrame(Duration.seconds(time_offset + 0.3),
-                new KeyValue(dot_2.fillProperty(), grey_medium_opacity));
+                    new KeyValue(dot_2.fillProperty(), grey_medium_opacity));
 
             KeyFrame keyframe_2_reset = new KeyFrame(Duration.seconds(time_offset + 0.5),
-                new KeyValue(dot_2.fillProperty(), grey_low_opacity));
+                    new KeyValue(dot_2.fillProperty(), grey_low_opacity));
 
             KeyFrame keyframe_3 = new KeyFrame(Duration.seconds(time_offset + 0.5),
-                new KeyValue(dot_3.fillProperty(), grey_medium_opacity));
+                    new KeyValue(dot_3.fillProperty(), grey_medium_opacity));
 
             KeyFrame keyframe_3_reset = new KeyFrame(Duration.seconds(time_offset + 0.7),
-                new KeyValue(dot_3.fillProperty(), grey_low_opacity));
+                    new KeyValue(dot_3.fillProperty(), grey_low_opacity));
 
             timeline.getKeyFrames().addAll(keyframe_1, keyframe_1_reset, keyframe_2, keyframe_2_reset, keyframe_3, keyframe_3_reset);
         }

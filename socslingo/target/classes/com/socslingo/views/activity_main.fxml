@@ -17,7 +17,7 @@
 <?import javafx.scene.text.TextFlow?>
 
 <BorderPane  maxHeight="Infinity" stylesheets="@../css/activity.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ActivityMainController">
-   
+
    <!-- Top Section -->
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -36,7 +36,7 @@
                <children>
                   <!-- ProgressBar -->
                   <ProgressBar fx:id="progress_bar" prefWidth="849.0" progress="0.0" styleClass="custom-progress-bar" GridPane.columnIndex="2" />
-                  
+
                   <!-- Exit Button -->
                   <Button fx:id="exit_button" mnemonicParsing="false" styleClass="exit-button">
                      <graphic>
@@ -49,13 +49,13 @@
                   </Button>
                </children>
             </GridPane>
-         </children>    
+         </children>
          <padding>
             <Insets bottom="50.0" top="50.0" />
          </padding>
       </HBox>
    </top>
-   
+
    <!-- Center Section -->
    <center>
       <VBox VBox.vgrow="ALWAYS">
@@ -70,12 +70,12 @@
          </children>
       </VBox>
    </center>
-   
+
    <!-- Bottom Section -->
    <bottom>
       <HBox fx:id="bottom_section" alignment="CENTER" styleClass="bottom-section-neutral" BorderPane.alignment="CENTER">
          <children>
-            
+
             <HBox fx:id="activity_information_container" alignment="CENTER" prefWidth="800.0">
                <children>
                   <!-- Skip Control Container -->
@@ -108,12 +108,12 @@
                      </StackPane>
                   </VBox>
                </children>
-            </HBox> 
+            </HBox>
          </children>
          <padding>
             <Insets bottom="50.0" top="50.0" />
          </padding>
       </HBox>
    </bottom>
-   
+
 </BorderPane>

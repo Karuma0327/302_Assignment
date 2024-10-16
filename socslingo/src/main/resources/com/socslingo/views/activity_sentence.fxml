@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane maxHeight="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ActivitySentenceController">
+    <children>
+        <!-- Main Content VBox -->
+        <VBox fx:id="rootVBox" alignment="CENTER" prefHeight="600.0" spacing="25.0" style="-fx-background-color: white" stylesheets="@../css/activity_sentence.css">
+            <children>
+                <VBox minHeight="50.0">
+                    <children>
+                        <Label prefWidth="481.0" styleClass="activity-title" text="Write this in English">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <VBox prefHeight="500.0" prefWidth="100.0">
+                    <children>
+                        <HBox minHeight="242.0" prefHeight="200.0" prefWidth="200.0" styleClass="activity-sentence-body-container">
+                            <ImageView fitHeight="240.0" fitWidth="240.0" preserveRatio="true">
+                                <image>
+                                    <Image url="@../images/dobby_chibby_half.png" />
+                                </image>
+                            </ImageView>
+                        </HBox>
+
+                        <!-- Sentence line where words will appear -->
+                        <HBox fx:id="sentenceLine" alignment="CENTER_LEFT" minHeight="90.0" prefHeight="90.0" prefWidth="200.0" spacing="10.0" styleClass="activity-sentence-word-container">
+                        </HBox>
+
+                        <!-- Words to be arranged -->
+                        <HBox alignment="CENTER" minHeight="168.0" prefHeight="168.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <FlowPane fx:id="wordButtonsPane" alignment="CENTER" hgap="10.0" prefHeight="200.0" vgap="10.0">
+                                    <children>
+                                        <!-- Each HBox contains StackPanes with ToggleButtons -->
+                                        <HBox alignment="CENTER" spacing="20.0">
+                                            <children>
+                                                <StackPane alignment="CENTER" styleClass="activity-sentence-toggle-button-stackpane">
+                                                    <Rectangle height="72" strokeType="INSIDE" styleClass="activity-sentence-toggle-button-background-rectangle-unselected-state-unpressed" width="128" />
+                                                    <ToggleButton mnemonicParsing="false" onAction="#handleWordButtonPress" styleClass="activity-sentence-toggle-button-unselected-state-unpressed" text="1" />
+                                                </StackPane>
+                                                <StackPane alignment="CENTER" styleClass="activity-sentence-toggle-button-stackpane">
+                                                    <Rectangle height="72" strokeType="INSIDE" styleClass="activity-sentence-toggle-button-background-rectangle-unselected-state-unpressed" width="128" />
+                                                    <ToggleButton mnemonicParsing="false" onAction="#handleWordButtonPress" styleClass="activity-sentence-toggle-button-unselected-state-unpressed" text="Sushi" />
+                                                </StackPane>
+                                                <StackPane alignment="CENTER" styleClass="activity-sentence-toggle-button-stackpane">
+                                                    <Rectangle height="72" strokeType="INSIDE" styleClass="activity-sentence-toggle-button-background-rectangle-unselected-state-unpressed" width="128" />
+                                                    <ToggleButton mnemonicParsing="false" onAction="#handleWordButtonPress" styleClass="activity-sentence-toggle-button-unselected-state-unpressed" text="Please" />
+                                                </StackPane>
+                                                <!-- Add more StackPanes with ToggleButtons as needed -->
+                                            </children>
+                                        </HBox>
+                                        <!-- Add more HBoxes if you have multiple rows of buttons -->
+                                    </children>
+                                </FlowPane>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="70.0" left="70.0" right="70.0" top="50.0" />
+            </padding>
+        </VBox>
+
+        <!-- Overlay Pane for Animations -->
+        <Pane fx:id="animationPane" mouseTransparent="true" pickOnBounds="false" />
+    </children>
+</StackPane>

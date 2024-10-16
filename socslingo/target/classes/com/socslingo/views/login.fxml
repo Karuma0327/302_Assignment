@@ -26,18 +26,18 @@
                                 <Image url="@../images/threadjump_grey.gif"/>
                             </image>
                         </ImageView>
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                        <children>
-                            <Pane prefHeight="100.0" prefWidth="162.0">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
+                                <Pane prefHeight="100.0" prefWidth="162.0">
+                                    <children>
                                         <Label fx:id="socslingoLogoName" alignment="CENTER" prefHeight="83.0" prefWidth="260.0" styleClass="socslingo-logo-name" text="socslingo" textAlignment="CENTER" />
+                                    </children>
+                                </Pane>
                             </children>
-                            </Pane>
-                        </children>
-                    </HBox>
+                        </HBox>
                     </children>
                 </VBox>
-                
+
                 <!-- Second Column -->
                 <VBox styleClass="right-sidebar-column" HBox.hgrow="ALWAYS" alignment="center">
                     <children>
@@ -53,7 +53,7 @@
                         <VBox alignment="CENTER" styleClass="registration-container" VBox.vgrow="ALWAYS" spacing="10" maxWidth="371">
                             <children>
                                 <Label fx:id="rightSidebarTaskLabel" text="Log in" styleClass="create-your-profile-sub-heading-text"/>
-                                <VBox spacing="20"> 
+                                <VBox spacing="20">
                                     <children>
                                         <TextField styleClass="registration-text-field" fx:id="username_field" promptText="Username"/>
                                         <PasswordField styleClass="registration-text-field-password" fx:id="password_field" promptText="Password"/>

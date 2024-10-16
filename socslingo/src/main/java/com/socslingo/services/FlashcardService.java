@@ -3,9 +3,12 @@ package com.socslingo.services;
 import com.socslingo.dataAccess.FlashcardDataAccess;
 import com.socslingo.models.Flashcard;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FlashcardService {
     private FlashcardDataAccess flashcard_data_access;
+    private static final Logger logger = LoggerFactory.getLogger(FlashcardService.class);
 
     public FlashcardService(FlashcardDataAccess flashcard_data_access) {
         this.flashcard_data_access = flashcard_data_access;
@@ -26,4 +29,12 @@ public class FlashcardService {
     public Flashcard getFlashcardById(int flashcard_id) {
         return flashcard_data_access.retrieveFlashcardById(flashcard_id);
     }
+
+    public List<Flashcard> getAllFlashcardsForUser(int userId) {
+        logger.debug("Fetching all flashcards for user_id: {}", userId);
+        return flashcard_data_access.getUserFlashcards(userId);
+    }
+
+
+    
 }

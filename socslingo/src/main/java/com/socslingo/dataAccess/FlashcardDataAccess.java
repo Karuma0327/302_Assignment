@@ -107,4 +107,37 @@ public class FlashcardDataAccess {
         logger.warn("Flashcard with id {} not found.", flashcard_id);
         return null;
     }
+
+    /**
+     * Retrieves all flashcards for a specific user.
+     * 
+     * @param userId The user's ID.
+     * @return A list of Flashcards belonging to the user.
+     */
+    public List<Flashcard> getUserFlashcards(int userId) {
+        List<Flashcard> flashcards = new ArrayList<>();
+        String sql = "SELECT flashcard_id, front_text, back_text FROM flashcards_table WHERE user_id = ?";
+
+        logger.debug("Retrieving user flashcards for user_id: {}", userId);
+        try (Connection conn = database_manager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("flashcard_id");
+                String front = rs.getString("front_text");
+                String back = rs.getString("back_text");
+                flashcards.add(new Flashcard(id, front, back));
+                logger.debug("Flashcard retrieved: ID={}, Front='{}'", id, front);
+            }
+
+            logger.info("Total user flashcards retrieved for user_id {}: {}", userId, flashcards.size());
+
+        } catch (SQLException e) {
+            logger.error("Error retrieving flashcards for user_id: {}", userId, e);
+        }
+        return flashcards;
+    }
 }

@@ -20,7 +20,3 @@ Include meaningful messages and context in log entries.
 Catch specific exceptions instead of generic Exception.
 Provide meaningful error messages in exception handling.
 Use custom exceptions for application-specific errors.
-Use JUnit for unit testing.
-Follow the Arrange-Act-Assert pattern in tests.
-Write tests for both positive and negative scenarios.
-Use mock objects for dependencies in unit tests.

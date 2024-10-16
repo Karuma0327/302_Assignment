@@ -23,7 +23,7 @@
         <!-- Main Content Area -->
         <HBox spacing="0" VBox.vgrow="ALWAYS">
             <children>
-                
+
                 <VBox fx:id="rightSidebarColumn" styleClass="middle-column" HBox.hgrow="ALWAYS" spacing="10" alignment="CENTER">
                     <children>
                         <Label fx:id="rightSidebarTaskLabel" styleClass=""/>
@@ -31,16 +31,16 @@
                             <children>
                                 <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER">
                                     <children>
-                                            <HBox>
-                                                <children>
-                                                    <StackPane fx:id="stackPane" styleClass="flashcard-container">
-                                                        <children>
-                                                            <Label fx:id="frontLabel" styleClass="flashcard-label"/>
-                                                            <Label fx:id="backLabel" styleClass="flashcard-label" visible="false"/>
-                                                        </children>
-                                                    </StackPane>
-                                                </children>
-                                            </HBox>
+                                        <HBox>
+                                            <children>
+                                                <StackPane fx:id="stackPane" styleClass="flashcard-container">
+                                                    <children>
+                                                        <Label fx:id="frontLabel" styleClass="flashcard-label"/>
+                                                        <Label fx:id="backLabel" styleClass="flashcard-label" visible="false"/>
+                                                    </children>
+                                                </StackPane>
+                                            </children>
+                                        </HBox>
                                     </children>
                                 </HBox>
                                 <HBox styleClass="pane-outline" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10">

@@ -3,13 +3,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "DatabaseController",
-            "request": "launch",
-            "mainClass": "com.socslingo.controllers.DatabaseController",
-            "projectName": "socslingo"
-        },
-        {
-            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "com.socslingo.App",
@@ -17,9 +10,9 @@
         },
         {
             "type": "java",
-            "name": "App",
+            "name": "DatabaseController",
             "request": "launch",
-            "mainClass": "com.socslingo/com.socslingo.App",
+            "mainClass": "com.socslingo.controllers.DatabaseController",
             "projectName": "socslingo"
         },
         {

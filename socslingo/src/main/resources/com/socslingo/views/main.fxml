@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <StackPane fx:id="stack_pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
-    <BorderPane fx:id="root_pane" styleClass="based-background"  maxWidth="Infinity" maxHeight="Infinity"> 
+    <BorderPane fx:id="root_pane" styleClass="based-background"  maxWidth="Infinity" maxHeight="Infinity">
         <left>
             <VBox fx:id="left_sidebar" alignment="CENTER" maxWidth="250" onMouseClicked="#handleSidebarMouseClicked" spacing="10" styleClass="left-sidebar-column">
                 <children>
@@ -102,7 +102,7 @@
                 </padding>
             </VBox>
         </left>
-        
+
         <center>
             <!-- Dynamic Content Area -->
             <VBox VBox.vgrow="ALWAYS" fx:id="content_area" maxHeight="Infinity" maxWidth="Infinity" styleClass="middle-column">
@@ -121,7 +121,7 @@
 
     <HBox fx:id="status_bar" styleClass="status-bar" StackPane.alignment="BOTTOM_CENTER">
     </HBox>
-    
+
     <!-- Overlayed Toggle Buttons (Initially Hidden) -->
     <Button fx:id="toggle_sidebar_button" graphicTextGap="12" onAction="#handleToggleSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_LEFT">
         <graphic>
