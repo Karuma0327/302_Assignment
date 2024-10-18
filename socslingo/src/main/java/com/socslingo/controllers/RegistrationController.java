@@ -56,7 +56,7 @@ public class RegistrationController {
     @FXML
     private Label email_error_label;
 
-
+    
     @FXML
     private ImageView email_error_icon;
 
@@ -274,22 +274,22 @@ public class RegistrationController {
             double time_offset = cycle * duration_per_cycle.toSeconds();
 
             KeyFrame keyframe_1 = new KeyFrame(Duration.seconds(time_offset + 0.1),
-                    new KeyValue(dot_1.fillProperty(), grey_medium_opacity));
+                new KeyValue(dot_1.fillProperty(), grey_medium_opacity));
 
             KeyFrame keyframe_1_reset = new KeyFrame(Duration.seconds(time_offset + 0.3),
-                    new KeyValue(dot_1.fillProperty(), grey_low_opacity));
+                new KeyValue(dot_1.fillProperty(), grey_low_opacity));
 
             KeyFrame keyframe_2 = new KeyFrame(Duration.seconds(time_offset + 0.3),
-                    new KeyValue(dot_2.fillProperty(), grey_medium_opacity));
+                new KeyValue(dot_2.fillProperty(), grey_medium_opacity));
 
             KeyFrame keyframe_2_reset = new KeyFrame(Duration.seconds(time_offset + 0.5),
-                    new KeyValue(dot_2.fillProperty(), grey_low_opacity));
+                new KeyValue(dot_2.fillProperty(), grey_low_opacity));
 
             KeyFrame keyframe_3 = new KeyFrame(Duration.seconds(time_offset + 0.5),
-                    new KeyValue(dot_3.fillProperty(), grey_medium_opacity));
+                new KeyValue(dot_3.fillProperty(), grey_medium_opacity));
 
             KeyFrame keyframe_3_reset = new KeyFrame(Duration.seconds(time_offset + 0.7),
-                    new KeyValue(dot_3.fillProperty(), grey_low_opacity));
+                new KeyValue(dot_3.fillProperty(), grey_low_opacity));
 
             timeline.getKeyFrames().addAll(keyframe_1, keyframe_1_reset, keyframe_2, keyframe_2_reset, keyframe_3, keyframe_3_reset);
         }

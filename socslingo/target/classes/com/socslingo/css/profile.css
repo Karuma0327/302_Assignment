@@ -60,10 +60,12 @@
 }
 
 .profile-banner-image-view{ 
-    -fx-max-height: 700px;
+    /* -fx-max-height: 400px; */
+    
     -fx-cursor: hand;
-    -fx-background-radius: 10px;
+    -fx-background-color: rgb(255, 228, 179);
+    -fx-background-radius: 12px;
     -fx-smooth: true;
-    -fx-border-radius: 10px;
-    -fx-max-width: 400px;
+    -fx-border-radius: 12px;
+    /* -fx-max-width: 700px; */
 }
