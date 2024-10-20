@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.*?>
 
-<ContextMenu xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.MoreContextMenuController">
+<ContextMenu xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.socslingo.controllers.MoreContextMenuController">
     <items>
-        <MenuItem fx:id="settings_menu_item" text="Settings" onAction="#handleSettings"/>
-        <MenuItem fx:id="help_menu_item" text="Help" onAction="#handleHelp"/>
+        <MenuItem fx:id="settings_menu_item" text="Settings" onAction="#handleSettings" />
+        <MenuItem fx:id="help_menu_item" text="Help" onAction="#handleHelp" />
         <SeparatorMenuItem />
-        <MenuItem fx:id="logout_menu_item" text="Logout" onAction="#handleLogout"/>
+        <MenuItem fx:id="logout_menu_item" text="Logout" onAction="#handleLogout" />
     </items>
 </ContextMenu>

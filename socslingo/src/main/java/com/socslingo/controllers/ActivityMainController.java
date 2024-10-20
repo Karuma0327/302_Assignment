@@ -63,6 +63,7 @@ public class ActivityMainController {
 
     @FXML
     private ProgressBar progress_bar; // Reference to the ProgressBar
+    
 
     // Store the original skip_control_container content for resetting
     private Node originalSkipControlContent;
@@ -343,36 +344,40 @@ public class ActivityMainController {
      * Resets the Continue button styles to their default state.
      */
     private void resetContinueButtonStyles() {
-        // Remove 'incorrect-hover' and 'hover' style classes from the label
+        // Remove 'incorrect-hover', 'correct-hover', and 'hover' style classes from the label
         continue_button_label.getStyleClass().removeAll(
             "activity-continue-button__label--medium-type-incorrect-hover",
+            "activity-continue-button__label--medium-type-correct-hover",
             "activity-continue-button__label--medium-type-hover"
         );
         
-        // Remove 'incorrect-hover' and 'hover' style classes from the button
+        // Remove 'incorrect-hover', 'correct-hover', and 'hover' style classes from the button
         continue_button.getStyleClass().removeAll(
             "activity-continue-button--medium-type-incorrect-hover",
+            "activity-continue-button--medium-type-correct-hover",
             "activity-continue-button--medium-type-hover"
         );
         
-        // Remove 'incorrect-hover' and 'hover' style classes from the background rectangle
+        // Remove 'incorrect-hover', 'correct-hover', and 'hover' style classes from the background rectangle
         continue_button_background_rectangle.getStyleClass().removeAll(
             "activity-continue-button__background-rectangle--medium-type-incorrect-hover",
+            "activity-continue-button__background-rectangle--medium-type-correct-hover",
             "activity-continue-button__background-rectangle--medium-type-hover"
         );
         
-        // Remove 'incorrect-hover' and 'hover' style classes from the stack pane
+        // Remove 'incorrect-hover', 'correct-hover', and 'hover' style classes from the stack pane
         continue_button_stackpane.getStyleClass().removeAll(
             "activity-continue-button-stackpane-type-incorrect-hover",
+            "activity-button-stackpane-type-correct-hover",
             "activity-continue-button-stackpane-type-hover"
         );
-
+    
         // Re-add 'check-answer-unclickable' style classes
         continue_button_label.getStyleClass().add("activity-button__label--medium-type-check-answer-unclickable");
         continue_button.getStyleClass().add("activity-button--medium-type-check-answer-unclickable");
         continue_button_background_rectangle.getStyleClass().add("activity-button__background-rectangle--medium-type-check-answer-unclickable");
         continue_button_stackpane.getStyleClass().add("activity-button-stackpane-type-check-answer-unclickable");
-
+    
         // Disable the Continue button
         continue_button.setDisable(true);
         continue_button_label.setDisable(true);

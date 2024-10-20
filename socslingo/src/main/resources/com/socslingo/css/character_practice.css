@@ -1,0 +1,229 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+
+
+
+@font-face {
+    font-family: 'DINNextLTPro-Medium';
+    src: url('../fonts/DIN_NEXT_LT_PRO/DIN_Next_LT_Pro_Medium.otf');
+}
+
+
+
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo.ttf');
+}
+
+.practice-toggle-button {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-text-fill: rgb(175, 175, 175);
+    -fx-pref-width: 150px;
+    -fx-pref-height: 75px;
+    -fx-font-size: 18px;
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-cursor: hand;
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-border-width: 0 0 2 0;
+}
+
+.practice-toggle-button.practice-toggle-button:selected {
+    -fx-border-color: rgb(28, 176, 246);
+    -fx-text-fill: rgb(28, 176, 246);
+}
+
+
+.learn-the-characters-button {
+    -fx-background-color: rgb(28, 176, 246);
+    -fx-text-fill: rgb(255, 255 ,255);
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-padding: 0 0 3 0;
+    -fx-pref-width: 350px;
+    -fx-pref-height: 48px;
+    -fx-font-size: 16px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-translate-y: -5px;
+}
+
+.learn-the-characters-button:pressed{
+    -fx-translate-y: 0px;
+}
+
+.learn-the-characters-button-background-label{
+    -fx-background-color: rgb(24, 153, 214);
+    -fx-pref-width: 350px;
+    -fx-pref-height: 48px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+}
+
+
+.practice-sub-text{
+    -fx-font-family: 'DINNextLTPro-Medium';
+    -fx-font-size: 20px;
+    -fx-text-fill: rgb(119, 119, 119);
+}
+
+.practice-main-text{
+    -fx-font-family: 'DINRoundPro-Black';
+    -fx-font-size: 32px;
+    -fx-text-fill: rgb(75, 75, 75);
+}
+
+
+
+/* This label is used as the background bottom layer of the character button*/
+
+
+.practice-character-button-background-label{    
+    -fx-background-color: rgb(235, 235, 235);
+    -fx-pref-width: 87px;
+    -fx-pref-height: 68px;
+
+    -fx-background-radius: 16px;
+    -fx-border-radius: 16px;
+
+}
+
+/* This button is used to display the character*/
+
+.practice-character-button-top-layer{
+    -fx-background-color: transparent;
+    -fx-pref-width: 87px;
+    -fx-pref-height: 68px;
+    -fx-border-width: 2px;
+    -fx-padding: 0 0 20 0;
+    -fx-text-fill: rgb(164, 164, 164);
+    -fx-background-radius: 16px;
+    -fx-border-radius: 16px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 15px;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-insets: 0;
+    -fx-cursor: hand;
+    -fx-translate-y: -2px;
+    -fx-border-color: rgb(235, 235, 235);
+    -fx-padding: 20 0 0 0;
+}
+
+
+
+.practice-character-text-layer-japanese-bottom-layer{
+    -fx-font-family: 'Meiryo';
+    -fx-font-size: 20px;
+    -fx-pref-width: 87px;
+    -fx-padding: 0 0 20 0;
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-background-radius: 16px;
+    -fx-translate-y: -2px;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-radius: 16px;
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-pref-height: 68px;
+}
+
+.practice-character-button-stack-pane:pressed .practice-character-button-top-layer,
+.practice-character-button-stack-pane:pressed .practice-character-text-layer-japanese-bottom-layer{
+    -fx-translate-y: 0px;
+
+}
+
+
+
+.practice-text-label-small-subheading{
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 20px;
+    -fx-text-fill: rgb(75, 75, 75);
+}
+
+.practice-text-label-small-body{
+
+    -fx-font-family: 'DINNextLTPro-Medium';
+    -fx-font-size: 20px;
+    -fx-text-fill: rgb(119, 119, 119);
+}
+
+
+.practice-divider-pane{
+    -fx-pref-width: 550px;
+    -fx-pref-height: 2px;
+    -fx-background-color: rgb(235, 235, 235);
+
+
+}
+.divider-margin {
+    -fx-padding: 20px;
+}
+
+
+.character-list-view {
+    -fx-border-width: 0; /* Removes the border */
+    -fx-background-color: transparent; /* Optional: Makes the background transparent */
+}
+.character-list-view .list-cell {
+    -fx-selection-bar: transparent; /* Makes the selection bar transparent */
+    -fx-selection-bar-non-focused: transparent; /* Ensures non-focused selection is also transparent */
+    -fx-background-color: transparent; /* Ensures no background color on selection */
+    -fx-text-fill: inherit; /* Keeps text color consistent */
+    -fx-user-select: none; /* Disables text selection */
+    
+}
+
+.character-list-view .scroll-bar:vertical,
+.character-list-view .scroll-bar:horizontal{
+    -fx-pref-height: 0px;
+    -fx-pref-width: 0px;
+    -fx-background-color: transparent;
+
+}
+
+.practice-text-label-small-subheading-jp{
+    -fx-font-family: 'Meiryo';
+    -fx-font-size: 24px;
+    -fx-text-fill: rgb(75, 75, 75);
+
+    
+}
+
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0; /* Makes the scroll bars invisible */
+    -fx-pref-width: 0; /* Ensures the scroll bars do not take up space */
+    -fx-pref-height: 0;
+}

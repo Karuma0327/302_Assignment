@@ -53,11 +53,6 @@
             <version>5.11.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
         <!-- SLF4J API -->
         <dependency>
             <groupId>org.slf4j</groupId>

@@ -28,10 +28,20 @@
     src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
 }
 
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');
+}
+
+
 .socslingo-logo-name {
-    -fx-font-size: 46px;
+    -fx-font-size: 36px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.10), 0, 0, 0, 1);
-    -fx-padding: 15px 0px 5px 0px;
     -fx-font-family: 'DINRoundPro-Black';
     -fx-text-fill: rgb(255, 198, 92);
 }
@@ -44,11 +54,11 @@
     -fx-pref-height: 52px;
     -fx-border-width: 2px;
     -fx-text-fill: rgb(255, 198, 92);
-    -fx-padding: 0px 0px 0px 20px;
+    -fx-padding: 0px 0px 0px 0px;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-font-size: 18px;
-    -fx-font-family: 'DINNextW10-Heavy';
+    -fx-font-family: 'DINRoundPro-Black';
 }
 
 .left-sidebar-button {
@@ -56,12 +66,12 @@
     -fx-pref-width: 222px;
     -fx-pref-height: 52px;
     -fx-border-width: 2;
-    -fx-text-fill: #3f3f3f;
-    -fx-padding: 0px 0px 0px 20px;
+    -fx-text-fill: rgb(119, 119, 119);
+    -fx-padding: 0px 0px 0px 0px;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-font-size: 18px;
-    -fx-font-family: 'DINNextW10-Heavy';
+    -fx-font-family: 'DINRoundPro-Black';
     -fx-cursor: hand;
 }
 
@@ -213,3 +223,30 @@
 }
 
 .toggle-sidebar-button .image-view {}
+
+
+
+
+
+
+.settings-avatar-label {
+    -fx-background-color: transparent; /* Example background color */
+    -fx-background-radius: 50%; /* Make the background circular */
+    -fx-border-radius: 50%; /* Make the border circular */
+    -fx-pref-width: 32px; /* Set a fixed width */
+    -fx-pref-height: 32px; /* Set a fixed height */
+    -fx-alignment: center; /* Center the content */
+    -fx-text-fill: rgb(175, 175, 175); /* Example text color */
+    -fx-font-family: 'DINRoundPro-Black'; /* Example font */
+    -fx-cursor: hand;
+    -fx-font-size: 14px; /* Example font size */
+    -fx-cursor: hand;
+    -fx-border-color: rgb(175, 175, 175);
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-style: dashed; /* Dashed border style */
+    -fx-border-dash-array: 30 30; /* Pattern of dashes and gaps */
+}
+
+.settings-avatar-stackpane{
+    -fx-cursor: hand;
+}

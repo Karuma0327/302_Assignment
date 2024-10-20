@@ -3,29 +3,170 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.Pane?>
-
-
-
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.HomeController" spacing="10" alignment="CENTER">
-    <children>
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" style="-fx-background-color: white;" stylesheets="@../css/settings.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.SettingsController">
+   <content>
+      <HBox alignment="CENTER" style="-fx-background-color: white;">
+         <children>
+            <VBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label styleClass="settings-profile-title-text-label" text="Profile">
+                         </Label>
+                     </children>
+                  </VBox>
+                  <HBox>
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label styleClass="settings-sub-heading-text-label" text="Avatar">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <StackPane styleClass="settings-avatar-stackpane">
+                                       <children>
+                                          <Label style="-fx-cursor: hand;" styleClass="settings-avatar-label" text="T">
+                                         </Label>
+                                         <StackPane alignment="TOP_RIGHT" StackPane.alignment="TOP_RIGHT">
+                                             <Circle fill="rgb(28, 176, 246)" radius="20" />
+                                             <SVGPath content="M9.19599 2.4431L10.1997 1.43938C11.24 0.39911 12.9266 0.399112 13.9669 1.43939C15.0071 2.47966 15.0071 4.16628 13.9669 5.20655L12.9632 6.21026L9.19599 2.4431ZM8.0124 3.62669L1.44866 10.1904C0.808195 10.8309 0.471563 13.8719 1.02949 14.4299C1.58741 14.9878 4.5644 14.609 5.21582 13.9576L11.7796 7.39385L8.0124 3.62669Z" fill="white" scaleX="1.2" scaleY="1.2" translateX="-12.0" translateY="12.0" StackPane.alignment="TOP_RIGHT">
+                                             </SVGPath>
+                                          </StackPane>
+                                          <ImageView fitHeight="125" fitWidth="125" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <Label styleClass="settings-sub-heading-text-label" text="ACTUAL NAME">
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField styleClass="settings-text-field" HBox.hgrow="ALWAYS" />
+                           </children>
+      
+                        </HBox>  
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="254.0">
+                     <children>
+                        <Label styleClass="settings-sub-heading-text-label" text="USERNAME">
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField styleClass="settings-text-field" HBox.hgrow="ALWAYS" />
+                           </children>
+      
+                                                </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="329.0">
+                     <children>
+                        <Label styleClass="settings-sub-heading-text-label" text="EMAIL">
 
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField styleClass="settings-text-field" HBox.hgrow="ALWAYS" />
+                           </children>
+      
+                                                </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="399.0">
+                     <children>
+                        <Label styleClass="settings-sub-heading-text-label" text="CURRENT PASSWORD">
 
-    </children>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <PasswordField styleClass="settings-password-text-field" HBox.hgrow="ALWAYS" />
+                           </children>
+      
+                                                </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="469.0">
+                     <children>
+                        <Label styleClass="settings-sub-heading-text-label" text="NEW PASSWORD">
 
-</VBox>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <PasswordField styleClass="settings-password-text-field" HBox.hgrow="ALWAYS" />
+                           </children>
+      
+                                                </HBox>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <StackPane styleClass="save-changes-button-stackpane">
+                           <children>
+                              <!-- Version that's there when the user has not made any changes   -->
+                              <!-- <Label styleClass="save-changes-background-button-unclickable" text="SAVE CHANGES" /> -->
+                              <!-- Version that's there when the user has made changes -->
+                              <Label styleClass="save-changes-background-button-label-clickable" />
+                              <Button mnemonicParsing="false" styleClass="save-changes-background-button-clickable" text="SAVE CHANGES" />
+      
+                                                   </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" styleClass="delete-my-account-button" text="DELETE MY ACCOUNT" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </VBox>
+            <VBox>
+               <children>
+                  <VBox prefHeight="150.0" prefWidth="368.0" style="-fx-border-width: 2px; -fx-border-color: rgb(229, 229, 229); -fx-border-radius: 16px;">
+                     <children>
+                        <Label styleClass="right-side-container-heading-text-label" text="Account" />
+                        <Button mnemonicParsing="false" styleClass="right-side-container-button" text="Profile Settings" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <StackPane styleClass="logout-button-stackpane">
+                     <children>
+                        <Label styleClass="logout-button-background-label" />
+                        <Button mnemonicParsing="false" styleClass="logout-button" text="Logout" />
+                     </children>
+                  </StackPane>
+               </children>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></VBox>
+         </children>
+      </HBox>
+   </content>
+</ScrollPane>

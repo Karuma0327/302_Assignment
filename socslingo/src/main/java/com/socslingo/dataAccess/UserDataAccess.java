@@ -20,10 +20,10 @@ public class UserDataAccess {
         logger.info("UserDataAccess initialized with DatabaseManager");
     }
 
-    public boolean insertUser(String username, String email, String hashed_password) {
-        String sql = "INSERT INTO user_table(username, email, password, created_date) VALUES(?, ?, ?, ?)";
+    public boolean insertUser(String username, String email, String hashed_password, String actual_name) {
+        String sql = "INSERT INTO user_table(username, email, password, created_date, actual_name) VALUES(?, ?, ?, ?, ?)";
 
-        logger.debug("Attempting to insert user: username={}, email={}", username, email);
+        logger.debug("Attempting to insert user: username={}, email={}, actual_name={}", username, email, actual_name);
         try (Connection connection = database_manager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
@@ -31,6 +31,7 @@ public class UserDataAccess {
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, hashed_password);
             preparedStatement.setString(4, LocalDateTime.now().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + LocalDateTime.now().getYear());
+            preparedStatement.setString(5, actual_name);
             int rows_affected = preparedStatement.executeUpdate();
             if (rows_affected > 0) {
                 logger.info("User '{}' inserted successfully.", username);

@@ -6,6 +6,7 @@ public class User {
     private String password;
     private String created_date;
     private String profile_banner_path;
+    private String actual_name;
 
     public User(int id, String username, String password, String created_date) {
         this.id = id;
@@ -25,6 +26,14 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getActualName(){
+        return actual_name;
+    }
+
+    public void setActualName(String actual_name){
+        this.actual_name = actual_name;
     }
 
     public void setUsername(String username) {

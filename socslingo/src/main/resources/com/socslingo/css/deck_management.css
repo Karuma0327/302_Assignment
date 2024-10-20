@@ -28,6 +28,17 @@
     src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
 }
 
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');
+}
+
+
 
 .left-sidebar-column{
     -fx-border-color: #e5e5e5;
@@ -182,8 +193,7 @@
 
 .deck-title{
     -fx-font-size: 36px;
-    -fx-padding: 0px 0px 0px 280px; /* Top, Right, Bottom, Left */
-    -fx-font-family: 'DINRoundPro';
+    -fx-font-family: 'DINRoundPro-Bold';
     -fx-font-weight: bold;
     -fx-text-fill: #FFD681;
 }

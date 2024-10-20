@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<StackPane fx:id="stack_pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.PrimaryController">
+    <BorderPane fx:id="root_pane" styleClass="based-background">
+        <left>
+            <VBox fx:id="left_sidebar" alignment="CENTER_LEFT" onMouseClicked="#handleSidebarMouseClicked" styleClass="left-sidebar-column">
+                <children>
+                    <Label fx:id="socslingo_logo_name" styleClass="socslingo-logo-name" text="socslingo">
+                        <padding>
+                            <Insets bottom="30.0" left="16.0" />
+                        </padding>
+                    </Label>
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <Group scaleX="0.7" scaleY="0.7">
+                                                <children>
+                                                    <SVGPath content="M 3.058594 0 L 11.925781 0 L 11.925781 40 L 3.058594 40 Z M 3.058594 0" fill="#00DDC0" />
+                                                    <SVGPath content="M 7.492188 0 L 11.925781 0 L 11.925781 40 L 7.492188 40 Z M 7.492188 0" fill="#00AC93" />
+                                                    <SVGPath content="M 11.925781 0 L 20.796875 0 L 20.796875 40 L 11.925781 40 Z M 11.925781 0" fill="#FFAB1D" />
+                                                    <SVGPath content="M 16.363281 0 L 20.796875 0 L 20.796875 40 L 16.363281 40 Z M 16.363281 0" fill="#FF8900" />
+                                                    <SVGPath content="M 3.058594 34.179688 L 11.925781 34.179688 L 11.925781 40 L 3.058594 40 Z M 3.058594 34.179688" fill="#006666" />
+                                                    <SVGPath content="M 7.492188 34.179688 L 11.925781 34.179688 L 11.925781 40 L 7.492188 40 Z M 7.492188 34.179688" fill="#00534A" />
+                                                    <SVGPath content="M 11.925781 34.179688 L 20.796875 34.179688 L 20.796875 40 L 11.925781 40 Z M 11.925781 34.179688" fill="#FF4F18" />
+                                                    <SVGPath content="M 16.363281 34.179688 L 20.796875 34.179688 L 20.796875 40 L 16.363281 40 Z M 16.363281 34.179688" fill="#FF3400" />
+                                                    <SVGPath content="M 36.941406 38.277344 L 28.511719 39.960938 L 20.90625 1.949219 L 29.335938 0.261719 Z M 36.941406 38.277344" fill="#00A4FF" />
+                                                    <SVGPath content="M 36.941406 38.273438 L 32.726562 39.117188 L 25.121094 1.105469 L 29.335938 0.261719 Z M 36.941406 38.273438" fill="#0082D1" />
+                                                    <SVGPath content="M 36.941406 38.273438 L 28.511719 39.960938 L 27.371094 34.246094 L 35.800781 32.578125 Z M 36.941406 38.273438" fill="#006DFF" />
+                                                    <SVGPath content="M 36.941406 38.273438 L 32.726562 39.117188 L 31.585938 33.414062 L 35.800781 32.578125 Z M 36.941406 38.273438" fill="#0060D1" />
+                                                    <SVGPath content="M 5.78125 4 L 9.257812 4 L 9.257812 6.609375 L 5.78125 6.609375 Z M 5.78125 4" fill="#FFFFFF" />
+                                                    <SVGPath content="M 7.519531 4 L 9.257812 4 L 9.257812 6.609375 L 7.519531 6.609375 Z M 7.519531 4" fill="#E1E1E4" />
+                                                    <SVGPath content="M 14.648438 4 L 18.128906 4 L 18.128906 6.609375 L 14.648438 6.609375 Z M 14.648438 4" fill="#FFFFFF" />
+                                                    <SVGPath content="M 16.363281 4 L 18.128906 4 L 18.128906 6.609375 L 16.363281 6.609375 Z M 16.363281 4" fill="#E1E1E4" />
+                                                    <SVGPath content="M 24.808594 7.925781 L 24.316406 5.367188 L 27.625 4.726562 L 28.121094 7.289062 Z M 24.808594 7.925781" fill="#FFFFFF" />
+                                                    <SVGPath content="M 26.421875 7.617188 L 25.910156 5.058594 L 27.625 4.726562 L 28.117188 7.289062 Z M 26.421875 7.617188" fill="#E1E1E4" />
+                                                </children>
+                                            </Group>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="LEARN">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets bottom="5.0" />
+                  </VBox.margin>
+                    </Button>
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button-active">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <Group>
+                                                <children>
+                                                    <SVGPath content="M24.5852 25.2658C24.2883 26.8243 22.9257 27.9519 21.3392 27.9519H10.6401C9.05354 27.9519 7.69094 26.8243 7.39408 25.2658L4.98096 12.5969L15.9001 4.52225L26.9988 12.5941L24.5852 25.2658Z" fill="#FFC800" />
+                                                    <SVGPath content="M13.1558 23.1111C13.1558 22.522 13.6333 22.0444 14.2224 22.0444H18.4891C19.0782 22.0444 19.5558 22.522 19.5558 23.1111C19.5558 23.7002 19.0782 24.1778 18.4891 24.1778H14.2224C13.6333 24.1778 13.1558 23.7002 13.1558 23.1111Z" fill="#945151" fillRule="EVEN_ODD" opacity="0.5" /> <!-- Set fillRule and
+                                                    opacity -->
+                                                    <SVGPath content="M19.4785 16.2998C19.4785 18.2208 17.9212 19.778 16.0002 19.778C14.0792 19.778 12.522 18.2208 12.522 16.2998C12.522 14.3788 14.0792 12.8215 16.0002 12.8215C17.9212 12.8215 19.4785 14.3788 19.4785 16.2998Z" fill="#945151" />
+                                                    <SVGPath content="M16.1685 2.84462C16.6431 2.84231 17.1233 2.98589 17.5361 3.28558L17.5368 3.2861L29.9455 12.2319C30.9781 12.9822 31.207 14.4275 30.4568 15.4601C29.7067 16.4924 28.262 16.7215 27.2294 15.9719L27.2286 15.9714L16.1602 7.99185L5.09208 15.9712L5.09121 15.9719C4.05865 16.7213 2.61395 16.4923 1.86391 15.4599C1.11367 14.4273 1.34258 12.982 2.3752 12.2318L2.37679 12.2306L14.7839 3.28596L14.7846 3.28544C15.2022 2.98229 15.6887 2.83889 16.1685 2.84462Z" fill="#FF4B4B" />
+                                                </children>
+                                            </Group>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="HOME">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets bottom="5.0" top="5.0" />
+                  </VBox.margin>
+                    </Button>
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <Group scaleX="0.7" scaleY="0.7">
+                                                <children>
+                                                    <SVGPath content="M18.0524 5C17.3857 13 17.0524 30.7 21.0524 37.5" fill="transparent" stroke="#1CB0F6" strokeLineCap="ROUND" strokeWidth="3" />
+                                                    <SVGPath content="M8.05237 11C12.719 11.1667 24.8524 11.1 36.0524 9.5" fill="transparent" stroke="#1CB0F6" strokeLineCap="ROUND" strokeWidth="3" />
+                                                    <SVGPath content="M28.5524 16C28.0524 20.6667 25.1524 31.3 17.5524 36.5C9.95236 41.7 7.38569 37.3333 7.05236 34.5C6.6406 31 8.55236 24 16.5524 21C19.8857 19.6667 27.8191 18.631 33.0524 20.5C40.0524 23 45.0524 37.5 25.0524 41" fill="transparent" stroke="#1CB0F6" strokeLineCap="ROUND" strokeWidth="3" />
+                                                </children>
+                                            </Group>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="CHARACTERS">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets bottom="5.0" top="5.0" />
+                  </VBox.margin>
+                    </Button>
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <Group>
+                                                <children>
+                                                    <SVGPath content="M 28.648438 25.449219 C 28.265625 24.871094 27.796875 24.46875 27.191406 24.21875 C 28.089844 22.636719 28.277344 19.726562 28.257812 15.6875 C 28.21875 7.929688 27.277344 4.914062 24.902344 4.925781 C 22.535156 4.941406 21.625 7.96875 21.664062 15.722656 C 21.6875 20.042969 22.140625 22.871094 23.0625 24.347656 C 22.339844 24.664062 21.75 25.136719 21.367188 25.777344 C 21.09375 26.238281 20.992188 26.726562 20.992188 27.214844 C 20.992188 28.035156 21.28125 28.847656 21.515625 29.511719 L 21.605469 29.773438 C 21.863281 30.515625 22.171875 32.230469 22.171875 33.113281 C 22.171875 33.308594 22.152344 33.464844 22.121094 33.558594 L 22.25 33.398438 C 22.003906 33.707031 21.925781 34.199219 22.152344 34.519531 C 22.378906 34.84375 22.726562 35.039062 23.097656 34.917969 L 23.425781 34.804688 C 24.515625 34.4375 24.605469 34.40625 25.3125 33.910156 L 25.914062 33.492188 C 27.480469 32.429688 28.722656 30.777344 29.074219 29.28125 C 29.429688 27.765625 29.28125 26.402344 28.648438 25.449219 Z" fill="#0F333A" />
+                                                    <SVGPath content="M 24.914062 6.695312 C 25.167969 6.695312 26.445312 7.121094 26.488281 15.695312 C 26.496094 16.492188 26.5 17.691406 26.445312 18.9375 C 25.523438 18.664062 24.542969 18.691406 23.5625 19.007812 C 23.488281 18.089844 23.441406 17.015625 23.433594 15.710938 C 23.390625 7.351562 24.554688 6.695312 24.914062 6.695312 Z" fill="#79CCBF" />
+                                                    <SVGPath content="M 26.367188 20.179688 C 26.234375 21.71875 25.972656 23.121094 25.449219 23.640625 C 25.324219 23.761719 25.203125 23.8125 25.03125 23.8125 C 25.019531 23.8125 24.132812 23.734375 23.6875 20.238281 C 24.613281 19.882812 25.53125 19.863281 26.367188 20.179688 Z" fill="#FFFFFF" />
+                                                    <SVGPath content="M 27.351562 28.875 C 27.105469 29.929688 26.105469 31.226562 24.921875 32.027344 L 24.296875 32.464844 C 24.128906 32.578125 24.019531 32.652344 23.910156 32.714844 C 23.855469 31.105469 23.289062 29.222656 23.277344 29.195312 L 23.179688 28.921875 C 22.996094 28.398438 22.765625 27.742188 22.765625 27.214844 C 22.765625 27.011719 22.796875 26.828125 22.886719 26.683594 C 23.347656 25.910156 24.308594 25.710938 25.03125 25.683594 C 26.523438 25.621094 26.882812 25.980469 27.171875 26.421875 C 27.382812 26.746094 27.492188 27.203125 27.492188 27.742188 C 27.492188 28.09375 27.449219 28.476562 27.351562 28.875 Z" fill="#F4CD73" />
+                                                    <SVGPath content="M 25.761719 26.613281 C 25.4375 26.664062 25.21875 26.96875 25.273438 27.289062 C 25.46875 28.523438 25.496094 29.066406 24.964844 29.492188 C 24.710938 29.695312 24.667969 30.066406 24.871094 30.320312 C 25.074219 30.574219 25.445312 30.617188 25.699219 30.414062 C 26.824219 29.519531 26.625 28.289062 26.433594 27.101562 C 26.382812 26.78125 26.082031 26.5625 25.761719 26.613281 Z" fill="#0F333A" />
+                                                </children>
+                                            </Group>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="CREATE">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets bottom="5.0" top="5.0" />
+                  </VBox.margin>
+                    </Button>
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <Group scaleX="0.7" scaleY="0.7">
+                                                <children>
+                                                    <!-- Replace existing SVGPath elements with the new SVG paths -->
+                                                    <SVGPath content="M7 9.5C7 7.84314 8.34315 6.5 10 6.5H36C37.6569 6.5 39 7.84315 39 9.5V23.5C39 32.3366 31.8366 39.5 23 39.5C14.1634 39.5 7 32.3366 7 23.5V9.5Z" fill="#FEC701" />
+                                                    <SVGPath content="M39.0001 13.3455V9.5C39.0001 7.84315 37.657 6.5 36.0001 6.5H31.5706L8.30957 29.8497C9.68623 33.0304 12.0656 35.6759 15.0491 37.3877L39.0001 13.3455Z" fill="white" opacity="0.3" />
+                                                </children>
+                                            </Group>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="DECKS">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets bottom="5.0" top="5.0" />
+                  </VBox.margin>
+                    </Button>
+                    <Region VBox.vgrow="ALWAYS" />
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <StackPane styleClass="settings-avatar-stackpane">
+                                                <children>
+                                                    <!-- Avatar Label -->
+                                                    <Label style="-fx-cursor: hand;" styleClass="settings-avatar-label" text="T" />
+                
+                
+                                                </children>
+                                            </StackPane>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="PROFILE">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets bottom="5.0" top="5.0" />
+                  </VBox.margin>
+                    </Button>
+                    <Button fx:id="sidebar_switch_to_main_flashcard_button" graphicTextGap="12" onAction="#handleButtonAction" styleClass="left-sidebar-button">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT">
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0">
+                                        <graphic>
+                                            <Group scaleX="0.7" scaleY="0.7"> <!-- Adjust scaleX and scaleY to reduce size -->
+                                                <!-- Outer Circle -->
+                                                <SVGPath content="M23,4 A19,19 0 1,0 23,42 A19,19 0 1,0 23,4" fill="#CE82FF" stroke="#CE82FF" strokeWidth="2" />
+                                                <!-- First Dot -->
+                                                <SVGPath content="M15,21 A2,2 0 1,0 15,25 A2,2 0 1,0 15,21" fill="white" />
+                                                <!-- Second Dot -->
+                                                <SVGPath content="M23,21 A2,2 0 1,0 23,25 A2,2 0 1,0 23,21" fill="white" />
+                                                <!-- Third Dot -->
+                                                <SVGPath content="M31,21 A2,2 0 1,0 31,25 A2,2 0 1,0 31,21" fill="white" />
+                                            </Group>
+                                        </graphic>
+                                        <HBox.margin>
+                                            <Insets left="6.0" right="20.0" />
+                                        </HBox.margin>
+                                    </Label>
+                                    <Label alignment="CENTER" graphicTextGap="10.0" text="MORE">
+                                        <padding>
+                                            <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                                <padding>
+                                    <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+                                </padding>
+                            </HBox>
+                        </graphic>
+                  <VBox.margin>
+                     <Insets top="5.0" />
+                  </VBox.margin>
+                    </Button>
+                </children>
+                <padding>
+                    <Insets bottom="30.0" left="16.0" right="16.0" top="32.0" />
+                </padding>
+            </VBox>
+        </left>
+
+        <center>
+            <!-- Dynamic Content Area -->
+            <VBox fx:id="content_area" maxHeight="Infinity" maxWidth="Infinity" styleClass="middle-column" VBox.vgrow="ALWAYS">
+                <!-- Initial Content Can Be Loaded Here -->
+            </VBox>
+        </center>
+
+        <right>
+            <!-- Placeholder for Right Sidebar -->
+        </right>
+
+        <bottom>
+            <!-- Placeholder for Bottom Bar -->
+        </bottom>
+        <StackPane.margin>
+            <Insets />
+        </StackPane.margin>
+    </BorderPane>
+
+    <HBox fx:id="status_bar" styleClass="status-bar" StackPane.alignment="BOTTOM_CENTER">
+    </HBox>
+
+    <!-- Overlayed Toggle Buttons (Initially Hidden) -->
+    <Button fx:id="toggle_sidebar_button" graphicTextGap="12" onAction="#handleToggleSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_LEFT">
+        <graphic>
+            <ImageView fitWidth="21" preserveRatio="true" styleClass="image-view">
+                <image>
+                    <Image url="@../images/arrow_right.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <Button fx:id="toggle_right_sidebar_button" graphicTextGap="12" onAction="#handleToggleRightSidebar" styleClass="toggle-sidebar-button" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+        <graphic>
+            <ImageView fitWidth="21" preserveRatio="true" styleClass="image-view">
+                <image>
+                    <Image url="@../images/arrow_left.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+
+</StackPane>

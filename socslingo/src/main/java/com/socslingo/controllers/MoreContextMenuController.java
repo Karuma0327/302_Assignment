@@ -32,7 +32,7 @@ public class MoreContextMenuController {
     @FXML
     private void handleHelp(ActionEvent event) {
         try {
-            PrimaryController.getInstance().switchContent("/com/socslingo/views/help.fxml");
+            PrimaryController.getInstance().switchContent("/com/socslingo/views/character_practice_activity_three_option.fxml");
         } catch (IOException e) {
             e.printStackTrace(); // or handle the exception in a way that's appropriate for your application
         }

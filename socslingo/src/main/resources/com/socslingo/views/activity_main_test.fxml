@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane stylesheets="@../css/activity.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ActivityMainTestController">
+<BorderPane stylesheets="@../css/activity.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ActivityMainTestController" VBox.vgrow="ALWAYS">
    
    <!-- Top Section -->
    <top>

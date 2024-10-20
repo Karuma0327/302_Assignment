@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" fillWidth="false" spacing="25.0" stylesheets="@../css/practice_three_option.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" 
+   fx:controller="com.socslingo.controllers.CharacterPracticeActivityThreeOptionController">
+   <children>
+      <BorderPane prefWidth="660.0" VBox.vgrow="ALWAYS">
+         <center>
+            
+            <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox style="-fx-background-color: none;">
+                     <children>
+                        <Label fx:id="titleLabel" minHeight="50.0" prefWidth="481.0" styleClass="practice-three-option-title" text="Select the correct option ">
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox prefWidth="600.0">
+                     <children>
+                        
+                        <VBox alignment="CENTER" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label  fx:id="questionLabel" alignment="CENTER" styleClass="practice-question-label" text="ア" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" spacing="20.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <StackPane prefHeight="60.0" prefWidth="361.0"> 
+                                 <children>
+                                    <Label fx:id="backgroundLabel1" styleClass="practice-three-option-toggle-button-background-label" />
+                                      <ToggleButton fx:id="toggleButton1" mnemonicParsing="false" styleClass="practice-three-option-toggle-button" text="sa" />
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="60.0" prefWidth="361.0">
+                                 <children>
+                                    <Label fx:id="backgroundLabel2" styleClass="practice-three-option-toggle-button-background-label" />
+                                    <ToggleButton fx:id="toggleButton2" mnemonicParsing="false" styleClass="practice-three-option-toggle-button" text="a" />
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="60.0" prefWidth="361.0">
+                                 <children>
+                                    <Label fx:id="backgroundLabel3" styleClass="practice-three-option-toggle-button-background-label" />
+                                    <ToggleButton fx:id="toggleButton3" mnemonicParsing="false" styleClass="practice-three-option-toggle-button" text="ka" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets left="70.0" right="70.0" />
+   </padding>
+</VBox>

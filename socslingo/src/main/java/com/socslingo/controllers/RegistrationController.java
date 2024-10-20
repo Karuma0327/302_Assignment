@@ -143,7 +143,8 @@ public class RegistrationController {
         }
 
         String hashed_password = hashPassword(password);
-        boolean is_registered = user_service.registerUser(username, email, hashed_password);
+        String actual_name = username;
+        boolean is_registered = user_service.registerUser(username, email, hashed_password, actual_name);
 
         if (is_registered) {
             is_animating = true;

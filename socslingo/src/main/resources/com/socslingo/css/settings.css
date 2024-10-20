@@ -1,0 +1,258 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');
+}
+
+
+
+.settings-profile-title-text-label{
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 32px;
+}
+
+.settings-sub-heading-text-label{
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 20px;
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-padding: 10px 0px 10px 0px;
+}
+
+.settings-text-field{
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-background-color: rgb(247, 247, 247);
+    -fx-background-radius: 12px;
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-min-height: 44px;
+    -fx-font-family: 'DINRoundPro-Medi';
+    -fx-font-size: 20px;
+    -fx-min-width: 588px;
+    -fx-font-smoothing-type: lcd; 
+    
+}
+
+.settings-password-text-field{
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-background-color: rgb(247, 247, 247);
+    -fx-background-radius: 12px;
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-min-height: 44px;
+    -fx-padding: 0 0 0 20px; /* Added padding to the right */
+    -fx-font-family: 'Arial';
+    -fx-font-size: 20px;
+    -fx-min-width: 588px;
+    
+}
+.settings-text-field:focused{
+    -fx-border-color: rgb(28, 176, 246);
+}
+
+
+
+.save-changes-background-button-unclickable{
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-pref-height: 44px;
+    -fx-pref-width: 141px;
+    -fx-alignment: center;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 16px;
+
+    -fx-text-fill: rgb(175, 175, 175);
+}
+
+.save-changes-background-button-label-clickable{
+    -fx-background-color: rgb(24, 153, 214);
+    -fx-pref-height: 44px;
+    -fx-pref-width: 141px;
+    -fx-alignment: center;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 16px;
+}
+.save-changes-background-button-clickable{
+    -fx-background-color: rgb(28, 176, 246);
+    -fx-text-fill: white;
+    -fx-pref-height: 44px;
+    -fx-pref-width: 141px;
+    -fx-translate-y: -5px;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 16px;
+    
+}   
+.save-changes-background-button-clickable:hover
+{
+    -fx-background-color: rgb(31, 194, 255);
+}
+.save-changes-button-stackpane:hover .save-changes-background-button-label-clickable{
+    -fx-background-color:rgb(26, 168, 235);
+}
+.save-changes-background-button-clickable:pressed{
+    -fx-translate-y: 0px;
+}
+
+.delete-my-account-button{
+    -fx-text-fill: rgb(255, 75, 75);
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+
+}
+.avatar-svg-icon {
+    -fx-background-color: rgb(0, 102, 204);
+    -fx-background-radius: 50%; /* Make the background circular */
+    -fx-padding: 5px; /* Add padding to ensure the circle is visible */
+    -fx-shape: "M0,0 L1,0 L1,1 L0,1 Z"; /* Ensures the SVG is treated as a shape */
+}
+
+.settings-avatar-label {
+    -fx-background-color: transparent; /* Example background color */
+    -fx-background-radius: 50%; /* Make the background circular */
+    -fx-border-radius: 50%; /* Make the border circular */
+    -fx-pref-width: 125px; /* Set a fixed width */
+    -fx-pref-height: 125px; /* Set a fixed height */
+    -fx-alignment: center; /* Center the content */
+    -fx-text-fill: rgb(175, 175, 175); /* Example text color */
+    -fx-font-family: 'DINRoundPro-Black'; /* Example font */
+    -fx-cursor: hand;
+    -fx-font-size: 56px; /* Example font size */
+    -fx-cursor: hand;
+    -fx-border-color: rgb(175, 175, 175);
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-style: dashed; /* Dashed border style */
+    -fx-border-dash-array: 30 30; /* Pattern of dashes and gaps */
+}
+
+.settings-avatar-stackpane{
+    -fx-cursor: hand;
+}
+
+
+.right-side-container-heading-text-label{
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(119, 119, 119);
+    -fx-font-size: 26px;
+    -fx-padding: 8px 30px;
+    -fx-margin: 0 30px 16px 30px;
+}
+
+
+.right-side-container-button{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-text-fill: rgb(75, 75, 75);
+    -fx-pref-width: 332px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 20px;
+    -fx-padding: 0px 30px 0px 30px;
+    -fx-cursor: hand;
+    -fx-alignment: center_left;
+    -fx-font-family: 'DINRoundPro-Bold';
+
+}
+.logout-button-stackpane{
+    -fx-cursor: hand;
+}
+.logout-button-background-label{
+    -fx-pref-width: 368px;
+    -fx-pref-height: 48px;
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-background-insets: 1 0 1 0;
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.logout-button{
+    -fx-border-radius: 12px;
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-text-fill: rgb(28, 176, 246);
+    -fx-padding: 0px 0 5px 0px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 16px;
+    -fx-background-insets: 1 0 1 0;
+    -fx-pref-width: 368px;
+    -fx-pref-height: 48px;
+    -fx-translate-y: -3px;
+    -fx-background-radius: 12px;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-border-radius: 12px;
+    -fx-border-width: 2px;
+}
+
+.logout-button:pressed{
+    -fx-translate-y: 0px;
+
+}
+
+.logout-button:hover{
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-border-color: rgb(206, 206, 206);
+}
+.logout-button-background-label:hover{
+    -fx-background-color: rgb(206, 206, 206);
+    -fx-border-color: rgb(206, 206, 206);
+}
+
+.logout-button-stackpane:hover .logout-button-background-label {
+    -fx-background-color: rgb(206, 206, 206);
+    -fx-border-color: rgb(206, 206, 206);
+}
+
+
+.right-side-container-button:hover{
+    -fx-background-color: rgb(206, 206, 206);
+    -fx-cursor: hand;
+    -fx-background-radius: 12px;
+
+}

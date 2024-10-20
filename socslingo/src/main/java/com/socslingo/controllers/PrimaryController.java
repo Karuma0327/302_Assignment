@@ -51,12 +51,12 @@ public class PrimaryController {
     @FXML
     private Button sidebar_switch_to_home_button;
 
-    @FXML
-    private Button sidebar_switch_to_main_flashcard_button;
 
     @FXML
     private Button switch_to_activity_main_button;
 
+    @FXML
+    private Button switch_to_character_practice_main_button;
     @FXML
     private Button switch_to_deck_management_button;
     @FXML
@@ -124,10 +124,14 @@ private ImageView preloadedMascotImageView;
             button_to_fxml_map.put("switch_to_registration_fxml_button", "/com/socslingo/views/registration.fxml");
             button_to_fxml_map.put("switch_to_activity_main_button", "/com/socslingo/views/activity_main.fxml");
             button_to_fxml_map.put("switch_to_activity_main_test_button", "/com/socslingo/views/activity_main_test.fxml");
-
+            button_to_fxml_map.put("switch_to_character_practice_main_button", "/com/socslingo/views/character_practice_home.fxml");
+            button_to_fxml_map.put("switch_to_character_practice_activity_main_button", "/com/socslingo/views/character_practice_activity_main.fxml");
+            
+            
+            
             sidebar_buttons = Arrays.asList(
                     sidebar_switch_to_home_button,
-                    sidebar_switch_to_main_flashcard_button,
+                    switch_to_character_practice_main_button,
                     switch_to_activity_main_button,
                     switch_to_deck_management_button,
                     switch_to_activity_main_test_button,
@@ -256,7 +260,7 @@ private ImageView preloadedMascotImageView;
             preloadedIntermissionScreen.prefHeightProperty().bind(content_area.heightProperty());
             
             // Adjust the image size (e.g., 30% of the parent's width)
-            preloadedMascotImageView.fitWidthProperty().bind(preloadedIntermissionScreen.widthProperty().multiply(0.40));
+            preloadedMascotImageView.fitWidthProperty().bind(preloadedIntermissionScreen.widthProperty().multiply(0.25));
             preloadedMascotImageView.setPreserveRatio(true);
         } catch (IOException e) {
             logger.error("Failed to preload intermission screen", e);
@@ -312,7 +316,7 @@ private ImageView preloadedMascotImageView;
                     }
                 },
                 fadeInStartup,
-                new PauseTransition(Duration.seconds(3)), // Display intermission for 3 seconds
+                new PauseTransition(Duration.millis(300)), // Display intermission for 3 seconds
                 fadeOutStartup
             );
     
@@ -321,7 +325,7 @@ private ImageView preloadedMascotImageView;
                 content_area.getChildren().setAll(nextContent);
     
                 // Apply fade-in transition to the new content
-                FadeTransition fadeInContent = new FadeTransition(Duration.millis(500), nextContent);
+                FadeTransition fadeInContent = new FadeTransition(Duration.millis(300), nextContent);
                 fadeInContent.setFromValue(0);
                 fadeInContent.setToValue(1);
                 fadeInContent.play();
@@ -412,7 +416,7 @@ private ImageView preloadedMascotImageView;
     public void handleHelp(ActionEvent event) {
         logger.info("Help option selected from ContextMenu");
         try {
-            switchContent("/com/socslingo/views/help.fxml");
+            switchContent("/com/socslingo/views/character_practice_main.fxml");
             setActiveButton(null);
         } catch (IOException e) {
             logger.error("Failed to load help.fxml", e);

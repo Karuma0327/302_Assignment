@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'DINRoundPro-Bold';
+    src: url('../fonts/DIN_ROUND/ff-din-round-bold.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro';
+    src: url('../fonts/DIN_ROUND/ff-din-round-regular.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Medi';
+    src: url('../fonts/DIN_ROUND/ff-din-round-medium.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Light';
+    src: url('../fonts/DIN_ROUND/ff-din-round-light.otf');
+}
+
+@font-face {
+    font-family: 'DINRoundPro-Black';
+    src: url('../fonts/DIN_ROUND/ff-din-round-black.otf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Heavy';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Heavy.ttf');
+}
+
+@font-face {
+    font-family: 'DINNextW10-Bold';
+    src: url('../fonts/DIN_NEXT_W10/DINNextW10Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Meiryo';
+    src: url('../fonts/Meiryo-Bold.ttf');   
+}
+
+.practice-three-option-title {
+    -fx-font-size: 36px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(60, 60, 60);
+}
+
+.practice-three-option-toggle-button {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-pref-height: 60px;
+    -fx-pref-width: 361px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 20px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-text-fill: rgb(75, 75, 75);
+
+    -fx-translate-y: -3px;
+    -fx-background-insets: 1 0 1 0;
+    
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-border-radius: 12px;
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.practice-three-option-toggle-button-background-label{
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-border-color: rgb(229, 229, 229);
+
+    -fx-pref-height: 60px;
+    -fx-pref-width: 361px;
+    -fx-background-radius: 12px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+}
+
+.practice-three-option-toggle-button:pressed {
+    -fx-translate-y: 0px;
+    -fx-background-color:rgb(221, 244, 255);
+    -fx-border-color: rgb(132, 216, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+}
+
+.practice-three-option-toggle-button:selected{
+    -fx-background-color:rgb(221, 244, 255);
+    -fx-text-fill: rgb(24, 153, 214);
+    -fx-border-color: rgb(132, 216, 255);
+}
+
+.practice-three-option-toggle-button-hover{
+    -fx-background-color: rgb(247, 247, 247);
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.practice-three-option-toggle-button-pressed{
+    -fx-background-color:rgb(221, 244, 255);
+    -fx-border-color: rgb(132, 216, 255);
+}
+
+.practice-three-option-toggle-button-background-label-selected{
+    -fx-background-color: rgb(132, 216, 255); /* Selected color */
+    -fx-border-color: rgb(132, 216, 255);
+}
+
+.practice-three-option-toggle-button-background-label-hover{
+    -fx-background-color: rgb(229, 229, 229);/* Hover color */
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+.practice-question-label{
+    -fx-pref-height: 240.0;
+    -fx-font-size: 72px;
+    -fx-font-family: 'Meiryo';
+
+    -fx-pref-width: 215.0;
+    -fx-border-color: rgb(229, 229, 229);
+    -fx-background-color: rgb(255,255, 255);
+
+    -fx-border-radius: 32;
+    -fx-border-width: 2;
+    -fx-background-radius: 32;
+}
+
+/* **Added hover style for ToggleButton** */
+.practice-three-option-toggle-button-hover {
+    -fx-background-color: rgb(247, 247, 247);/* Desired hover background color */
+    -fx-border-color: rgb(229, 229, 229);
+}
+
+/* **Added selected label style** */
+.practice-three-option-toggle-button-background-label-selected {
+    -fx-background-color: rgb(132, 216, 255); /* Selected color */
+    -fx-border-color: rgb(132, 216, 255);
+}
+
+/* **Ensure labels revert to default when unselected** */
+.practice-three-option-toggle-button-background-label-default {
+    -fx-background-color: rgb(229, 229, 229);
+    -fx-border-color: rgb(229, 229, 229);
+}
+

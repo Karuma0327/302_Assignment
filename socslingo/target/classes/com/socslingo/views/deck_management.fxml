@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -9,39 +8,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.socslingo.controllers.DeckManagementController"
-            stylesheets="@../css/deck_management.css">
+<BorderPane stylesheets="@../css/deck_management.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.DeckManagementController">
     
     <center>
-        <VBox spacing="20" alignment="CENTER" styleClass="main-content-container">
+        <VBox alignment="CENTER" spacing="20" styleClass="main-content-container">
             
             <!-- Decks List Section -->
             <VBox spacing="10">
                 <!-- Wrap Label in HBox for center-left alignment -->
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="Your Decks" styleClass="deck-title"/>
+                <HBox alignment="CENTER_LEFT" minWidth="880.0">
+                    <Label minWidth="880.0" styleClass="deck-title" text="Your Character Sets" HBox.hgrow="ALWAYS" />
                 </HBox>
                 
                 <!-- Wrap ListView in HBox for center alignment -->
-                <HBox alignment="CENTER">
-                    <ListView fx:id="decks_list_view" prefHeight="300" prefWidth="800" maxWidth="800"/>
+                <HBox alignment="CENTER" minWidth="880.0">
+                    <ListView fx:id="decks_list_view" maxWidth="800" prefHeight="300" prefWidth="800" />
                 </HBox>
             </VBox>
 
             <!-- Navigation Buttons to Flashcard Management -->
-            <HBox spacing="10" alignment="CENTER">
+            <HBox alignment="CENTER" spacing="10">
                 
-                <Button fx:id="preview_deck_button" text="Preview Deck" onAction="#handlePreviewDeck"
-                        styleClass="generic-button-medium"/>
-                <Button fx:id="switch_to_flashcard_creation_button" text="Create Flashcard" onAction="#handleButtonAction"
-                        styleClass="generic-button-medium"/>
-                <Button fx:id="delete_deck_button" text="Delete Deck" onAction="#handleDeleteDeck"
-                        styleClass="generic-button-medium"/>
-                <Button fx:id="switch_to_deck_flashcard_management_button" text="Manage Flashcards" onAction="#navigateToFlashcardManagement"
-                        styleClass="generic-button-medium"/>
-                <Button fx:id="create_deck_button" text="Create Deck" onAction="#handleCreateDeck"
-                        styleClass="generic-button-medium"/>
+                <Button fx:id="preview_deck_button" onAction="#handlePreviewDeck" styleClass="generic-button-medium" text="Preview Deck" />
+                <Button fx:id="switch_to_flashcard_creation_button" onAction="#handleButtonAction" styleClass="generic-button-medium" text="Create Flashcard" />
+                <Button fx:id="delete_deck_button" onAction="#handleDeleteDeck" styleClass="generic-button-medium" text="Delete Deck" />
+                <Button fx:id="switch_to_deck_flashcard_management_button" onAction="#navigateToFlashcardManagement" styleClass="generic-button-medium" text="Manage Flashcards" />
+                <Button fx:id="create_deck_button" onAction="#handleCreateDeck" styleClass="generic-button-medium" text="Create Deck" />
             </HBox>
             
             <!-- Optional: Add more sections or components as needed -->
@@ -51,6 +43,6 @@
     
     <!-- Properly set padding using Insets -->
     <padding>
-        <Insets top="75" right="75" bottom="75" left="75"/>
+        <Insets bottom="75" left="75" right="75" top="75" />
     </padding>
 </BorderPane>

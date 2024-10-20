@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<HBox xmlns="http://javafx.com/javafx/23"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.socslingo.controllers.CharacterListCellController"
+    spacing="15.0"
+    alignment="CENTER"
+    stylesheets="@../css/character_practice.css">
+    <children>
+        <!-- Character Buttons (Max 5) -->
+        <!-- Repeat the StackPane structure for 5 characters -->
+        <StackPane prefHeight="68.0" prefWidth="87.0"
+            styleClass="practice-character-button-stack-pane">
+            <children>
+                <Label prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-button-background-label"
+                    text="Label" />
+                <Label fx:id="japaneseLabel1" alignment="CENTER" prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-text-layer-japanese-bottom-layer"
+                    text="あ" />
+                <Button fx:id="characterButton1" mnemonicParsing="false" prefHeight="68.0"
+                    prefWidth="87.0"
+                    styleClass="practice-character-button-top-layer" text="a" />
+            </children>
+        </StackPane>
+
+        <StackPane prefHeight="68.0" prefWidth="87.0"
+            styleClass="practice-character-button-stack-pane">
+            <children>
+                <Label prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-button-background-label"
+                    text="Label" />
+                <Label fx:id="japaneseLabel2" alignment="CENTER" prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-text-layer-japanese-bottom-layer"
+                    text="あ" />
+                <Button fx:id="characterButton2" mnemonicParsing="false" prefHeight="68.0"
+                    prefWidth="87.0"
+                    styleClass="practice-character-button-top-layer" text="a" />
+            </children>
+        </StackPane>
+
+        <StackPane prefHeight="68.0" prefWidth="87.0"
+            styleClass="practice-character-button-stack-pane">
+            <children>
+                <Label prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-button-background-label"
+                    text="Label" />
+                <Label fx:id="japaneseLabel3" alignment="CENTER" prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-text-layer-japanese-bottom-layer"
+                    text="あ" />
+                <Button fx:id="characterButton3" mnemonicParsing="false" prefHeight="68.0"
+                    prefWidth="87.0"
+                    styleClass="practice-character-button-top-layer" text="a" />
+            </children>
+        </StackPane>
+
+        <StackPane prefHeight="68.0" prefWidth="87.0"
+            styleClass="practice-character-button-stack-pane">
+            <children>
+                <Label prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-button-background-label"
+                    text="Label" />
+                <Label fx:id="japaneseLabel4" alignment="CENTER" prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-text-layer-japanese-bottom-layer"
+                    text="あ" />
+                <Button fx:id="characterButton4" mnemonicParsing="false" prefHeight="68.0"
+                    prefWidth="87.0"
+                    styleClass="practice-character-button-top-layer" text="a" />
+            </children>
+        </StackPane>
+
+        <StackPane prefHeight="68.0" prefWidth="87.0"
+            styleClass="practice-character-button-stack-pane">
+            <children>
+                <Label prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-button-background-label"
+                    text="Label" />
+                <Label fx:id="japaneseLabel5" alignment="CENTER" prefHeight="68.0" prefWidth="87.0"
+                    styleClass="practice-character-text-layer-japanese-bottom-layer"
+                    text="あ" />
+                <Button fx:id="characterButton5" mnemonicParsing="false" prefHeight="68.0"
+                    prefWidth="87.0"
+                    styleClass="practice-character-button-top-layer" text="a" />
+            </children>
+        </StackPane>
+    </children>
+</HBox>

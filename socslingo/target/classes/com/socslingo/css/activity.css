@@ -39,7 +39,6 @@
 }
 
 
-
 /* StackPane Hover Styles */
 .activity-button-stackpane-type-hover:hover .activity-button--large-type-hover,
 .activity-button-stackpane-type-hover:hover .activity-button--medium-type-hover,
@@ -584,6 +583,8 @@
     -fx-translate-y: -2;
 }
 
+
+
 .activity-continue-button-stackpane-type-correct-hover:hover .activity-continue-button--medium-type-correct-hover {
     -fx-background-color: rgb(134, 219, 70);
 
@@ -640,6 +641,65 @@
     -fx-background-color: rgb(134, 219, 70);
     -fx-border-color: rgb(119, 179, 56);
 }
+
+
+.activity-check-button-stackpane:hover .activity-check-button {
+    -fx-background-color: rgb(31, 194, 255);
+
+    -fx-border-color: rgb(26, 168, 235);
+}
+
+.activity-check-button-stackpane:pressed .activity-check-button,
+.activity-check-button-stackpane:pressed .activity-check-button__label {
+    -fx-translate-y: 0;
+}
+
+.activity-check-button__background-rectangle{
+    -fx-fill: rgb(24, 153, 214);
+    -fx-arc-width: 36;
+    -fx-arc-height: 36;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-insets: 0 0 0 0;
+
+}
+
+.activity-check-button-stackpane:hover .activity-check-button__background-rectangle{
+    -fx-fill: rgb(24, 153, 214);
+}
+
+.activity-check-button__label{
+    -fx-font-size: 17px;
+    -fx-font-family: 'DINNextW10-Bold';
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-translate-y: -4;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.activity-check-button {
+    -fx-background-color: rgb(28, 176, 246);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-width: 0px;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-font-size: 19px;
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-translate-y: -4;
+}
+
+.activity-check-button:hover {
+    -fx-background-color: rgb(31, 194, 255);
+    -fx-border-color: rgb(26, 168, 235);
+}
+
+
 
 
 .activity-continue-button-stackpane-type-incorrect-hover:hover .activity-continue-button--medium-type-incorrect-hover {

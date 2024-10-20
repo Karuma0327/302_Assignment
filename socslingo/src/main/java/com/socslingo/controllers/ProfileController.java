@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
@@ -37,6 +38,9 @@ public class ProfileController implements Initializable {
     private Label username_label;
 
     @FXML
+    private Label actual_name_label;
+
+    @FXML
     private Label joined_date_label;
 
     @FXML
@@ -46,6 +50,8 @@ public class ProfileController implements Initializable {
 
     private Image profile_banner_image;
 
+    @FXML
+    private StackPane profile_banner_stack_pane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,6 +62,7 @@ public class ProfileController implements Initializable {
 
         if (current_user != null) {
             username_label.setText(current_user.getUsername());
+            actual_name_label.setText(current_user.getActualName());
             joined_date_label.setText("Joined " + current_user.getCreatedDate());
 
             profile_banner_image = ImageCache.getInstance().getBannerImage(current_user.getId());
@@ -358,8 +365,12 @@ public class ProfileController implements Initializable {
     private void set_profile_banner(Image image) {
         if (image != null) {
             profile_banner_image_view.setImage(image);
-            // Removed viewport settings
-            profile_banner_image_view.setStyle("");
+    
+            // Set dimensions for the user-uploaded banner
+            profile_banner_image_view.setFitWidth(684);
+            profile_banner_image_view.setFitHeight(384);
+            profile_banner_stack_pane.setStyle("-fx-background-color: transparent;");
+            profile_banner_image_view.setTranslateY(0);
             profile_banner_image_view.setSmooth(true);
             System.out.println("Profile banner set successfully with dynamic sizing.");
         }
@@ -379,11 +390,17 @@ public class ProfileController implements Initializable {
             }
             Image defaultImage = new Image(is);
             profile_banner_image_view.setImage(defaultImage);
-            profile_banner_image_view.setStyle("");
+            profile_banner_image_view.setFitWidth(600); 
+            profile_banner_image_view.setFitHeight(250); 
+            profile_banner_image_view.setTranslateY(25);
+            profile_banner_stack_pane.setStyle("-fx-background-color: #ddf4ff;");
             System.out.println("Default profile banner set.");
         } catch (Exception e) {
             System.err.println("Failed to load default banner image.");
             e.printStackTrace();
         }
     }
+
+
+    
 }
