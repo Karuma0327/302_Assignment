@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.socslingo.models.CharacterRecognitionTest" time="0.211" tests="17" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\target\test-classes;C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\target\classes;C:\Users\taitr\.m2\repository\org\mindrot\jbcrypt\0.4\jbcrypt-0.4.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16-win.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16-win.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16-win.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16-win.jar;C:\Users\taitr\.m2\repository\ch\qos\logback\logback-classic\1.5.8\logback-classic-1.5.8.jar;C:\Users\taitr\.m2\repository\ch\qos\logback\logback-core\1.5.8\logback-core-1.5.8.jar;C:\Users\taitr\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\taitr\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\taitr\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\taitr\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\taitr\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\taitr\.m2\repository\org\xerial\sqlite-jdbc\3.46.1.0\sqlite-jdbc-3.46.1.0.jar;"/>
+    <property name="java.vm.vendor" value="BellSoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://bell-sw.com/"/>
+    <property name="user.timezone" value="Australia/Brisbane"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="AU"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\BellSoft\LibericaJDK-21-Full\bin"/>
+    <property name="sun.java.command" value="C:\Users\taitr\AppData\Local\Temp\surefire5531487948309240617\surefirebooter-20241027123857683_3.jar C:\Users\taitr\AppData\Local\Temp\surefire5531487948309240617 2024-10-27T12-38-57_398-jvmRun1 surefire-20241027123857683_1tmp surefire_0-20241027123857683_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\target\test-classes;C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\target\classes;C:\Users\taitr\.m2\repository\org\mindrot\jbcrypt\0.4\jbcrypt-0.4.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16-win.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16-win.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16-win.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\taitr\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16-win.jar;C:\Users\taitr\.m2\repository\ch\qos\logback\logback-classic\1.5.8\logback-classic-1.5.8.jar;C:\Users\taitr\.m2\repository\ch\qos\logback\logback-core\1.5.8\logback-core-1.5.8.jar;C:\Users\taitr\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\taitr\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\taitr\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\taitr\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\taitr\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\taitr\.m2\repository\org\xerial\sqlite-jdbc\3.46.1.0\sqlite-jdbc-3.46.1.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\taitr"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="C:\Program Files\BellSoft\LibericaJDK-21-Full"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\taitr\AppData\Local\Temp\surefire5531487948309240617\surefirebooter-20241027123857683_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.4+9-LTS"/>
+    <property name="user.name" value="Taitranz"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\taitr\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bell-sw.com/support"/>
+    <property name="java.io.tmpdir" value="C:\Users\taitr\AppData\Local\Temp\"/>
+    <property name="java.version" value="21.0.4"/>
+    <property name="user.dir" value="C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\BellSoft\LibericaJDK-21-Full\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\taitr\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\BellSoft\LibericaJDK-21-Full\bin\;C:\Program Files\Eclipse Adoptium\jdk-17.0.12.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\taitr\OneDrive\Documents\Enviromental Variables\apache-maven-3.9.9\bin;C:\Program Files\MATLAB\R2024b\bin;C:\Users\taitr\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\taitr\AppData\Local\Programs\Python\Python312\;C:\Users\taitr\AppData\Local\Microsoft\WindowsApps;;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\Users\taitr\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\taitr\AppData\Local\Programs\Python\Python312\;C:\Users\taitr\AppData\Local\Microsoft\WindowsApps;C:\Users\taitr\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\taitr\AppData\Local\Muse Hub\lib;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="BellSoft"/>
+    <property name="java.vm.version" value="21.0.4+9-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="testSpecialCharacters" classname="com.socslingo.models.CharacterRecognitionTest" time="0.199">
+    <system-out><![CDATA[12:38:58.912 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=115, characterType='Katakana', character='シ', romaji='shi'}
+]]></system-out>
+  </testcase>
+  <testcase name="testGetCharacter" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.931 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=106, characterType='Kanji', character='日', romaji='ni'}
+]]></system-out>
+  </testcase>
+  <testcase name="testToStringKatakana" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.932 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=109, characterType='Katakana', character='ケ', romaji='ke'}
+]]></system-out>
+  </testcase>
+  <testcase name="testCharacterRecognitionCreationKatakana" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.933 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=102, characterType='Katakana', character='ケ', romaji='ke'}
+]]></system-out>
+  </testcase>
+  <testcase name="testGetActivityId" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.933 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=104, characterType='Hiragana', character='う', romaji='u'}
+]]></system-out>
+  </testcase>
+  <testcase name="testCharacterRecognitionCreationKanji" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.934 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=103, characterType='Kanji', character='木', romaji='ki'}
+]]></system-out>
+  </testcase>
+  <testcase name="testToStringKanji" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.935 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=110, characterType='Kanji', character='森', romaji='mori'}
+]]></system-out>
+  </testcase>
+  <testcase name="testMultipleCharacterRecognition" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.936 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=111, characterType='Hiragana', character='か', romaji='ka'}
+12:38:58.936 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=112, characterType='Katakana', character='カー', romaji='kaa'}
+12:38:58.936 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=113, characterType='Kanji', character='火', romaji='hi'}
+]]></system-out>
+  </testcase>
+  <testcase name="testImmutableFields" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.936 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=114, characterType='Hiragana', character='き', romaji='ki'}
+]]></system-out>
+  </testcase>
+  <testcase name="testToStringHiragana" classname="com.socslingo.models.CharacterRecognitionTest" time="0.002">
+    <system-out><![CDATA[12:38:58.937 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=108, characterType='Hiragana', character='お', romaji='o'}
+]]></system-out>
+  </testcase>
+  <testcase name="testGetCharacterType" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.939 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=105, characterType='Katakana', character='ク', romaji='ku'}
+]]></system-out>
+  </testcase>
+  <testcase name="testNegativeActivityId" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.940 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=-117, characterType='Hiragana', character='つ', romaji='tsu'}
+]]></system-out>
+  </testcase>
+  <testcase name="testEmptyRomaji" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.940 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=118, characterType='Kanji', character='日', romaji=''}
+]]></system-out>
+  </testcase>
+  <testcase name="testCharacterRecognitionCreationHiragana" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.941 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=101, characterType='Hiragana', character='あ', romaji='a'}
+]]></system-out>
+  </testcase>
+  <testcase name="testGetRomaji" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.941 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=107, characterType='Hiragana', character='え', romaji='e'}
+]]></system-out>
+  </testcase>
+  <testcase name="testZeroActivityId" classname="com.socslingo.models.CharacterRecognitionTest" time="0.001">
+    <system-out><![CDATA[12:38:58.941 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=0, characterType='Katakana', character='ツ', romaji='tsu'}
+]]></system-out>
+  </testcase>
+  <testcase name="testUnicodeCharacters" classname="com.socslingo.models.CharacterRecognitionTest" time="0.0">
+    <system-out><![CDATA[12:38:58.942 [main] INFO com.socslingo.models.CharacterRecognition -- CharacterRecognition created: CharacterRecognition{activityId=116, characterType='Kanji', character='愛', romaji='ai'}
+]]></system-out>
+  </testcase>
+</testsuite>

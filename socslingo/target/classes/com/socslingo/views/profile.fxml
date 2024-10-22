@@ -1,38 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.Group?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.shape.Rectangle?>
 
-<ScrollPane fitToWidth="true" pannable="true" styleClass="profile-scroll-pane-main-container" style="-fx-background-color: white;" stylesheets="@../css/profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ProfileController">
+<ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" style="-fx-background-color: white;" styleClass="profile-scroll-pane-main-container" stylesheets="@../css/profile.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.ProfileController">
    <content>
       <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: white;">
           <children>
               <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1200.0">
                   <children>
-                     <StackPane fx:id="profile_banner_stack_pane" prefWidth="684" prefHeight="384" styleClass="profile-banner-stack-pane">
-                        <ImageView 
-                        
-                            fx:id="profile_banner_image_view" 
-                            preserveRatio="true" 
-                            fitWidth="684" 
-                            fitHeight="384" 
-                            styleClass="profile-banner-image-view" 
-                            onMouseClicked="#handle_profile_banner_click" />
+                     <StackPane fx:id="profile_banner_stack_pane" prefHeight="384" prefWidth="684" styleClass="profile-banner-stack-pane">
+                        <ImageView fx:id="profile_banner_image_view" fitHeight="384" fitWidth="684" onMouseClicked="#handle_profile_banner_click" preserveRatio="true" styleClass="profile-banner-image-view" />
                             
                     </StackPane>
                   </children>
@@ -43,35 +32,28 @@
                      <children>
 
                         <!-- User's Name Label -->    
-                        <Label fx:id="actual_name_label" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: lightcoral;" text="">
-                           <font>
-                              <Font name="DINRoundPro-Bold Regular" size="17.0" />
-                           </font>
+                        <Label fx:id="actual_name_label" prefHeight="38.0" prefWidth="175.0" styleClass="profile-text-style-1" text="">
+                           
                         </Label>
                         
                         <!-- Username Label -->
-                        <Label fx:id="username_label" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: lightcoral;" text="">
-                           <font>
-                              <Font name="DINRoundPro-Bold Regular" size="17.0" />
-                           </font>
+                        <Label fx:id="username_label" prefHeight="38.0" prefWidth="175.0" styleClass="profile-text-style-2" text="">
                         </Label>
 
                         <!-- Joined Date Label -->
-                        <Label fx:id="joined_date_label" prefHeight="41.0" prefWidth="175.0" style="-fx-background-color: pink;" text="">
-                           <font>
-                              <Font name="DINRoundPro-Bold Regular" size="17.0" />
-                           </font>
+                        <Label fx:id="joined_date_label" prefHeight="41.0" prefWidth="175.0" styleClass="profile-text-style-3" text="">
+
                         </Label>
                         <!-- Language Flag-->
                         <HBox prefHeight="45.0" prefWidth="593.0">
                            <children>
-                              <Label alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="593.0" style="-fx-background-color: lightyellow;" >
+                              <Label alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="593.0">
                                  <graphic>
                                     <Group>
                                        <!-- Rectangle Path -->
-                                       <SVGPath content="M194.727078,0 L890.272922,0 C957.98377,0 982.537359,7.05010505 1007.29143,20.2887285 C1032.04551,33.527352 1051.47265,52.9544938 1064.71127,77.7085675 C1077.94989,102.462641 1085,127.01623 1085,194.727078 L1085,642.272922 C1085,709.98377 1077.94989,734.537359 1064.71127,759.291433 C1051.47265,784.045506 1032.04551,803.472648 1007.29143,816.711271 C982.537359,829.949895 957.98377,837 890.272922,837 L194.727078,837 C127.01623,837 102.462641,829.949895 77.7085675,816.711271 C52.9544938,803.472648 33.527352,784.045506 20.2887285,759.291433 C7.05010505,734.537359 0,709.98377 0,642.272922 L0,194.727078 C0,127.01623 7.05010505,102.462641 20.2887285,77.7085675 C33.527352,52.9544938 52.9544938,33.527352 77.7085675,20.2887285 C102.462641,7.05010505 127.01623,0 194.727078,0 Z" fill="#EEEEEE" scaleX="0.03" scaleY="0.03"/>
+                                       <SVGPath content="M194.727078,0 L890.272922,0 C957.98377,0 982.537359,7.05010505 1007.29143,20.2887285 C1032.04551,33.527352 1051.47265,52.9544938 1064.71127,77.7085675 C1077.94989,102.462641 1085,127.01623 1085,194.727078 L1085,642.272922 C1085,709.98377 1077.94989,734.537359 1064.71127,759.291433 C1051.47265,784.045506 1032.04551,803.472648 1007.29143,816.711271 C982.537359,829.949895 957.98377,837 890.272922,837 L194.727078,837 C127.01623,837 102.462641,829.949895 77.7085675,816.711271 C52.9544938,803.472648 33.527352,784.045506 20.2887285,759.291433 C7.05010505,734.537359 0,709.98377 0,642.272922 L0,194.727078 C0,127.01623 7.05010505,102.462641 20.2887285,77.7085675 C33.527352,52.9544938 52.9544938,33.527352 77.7085675,20.2887285 C102.462641,7.05010505 127.01623,0 194.727078,0 Z" fill="#EEEEEE" scaleX="0.03" scaleY="0.03" />
                                        <!-- Circle Path -->
-                                       <SVGPath content="M542.5,418.5 m-217,0 a217,217 0 1,0 434,0 a217,217 0 1,0 -434,0" fill="#FF4B4B" scaleX="0.03" scaleY="0.03"/>
+                                       <SVGPath content="M542.5,418.5 m-217,0 a217,217 0 1,0 434,0 a217,217 0 1,0 -434,0" fill="#FF4B4B" scaleX="0.03" scaleY="0.03" />
                                     </Group>
                                  </graphic>
                               </Label>
@@ -86,80 +68,94 @@
                   <Separator prefHeight="41.0" prefWidth="600.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1200.0">
+              <HBox alignment="CENTER" prefWidth="1200.0" spacing="10">
                <children>
-                  <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: grey;" />
-               </children>
-            </HBox>
-              <HBox alignment="CENTER" prefHeight="664.0" prefWidth="1200.0" spacing="10">
-               <children>
-                  <VBox prefHeight="500.0" prefWidth="600.0">
+                  <VBox prefWidth="600.0">
                      <children>
-                        <VBox prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: purple;">
+                        <VBox prefHeight="52.0" prefWidth="600.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="52.0" prefWidth="104.0" text="Label">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
+                              <Label prefHeight="52.0" prefWidth="150" styleClass="profile-text-style-4" text="Statistics">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin></Label>
                            </children>
                         </VBox>
-                        <GridPane prefHeight="154.0" prefWidth="600.0">
+                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="140.0" prefWidth="600.0" vgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 1" />
-                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 3" GridPane.rowIndex="1" />
-                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 2" GridPane.columnIndex="1" />
-                              <Label prefHeight="40.0" prefWidth="300.0" text="STATS 3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <VBox alignment="CENTER" styleClass="profile-grid-pane">
+                                 <children>
+                                    <Label fx:id="character_correct_label" graphicTextGap="35.0" minHeight="100.0" prefHeight="100.0" minWidth="285.0" prefWidth="295.0" styleClass="profile-grid-pane-label" text="3">
+                                       <graphic>
+                                          <Group>
+                                             <children>
+                                                 <SVGPath content="M 3.058594 0 L 11.925781 0 L 11.925781 40 L 3.058594 40 Z M 3.058594 0" fill="#00DDC0" />
+                                                 <SVGPath content="M 7.492188 0 L 11.925781 0 L 11.925781 40 L 7.492188 40 Z M 7.492188 0" fill="#00AC93" />
+                                                 <SVGPath content="M 11.925781 0 L 20.796875 0 L 20.796875 40 L 11.925781 40 Z M 11.925781 0" fill="#FFAB1D" />
+                                                 <SVGPath content="M 16.363281 0 L 20.796875 0 L 20.796875 40 L 16.363281 40 Z M 16.363281 0" fill="#FF8900" />
+                                                 <SVGPath content="M 3.058594 34.179688 L 11.925781 34.179688 L 11.925781 40 L 3.058594 40 Z M 3.058594 34.179688" fill="#006666" />
+                                                 <SVGPath content="M 7.492188 34.179688 L 11.925781 34.179688 L 11.925781 40 L 7.492188 40 Z M 7.492188 34.179688" fill="#00534A" />
+                                                 <SVGPath content="M 11.925781 34.179688 L 20.796875 34.179688 L 20.796875 40 L 11.925781 40 Z M 11.925781 34.179688" fill="#FF4F18" />
+                                                 <SVGPath content="M 16.363281 34.179688 L 20.796875 34.179688 L 20.796875 40 L 16.363281 40 Z M 16.363281 34.179688" fill="#FF3400" />
+                                                 <SVGPath content="M 36.941406 38.277344 L 28.511719 39.960938 L 20.90625 1.949219 L 29.335938 0.261719 Z M 36.941406 38.277344" fill="#00A4FF" />
+                                                 <SVGPath content="M 36.941406 38.273438 L 32.726562 39.117188 L 25.121094 1.105469 L 29.335938 0.261719 Z M 36.941406 38.273438" fill="#0082D1" />
+                                                 <SVGPath content="M 36.941406 38.273438 L 28.511719 39.960938 L 27.371094 34.246094 L 35.800781 32.578125 Z M 36.941406 38.273438" fill="#006DFF" />
+                                                 <SVGPath content="M 36.941406 38.273438 L 32.726562 39.117188 L 31.585938 33.414062 L 35.800781 32.578125 Z M 36.941406 38.273438" fill="#0060D1" />
+                                                 <SVGPath content="M 5.78125 4 L 9.257812 4 L 9.257812 6.609375 L 5.78125 6.609375 Z M 5.78125 4" fill="#FFFFFF" />
+                                                 <SVGPath content="M 7.519531 4 L 9.257812 4 L 9.257812 6.609375 L 7.519531 6.609375 Z M 7.519531 4" fill="#E1E1E4" />
+                                                 <SVGPath content="M 14.648438 4 L 18.128906 4 L 18.128906 6.609375 L 14.648438 6.609375 Z M 14.648438 4" fill="#FFFFFF" />
+                                                 <SVGPath content="M 16.363281 4 L 18.128906 4 L 18.128906 6.609375 L 16.363281 6.609375 Z M 16.363281 4" fill="#E1E1E4" />
+                                                 <SVGPath content="M 24.808594 7.925781 L 24.316406 5.367188 L 27.625 4.726562 L 28.121094 7.289062 Z M 24.808594 7.925781" fill="#FFFFFF" />
+                                                 <SVGPath content="M 26.421875 7.617188 L 25.910156 5.058594 L 27.625 4.726562 L 28.117188 7.289062 Z M 26.421875 7.617188" fill="#E1E1E4" />
+                                             </children>
+                                         </Group>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" />
+                                       </padding></Label>
+                                    <Label styleClass="profile-grid-pane-label-stats-1" text="WORD CORRECT">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin></Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" styleClass="profile-grid-pane" GridPane.columnIndex="3">
+                                 <children>
+                                    <Label fx:id="character_incorrect_label" graphicTextGap="25.0" minHeight="100.0" prefHeight="100.0" minWidth="285.0" prefWidth="295.0" styleClass="profile-grid-pane-label" text="3">
+                                       <graphic>
+                                          <Group>
+                                             <children>
+                                                <SVGPath content="M18.0524 5C17.3857 13 17.0524 30.7 21.0524 37.5" fill="transparent" stroke="#1CB0F6" strokeLineCap="ROUND" strokeWidth="3" />
+                                                <SVGPath content="M8.05237 11C12.719 11.1667 24.8524 11.1 36.0524 9.5" fill="transparent" stroke="#1CB0F6" strokeLineCap="ROUND" strokeWidth="3" />
+                                                <SVGPath content="M28.5524 16C28.0524 20.6667 25.1524 31.3 17.5524 36.5C9.95236 41.7 7.38569 37.3333 7.05236 34.5C6.6406 31 8.55236 24 16.5524 21C19.8857 19.6667 27.8191 18.631 33.0524 20.5C40.0524 23 45.0524 37.5 25.0524 41" fill="transparent" stroke="#1CB0F6" strokeLineCap="ROUND" strokeWidth="3" />
+                                            </children>
+                                         </Group>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" />
+                                       </padding></Label>
+                                    <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="229.0" styleClass="profile-grid-pane-label-stats-1" text="WORD INCORRECT">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin></Label>
+                                 </children>
+                              </VBox>
+
                            </children>
                         </GridPane>
-                        <VBox prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: purple;">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="52.0" prefWidth="104.0" text="Label">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="411.0" prefWidth="600.0">
-                           <children>
-                              <VBox prefHeight="137.0" prefWidth="100.0" style="-fx-background-color: lightblue;">
-                                 <children>
-                                    <HBox prefHeight="137.0" prefWidth="600.0">
-                                       <children>
-                                          <HBox prefHeight="100.0" prefWidth="178.0" style="-fx-background-color: aqua;" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="137.0" prefWidth="600.0" style="-fx-background-color: gold;">
-                                 <children>
-                                    <HBox prefHeight="137.0" prefWidth="178.0">
-                                       <children>
-                                          <HBox prefHeight="137.0" prefWidth="180.0" style="-fx-background-color: pink;" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="137.0" prefWidth="600.0" style="-fx-background-color: green;">
-                                 <children>
-                                      <HBox prefHeight="137.0" prefWidth="288.0" spacing="10">
-                                       <children>
-                                          <HBox prefHeight="137.0" prefWidth="180.0" style="-fx-background-color: brown;" />
-                                       </children>
-                                      </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
+                      
                      </children>
                   </VBox>
                </children>

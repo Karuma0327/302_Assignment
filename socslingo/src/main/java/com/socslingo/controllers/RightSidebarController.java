@@ -150,6 +150,12 @@ public class RightSidebarController {
             System.err.println("quickSaveNumberField is not initialized. Check fx:id in FXML.");
         }
         updateQuickSaveFields(3);
+        
+                // **Ensure flashcardContent and deckContent are visible**
+                flashcardContent.setVisible(true);
+                flashcardContent.setManaged(true);
+                deckContent.setVisible(true);
+                deckContent.setManaged(true);
     }
 
     /**

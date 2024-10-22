@@ -16,12 +16,12 @@
             <!-- Decks List Section -->
             <VBox spacing="10">
                 <!-- Wrap Label in HBox for center-left alignment -->
-                <HBox alignment="CENTER_LEFT" minWidth="880.0">
+                <HBox alignment="CENTER_LEFT" minWidth="480.0">
                     <Label minWidth="880.0" styleClass="deck-title" text="Your Character Sets" HBox.hgrow="ALWAYS" />
                 </HBox>
                 
                 <!-- Wrap ListView in HBox for center alignment -->
-                <HBox alignment="CENTER" minWidth="880.0">
+                <HBox alignment="CENTER" minWidth="480.0">
                     <ListView fx:id="decks_list_view" maxWidth="800" prefHeight="300" prefWidth="800" />
                 </HBox>
             </VBox>

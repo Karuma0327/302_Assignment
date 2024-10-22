@@ -7,6 +7,7 @@ public class User {
     private String created_date;
     private String profile_banner_path;
     private String actual_name;
+    private String email; // Added email field
 
     public User(int id, String username, String password, String created_date) {
         this.id = id;
@@ -64,11 +65,20 @@ public class User {
         this.profile_banner_path = profile_banner_path;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", email='" + email + '\'' +       // Include email
+                ", actual_name='" + actual_name + '\'' + // Include actual name
                 ", password='" + password + '\'' +
                 ", created_date='" + created_date + '\'' +
                 ", profile_banner_path='" + profile_banner_path + '\'' +

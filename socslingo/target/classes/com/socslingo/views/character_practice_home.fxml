@@ -11,11 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true" pannable="true" prefHeight="1500.0" prefWidth="1000.0"
-   style="-fx-background-color: white;" stylesheets="@../css/character_practice.css"
-   xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.socslingo.controllers.CharacterPracticeHomeController"
-   styleClass="character-practice-main">
+<ScrollPane fitToWidth="true" pannable="true" prefWidth="1000.0" style="-fx-background-color: white;" styleClass="character-practice-main" stylesheets="@../css/character_practice.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socslingo.controllers.CharacterPracticeHomeController">
    <content>
       <VBox style="-fx-background-color: white;">
          <fx:define>
@@ -29,30 +25,25 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                           styleClass="practice-toggle-button" text="HIRAGANA"
-                           toggleGroup="$toggleGroup" /> <!-- Modified: Removed nested ToggleGroup -->
+                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle" styleClass="practice-toggle-button" text="HIRAGANA">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleGroup" />
+                           </toggleGroup></ToggleButton> <!-- Modified: Removed nested ToggleGroup -->
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                           styleClass="practice-toggle-button" text="KATAKANA"
-                           toggleGroup="$toggleGroup" /> <!-- Modified: Removed nested ToggleGroup -->
+                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle" styleClass="practice-toggle-button" text="KATAKANA" toggleGroup="$toggleGroup" /> <!-- Modified: Removed nested ToggleGroup -->
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                           styleClass="practice-toggle-button" text="KANJI"
-                           toggleGroup="$toggleGroup" /> <!-- Added KANJI ToggleButton -->
+                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle" styleClass="practice-toggle-button" text="KANJI" toggleGroup="$toggleGroup" /> <!-- Added KANJI ToggleButton -->
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                           styleClass="practice-toggle-button" text="USER"
-                           toggleGroup="$toggleGroup" /> <!-- Modified: Removed nested ToggleGroup -->
+                        <ToggleButton mnemonicParsing="false" onAction="#handleToggle" styleClass="practice-toggle-button" text="USER" toggleGroup="$toggleGroup" /> <!-- Modified: Removed nested ToggleGroup -->
                      </children>
                   </HBox>
                </children>
@@ -64,178 +55,172 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <!-- practice-main-text Label -->
-                        <Label fx:id="practiceMainText" styleClass="practice-main-text"
-                           text="Let's learn Hiragana!" />
+                        <Label fx:id="practiceMainText" styleClass="practice-main-text" text="Let's learn Hiragana!" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <!-- practice-sub-text Label -->
-                        <Label fx:id="practiceSubText" styleClass="practice-sub-text"
-                           text="Get to know the main writing system in Japanese" />
+                        <Label fx:id="practiceSubText" styleClass="practice-sub-text" text="Get to know the main writing system in Japanese" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="350.0">
                      <children>
                         <StackPane fx:id="learnCharactersContainer"> <!-- Added: fx:id for StackPane -->
                            <children>
-                              <Label styleClass="learn-the-characters-button-background-label"
-                                 text="Label" />
-                              <Button fx:id="learnCharactersButton"
-                                 mnemonicParsing="false"
-                                 styleClass="learn-the-characters-button"
-                                 text="LEARN THE CHARACTERS" onAction="#handleLearnCharacters" />
+                              <Label styleClass="learn-the-characters-button-background-label" text="Label" />
+                              <Button fx:id="learnCharactersButton" mnemonicParsing="false" onAction="#handleLearnCharacters" styleClass="learn-the-characters-button" text="LEARN THE CHARACTERS" />
                            </children>
                         </StackPane>
                      </children>
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets top="25.0" bottom="25.0" />
+                  <Insets bottom="25.0" top="25.0" />
                </VBox.margin>
             </VBox>
-
-            <!-- Character Buttons Container -->
-            <VBox fx:id="characterButtonsContainer" />
-
-            <!-- Divider -->
-            <HBox fx:id="mainDivider" alignment="CENTER" styleClass="divider-margin" visible="false"> <!--
-               Modified: Added fx:id and initially hidden -->
+            <VBox minHeight="800.0">
                <children>
-                  <Pane styleClass="practice-divider-pane" />
-               </children>
-            </HBox>
-
-            <!-- Dakuon Description Container -->
-            <HBox alignment="CENTER">
-               <children>
-                  <VBox fx:id="dakuonDescriptionContainer" prefWidth="475.0" visible="false"> <!--
+      
+                  <!-- Character Buttons Container -->
+                  <VBox fx:id="characterButtonsContainer" />
+      
+                  <!-- Divider -->
+                  <HBox fx:id="mainDivider" alignment="CENTER" styleClass="divider-margin" visible="false"> <!--
                      Modified: Added fx:id and initially hidden -->
                      <children>
-                        <Label styleClass="practice-text-label-small-subheading" text="Dakuon">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label styleClass="practice-text-label-small-body"
-                           text="Add a symbol to change the sound">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <Pane styleClass="practice-divider-pane" />
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox fx:id="dakuonButtonsContainer" visible="false" /> <!-- Modified: Initially hidden -->
-
-            <!-- Divider -->
-            <HBox fx:id="dakuonDivider" alignment="CENTER" styleClass="divider-margin"
-               visible="false"> <!-- Modified: Added fx:id and initially hidden -->
-               <children>
-                  <Pane styleClass="practice-divider-pane" />
-               </children>
-            </HBox>
-
-            <!-- Combo Description Container -->
-            <HBox alignment="CENTER">
-               <children>
-                  <VBox fx:id="comboDescriptionContainer" prefWidth="475.0" visible="false"> <!--
-                     Modified: Added fx:id and initially hidden -->
+                  </HBox>
+      
+                  <!-- Dakuon Description Container -->
+                  <HBox alignment="CENTER">
                      <children>
-                        <Label styleClass="practice-text-label-small-subheading" text="Combo">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label styleClass="practice-text-label-small-body"
-                           text="Add small characters to make new syllables">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <VBox fx:id="dakuonDescriptionContainer" prefWidth="475.0" visible="false"> <!--
+                           Modified: Added fx:id and initially hidden -->
+                           <children>
+                              <Label styleClass="practice-text-label-small-subheading" text="Dakuon">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label styleClass="practice-text-label-small-body" text="Add a symbol to change the sound">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox fx:id="comboButtonsContainer" visible="false" /> <!-- Modified: Initially hidden -->
-
-            <!-- Divider -->
-            <HBox fx:id="comboDivider" alignment="CENTER" styleClass="divider-margin"
-               visible="false"> <!-- Modified: Added fx:id and initially hidden -->
-               <children>
-                  <Pane styleClass="practice-divider-pane" />
-               </children>
-            </HBox>
-
-            <!-- Small Tsu Description Container -->
-            <HBox alignment="CENTER">
-               <children>
-                  <VBox fx:id="smallTsuDescriptionContainer" prefWidth="475.0" visible="false"> <!--
-                     Modified: Added fx:id and initially hidden -->
+                  </HBox>
+                  <VBox fx:id="dakuonButtonsContainer" visible="false" /> <!-- Modified: Initially hidden -->
+      
+                  <!-- Divider -->
+                  <HBox fx:id="dakuonDivider" alignment="CENTER" styleClass="divider-margin" visible="false"> <!-- Modified: Added fx:id and initially hidden -->
                      <children>
-                        <HBox alignment="CENTER_LEFT" spacing="4.0">
-                           <Label styleClass="practice-text-label-small-subheading" text="Small" />
-                           <Label styleClass="practice-text-label-small-subheading-jp" text="ッ" />
-                           <HBox.margin>
-                              <Insets bottom="5.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" />
-                           </padding>
-                        </HBox>
-                        <Label styleClass="practice-text-label-small-body"
-                           text="Double the following consonant">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <Pane styleClass="practice-divider-pane" />
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox fx:id="smallTsuButtonsContainer" visible="false" /> <!-- Modified: Initially hidden -->
-
-            <!-- Divider -->
-            <HBox fx:id="smallTsuDivider" alignment="CENTER" styleClass="divider-margin"
-               visible="false"> <!-- Modified: Added fx:id and initially hidden -->
-               <children>
-                  <Pane styleClass="practice-divider-pane" />
-               </children>
-            </HBox>
-
-            <!-- Long Vowels Description Container -->
-            <HBox alignment="CENTER">
-               <children>
-                  <VBox fx:id="longVowelsDescriptionContainer" prefWidth="475.0" visible="false"> <!--
-                     Modified: Added fx:id and initially hidden -->
+                  </HBox>
+      
+                  <!-- Combo Description Container -->
+                  <HBox alignment="CENTER">
                      <children>
-                        <Label styleClass="practice-text-label-small-subheading" text="Long vowels">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label styleClass="practice-text-label-small-body"
-                           text="Double the following consonant">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <VBox fx:id="comboDescriptionContainer" prefWidth="475.0" visible="false"> <!--
+                           Modified: Added fx:id and initially hidden -->
+                           <children>
+                              <Label styleClass="practice-text-label-small-subheading" text="Combo">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label styleClass="practice-text-label-small-body" text="Add small characters to make new syllables">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox fx:id="longVowelsButtonsContainer" visible="false" /> <!-- Modified: Initially
-            hidden -->
+                  </HBox>
+                  <VBox fx:id="comboButtonsContainer" visible="false" /> <!-- Modified: Initially hidden -->
+      
+                  <!-- Divider -->
+                  <HBox fx:id="comboDivider" alignment="CENTER" styleClass="divider-margin" visible="false"> <!-- Modified: Added fx:id and initially hidden -->
+                     <children>
+                        <Pane styleClass="practice-divider-pane" />
+                     </children>
+                  </HBox>
+      
+                  <!-- Small Tsu Description Container -->
+                  <HBox alignment="CENTER">
+                     <children>
+                        <VBox fx:id="smallTsuDescriptionContainer" prefWidth="475.0" visible="false"> <!--
+                           Modified: Added fx:id and initially hidden -->
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="4.0">
+                                 <Label styleClass="practice-text-label-small-subheading" text="Small" />
+                                 <Label styleClass="practice-text-label-small-subheading-jp" text="ッ" />
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Label styleClass="practice-text-label-small-body" text="Double the following consonant">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="smallTsuButtonsContainer" visible="false" /> <!-- Modified: Initially hidden -->
+      
+                  <!-- Divider -->
+                  <HBox fx:id="smallTsuDivider" alignment="CENTER" styleClass="divider-margin" visible="false"> <!-- Modified: Added fx:id and initially hidden -->
+                     <children>
+                        <Pane styleClass="practice-divider-pane" />
+                     </children>
+                  </HBox>
+      
+                  <!-- Long Vowels Description Container -->
+                  <HBox alignment="CENTER">
+                     <children>
+                        <VBox fx:id="longVowelsDescriptionContainer" prefWidth="475.0" visible="false"> <!--
+                           Modified: Added fx:id and initially hidden -->
+                           <children>
+                              <Label styleClass="practice-text-label-small-subheading" text="Long vowels">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label styleClass="practice-text-label-small-body" text="Double the following consonant">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="longVowelsButtonsContainer" visible="false" /> <!-- Modified: Initially
+                  hidden -->
+      
+                  <!-- Divider -->
+                  <HBox fx:id="longVowelsDivider" alignment="CENTER" styleClass="divider-margin" visible="false"> <!-- Modified: Added fx:id and initially hidden -->
+                     <children>
+                        <Pane styleClass="practice-divider-pane" />
+                     </children>
+                  </HBox>
+      
+                  <VBox fx:id="userSection" spacing="20.0" visible="false">
 
-            <!-- Divider -->
-            <HBox fx:id="longVowelsDivider" alignment="CENTER" styleClass="divider-margin"
-               visible="false"> <!-- Modified: Added fx:id and initially hidden -->
-               <children>
-                  <Pane styleClass="practice-divider-pane" />
+              <!-- Dynamic Deck Sections will be added here -->
+           </VBox>
                </children>
-            </HBox>
-
+            </VBox>
          </children>
       </VBox>
       

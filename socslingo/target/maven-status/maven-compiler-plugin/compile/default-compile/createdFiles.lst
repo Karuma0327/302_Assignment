@@ -1,11 +1,14 @@
 com\socslingo\controllers\RightSidebarController$1$1.class
+com\socslingo\data\SelectedCategory.class
 com\socslingo\cache\ImageCache$ImageLoadService$1.class
 com\socslingo\controllers\MoreContextMenuController.class
 com\socslingo\services\UserService.class
+com\socslingo\data\SelectedCategory$Category.class
 com\socslingo\controllers\ActivityMainTestController.class
 com\socslingo\services\DeckService.class
 com\socslingo\controllers\RightSidebarController.class
 com\socslingo\models\Deck.class
+com\socslingo\services\CharacterService$1.class
 com\socslingo\controllers\DeckController$2$1.class
 com\socslingo\services\CharacterRecognitionService.class
 com\socslingo\controllers\ActivityMainController$1.class
@@ -26,12 +29,10 @@ com\socslingo\dataAccess\CharacterRecognitionDataAccess.class
 com\socslingo\controllers\DeckPreviewController.class
 com\socslingo\controllers\DeckFlashcardManagementController.class
 com\socslingo\controllers\RightSidebarController$1.class
-com\socslingo\controllers\CharacterPracticeActivityPracticeController.class
 com\socslingo\services\ConversationService.class
 com\socslingo\services\FlashcardService.class
 com\socslingo\controllers\CharacterPracticeActivityMainController$1.class
 com\socslingo\controllers\DeckManagementController$DeckListCell.class
-com\socslingo\controllers\PracticeThreeOptionController.class
 com\socslingo\models\UserStatistics.class
 com\socslingo\controllers\RightSidebarController$2.class
 com\socslingo\dataAccess\UserDataAccess.class
@@ -45,7 +46,6 @@ com\socslingo\controllers\IntermissionController.class
 com\socslingo\models\Conversation.class
 com\socslingo\controllers\ProfileController.class
 com\socslingo\utils\DateUtils.class
-com\socslingo\controllers\CharacterPracticeController.class
 com\socslingo\controllers\DeckFlashcardManagementController$1.class
 com\socslingo\App.class
 com\socslingo\models\Flashcard.class
@@ -68,7 +68,9 @@ com\socslingo\cache\ImageCache.class
 com\socslingo\services\UserStatisticsService.class
 com\socslingo\controllers\SettingsController.class
 com\socslingo\controllers\ActivityMainTestController$1.class
+com\socslingo\controllers\CharacterPracticeHomeController.class
 com\socslingo\models\CharacterModel.class
+com\socslingo\controllers\CharacterPracticeActivityThreeOptionController.class
 com\socslingo\controllers\DeckController$2.class
 com\socslingo\controllers\HomeController.class
 com\socslingo\controllers\DeckController$1$1.class

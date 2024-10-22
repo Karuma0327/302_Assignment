@@ -64,12 +64,18 @@ public class ActivityMainController {
     @FXML
     private ProgressBar progress_bar; // Reference to the ProgressBar
     
+    @FXML
+    private Label progress_label; // Label to display hearts
+
+        // New fields for heart functionality
+        private int hearts = 5; // Initial number of hearts
+
 
     // Store the original skip_control_container content for resetting
     private Node originalSkipControlContent;
 
     private int completionCount = 0; // Tracks the number of successful completions
-    private static final int TOTAL_COMPLETIONS = 3; // Total required completions
+    private static final int TOTAL_COMPLETIONS = 2; // Total required completions
 
     private boolean isSkipped = false; // Flag to track if the activity was skipped
 
@@ -85,8 +91,10 @@ public class ActivityMainController {
 
         // Initialize the progress bar
         progress_bar.setProgress(0.0);
-
         
+        // Initialize hearts
+        progress_label.setText(String.valueOf(hearts));
+
         // Load the first activity synchronously
         try {
             loadCharacterRecognitionActivity();
@@ -160,6 +168,11 @@ public class ActivityMainController {
      * Handles the Skip button action. Sets the skip flag and updates UI accordingly.
      */
     private void handleSkipButton() {
+        if (hearts <= 0) {
+            // Optional: Prevent skipping if no hearts left
+            return;
+        }
+
         // Set the skip flag to true
         isSkipped = true;
 
@@ -178,8 +191,39 @@ public class ActivityMainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Decrease hearts by 1
+        hearts--;
+        updateHeartsDisplay();
+
+        // Check if hearts have run out
+        if (hearts <= 0) {
+            handleNoHeartsLeft();
+        }
     }
 
+    private void updateHeartsDisplay() {
+        progress_label.setText(String.valueOf(hearts));
+        // Optional: Add animations or visual feedback for heart decrement
+    }
+
+    private void handleNoHeartsLeft() {
+        // Example: Navigate back to home
+        try {
+            PrimaryController.getInstance().switchToHome();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Optional: Show a dialog or alert to inform the user
+        /*
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        alert.setContentText("You've run out of hearts!");
+        alert.showAndWait();
+        */
+    }
     /**
      * Updates the Continue button to use the 'incorrect-hover' styles.
      */

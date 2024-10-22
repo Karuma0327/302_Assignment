@@ -8,7 +8,7 @@ public class DatabaseManager {
     private static DatabaseManager instance;
     private String url;
 
-    private DatabaseManager() {
+    public DatabaseManager() {
         String db_path = "src/main/database/socslingo_database.db";
         url = "jdbc:sqlite:" + db_path;
     }

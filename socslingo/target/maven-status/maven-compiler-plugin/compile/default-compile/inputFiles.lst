@@ -5,8 +5,8 @@ C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\soc
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\ActivityMainTestController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\ActivitySentenceController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\CharacterPracticeActivityMainController.java
-C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\CharacterPracticeActivityPracticeController.java
-C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\CharacterPracticeController.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\CharacterPracticeActivityThreeOptionController.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\CharacterPracticeHomeController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DatabaseController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\DeckFlashcardManagementController.java
@@ -19,7 +19,6 @@ C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\soc
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\LoginController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\MainFlashcardController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\MoreContextMenuController.java
-C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\PracticeThreeOptionController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\PrimaryController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\ProfileController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\RegistrationController.java
@@ -27,7 +26,9 @@ C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\soc
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\RightSidebarListCell.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\SettingsController.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\controllers\StartupController.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\data\SelectedCategory.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\dataAccess\CharacterRecognitionDataAccess.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\dataAccess\CharacterRecognitionStatisticsDAO.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\dataAccess\ConversationDataAccess.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\dataAccess\DeckDataAccess.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\dataAccess\FlashcardDataAccess.java
@@ -40,6 +41,7 @@ C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\soc
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\managers\SessionManager.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\CharacterModel.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\CharacterRecognition.java
+C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\CharacterRecognitionStatistics.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\Conversation.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\Deck.java
 C:\Users\taitr\OneDrive\Desktop\LOCAL_PRODUCTION\socslingo\src\main\java\com\socslingo\models\Flashcard.java

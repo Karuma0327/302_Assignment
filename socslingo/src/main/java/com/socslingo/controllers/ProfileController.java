@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import com.socslingo.cache.ImageCache;
+import com.socslingo.models.CharacterRecognitionStatistics;
 import com.socslingo.models.User;
 import com.socslingo.managers.SessionManager;
 import com.socslingo.services.UserService;
+import com.socslingo.dataAccess.CharacterRecognitionStatisticsDAO;
 import com.socslingo.dataAccess.UserDataAccess;
 import com.socslingo.managers.DatabaseManager;
 
@@ -32,7 +34,14 @@ import javax.imageio.ImageWriter;
 import javax.imageio.IIOImage;
 import javax.imageio.stream.ImageOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ProfileController implements Initializable {
+
+
+    
+    private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @FXML
     private Label username_label;
@@ -52,6 +61,13 @@ public class ProfileController implements Initializable {
 
     @FXML
     private StackPane profile_banner_stack_pane;
+
+    @FXML
+    private Label character_correct_label;
+
+    @FXML
+    private Label character_incorrect_label;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,10 +98,12 @@ public class ProfileController implements Initializable {
             joined_date_label.setText("");
             set_profile_banner_placeholder();
         }
-
+        loadCharacterStatistics();
         // Removed viewport settings
     }
 
+
+    
     @FXML
     private void handle_profile_banner_click() {
         System.out.println("handle_profile_banner_click() method called.");
@@ -162,6 +180,30 @@ public class ProfileController implements Initializable {
             System.err.println("An error occurred while opening the FileChooser: " + e.getMessage());
         }
     }
+
+        private void loadCharacterStatistics() {
+        User currentUser = SessionManager.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            int userId = currentUser.getId();
+            CharacterRecognitionStatisticsDAO statsDAO = CharacterRecognitionStatisticsDAO.getInstance();
+            CharacterRecognitionStatistics stats = statsDAO.getStatisticsByUserId(userId);
+
+            if (stats != null) {
+                character_correct_label.setText(String.valueOf(stats.getCharactersCorrect()));
+                character_incorrect_label.setText(String.valueOf(stats.getCharactersIncorrect()));
+                logger.info("Character statistics loaded for user ID {}", userId);
+            } else {
+                logger.warn("No character statistics found for user ID {}. Setting defaults to 0.", userId);
+                character_correct_label.setText("0");
+                character_incorrect_label.setText("0");
+            }
+        } else {
+            logger.error("No user is currently logged in. Cannot load character statistics.");
+            character_correct_label.setText("0");
+            character_incorrect_label.setText("0");
+        }
+    }
+
 
     /**
      * Resizes and crops the given BufferedImage to exactly fit the specified width and height.

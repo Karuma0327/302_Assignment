@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: white;" stylesheets="@../css/completion.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" style="-fx-border-width: 0; -fx-background-color: white;">
+         <VBox prefWidth="1540.0">
+            <children>
+               <ImageView fx:id="mascotImageView" fitHeight="1062.0" fitWidth="1820.0" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/dobby_dance.gif" />
+                  </image>
+               </ImageView>
+            </children>
+         </VBox>
+         <VBox alignment="CENTER" style="-fx-background-color: white;" translateY="-5.0">
+            <children>
+               <Label styleClass="completion-label" text="Completed!" translateY="-2.0">
+                  <font>
+                     <Font size="96.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>

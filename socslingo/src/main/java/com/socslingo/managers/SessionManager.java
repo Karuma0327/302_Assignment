@@ -2,10 +2,10 @@ package com.socslingo.managers;
 
 import com.socslingo.models.User;
 
-
 public class SessionManager {
     private static SessionManager instance;
     private User current_user;
+
     private SessionManager() {
     }
 
@@ -27,5 +27,4 @@ public class SessionManager {
     public int getCurrentUserId() {
         return current_user != null ? current_user.getId() : -1;
     }
-    
 }

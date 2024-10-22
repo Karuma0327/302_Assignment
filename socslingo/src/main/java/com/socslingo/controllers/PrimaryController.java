@@ -59,8 +59,6 @@ public class PrimaryController {
     private Button switch_to_character_practice_main_button;
     @FXML
     private Button switch_to_deck_management_button;
-    @FXML
-    private Button switch_to_activity_main_test_button;
 
     @FXML
     private Button switch_to_profile_button;
@@ -90,7 +88,8 @@ public class PrimaryController {
     private HBox status_bar;
 
     private Set<String> fxmlWithHiddenSidebar = new HashSet<>(Arrays.asList(
-        "/com/socslingo/views/activity_main.fxml"
+        "/com/socslingo/views/activity_main.fxml",
+        "/com/socslingo/views/character_practice_activity_main.fxml"
     ));
     
     @FXML
@@ -134,7 +133,7 @@ private ImageView preloadedMascotImageView;
                     switch_to_character_practice_main_button,
                     switch_to_activity_main_button,
                     switch_to_deck_management_button,
-                    switch_to_activity_main_test_button,
+
                     switch_to_profile_button,
                     more_button);
 
@@ -144,7 +143,7 @@ private ImageView preloadedMascotImageView;
 
             setupContextMenu();
 
-            toggle_sidebar_button.setVisible(false);
+
 
             sidebar_context_menu = new ContextMenu();
             MenuItem hide_sidebar_item = new MenuItem("Hide Sidebar");
@@ -152,8 +151,10 @@ private ImageView preloadedMascotImageView;
             sidebar_context_menu.getItems().add(hide_sidebar_item);
 
             loadRightSidebar();
+            removeRightSidebar(); // Hide the right sidebar after loading
             logger.info("PrimaryController initialized successfully");
-
+            toggle_sidebar_button.setVisible(false);
+            toggle_right_sidebar_button.setVisible(false); // Ensure it's hidden initially
             status_bar.prefWidthProperty().bind(stack_pane.widthProperty());
             applyAnimatedGlowEffect();
 
@@ -192,46 +193,55 @@ private ImageView preloadedMascotImageView;
         logger.info("Left Sidebar Button Clicked!");
         showAlert(Alert.AlertType.INFORMATION, "Left Sidebar Button Clicked!");
     }
+   // Add this new field at the class level
+   private Set<String> fxmlsWithIntermission = new HashSet<>(Arrays.asList(
+       "/com/socslingo/views/activity_main.fxml",
+       "/com/socslingo/views/character_practice_activity_main.fxml"
+   ));
 
-    public void switchContent(String fxml_path, Consumer<FXMLLoader> controller_consumer) throws IOException {
-        logger.debug("Switching content to: {}", fxml_path);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
-        loader.setControllerFactory(ControllerManager.getInstance());
-        Node node = loader.load();
-    
-        if (controller_consumer != null) {
-            controller_consumer.accept(loader);
-        }
-    
-        content_area.getChildren().clear();
-        logger.debug("Cleared existing content in content_area");
-    
-        if (fxml_path.equals("/com/socslingo/views/activity_main.fxml")) {
-            // Load the startup screen first
-            loadStartupScreen(node);
-        } else {
-            content_area.getChildren().add(node);
-            logger.debug("Added new content to content_area");
-    
-            FadeTransition fade_in = new FadeTransition(Duration.millis(500), node);
-            fade_in.setFromValue(0);
-            fade_in.setToValue(1);
-            fade_in.play();
-            logger.debug("Applied fade-in transition to new content");
-        }
-    
-        if (fxmlWithHiddenSidebar.contains(fxml_path)) {
-            setSidebarVisibility(false);
-        } else {
-            setSidebarVisibility(true);
-        }
-    
-        if (shouldShowRightSidebar(fxml_path)) {
-            loadRightSidebar();
-        } else {
-            removeRightSidebar();
-        }
+   public void switchContent(String fxml_path, Consumer<FXMLLoader> controller_consumer) throws IOException {
+    logger.debug("Switching content to: {}", fxml_path);
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_path));
+    loader.setControllerFactory(ControllerManager.getInstance());
+    Node node = loader.load();
+
+    if (controller_consumer != null) {
+        controller_consumer.accept(loader);
     }
+
+    content_area.getChildren().clear();
+    logger.debug("Cleared existing content in content_area");
+
+    if (fxmlsWithIntermission.contains(fxml_path)) {
+        loadStartupScreen(node);
+    } else {
+        content_area.getChildren().add(node);
+        logger.debug("Added new content to content_area");
+
+        FadeTransition fade_in = new FadeTransition(Duration.millis(500), node);
+        fade_in.setFromValue(0);
+        fade_in.setToValue(1);
+        fade_in.play();
+        logger.debug("Applied fade-in transition to new content");
+    }
+
+    if (fxmlWithHiddenSidebar.contains(fxml_path)) {
+        setSidebarVisibility(false);
+    } else {
+        setSidebarVisibility(true);
+    }
+
+    // **Load or remove the right sidebar based on shouldShowRightSidebar**
+    if (shouldShowRightSidebar(fxml_path)) {
+        loadRightSidebar();
+        // **Show the toggle button only for Deck Management**
+        toggle_right_sidebar_button.setVisible(true);
+    } else {
+        removeRightSidebar();
+        // **Hide the toggle button on other pages**
+        toggle_right_sidebar_button.setVisible(false);
+    }
+}
 
     public void switchContent(String fxml_path) throws IOException {
         switchContent(fxml_path, null);
@@ -240,9 +250,7 @@ private ImageView preloadedMascotImageView;
     
     private boolean shouldShowRightSidebar(String fxml_path) {
         List<String> fxml_with_sidebar = Arrays.asList(
-                "/com/socslingo/views/home.fxml",
-                "/com/socslingo/views/deck_management.fxml",
-                "/com/socslingo/views/deck_preview.fxml");
+                "/com/socslingo/views/deck_management.fxml");
         boolean should_show = fxml_with_sidebar.contains(fxml_path);
         logger.debug("shouldShowRightSidebar check for '{}': {}", fxml_path, should_show);
         return should_show;

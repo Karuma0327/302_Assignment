@@ -1,162 +1,338 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true" pannable="true" prefHeight="1500.0" prefWidth="1000.0"
-    style="-fx-background-color: white;" stylesheets="@../css/character_practice.css"
-    xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="com.socslingo.controllers.CharacterPracticeHomeController"
-    styleClass="character-practice-main">
+<ScrollPane fitToWidth="true" pannable="true" prefHeight="1500.0" prefWidth="1000.0" 
+            style="-fx-background-color: white;" styleClass="character-practice-main" 
+            stylesheets="@../css/character_practice.css" 
+            xmlns="http://javafx.com/javafx/23" 
+            xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <VBox style="-fx-background-color: white;">
             <fx:define>
-
-                <ToggleGroup fx:id="toggleGroup" />
+                <ToggleGroup />
             </fx:define>
 
             <children>
 
-                <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0">
-                    <children>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
-                            <children>
-                                <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                                    styleClass="practice-toggle-button" text="HIRAGANA"
-                                    toggleGroup="$toggleGroup" /> 
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
-                            <children>
-                                <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                                    styleClass="practice-toggle-button" text="KATAKANA"
-                                    toggleGroup="$toggleGroup" /> 
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
-                            <children>
-                                <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                                    styleClass="practice-toggle-button" text="KANJI"
-                                    toggleGroup="$toggleGroup" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="75.0" prefWidth="150.0">
-                            <children>
-                                <ToggleButton mnemonicParsing="false" onAction="#handleToggle"
-                                    styleClass="practice-toggle-button" text="USER"
-                                    toggleGroup="$toggleGroup" /> 
-                            </children>
-                        </HBox>
-                    </children>
-                </HBox>
-
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-
-                                <Label fx:id="practiceMainText" styleClass="practice-main-text"
-                                    text="Let's learn Hiragana!" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-
-                                <Label fx:id="practiceSubText" styleClass="practice-sub-text"
-                                    text="Get to know the main writing system in Japanese" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="350.0">
-                            <children>
-                                <StackPane fx:id="learnCharactersContainer"> 
-                                    <children>
-                                        <Label
-                                            styleClass="learn-the-characters-button-background-label"
-                                            text="Label" />
-                                        <Button fx:id="learnCharactersButton"
-                                            mnemonicParsing="false"
-                                            styleClass="learn-the-characters-button"
-                                            text="LEARN THE CHARACTERS"
-                                            onAction="#handleLearnCharacters" />
-                                    </children>
-                                </StackPane>
-                            </children>
-                        </HBox>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="25.0" bottom="25.0" />
-                    </VBox.margin>
-                </VBox>
-
-                <VBox fx:id="characterButtonsContainer" />
-
-
-                <HBox fx:id="mainDivider" alignment="CENTER" styleClass="divider-margin"
-                    visible="true"> 
+                <!-- Main Divider -->
+                <HBox alignment="CENTER" styleClass="divider-margin" visible="true"> 
                     <children>
                         <Pane styleClass="practice-divider-pane" />
                     </children>
                 </HBox>
 
-
+                <!-- DECK1 Section -->
                 <HBox alignment="CENTER">
                     <children>
-                        <VBox fx:id="dakuonDescriptionContainer" prefWidth="475.0" visible="true"> 
+                        <VBox prefWidth="500.0" visible="true"> 
                             <children>
-                                <Label styleClass="practice-text-label-small-subheading"
-                                    text="DECK1">
-                                    <VBox.margin>
-                                        <Insets bottom="10.0" />
-                                    </VBox.margin>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
-
-                <VBox fx:id="dakuonButtonsContainer" visible="false" />
-
-                <!-- Divider -->
-                <HBox fx:id="dakuonDivider" alignment="CENTER" styleClass="divider-margin"
-                    visible="true"> 
-                    <children>
-                        <Pane styleClass="practice-divider-pane" />
-                    </children>
-                </HBox>
-
-                <HBox alignment="CENTER">
-                    <children>
-                        <VBox fx:id="comboDescriptionContainer" prefWidth="475.0" visible="true">
-                            <children>
-                                <Label styleClass="practice-text-label-small-subheading"
-                                    text="DECK2">
+                                <Label styleClass="practice-text-label-small-subheading" text="DECK1">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
                                 </Label>
 
+                                <!-- Character Buttons for DECK1 -->
+                                <TilePane hgap="10" vgap="10" prefColumns="5">
+                                    <padding>
+                                        <Insets top="10" right="10" bottom="10" left="10"/>
+                                    </padding>
+                                    
+                                    <!-- Example Character Button 1 -->
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+                                </TilePane>
                             </children>
                         </VBox>
                     </children>
                 </HBox>
-                <VBox fx:id="comboButtonsContainer" visible="false" /> 
 
+                <!-- Dakuon Divider -->
+                <HBox alignment="CENTER" styleClass="divider-margin" visible="true"> 
+                    <children>
+                        <Pane styleClass="practice-divider-pane" />
+                    </children>
+                </HBox> 
 
-                <HBox fx:id="comboDivider" alignment="CENTER" styleClass="divider-margin"
-                    visible="true"> 
+                <!-- DECK2 Section -->
+                <HBox alignment="CENTER">
+                    <children>
+                        <VBox prefWidth="500.0" visible="true">
+                            <children>
+                                <Label styleClass="practice-text-label-small-subheading" text="DECK2">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" />
+                                    </VBox.margin>
+                                </Label>
+
+                                <!-- Character Buttons for DECK2 -->
+                                <TilePane hgap="10" vgap="10" prefColumns="5">
+                                    <padding>
+                                        <Insets top="10" right="10" bottom="10" left="10"/>
+                                    </padding>
+                                    
+                                    <!-- Example Character Button 1 -->
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane>
+
+                                    <StackPane prefWidth="87.0" prefHeight="68.0" styleClass="practice-character-button-stack-pane">
+                                        <!-- Background Label -->
+                                        <Label text="Label"
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               styleClass="practice-character-button-background-label"/>
+                                        
+                                        <!-- Character Label -->
+                                        <Label text="FRONT OF CARD" 
+                                               prefWidth="87.0" prefHeight="68.0"
+                                               alignment="CENTER"
+                                               styleClass="practice-character-text-layer-japanese-bottom-layer">
+                                            <padding>
+                                                <Insets bottom="10.0"/>
+                                            </padding>
+                                        </Label>
+                                        
+                                        <!-- Romaji Button -->
+                                        <Button text="BACK OF CARD" 
+                                                prefWidth="87.0" prefHeight="68.0"
+                                                styleClass="practice-character-button-top-layer"
+                                                mnemonicParsing="false"
+                                                onAction="#handleRomajiButtonAction"/>
+                                    </StackPane> 
+                                </TilePane>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox> 
+
+                <!-- Combo Divider -->
+                <HBox alignment="CENTER" styleClass="divider-margin" visible="true"> 
                     <children>
                         <Pane styleClass="practice-divider-pane" />
                     </children>
                 </HBox>
 
+                <!-- Add more sections or character buttons as needed -->
 
             </children>
         </VBox>

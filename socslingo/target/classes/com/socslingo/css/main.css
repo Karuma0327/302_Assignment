@@ -226,7 +226,11 @@
 
 
 
-
+.home-label{
+    -fx-font-family: 'DINRoundPro-Bold';
+    -fx-font-size: 76px;
+    -fx-text-fill: rgb(255, 198, 92);
+}
 
 
 .settings-avatar-label {

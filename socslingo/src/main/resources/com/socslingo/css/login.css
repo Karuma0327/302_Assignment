@@ -147,7 +147,7 @@
     -fx-background-color: #ffffff; 
     -fx-pref-width: 98px;
     -fx-pref-height: 48px;
-    -fx-border-color: #e5e5e5;
+    -fx-border-color: rgb(229, 229, 229);
     -fx-border-width: 2px 2px 4px 2px;
     -fx-text-fill: #f5d78e;
     -fx-background-radius: 12px;

@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 public class DatabaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseController.class);
+    private static final String DATABASE_PATH = "src/main/database/socslingo_database.db";
+    private static final String DATABASE_URL = "jdbc:sqlite:" + DATABASE_PATH;
 
     public static void createDatabase() {
         String folder_path = "src/main/database";
@@ -44,7 +46,7 @@ public class DatabaseController {
 
         String database_url = "jdbc:sqlite:" + database_path;
 
-        // Existing Tables
+        // Existing Tables without pet_table and related references
         String user_table_sql = "CREATE TABLE IF NOT EXISTS user_table (\n"
                 + " user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " username TEXT NOT NULL UNIQUE,\n"
@@ -52,19 +54,7 @@ public class DatabaseController {
                 + " password TEXT NOT NULL,\n"
                 + " created_date TEXT NOT NULL,\n"
                 + " profile_banner_path TEXT,\n"
-                + " pet_id INTEGER,\n"
-                + " actual_name TEXT,\n"  // Added actual_name column, not mandatory
-                + " FOREIGN KEY (pet_id) REFERENCES pet_table(pet_id)\n"
-                + ");";
-
-        String pet_table_sql = "CREATE TABLE IF NOT EXISTS pet_table (\n"
-                + " pet_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                + " pet_name TEXT NOT NULL,\n"
-                + " hunger_level INTEGER DEFAULT 0,\n"
-                + " happiness_level INTEGER DEFAULT 0,\n"
-                + " health_level INTEGER DEFAULT 0,\n"
-                + " pet_tier INTEGER DEFAULT 1,\n"
-                + " pet_experience INTEGER DEFAULT 0\n"
+                + " actual_name TEXT\n"
                 + ");";
 
         String flashcards_table_sql = "CREATE TABLE IF NOT EXISTS flashcards_table (\n"
@@ -92,18 +82,7 @@ public class DatabaseController {
                 + " FOREIGN KEY (flashcard_id) REFERENCES flashcards_table(flashcard_id) ON DELETE CASCADE\n"
                 + ");";
 
-        // New Statistics Tables
-        String conversation_statistics_table_sql = "CREATE TABLE IF NOT EXISTS conversation_statistics (\n"
-                + " stat_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                + " user_id INTEGER NOT NULL,\n"
-                + " conversation_attempts INTEGER DEFAULT 0,\n"
-                + " conversation_correct INTEGER DEFAULT 0,\n"
-                + " conversation_incorrect INTEGER DEFAULT 0,\n"
-                + " conversation_accuracy DECIMAL(5,2) DEFAULT 0.00,\n"
-                + " last_updated TEXT DEFAULT CURRENT_TIMESTAMP,\n"
-                + " FOREIGN KEY (user_id) REFERENCES user_table(user_id) ON DELETE CASCADE\n"
-                + ");";
-
+        // New Statistics Tables without conversation_statistics
         String flashcard_statistics_table_sql = "CREATE TABLE IF NOT EXISTS flashcard_statistics (\n"
                 + " stat_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " user_id INTEGER NOT NULL,\n"
@@ -135,34 +114,23 @@ public class DatabaseController {
                 + " FOREIGN KEY (user_id) REFERENCES user_table(user_id) ON DELETE CASCADE\n"
                 + ");";
 
-        String conversations_table_sql = "CREATE TABLE IF NOT EXISTS conversations_table (\n"
-                + " conversation_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                + " sentence TEXT NOT NULL,\n"
-                + " option_one TEXT NOT NULL,\n"
-                + " option_two TEXT NOT NULL,\n"
-                + " option_three TEXT NOT NULL,\n"
-                + " option_four TEXT NOT NULL,\n"
-                + " correct_option INTEGER NOT NULL CHECK (correct_option BETWEEN 1 AND 4),\n"
-                + " created_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n"
-                + ");";
+        // Removed conversations_table_sql
 
-        // Updated Character Recognition Activities Table with differentiated character types
         String character_recognition_activities_table_sql = "CREATE TABLE IF NOT EXISTS character_recognition_activities_table (\n"
                 + " activity_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " character_type TEXT NOT NULL CHECK (character_type IN ('Hiragana_Main', 'Hiragana_Dakuon', 'Hiragana_Combo', 'Hiragana_Long Vowels', 'Hiragana_Small_tsu', "
-                + "'Katakana_Main', 'Katakana_Dakuon', 'Katakana_Combo', 'Katakana_Long Vowels', 'Katakana_Small_tsu', 'Kanji')),\n" // Ensure all types are included
+                + "'Katakana_Main', 'Katakana_Dakuon', 'Katakana_Combo', 'Katakana_Long Vowels', 'Katakana_Small_tsu', 'Kanji')),\n"
                 + " character TEXT NOT NULL,\n"
                 + " romaji TEXT NOT NULL,\n"
                 + " created_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n"
                 + ");";
 
-        // Word Recognition Activities Table (New)
         String word_recognition_activities_table_sql = "CREATE TABLE IF NOT EXISTS word_recognition_activities_table (\n"
                 + " activity_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " word_type TEXT NOT NULL CHECK (word_type IN ('Noun', 'Verb', 'Adjective', 'Adverb', 'Phrase')),\n"
                 + " word TEXT NOT NULL,\n"
                 + " meaning TEXT NOT NULL,\n"
-                + " romaji TEXT,\n"  // Optional: Include romaji if applicable
+                + " romaji TEXT,\n"
                 + " created_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n"
                 + ");";
 
@@ -174,19 +142,18 @@ public class DatabaseController {
 
                 // Execute table creation statements
                 statement.execute(user_table_sql);
-                statement.execute(pet_table_sql);
+                // Removed execution of pet_table_sql
                 statement.execute(flashcards_table_sql);
                 statement.execute(flashcard_decks_table_sql);
                 statement.execute(deck_flashcards_table_sql);
 
                 // Execute new statistics table creation statements
-                statement.execute(conversation_statistics_table_sql);
+                // Removed conversation_statistics_table_sql
                 statement.execute(flashcard_statistics_table_sql);
                 statement.execute(deck_statistics_table_sql);
                 statement.execute(character_recognition_statistics_table_sql);
 
-                // Execute new Conversations table creation
-                statement.execute(conversations_table_sql);
+                // Removed conversations_table_sql
 
                 // Execute updated Character Recognition Activities table creation
                 statement.execute(character_recognition_activities_table_sql); // Modified
@@ -195,12 +162,12 @@ public class DatabaseController {
                 statement.execute(word_recognition_activities_table_sql); // Added
 
                 // Optionally, create indexes for optimization
-                String index_conversation_user_id = "CREATE INDEX IF NOT EXISTS idx_conversation_user_id ON conversation_statistics(user_id);";
+                // Removed index_conversation_user_id
+
                 String index_flashcard_user_id = "CREATE INDEX IF NOT EXISTS idx_flashcard_user_id ON flashcard_statistics(user_id);";
                 String index_deck_user_id = "CREATE INDEX IF NOT EXISTS idx_deck_user_id ON deck_statistics(user_id);";
                 String index_character_recognition_user_id = "CREATE INDEX IF NOT EXISTS idx_character_recognition_user_id ON character_recognition_statistics(user_id);";
 
-                statement.execute(index_conversation_user_id);
                 statement.execute(index_flashcard_user_id);
                 statement.execute(index_deck_user_id);
                 statement.execute(index_character_recognition_user_id);
@@ -222,6 +189,7 @@ public class DatabaseController {
         }
     }
 
+    
     public static void insertAllCharacterTypes() {
         String database_path = "src/main/database/socslingo_database.db";
         String database_url = "jdbc:sqlite:" + database_path;
@@ -588,38 +556,57 @@ public class DatabaseController {
         }
     }
 
-    // Optional: Insert sample conversations for testing
-    public static void insertSampleConversations() {
-        String database_path = "src/main/database/socslingo_database.db";
-        String database_url = "jdbc:sqlite:" + database_path;
-
-        String insert_conversation_sql = "INSERT INTO conversations_table (sentence, option_one, option_two, option_three, option_four, correct_option) VALUES "
-                + "('I ___ to the store yesterday.', 'go', 'went', 'gone', 'going', 2),"
-                + "('She is ___ her homework.', 'doing', 'did', 'done', 'do', 1);";
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-
-            try (Connection connection = DriverManager.getConnection(database_url);
-                 Statement statement = connection.createStatement()) {
-                statement.executeUpdate(insert_conversation_sql);
-                logger.info("Sample conversations inserted successfully.");
-            }
-        } catch (ClassNotFoundException e) {
-            logger.error("SQLite JDBC driver not found.", e);
-        } catch (SQLException e) {
-            logger.error("SQL error: " + e.getMessage(), e);
-        }
-    }
+    // Removed insertSampleConversations method
 
     // New: Insert all Hiragana, Katakana, Dakuon, Combo, Small っ/ッ, and Long Vowels
     public static void insertAllCharacterTypesMethod() {
         insertAllCharacterTypes();
     }
 
+
+    public static void removeUnwantedTables() {
+        // List of tables to be removed
+        String[] tablesToRemove = {
+            "conversations_table",
+            "conversation_statistics",
+            "pet_table",          // Replace with actual pet-related table names
+            "pet_statistics",     // Add other pet-related tables as necessary
+            "deck_statistics",    // Added
+            "flashcard_statistics",// Added
+            "word_recognition_activities_table" // Added
+        };
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            try (Connection connection = DriverManager.getConnection(DATABASE_URL);
+                 Statement statement = connection.createStatement()) {
+
+                // Begin transaction
+                connection.setAutoCommit(false);
+
+                for (String tableName : tablesToRemove) {
+                    String dropTableSQL = "DROP TABLE IF EXISTS " + tableName + ";";
+                    statement.executeUpdate(dropTableSQL);
+                    logger.info("Dropped table if existed: " + tableName);
+                }
+
+                // Commit the transaction
+                connection.commit();
+                logger.info("All specified tables have been removed successfully.");
+
+            } catch (SQLException e) {
+                logger.error("SQL error while removing tables: " + e.getMessage(), e);
+            }
+        } catch (ClassNotFoundException e) {
+            logger.error("SQLite JDBC driver not found.", e);
+        }
+    }
+
     public static void main(String[] args) {
         createDatabase();
-        insertSampleConversations(); // Optional: Insert sample conversation data
+        // Removed insertSampleConversations() call
         insertAllCharacterTypesMethod(); // Insert all character types including Katakana expansions
+
+        // removeUnwantedTables();
     }
 }

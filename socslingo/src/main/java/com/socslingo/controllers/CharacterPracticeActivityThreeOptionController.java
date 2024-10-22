@@ -1,7 +1,10 @@
 package com.socslingo.controllers;
 
 import com.socslingo.data.SelectedCategory;
+import com.socslingo.dataAccess.CharacterRecognitionStatisticsDAO;
+import com.socslingo.managers.SessionManager;
 import com.socslingo.models.CharacterModel;
+import com.socslingo.models.CharacterRecognitionStatistics;
 import com.socslingo.services.CharacterService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -58,7 +61,7 @@ public class CharacterPracticeActivityThreeOptionController {
     private String correctRomaji;
     private String selectedRomaji;
 
-
+    private int userId; 
     @FXML
     public void initialize() {
         System.out.println("CharacterPracticeActivityThreeOptionController initialized.");
@@ -80,7 +83,36 @@ public class CharacterPracticeActivityThreeOptionController {
                 }
             });
         }
+
+        
+        // Fetch current user ID from SessionManager
+        userId = SessionManager.getInstance().getCurrentUserId();
+        if (userId == -1) {
+            System.err.println("No user is currently logged in.");
+            // Handle the case where no user is logged in
+            // For example, disable the activity or prompt login
+        } else {
+            // Ensure statistics exist for the user
+            initializeUserStatistics();
+        }
     }
+
+        private void initializeUserStatistics() {
+        CharacterRecognitionStatisticsDAO statsDAO = CharacterRecognitionStatisticsDAO.getInstance();
+        CharacterRecognitionStatistics stats = statsDAO.getStatisticsByUserId(userId);
+        if (stats == null) {
+            boolean created = statsDAO.createStatistics(userId);
+            if (created) {
+                System.out.println("Statistics initialized for user ID " + userId);
+            } else {
+                System.err.println("Failed to initialize statistics for user ID " + userId);
+                // Handle the error appropriately
+            }
+        } else {
+            System.out.println("Statistics already exist for user ID " + userId);
+        }
+    }
+
     public void disableToggleButtons() {
         System.out.println("Disabling all toggle buttons.");
         toggleButton1.setDisable(true);
@@ -282,11 +314,30 @@ public class CharacterPracticeActivityThreeOptionController {
 
         if (selectedRomaji.equals(correctRomaji)) {
             System.out.println("Answer is correct.");
+
+            // Update statistics for correct answer
+            boolean updated = CharacterRecognitionStatisticsDAO.getInstance().incrementCorrect(userId);
+            if (updated) {
+                System.out.println("Correct answer count incremented.");
+            } else {
+                System.err.println("Failed to increment correct answer count.");
+            }
+
             return true;
         } else {
             System.out.println("Answer is incorrect. Correct answer: " + correctRomaji);
+
+            // Update statistics for incorrect answer
+            boolean updated = CharacterRecognitionStatisticsDAO.getInstance().incrementIncorrect(userId);
+            if (updated) {
+                System.out.println("Incorrect answer count incremented.");
+            } else {
+                System.err.println("Failed to increment incorrect answer count.");
+            }
+
             return false;
         }
     }
+
 
 }
